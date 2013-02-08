@@ -1,0 +1,333 @@
+/*
+	Skin name: Default
+	Description: A sleek Royal Blue theme
+	Author: Gene53
+	Author url: http://cartpauj.com
+	Mingle Forum url: http://cartpauj.com/projects/mingle-forum-plugin
+	Version: 1.3
+*/
+#wpf-wrapper{
+	line-height: normal;
+	color: #000;
+	/*background-color: white; ENABLE THIS IF YOU'RE HAVING TROUBLE SEEING MENU FONTS*/
+}
+#wpf-wrapper th h4{
+	font-weight: bold;
+	color: #FFF;
+}
+
+#wpf-wrapper table, #wpf-wrapper div, #wpf-wrapper h2, #wpf-wrapper h3, #wpf-wrapper h4, #wpf-wrapper form{
+	margin: 0;
+	padding: 0;
+}
+#wpf-wrapper small{
+	color: #333;
+}
+
+.wpf-table a, .wpf-post-table a, #wpf-wrapper p a, #wpf-wrapper span a, #wpf-wrapper a{
+	color: #084d8f;
+	text-decoration: none;
+}
+
+#wp-mainmenu a{
+	color: #333;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.wpf-table a:hover, .wpf-post-table a:hover, #wpf-wrapper a:hover {
+	text-decoration: underline;
+}
+
+#wpf-wrapper th a {
+	color: #fff;
+}
+
+#wpf-wrapper th {
+	color: #fff;
+}
+#wpf-wrapper th.wpf-bright {
+	color: #000;
+}
+table.search td{
+	border: none;
+}
+table.search{
+	background: #ecedf3;
+}
+
+.topic_text p img { /*Edit This Value To Fit Your Theme*/
+	max-width: 475px;
+}
+
+img.avatar {
+  float: none;
+  margin: 0px;
+}
+
+ul#wpf-menu, ul.wpf-postmeta {
+	margin: 0;
+	padding: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+ul#wpf-menu li, .wpf-postmeta li{
+	list-style: none;
+	padding-right: 10px;
+	display: inline;
+}
+.wpf-table{
+	border-collapse: collapse;
+	padding: 5px;
+	border: 1px solid #696969;
+	background: #f6f6f6;
+	font-size:  95%; /*If your fonts are too small try increasing this number*/
+}
+.wpf-post-table{
+	border-collapse: collapse;
+	padding: 15px;
+	border-left: 1px solid #adadad;
+	border-right: 1px solid #adadad;
+	border-bottom: 1px solid #adadad;
+	background: #f6f6f6;
+}
+.wpf-table th, .wpf-post-table th{
+	text-align:left;
+	background: url('images/catbg.jpg') !important;
+	border: 1px solid #adadad;
+	padding: 5px;
+	color: #fff;
+	/*white-space: nowrap;*/
+	overflow: auto;
+}
+.wpf-post-table td{
+	padding: 5px;
+}
+
+.wpf-table td{
+	border: 1px solid #adadad;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding: 5px;
+}
+.wpf-table textarea {
+	width: 98%;
+}
+#wpf-wrapper .wpf{
+	padding: 1px;
+	border: 1px solid #696969;
+}
+.wpf-alt{
+	background: #ecedf3;
+}
+#wpf-wrapper .sticky{
+	background:#e0e1e8;
+}
+#wpf-wrapper .sticky a{
+	font-weight: bold;
+}
+td.wpf-meta{
+	border-bottom: 1px solid #adadad;
+	padding: 0;
+	margin: 0;
+}
+td.wpf-meta a{
+	font-weight: bold;
+}
+.wpf-small{
+	margin-bottom: 10px;
+}
+
+.wpf-table h2{
+	margin: 0;
+	padding: 0;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	color: #fff;
+}
+
+th.wpf-bright{
+	background: url('images/titlebg.jpg') !important;
+	color: #000;
+	border-top: 1px solid #375576;
+}
+th.wpf-bright h3{
+	margin: 0;
+	padding: 0;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+.wpf-avatar{
+	padding: 5px;
+}
+
+#wpf-wrapper a img, #wpf-wrapper img {
+	border: none;
+	padding: 0;
+	margin: 0;
+	background: transparent;
+}
+.updated{
+	background: #fffbcc;
+	border: 1px solid #e6db55;
+	padding: 5px;
+	margin-bottom: 1em;
+}
+.
+#wpf-wrapper blockquote{
+	background: #d7daec;
+	border: 1px solid #6081a0;
+	padding-left: 5px;
+	margin: 0;
+}
+
+
+/* definitions for the main tab, active means the tab reflects which page is displayed */
+.maintab_first, .maintab_back, .maintab_last, .maintab_active_first, .maintab_active_back, .maintab_active_last
+{
+	color: white;
+	_text-transform: uppercase;
+	vertical-align: top;
+}
+.maintab_back, .maintab_active_back
+{
+	color: white;
+	text-decoration: none;
+	vertical-align: top;
+	padding: 2px 6px 6px 6px;
+	font-family: tahoma, sans-serif;
+}
+.maintab_first
+{
+	background: url(images/maintab_first.gif) left bottom no-repeat !important;
+	width: 10px;
+}
+.maintab_back
+{
+	background: url(images/maintab_back.gif) left bottom repeat-x !important;
+}
+.maintab_last
+{
+	background: url(images/maintab_last.gif) left bottom no-repeat !important;
+	width: 8px;
+}
+/*
+.maintab_active_first
+{
+	background: url(images/maintab_active_first.gif) left bottom no-repeat !important;
+	width: 6px;
+}
+.maintab_active_back
+{
+	background: url(images/maintab_active_back.gif) left bottom repeat-x !important;
+}
+.maintab_active_last
+{
+	background: url(images/maintab_active_last.gif) left bottom no-repeat !important;
+	width: 8px;
+}
+*/
+
+/* how links behave in main tab. */
+#wpf-wrapper .maintab_back a:link , #wpf-wrapper .maintab_back a:visited, #wpf-wrapper .maintab_active_back a:link , #wpf-wrapper .maintab_active_back a:visited
+{
+	color: white;
+	text-decoration: none;
+}
+
+.maintab_back a:hover, .maintab_active_back a:hover
+{
+	color: #e0e0ff;
+	text-decoration: none;
+	
+}
+
+/* definitions for the mirror tab */
+#wpf-wrapper .mirrortab_first, #wpf-wrapper .mirrortab_back, #wpf-wrapper .mirrortab_last, #wpf-wrapper .mirrortab_active_first, #wpf-wrapper .mirrortab_active_back, #wpf-wrapper .mirrortab_active_last
+{
+	color: white;
+	vertical-align: top;
+}
+#wpf-wrapper .mirrortab_back, #wpf-wrapper .mirrortab_active_back
+{
+	color: white;
+	text-decoration: none;
+	vertical-align: bottom;
+	padding: 6px 6px 2px 6px;
+	font-family: tahoma, sans-serif;
+}
+
+.mirrortab_first
+{
+	background: url(images/mirrortab_first.gif) no-repeat !important;
+	width: 10px;
+}
+.mirrortab_back
+{
+	background: url(images/mirrortab_back.gif) repeat-x !important;
+}
+.mirrortab_last
+{
+	background: url(images/mirrortab_last.gif) no-repeat !important;
+	width: 6px;
+}
+/* how links behave in mirror tab. */
+#wpf-wrapper .mirrortab_back a:link ,#wpf-wrapper  .mirrortab_back a:visited,#wpf-wrapper  .mirrortab_active_back a:link , #wpf-wrapper .mirrortab_active_back a:visited
+{
+	color: white;
+	text-decoration: none;
+}
+
+.mirrortab_back a:hover, .mirrortab_active_back a:hover
+{
+	color: #e0e0ff;
+	text-decoration: none;
+}
+
+pre.code{
+	width: 90%;
+	background: #eee;
+	border: solid 1px #ccc;
+	padding: 5px;
+	overflow: auto;
+	white-space: pre-wrap;
+	font-size: 95%; /*If font is too small try increasing this*/
+}
+
+#trail{
+	margin-top: 20px;
+}
+ 
+#wpf-info{
+	text-align:center; 
+	padding:5px; 
+	border:1px solid #adadad;
+	margin-top:15px;
+	background: #f6f6f6;
+}
+#wpf-wrapper{
+		font-size: 95%; /*If fonts are too small try increasing this*/
+
+}
+#wpf-wrapper td, #wpf-wrapper th{
+	vertical-align: top;
+}
+#wpf-wrapper th{
+	vertical-align: middle;
+}
+
+/*Attempt to make the forum look better with more themes*/
+#forummenu td, #topicmenu td {
+	padding:1px !important;
+	padding-left:3px !important;
+	margin:0 !important;
+	height:25px !important;
+	vertical-align:middle !important;
+}
+.maintab_first, .mirrortab_first {
+	font-size:5px !important;
+}
+.pop_menus td{
+	padding:0 !important;
+	margin:0 !important;
+}
