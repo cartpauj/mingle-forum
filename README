@@ -1,5 +1,6 @@
-NOTE TO DEVELOPERS WHO WISH TO HELP ON THE PROJECT.
+Note to developers:
+Because the WordPress.org repository is SVN based, I will not be managing Tags at github.
+Also, if I add you as a contibutor to the project, it's because I trust you, so no need to create any Forks, just push/pull to/from master.
 
-PLEASE PUSH AND PULL FROM/TO MASTER. I DO NOT WANT TO MANAGE A LOT OF FORKS, AND TAGS WILL BE HANDLED WITH SVN SEPARATELY.
-
-THANKS!
+Thanks,
+Cartpauj
