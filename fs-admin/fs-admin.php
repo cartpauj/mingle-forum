@@ -603,44 +603,47 @@ $image = WPFURL."images/user.png";
     
     function option_save(){
       if (isset($_POST['mingleforum_option_save'])) {
-      $op = get_option('mingleforum_options');
-        global $wpdb, $table_prefix;
-        $options = array( 'wp_posts_to_forum'			=> $_POST['wp_posts_to_forum'],
-                'forum_posts_per_page'			=> $wpdb->escape($_POST['forum_posts_per_page']),
-                'forum_threads_per_page' 		=> $wpdb->escape($_POST['forum_threads_per_page']),
-                'forum_require_registration' 	=> $_POST['forum_require_registration'],
-                'forum_show_login_form'			=> $_POST['forum_show_login_form'],
-                'forum_date_format' 			=> $wpdb->escape($_POST['forum_date_format']),
-                'forum_use_gravatar' 			=> $_POST['forum_use_gravatar'],
-                'forum_show_bio'				=> $_POST['forum_show_bio'],
-                'forum_skin'					=> $op['forum_skin'],
-                'forum_use_rss' 				=> $_POST['forum_use_rss'],
-                'forum_use_seo_friendly_urls'	=> $_POST['forum_use_seo_friendly_urls'],
-                'forum_allow_image_uploads'		=> $_POST['forum_allow_image_uploads'],
-                'notify_admin_on_new_posts'		=> $_POST['notify_admin_on_new_posts'],
-                'set_sort' 						=> $op['set_sort'],
-                'forum_use_spam' 				=> $_POST['forum_use_spam'],
-                'forum_use_bbcode' 				=> $_POST['forum_use_bbcode'],
-                'forum_captcha' 				=> $_POST['forum_captcha'],
-                'hot_topic' 					=> $wpdb->escape($_POST['hot_topic']),
-                'veryhot_topic' 				=> $wpdb->escape($_POST['veryhot_topic']),
-                'forum_display_name'			=> $_POST['forum_display_name'],
-                'level_one' 					=> $wpdb->escape($_POST['level_one']),
-                'level_two'		 				=> $wpdb->escape($_POST['level_two']),
-                'level_three'					=> $wpdb->escape($_POST['level_three']),
-                'level_newb_name'				=> $wpdb->escape($_POST['level_newb_name']),
-                'level_one_name'				=> $wpdb->escape($_POST['level_one_name']),
-                'level_two_name' 				=> $wpdb->escape($_POST['level_two_name']),
-                'level_three_name'				=> $wpdb->escape($_POST['level_three_name']),
-                'forum_db_version'				=> $op['forum_db_version'],
-                'forum_disabled_cats'			=> explode(",",$wpdb->escape($_POST['forum_disabled_cats'])),
-                'allow_user_replies_locked_cats' => $_POST['allow_user_replies_locked_cats'],
-                'forum_posting_time_limit' => $wpdb->escape($_POST['forum_posting_time_limit']),
-                'forum_hide_branding' => $_POST['forum_hide_branding']
+        global $wpdb, $table_prefix, $mingleforum;
+        $op = get_option('mingleforum_options');
+        $options = array( 'wp_posts_to_forum'           => $_POST['wp_posts_to_forum'],
+                'forum_posts_per_page'                  => $wpdb->escape($_POST['forum_posts_per_page']),
+                'forum_threads_per_page'                => $wpdb->escape($_POST['forum_threads_per_page']),
+                'forum_require_registration'            => $_POST['forum_require_registration'],
+                'forum_show_login_form'                 => $_POST['forum_show_login_form'],
+                'forum_date_format'                     => $wpdb->escape($_POST['forum_date_format']),
+                'forum_use_gravatar'                    => $_POST['forum_use_gravatar'],
+                'forum_show_bio'                        => $_POST['forum_show_bio'],
+                'forum_skin'                            => $op['forum_skin'],
+                'forum_use_rss'                         => $_POST['forum_use_rss'],
+                'forum_use_seo_friendly_urls'           => $_POST['forum_use_seo_friendly_urls'],
+                'forum_allow_image_uploads'             => $_POST['forum_allow_image_uploads'],
+                'notify_admin_on_new_posts'             => $_POST['notify_admin_on_new_posts'],
+                'set_sort'                              => $op['set_sort'],
+                'forum_use_spam'                        => $_POST['forum_use_spam'],
+                'forum_use_bbcode'                      => $_POST['forum_use_bbcode'],
+                'forum_captcha'                         => $_POST['forum_captcha'],
+                'hot_topic'                             => $wpdb->escape($_POST['hot_topic']),
+                'veryhot_topic'                         => $wpdb->escape($_POST['veryhot_topic']),
+                'forum_display_name'                    => $_POST['forum_display_name'],
+                'level_one'                             => $wpdb->escape($_POST['level_one']),
+                'level_two'                             => $wpdb->escape($_POST['level_two']),
+                'level_three'                           => $wpdb->escape($_POST['level_three']),
+                'level_newb_name'                       => $wpdb->escape($_POST['level_newb_name']),
+                'level_one_name'                        => $wpdb->escape($_POST['level_one_name']),
+                'level_two_name'                        => $wpdb->escape($_POST['level_two_name']),
+                'level_three_name'                      => $wpdb->escape($_POST['level_three_name']),
+                'forum_db_version'                      => $op['forum_db_version'],
+                'forum_disabled_cats'                   => explode(",",$wpdb->escape($_POST['forum_disabled_cats'])),
+                'allow_user_replies_locked_cats'        => $_POST['allow_user_replies_locked_cats'],
+                'forum_posting_time_limit'              => $wpdb->escape($_POST['forum_posting_time_limit']),
+                'forum_hide_branding'                   => $_POST['forum_hide_branding']
                 );
-                
+        
         update_option('mingleforum_options', $options);
-                
+        
+        //Update rewrite
+        $mingleforum->flush_wp_rewrite_rules();
+        
         return true;
       }
       return false;
@@ -648,8 +651,8 @@ $image = WPFURL."images/user.png";
     
   function delete_forum_group(){
     if(isset($_POST['delete_forum_groups'])){
-    global $wpdb, $table_prefix;
-    $msg = "";
+      global $wpdb, $table_prefix;
+      $msg = "";
       $table_forums = $table_prefix."forum_forums";
       $table_groups = $table_prefix."forum_groups";
       $table_threads = $table_prefix."forum_threads";
@@ -661,7 +664,6 @@ $image = WPFURL."images/user.png";
 
       $groups = $_POST['delete_groups'];
       $forums = $_POST['delete_forums'];
-      
 
       $forum_num = count($forums);
       $group_num = count($groups);
@@ -704,7 +706,6 @@ $image = WPFURL."images/user.png";
           $post_count += $wpdb->query("DELETE FROM $table_posts WHERE parent_id = $thread->id");
         }
         $thread_count += $wpdb->query("DELETE FROM $table_threads WHERE parent_id = {$forums[$i]}");
-
         
         $forum_count += $wpdb->query("DELETE FROM $table_forums WHERE id = {$forums[$i]}");
       }

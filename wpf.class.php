@@ -11,11 +11,7 @@ class mingleforum{
 	{
 		$this->options = $this->get_forum_admin_ops();
 		$this->get_set_ads_options();
-		if($this->options['forum_use_seo_friendly_urls'])
-		{
-			add_filter("init", array(&$this, "flush_wp_rewrite_rules"));
-			add_filter("rewrite_rules_array", array(&$this, "set_seo_friendly_rules"));
-		}
+		add_filter("rewrite_rules_array", array(&$this, "set_seo_friendly_rules"));
 		add_action("admin_menu", array(&$this,"add_admin_pages"));
 		add_action("admin_head", array(&$this, "admin_header"));
 		add_action("wp_head", array(&$this, "setup_header"));
