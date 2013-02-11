@@ -2,6 +2,7 @@
 include("wpf_define.php");
 include_once('bbcode.php');
 
+//Main Mingle Forum Class
 if(!class_exists('mingleforum')) {
 class mingleforum{
 
