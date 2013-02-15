@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Mingle Forum 1.0.34\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-02-05 08:05+0200\n"
+"PO-Revision-Date: 2013-02-15 22:40+0200\n"
 "Last-Translator: Dobrin Draganov  <ddart.bg@gmail.com>\n"
 "Language-Team: DDART <ddart.bg@gmail.com>\n"
 "Language: bg_BG\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.5\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: .\\pms\n"
@@ -386,11 +386,11 @@ msgstr "Редактирай"
 
 #: wpf.class.php:1069 wpf.class.php:1120
 msgid "Topics: "
-msgstr "Теми:"
+msgstr "Теми: "
 
 #: wpf.class.php:1069 wpf.class.php:1120
 msgid "Posts: "
-msgstr "Отговори:"
+msgstr "Отговори: "
 
 #: wpf.class.php:1079 wpf.class.php:1130
 msgid "New posts"

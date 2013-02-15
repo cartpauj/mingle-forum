@@ -7,7 +7,7 @@ if(isset($_GET['quote'])){
 	$text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, `date` FROM {$this->t_posts} WHERE id = %d", $quote_id));
 	$user = get_userdata($text->author_id);
 	$display_name = $this->options['forum_display_name'];
-	$q = "[quote][b]".__("Quote from", "mingleforum")." ".$user->$display_name." ".__("on", "mingleforum")." ".$mingleforum->format_date($text->date)."[/b]\n".$text->text."[/quote]";
+	$q = "[quote][quotetitle]".__("Quote from", "mingleforum")." ".$user->$display_name." ".__("on", "mingleforum")." ".$mingleforum->format_date($text->date)."[/quotetitle]\n".$text->text."[/quote]";
 }
 if(($_GET['mingleforumaction'] == "postreply")){
 	$options = get_option("mingleforum_options");
