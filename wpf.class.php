@@ -2318,7 +2318,7 @@ class mingleforum{
 
 	function profile_link($user_id, $toWrap = false){
 		if($toWrap)
-			$user = wordwrap($this->get_userdata($user_id, $this->options['forum_display_name']), 10, "-<br/>", 1);
+			$user = wordwrap($this->get_userdata($user_id, $this->options['forum_display_name']), 22, "-<br/>", 1);
 		else
 			$user = $this->get_userdata($user_id, $this->options['forum_display_name']);
 		//START MINGLE PROFILE LINKS

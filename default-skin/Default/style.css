@@ -60,6 +60,7 @@
 #wpf-login-button,
 #wpf-edit-button,
 #wpf-wrapper input[type=submit]{
+	color: #555;
     letter-spacing: normal !important;
     text-shadow:0 1px 0 #fff;
     border-color:#ccc #ccc #aaa;
@@ -117,7 +118,7 @@
 #wpf-wrapper .poster_in_forum span img{
 	float:left;
 	vertical-align: middle;
-	margin: 13px 9px 12px 0px
+	margin: 6px 9px 6px 0px
 	}
 #wpf-wrapper .poster_img_avatar img{
 	float:left;
@@ -138,7 +139,9 @@
 	-moz-box-shadow:  0 1px 4px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
-
+#wpf-wrapper td.poster_in_forum {
+    line-height: 15px;
+}
 /*end poster_in_forum ---------------------------------*/ 
 #wpf-wrapper th h4{
 	font-weight: bold;
