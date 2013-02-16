@@ -115,3 +115,32 @@ function invertAll(headerfield, checkform, mask)
 function uncheckglobal(headerfield, checkform){
 	checkform.mod_global.checked = false;
 }
+
+function wpf_confirm(){
+  var answer = confirm('Are you sure you want to remove this?');
+  if(!answer)
+    return false;
+  else
+    return true;
+}
+
+(function($) {
+  $(document).ready(function() {
+    //Show/Hide groups
+    $('a.wpf_click_me').click(function() {
+      var id = $(this).attr('data-value');
+      
+      if($(this).hasClass('show-hide-hidden')) {
+        $('tr.group-shrink-'+id).show();
+        $('a#shown-'+id).show();
+        $(this).hide();
+      } else {
+        $('tr.group-shrink-'+id).hide();
+        $('a#hidden-'+id).show();
+        $(this).hide();
+      }
+      
+      return false;
+    });
+  });
+})(jQuery);

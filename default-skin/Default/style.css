@@ -725,3 +725,13 @@ pre.code{
 .forum_buttons a {
   margin-right:3px;
 }
+
+/* Header shrink/hide */
+img.show_hide_icon {
+  float:right;
+  vertical-align:middle;
+}
+
+a.show-hide-hidden {
+  display:none;
+}

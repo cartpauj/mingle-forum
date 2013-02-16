@@ -13,7 +13,8 @@ class mingleforum{
 		$this->get_set_ads_options();
 		add_filter("rewrite_rules_array", array(&$this, "set_seo_friendly_rules"));
 		add_action("admin_menu", array(&$this,"add_admin_pages"));
-		add_action("admin_head", array(&$this, "admin_header"));
+    add_action("admin_enqueue_scripts", array(&$this, 'enqueue_admin_scripts'));
+    add_action("wp_enqueue_scripts", array(&$this, 'enqueue_front_scripts'));
 		add_action("wp_head", array(&$this, "setup_header"));
 		add_action("plugins_loaded", array(&$this, "wpf_load_widget"));
 		add_action("wp_footer", array(&$this, "wpf_footer"));
@@ -168,12 +169,12 @@ class mingleforum{
 		update_option('mingleforum_options', $this->options);
 		return $this->options;
 	}
-
+  
 	// Add admin pages
 	function add_admin_pages(){
 		include_once("fs-admin/fs-admin.php");
 		$wpfa = new mingleforumadmin();
-
+    
 		add_menu_page(__("Mingle Forum - Options", "mingleforum"), "Mingle Forum", "administrator", "mingle-forum", array(&$wpfa, "options"), WPFURL."images/logo.png");
 		add_submenu_page("mingle-forum", __("Mingle Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', array(&$wpfa, "options"));
 		add_submenu_page('mingle-forum', __('Ads', 'mingleforum'), __('Ads', 'mingleforum'), "administrator", 'mfads', array(&$wpfa, "ads"));
@@ -183,13 +184,49 @@ class mingleforum{
 		add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mfgroups', array(&$wpfa, "usergroups"));
 		add_submenu_page("mingle-forum", __("About", "mingleforum"), __("About", "mingleforum"), "administrator", 'mfabout', array(&$wpfa, "about"));
 	}
-
-	function admin_header(){
-		echo "<link rel='stylesheet' href='".get_bloginfo('wpurl')."/wp-content/plugins/".WPFPLUGIN."/wpf_admin.css' type='text/css' media='screen'  />"; 
-		?>
-			<script language="JavaScript" type="text/javascript" src="<?php echo WPFURL."js/script.js"?>"></script>
+  
+  function enqueue_front_scripts()
+  {
+		$this->setup_links();
+    
+    //Let's be responsible and only load our shiz where it's needed
+    if(is_page($this->get_pageid()))
+    {
+      //Not using the stylesheet yet as it causes some problems if loaded before the theme's stylesheets
+      //wp_enqueue_style('mingle-forum-skin-css', $this->skin_url.'/style.css');
+      wp_enqueue_script('mingle-forum-js', plugin_dir_url(__FILE__)."js/script.js", array('jquery'));
+    }
+  }
+  
+	function setup_header(){
+		global $user_ID;
+		$this->setup_links();
+    
+		if($this->options['forum_use_rss']): ?>
+			<link rel='alternate' type='application/rss+xml' title="<?php echo __("Forums RSS", "mingleforum"); ?>" href="<?php echo $this->global_feed_url;?>" />
+    <?php endif;
+    
+		if(is_page($this->get_pageid()))
+		{
+			if($this->ads_options['mf_ad_custom_css'] != ""): ?>
+        <style type="text/css"><?php echo stripslashes($this->ads_options['mf_ad_custom_css']); ?></style>
+			<?php endif; ?>
+			<link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css";?>"  />
 		<?php
+		}
 	}
+  
+  function enqueue_admin_scripts($hook)
+  {
+    $url = plugin_dir_url(__FILE__);
+    
+    //Let's only load our shiz on mingle-forum admin pages
+    if(strstr($hook, 'mingle-forum') !== false)
+    {
+      wp_enqueue_style('mingle-forum-admin-css', $url."wpf_admin.css");
+      wp_enqueue_script('mingle-forum-admin-js', $url."js/script.js");
+    }
+  }
 
 	function wpf_load_widget() {
 		wp_register_sidebar_widget("MFWidget", __("Forums Latest Activity", "mingleforum"), array(&$this, "widget"));
@@ -1064,13 +1101,21 @@ class mingleforum{
 		foreach($grs as $g){
 			if($this->have_access($g->id)){
 				$this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";	
-				$this->o .= "<tr><td class='forumtitle' colspan='4'><a href='".$this->get_grouplink($g->id)."'>".$this->output_filter($g->name)."</a></td></tr>";
-				$this->o .= "<tr class='forumstatus'><th style='text-align:center;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
+				$this->o .= "<tr><td class='forumtitle' colspan='4'>
+        
+        <a href='".$this->get_grouplink($g->id)."'>".$this->output_filter($g->name)."</a>
+        
+        <a href='#' id='shown-{$g->id}' class='wpf_click_me' data-value='{$g->id}' title='".__('Shrink this group', 'mingleforum')."'><img src='{$this->skin_url}/images/icons/icon_shown.jpg' class='show_hide_icon' /></a>
+        
+        <a href='#' id='hidden-{$g->id}' class='wpf_click_me show-hide-hidden' data-value='{$g->id}' title='".__('Expand this group', 'mingleforum')."'><img src='{$this->skin_url}/images/icons/icon_hidden.jpg' class='show_hide_icon' /></a>
+        
+        </td></tr>";
+				$this->o .= "<tr class='forumstatus group-shrink-{$g->id}'><th style='text-align:center;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
 				<th style='text-align:center;'></th><th>".__("Last post", "mingleforum")."</th></tr>";
 				$frs = $this->get_forums($g->id);
 				foreach($frs as $f){
 				$alt = ($alt=="alt even")?"odd":"alt even";
-					$this->o .= "<tr class='{$alt}'>";
+					$this->o .= "<tr class='{$alt} group-shrink-{$g->id}'>";
 					$image = "off.gif";
 					if($user_ID){
 					$lpif = $this->last_poster_in_forum($f->id, true);
@@ -1270,33 +1315,6 @@ class mingleforum{
 		if($id != "")
 			return true;
 		return false;
-	}
-
-	// TODO
-	function setup_header(){
-		$this->setup_links();
-		global $user_ID;
-		if($this->options['forum_use_rss']) { ?>
-			<link rel='alternate' type='application/rss+xml' title="<?php echo __("Forums RSS", "mingleforum"); ?>" href="<?php echo $this->global_feed_url;?>" /> <?php }
-		if(is_page($this->get_pageid()))
-		{
-			if($this->ads_options['mf_ad_custom_css'] != "") {
-			?>
-			<style type="text/css"><?php echo stripslashes($this->ads_options['mf_ad_custom_css']); ?></style>
-			<?php } //ENDIF FOR CUSTOM ADS CSS ?>
-			<link rel='stylesheet' type='text/css' href="<?php echo "$this->skin_url/style.css";?>"  />
-			<script language="JavaScript" type="text/javascript" src="<?php echo WPFURL."js/script.js"?>"></script>
-			<script language="JavaScript" type="text/javascript">
-			function wpf_confirm(){
-				var answer = confirm ('<?php echo __("Are you sure you want to remove this?", "mingleforum");?>');
-				if (!answer)
-					return false;
-				else
-					return true;
-			}
-			</script>
-		<?php
-		}
 	}
 
 	// Some SEO friendly stuff
