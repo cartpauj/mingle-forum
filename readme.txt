@@ -3,8 +3,8 @@ Contributors: cartpauj
 Donate link: http://cartpauj.com/donate/
 Tags: forum, mingle, mingle forum, cartpauj, discussion, board, threads, messaging, message, messages, user forum, wordpress forum, forum plugin, forums, discussion forums, easy forum, discussion board, discussions, boards, bbpress, bulletin board, bulletin boards, bulletin, server, wp
 Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 1.0.34
+Tested up to: 3.5.1
+Stable tag: 1.1.0
 
 Mingle Forum allows you to easily and quickly put a Forum on your Wordpress site/blog.
 
@@ -34,7 +34,7 @@ You can try Mingle Forum out on my site:
 * Private Messages - Mingle Forum now integrates seamlessly with Mingle or my [Cartpauj PM Plugin](http://cartpauj.com/projects/cartpauj-pm-plugin) (Requires Cartpauj PM vs 1.0.09 or greater)
 * RSS Feeds
 * Quick Reply
-* Wordpress 3.x ready!
+* Wordpress 3.5+ ready!
 * Categories with sub-forums
 * User Groups
 * User Levels (EX: Newbie, Beginner, Advanced, Pro)
@@ -118,6 +118,17 @@ n/a
 n/a
 
 == Changelog ==
+= 1.1.0 =
+* We owe 99% of this one to ddart!!! Please send him a donation, http://ddart-bg.com/
+* Massive style changes to default skin (Thanks to ddart)
+* More BBCode options & images (Thanks to ddart)
+* Added smilies to quick reply (Thanks to ddart)
+* Fixed common style problems with many themes (Thanks to ddart)
+* Further SQL injection prevention
+* Some code cleanup
+* Permalink structure does not update on every page load now
+* Fixed SPAM time limit not working for guests
+* Updated Bulgarian Translation (Big thanks to DDArt)
 = 1.0.34 =
 * Added ability to limit SPAM by setting a time interval users must wait between posts
 * Added option to allow users to post replies in locked categories

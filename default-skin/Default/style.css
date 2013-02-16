@@ -709,4 +709,16 @@ pre.code{
     padding: 0px 4px;
 	text-shadow:none!important;
 	text-decoration:none !important;
-		}
+}
+ 
+ /* Buttons fix */
+ div.forum_smilies,
+ div.forum_buttons {
+  padding:0;
+  margin:0;
+ }
+ 
+.forum_smilies a,
+.forum_buttons a {
+  margin-right:3px;
+}

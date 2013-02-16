@@ -16,7 +16,7 @@
 			<tr>	
 				<td valign='top'>".__("Message:", "mingleforum")."</td>
 				<td>
-					".$this->form_buttons()."<br/>".$this->form_smilies()."
+					".$this->form_buttons().$this->form_smilies()."
 
 					<br/><textarea ".ROW_COL." name='message' class='wpf-textarea'></textarea>
 				</td>

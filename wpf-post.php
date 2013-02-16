@@ -26,7 +26,7 @@ if(($_GET['mingleforumaction'] == "postreply")){
 			<tr>	
 				<td valign='top'>".__("Message:", "mingleforum")."</td>
 				<td>";
-					$out .= $this->form_buttons()."<br/>".$this->form_smilies();
+					$out .= $this->form_buttons().$this->form_smilies();
 					$out .= "<br /><textarea ".ROW_COL." name='message' class='wpf-textarea' >".stripslashes($q)."</textarea>";
 					$out .= "
 				</td>
