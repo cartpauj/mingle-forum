@@ -514,6 +514,7 @@ th.wpf-bright h3{
 .maintab_back
 {
 	background: url(images/maintab_back.gif) left bottom repeat-x !important;
+  white-space:nowrap;
 }
 .maintab_last
 {
@@ -573,6 +574,7 @@ th.wpf-bright h3{
 }
 .mirrortab_back
 {
+  white-space:nowrap;
 	background: url(images/mirrortab_back.gif) repeat-x !important;
 }
 .mirrortab_last
