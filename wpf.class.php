@@ -1105,9 +1105,9 @@ class mingleforum{
         
         <a href='".$this->get_grouplink($g->id)."'>".$this->output_filter($g->name)."</a>
         
-        <a href='#' id='shown-{$g->id}' class='wpf_click_me' data-value='{$g->id}' title='".__('Shrink this group', 'mingleforum')."'><img src='{$this->skin_url}/images/icons/icon_shown.jpg' class='show_hide_icon' /></a>
+        <a href='#' id='shown-{$g->id}' class='wpf_click_me' data-value='{$g->id}' title='".__('Shrink this group', 'mingleforum')."'><img src='{$this->skin_url}/images/icons/icon_shown.png' class='show_hide_icon' /></a>
         
-        <a href='#' id='hidden-{$g->id}' class='wpf_click_me show-hide-hidden' data-value='{$g->id}' title='".__('Expand this group', 'mingleforum')."'><img src='{$this->skin_url}/images/icons/icon_hidden.jpg' class='show_hide_icon' /></a>
+        <a href='#' id='hidden-{$g->id}' class='wpf_click_me show-hide-hidden' data-value='{$g->id}' title='".__('Expand this group', 'mingleforum')."'><img src='{$this->skin_url}/images/icons/icon_hidden.png' class='show_hide_icon' /></a>
         
         </td></tr>";
 				$this->o .= "<tr class='forumstatus group-shrink-{$g->id}'><th style='text-align:center;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
