@@ -2451,7 +2451,7 @@ class mingleforum{
 								.$this->get_paged_threadlink($thread->id)."'>"
 								.$this->output_filter($this->get_threadname($thread->id))."</a>
 							</td>
-							<td class='img-avatar-forumstats' style='vertical-align: middle;'>".$this->get_avatar($starter_id, 15)."".$this->profile_link($starter_id)."</td>
+							<td class='img-avatar-forumstats' style='vertical-align: middle;'>".$this->get_avatar($thread->starter, 15)."".$this->profile_link($starter_id)."</td>
 							<td style='vertical-align: middle;' class='wpf-alt forumstats' align='center'>".( $this->num_posts($thread->id) - 1 )."</td>
 							<td style='vertical-align: middle;'><small>".$this->get_lastpost($thread->id)."</small></td>
 						</tr>";
