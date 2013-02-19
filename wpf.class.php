@@ -249,7 +249,10 @@ class mingleforum{
 			{
 				//$user = get_userdata($post->author_id);
 				if($this->have_access($this->forum_get_group_from_post($post->parent_id)))
-					echo "<li><a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'>".$this->output_filter($post->subject)."</a><br/>".__("by:", "mingleforum")." ".$this->profile_link($post->author_id)."<br /><small>".$this->format_date($post->date)."</small></li>";
+					echo "<li><div style='float:left;   margin:10px 13px 0px 0;'>".$this->get_avatar($post->author_id, 35)."</div><div style='margin:0px 0px 12px 0; line-height: 17px;'><div style='margin: 0px 0px 0px 50px;'><a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'>".$this->output_filter($post->subject)."</a></div><div style='margin: 0px 0px 0px 50px;'>".__("by:", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div style='margin: 0px 0px 0px 50px;'><small>".$this->format_date($post->date)."</small>
+					
+	<a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:0px 0 0px 0; border-radius:0px; box-shadow: none; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a>
+					</div></li>";
 				$unique[] = $post->parent_id;
 				$toShow += 1;
 			}
@@ -730,7 +733,7 @@ class mingleforum{
 		$post = $wpdb->get_row($wpdb->prepare("SELECT `date`, author_id, id FROM {$this->t_posts} WHERE parent_id = %d ORDER BY `date` DESC LIMIT 1", $thread_id));
 		if (!empty($post)) {
 			$link = $this->get_paged_threadlink($thread_id);
-			return "<div class='poster_img_avatar' >".$this->get_avatar($post->author_id, 25)."</div>".__("by", "mingleforum")." ".$this->profile_link($post->author_id)."<br />".__("on", "mingleforum")."  <a href='".$link."'>".date($this->opt['forum_date_format'], strtotime($post->date))."<img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a>";
+			return "<div class='poster_img_avatar' >".$this->get_avatar($post->author_id, 25)."</div><div class='wpf-item-poster'><div class='wpf-item-poster-li'>".__("by", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div class='wpf-item-poster-li'>".__("on", "mingleforum")."  <a href='".$link."'>".date($this->opt['forum_date_format'], strtotime($post->date))."<img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a></div>";
 		}
 		else
 			return false;
@@ -739,7 +742,7 @@ class mingleforum{
 	function get_lastpost_all(){
 		global $wpdb;
 		$post = $wpdb->get_row("SELECT `date`, author_id, id FROM {$this->t_posts} ORDER BY `date` DESC LIMIT 1");
-		return __("Latest Post by", "mingleforum")." ".$this->profile_link($post->author_id)."<br />".__("on", "mingleforum")." ".date($this->opt['forum_date_format'], strtotime($post->date));
+		return __("Latest Post by", "mingleforum")." <span class='img-avatar-forumstats' >".$this->get_avatar($post->author_id, 15)."</span>".$this->profile_link($post->author_id)."<br />".__("on", "mingleforum")." ".date($this->opt['forum_date_format'], strtotime($post->date));
 	}
 
 	function showforum($forum_id){
@@ -778,7 +781,7 @@ class mingleforum{
 								<tr>
 									<th width='7%' class='forumIcon'>".__("Status", "mingleforum")."</th>
 									<th>".__("Topic Title", "mingleforum")."</th>
-									<th width='11%' nowrap='nowrap'>".__("Started by", "mingleforum")."</th>
+									<th width='12%' nowrap='nowrap'>".__("Started by", "mingleforum")."</th>
 									<th width='10%'>".__("Replies", "mingleforum")."</th>
 									<th width='10%'>".__("Views", "mingleforum")."</th>
 									<th width='22%'>".__("Last post", "mingleforum")."</th>
@@ -807,11 +810,11 @@ class mingleforum{
 					$sticky_img = "<img alt='' src='{$this->skin_url}/images/topic/normal_post_sticky.gif'/>";
 					$out .= "<tr>
 									<td class='forumIcon' align='center'>{$sticky_img}</td>
-									<td class='wpf-alt sticky'><span class='topicTitle'><a href='"
+									<td class='wpf-alt sticky wpf-topic-title'><span class='topicTitle'><a href='"
 										.$this->get_threadlink($thread->id)."'>"
 										.$this->output_filter($thread->subject)."</a>&nbsp;&nbsp;{$image}</span> {$del}
 									</td>
-									<td class='forumstats' align='center'>".$this->profile_link($thread->starter)."</td>
+									<td class='img-avatar-forumstats' align='center'>".$this->get_avatar($thread->starter, 15)."".$this->profile_link($thread->starter)."</td>
 									<td class='wpf-alt forumstats' align='center'>".( $this->num_posts($thread->id) - 1 )."</td>
 									<td class='wpf-alt forumstats' align='center'>".$thread->views."</td>
 									<td><small>".$this->get_lastpost($thread->id)."</small></td>
@@ -846,7 +849,7 @@ class mingleforum{
 										.$this->get_threadlink($thread->id)."'>"
 										.$this->output_filter($thread->subject)."</a>&nbsp;&nbsp;{$image}</span> {$del}
 									</td>
-									<td class='forumstats' align='center'>".$this->profile_link($thread->starter)."</td>
+									<td class='img-avatar-forumstats' align='center'>".$this->get_avatar($thread->starter, 15)."".$this->profile_link($thread->starter)."</td>
 									<td class='wpf-alt forumstats' align='center'>".( $this->num_posts($thread->id) - 1 )."</td>
 									<td class='wpf-alt forumstats' align='center'>".$thread->views."</td>
 									<td><small>".$this->get_lastpost($thread->id)."</small></td>
@@ -1131,7 +1134,7 @@ class mingleforum{
 					}
 					$this->o .= "
 							<td class='wpf-alt forumIcon' width='6%' align='center'><img alt='' src='{$this->skin_url}/images/{$image}' /></td>
-							<td valign='top'><strong><a href='".$this->get_forumlink($f->id)."'>"
+							<td valign='top' class='wpf-category-title' ><strong><a href='".$this->get_forumlink($f->id)."'>"
 								.$this->output_filter($f->name)."</a></strong><br />"
 								.$this->output_filter($f->description);
 								if($f->description != "")$this->o .= "<br />";
@@ -1184,7 +1187,7 @@ class mingleforum{
 					}
 					$this->o .= "
 							<td class='wpf-alt forumIcon' width='6%' align='center'><img alt='' src='{$this->skin_url}/images/{$image}' /></td>
-							<td valign='top'><strong><a href='".$this->get_forumlink($f->id)."'>"
+							<td valign='top' class='wpf-category-title'><strong><a href='".$this->get_forumlink($f->id)."'>"
 								.$this->output_filter($f->name)."</a></strong><br />"
 								.$this->output_filter($f->description);
 								if($f->description != "")$this->o .= "<br />";
@@ -1270,8 +1273,8 @@ class mingleforum{
 		if(!$date)
 			return __("No topics yet", "mingleforum");
 		$d =  date($this->opt['forum_date_format'], strtotime($date->date));
-		return "<span>".$this->get_avatar($date->author_id, 35)."</span><strong>".__("Last post", "mingleforum")."</strong> ".__("by", "mingleforum")." ".$this->profile_link($date->author_id)
-		."<br />".__("in", "mingleforum")." <a href='".$this->get_paged_threadlink($date->parent_id)."#postid-$date->id'>".$this->get_postname($date->id)."</a><br />".__("on", "mingleforum")." {$d}" ."<a href='".$this->get_paged_threadlink($date->parent_id)."#postid-{$date->id}'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.gif' /></a>";
+		return "<div class='wpf-item-avatar'><span>".$this->get_avatar($date->author_id, 35)."</span></div><div class='wpf-item'><div class='wpf-item-title'><strong>".__("Last post", "mingleforum")."</strong> ".__("by", "mingleforum")." ".$this->profile_link($date->author_id)."</div>
+		<div class='wpf-item-title'>".__("in", "mingleforum")." <a href='".$this->get_paged_threadlink($date->parent_id)."#postid-$date->id'>".$this->get_postname($date->id)."</a></div><div class='wpf-item-title'>".__("on", "mingleforum")." {$d}" ."<a href='".$this->get_paged_threadlink($date->parent_id)."#postid-{$date->id}'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.gif' /></a></div>";
 	}
 
 	function last_poster_in_thread($thread_id) {
@@ -1442,7 +1445,7 @@ class mingleforum{
 		$mods = $wpdb->get_results("SELECT user_id, meta_value FROM {$wpdb->usermeta} WHERE meta_key = 'wpf_moderator'");
 		foreach($mods as $mod){
 			if($this->is_moderator($mod->user_id, $forum_id)){
-				$out .= $this->profile_link($mod->user_id).", ";
+				$out .= "<span class='img-avatar-forumstats' >".$this->get_avatar($mod->user_id, 15)."</span>". $this->profile_link($mod->user_id).", ";
 			}
 		}
 		$out = substr($out, 0, strlen($out)-2);
@@ -2403,7 +2406,7 @@ class mingleforum{
 								<tr>
 									<td width='3%' class='forumIcon' align='center'><img alt='' src='{$this->skin_url}/images/icons/info.gif' /></td>
 									<td>
-										".$this->num_posts_total()." ".__("Posts in", "mingleforum")." ".$this->num_threads_total()." ".__("Topics Made by", "mingleforum")." ".count($this->get_users())." ".__("Members", "mingleforum").". ".__("Latest Member:", "mingleforum")." ".$this->profile_link($this->latest_member())."
+										".$this->num_posts_total()." ".__("Posts in", "mingleforum")." ".$this->num_threads_total()." ".__("Topics Made by", "mingleforum")." ".count($this->get_users())." ".__("Members", "mingleforum").". ".__("Latest Member:", "mingleforum")."<span class='img-avatar-forumstats' >".$this->get_avatar($this->latest_member(), 15)."</span>".$this->profile_link($this->latest_member())."
 										<br />".$this->get_lastpost_all()."
 									</td>
 								</tr>
@@ -2444,11 +2447,11 @@ class mingleforum{
 							$starter_id = $wpdb->get_var($wpdb->prepare("SELECT starter FROM {this->t_threads} WHERE id = %d", $thread->id));
 							$o .= "<tr>
 							<td align='center' class='forumIcon'>".$this->get_topic_image($thread->id)."</td>
-							<td style='vertical-align: middle;' class='wpf-alt' align='top'><a href='"
+							<td style='vertical-align: middle;' class='wpf-alt wpf-topic-title' align='top'><a href='"
 								.$this->get_paged_threadlink($thread->id)."'>"
 								.$this->output_filter($this->get_threadname($thread->id))."</a>
 							</td>
-							<td style='vertical-align: middle;'>".$this->profile_link($starter_id)."</td>
+							<td class='img-avatar-forumstats' style='vertical-align: middle;'>".$this->get_avatar($thread->starter, 15)."".$this->profile_link($starter_id)."</td>
 							<td style='vertical-align: middle;' class='wpf-alt forumstats' align='center'>".( $this->num_posts($thread->id) - 1 )."</td>
 							<td style='vertical-align: middle;'><small>".$this->get_lastpost($thread->id)."</small></td>
 						</tr>";
