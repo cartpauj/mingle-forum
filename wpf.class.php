@@ -2444,7 +2444,7 @@ class mingleforum{
 				foreach($threads as $thread){
 						if($this->have_access($this->forum_get_group_from_post($thread->id)))
 						{
-							$starter_id = $wpdb->get_var($wpdb->prepare("SELECT starter FROM {this->t_threads} WHERE id = %d", $thread->id));
+							$starter_id = $wpdb->get_var($wpdb->prepare("SELECT starter FROM {$this->t_threads} WHERE id = %d", $thread->id));
 							$o .= "<tr>
 							<td align='center' class='forumIcon'>".$this->get_topic_image($thread->id)."</td>
 							<td style='vertical-align: middle;' class='wpf-alt wpf-topic-title' align='top'><a href='"
@@ -2554,7 +2554,7 @@ class mingleforum{
 				</tr>";
 		foreach($results as $result){
 			if($this->have_access($this->forum_get_group_from_post($result->parent_id))){
-			$starter = $wpdb->get_var("select starter from {$this->t_threads} where id = {$result->parent_id}");
+			$starter = $wpdb->get_var("SELECT starter FROM {$this->t_threads} WHERE id = {$result->parent_id}");
 				$o .= "<tr>
 							<td valign='top' align='center'>".$this->get_topic_image($result->parent_id)."</td>
 							<td valign='top' class='wpf-alt'><a href='".$this->get_threadlink($result->parent_id)."'>".stripslashes($result->subject)."</a>
@@ -2569,7 +2569,7 @@ class mingleforum{
 		$this->o .= $o;
 		$this->footer();
 	}
-
+  
 	function ext_str_ireplace($findme, $replacewith, $subject){ 
  	 	return substr($subject, 0, stripos($subject, $findme)).
  	 	       str_replace('$1', substr($subject, stripos($subject, $findme), strlen($findme)), $replacewith).

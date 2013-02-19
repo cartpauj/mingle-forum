@@ -120,14 +120,15 @@ n/a
 == Changelog ==
 = 1.1.0 =
 * We owe 99% of this one to ddart!!! Please send him a donation, http://ddart-bg.com/
-* Massive style changes to default skin (Thanks to ddart)
-* More BBCode options & images (Thanks to ddart)
-* Added smilies to quick reply (Thanks to ddart)
-* Fixed common style problems with many themes (Thanks to ddart)
-* Further SQL injection prevention
-* Some code cleanup
-* Permalink structure does not update on every page load now
+* Added more BBCode options & images
+* Added smilies to quick reply
+* Added ability to shrink Categories to save space
+* Changed styling of default skin (HUGE Thanks to ddart)
+* Changed the bulky profile header to be more sleek
+* Changed permalink structure to not update on every page load
+* Fixed possible SQL injection sites
 * Fixed SPAM time limit not working for guests
+* Fixed common style problems with many themes
 * Updated Bulgarian Translation (Big thanks to DDArt)
 = 1.0.34 =
 * Added ability to limit SPAM by setting a time interval users must wait between posts
