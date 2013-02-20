@@ -252,7 +252,7 @@ class mingleforum{
 			{
 				//$user = get_userdata($post->author_id);
 				if($this->have_access($this->forum_get_group_from_post($post->parent_id)))
-					echo "<li><div style='float:left;   margin:10px 13px 0px 0;'>".$this->get_avatar($post->author_id, 35)."</div><div style='margin:0px 0px 12px 0; line-height: 17px;'><a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'>".$this->output_filter($post->subject)."</a></div><div style='margin: 0px 0px 0px 50px;'>".__("by:", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div style='margin: 0px 0px 0px 50px;'><small>".$this->format_date($post->date)."</small>
+					echo "<li class='wpf_widget_item'><div style='float:left; margin:10px 13px 0px 0;'>".$this->get_avatar($post->author_id, 35)."</div><div style='margin:0 0 0 50px;line-height:17px;'><a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'>".$this->output_filter($post->subject)."</a></div><div style='margin: 0px 0px 0px 50px;'>".__("by:", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div style='margin: 0px 0px 0px 50px;'><small>".$this->format_date($post->date)."</small>
 					<a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:0px 0 0px 0; border-radius:0px; box-shadow: none; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a>
 					</div></li>";
 				$unique[] = $post->parent_id;
@@ -312,10 +312,9 @@ class mingleforum{
 		{
 			?>
 			<script type="text/javascript" >
-				<?php echo "var skinurl = '$this->skin_url';";?>
-				fold();
+				<?php echo "var skinurl = '{$this->skin_url}';";?>
 			function notify(){
-					
+			
 				var answer = confirm ('<?php echo $this->notify_msg;?>');
 				if (!answer)
 					return false;

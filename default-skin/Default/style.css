@@ -763,3 +763,9 @@ a.show-hide-hidden {
   vertical-align:middle;
   margin-right:5px;
 }
+
+li.wpf_widget_item {
+  clear:both;
+  margin-bottom:10px;
+  border-bottom:1px dashed #CCC;
+}
