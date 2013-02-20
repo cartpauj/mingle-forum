@@ -32,7 +32,7 @@
 	/*background-color: white; ENABLE THIS IF YOU'RE HAVING TROUBLE SEEING MENU FONTS*/
 }
 /*Menu Header ---------------------------------------*/ 
-#wpf-wrapper #wp-mainmenu { margin-left: 5px; }
+#wpf-wrapper #wp-mainmenu { margin-left: 5px; margin-top: 5px; }
 #wp-mainmenu .menu_sub a {
 	border-right-style:solid;
 	-moz-border-radius:3px;
