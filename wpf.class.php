@@ -1859,7 +1859,7 @@ class mingleforum{
 	global $wpdb;
 		$this->setup_links();
 
-		$trail = "<a href='".get_permalink($this->page_id)."'>".__("Forum", "mingleforum")."</a>";
+		$trail = "<a href='".get_permalink($this->page_id)."'>".__("Forum Home", "mingleforum")."</a>";
 
 		if($this->current_group)
 			if($this->options['forum_use_seo_friendly_urls'])
