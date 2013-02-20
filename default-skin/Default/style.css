@@ -758,3 +758,8 @@ img.show_hide_icon {
 a.show-hide-hidden {
   display:none;
 }
+
+#profileHeader img {
+  vertical-align:middle;
+  margin-right:5px;
+}

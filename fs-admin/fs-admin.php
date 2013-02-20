@@ -214,7 +214,10 @@ $image = WPFURL."images/user.png";
                   'forum_disabled_cats'			=> $op['forum_disabled_cats'],
                   'allow_user_replies_locked_cats' => $op['allow_user_replies_locked_cats'],
                   'forum_posting_time_limit' => $op['forum_posting_time_limit'],
-                  'forum_hide_branding' => $op['forum_hide_branding']
+                  'forum_hide_branding' => $op['forum_hide_branding'],
+                  'forum_login_url' => $op['forum_login_url'],
+                  'forum_signup_url' => $op['forum_signup_url'],
+                  'forum_logout_redirect_url' => $op['forum_logout_redirect_url'],
                 );
                 
         update_option('mingleforum_options', $options);
@@ -488,14 +491,35 @@ $image = WPFURL."images/user.png";
       echo "checked='checked'";
     echo "/> ($defStr = ".__('Off', 'mingleforum').")</td>
     </tr>
+    
     <tr class='alternate'>
       <td>".__("Show Forum Login Form:", "mingleforum")."</td>
         <td><input type='checkbox' name='forum_show_login_form' value='true'";
      if($op['forum_show_login_form'] == 'true') 
       echo "checked='checked'";
     echo "/> ($defStr = ".__('On', 'mingleforum').")</td>
+    </tr>";
+    
+    $login_url = (isset($op['forum_login_url']) && !empty($op['forum_login_url']))?stripslashes($op['forum_login_url']):wp_login_url(get_permalink($mingleforum->page_id));
+    $signup_url = (isset($op['forum_signup_url']) && !empty($op['forum_signup_url']))?stripslashes($op['forum_signup_url']):wp_login_url().'?action=register';
+    $redirect_url = (isset($op['forum_logout_redirect_url']) && !empty($op['forum_logout_redirect_url']))?stripslashes($op['forum_logout_redirect_url']):get_permalink($mingleforum->page_id);
+    
+    echo "
+    <tr class='alternate'>
+      <td>".__("Login URL:", "mingleforum")."<br/><small>".__('Used only if Login Form disabled above', 'mingleforum')."</small></td>
+      <td><input type='text' name='forum_login_url' value='".$login_url."' /></td>
     </tr>
-        
+    
+    <tr class='alternate'>
+      <td>".__("Signup URL:", "mingleforum")."</td>
+      <td><input type='text' name='forum_signup_url' value='".$signup_url."' /></td>
+    </tr>
+    
+    <tr class='alternate'>
+      <td>".__("Logout Redirect URL:", "mingleforum")."</td>
+      <td><input type='text' name='forum_logout_redirect_url' value='".$redirect_url."' /></td>
+    </tr>
+    
     <tr class='alternate'>
       <td>".__("Show Avatars in the forum:", "mingleforum")."</td>
         <td><input type='checkbox' name='forum_use_gravatar' value='true'";
@@ -636,7 +660,10 @@ $image = WPFURL."images/user.png";
                 'forum_disabled_cats'                   => explode(",",$wpdb->escape($_POST['forum_disabled_cats'])),
                 'allow_user_replies_locked_cats'        => $_POST['allow_user_replies_locked_cats'],
                 'forum_posting_time_limit'              => $wpdb->escape($_POST['forum_posting_time_limit']),
-                'forum_hide_branding'                   => $_POST['forum_hide_branding']
+                'forum_hide_branding'                   => $_POST['forum_hide_branding'],
+                'forum_login_url'                       => $wpdb->escape(stripslashes($_POST['forum_login_url'])),
+                'forum_signup_url'                      => $wpdb->escape(stripslashes($_POST['forum_signup_url'])),
+                'forum_logout_redirect_url'             => $wpdb->escape(stripslashes($_POST['forum_logout_redirect_url']))
                 );
         
         update_option('mingleforum_options', $options);

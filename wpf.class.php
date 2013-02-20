@@ -158,7 +158,10 @@ class mingleforum{
 								'forum_disabled_cats'			=> array(),
                 'allow_user_replies_locked_cats' => false,
                 'forum_posting_time_limit' => 300,
-                'forum_hide_branding' => false
+                'forum_hide_branding' => false,
+                'forum_login_url' => '',
+                'forum_signup_url' => '',
+                'forum_logout_redirect_url' => ''
 								);
 		$initOps = get_option('mingleforum_options');
 		//Don't overwrite current opitions but allow the flexibility to add more options
@@ -1714,38 +1717,45 @@ class mingleforum{
 			$link = "<a id='user_button' href='".$this->base_url."profile&id={$user_ID}' title='".__("My profile", "mingleforum")."'>".__("My Profile", "mingleforum")."</a>";
 		}
 		//END MINGLE MY PROFILE LINK
-
-		if($this->options['forum_use_seo_friendly_urls'])
-		{
-			$menuitems = array(
-								"home" 	    => "<a id='home_button' href='".$this->home_url."'>".__("Forum Home", "mingleforum")."</a>",
-								"profile" 	=> $link,
-								"move" 		=> "<a href='".$this->forum_link.$this->current_forum.".".$this->curr_page."&getNewForumID&topic=$this->current_thread'>".__("Move Topic", "mingleforum")."</a>"
-				);
-		}
-		else
-		{
-			$menuitems = array(
-							"home" 	    => "<a id='home_button' href='".$this->home_url."'>".__("Forum Home", "mingleforum")."</a>",
-							"profile" 	=> $link,
-							"move" 		=> "<a href='".$this->get_forumlink($this->current_forum)."&getNewForumID&topic={$this->current_thread}'>".__("Move Topic", "mingleforum")."</a>");
-		}
-
-		$menu = "";
-		if($user_ID || $this->allow_unreg()){
-			$menu .= "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
-			$menu .= "<td valign='top' class='menu_sub'>{$menuitems['home']}</td>";
-			if($user_ID)
-				$menu .= "<td valign='top' class='menu_sub'>{$menuitems['profile']}</td>";
-
-			switch($this->current_view){
-				case THREAD:
-					if($this->is_moderator($user_ID, $this->current_forum)){
-						$menu .= "<td valign='top' class='menu_sub'>{$menuitems['move']}</td>";
-					}
-			}
-			$menu .= "</tr></table>";
-		}
+    
+    $menuitems = array(
+    "login" => '<a href="'.stripslashes($this->options['forum_login_url']).'">'.__('Login', 'mingleforum').'</a>',
+    "signup" => '<a href="'.stripslashes($this->options['forum_signup_url']).'">'.__('Register', 'mingleforum').'</a>',
+    "new_topics" => "<a href='".$this->base_url."shownew'>".__("Unread Topics", "mingleforum")."</a>",
+    "view_profile" 	=> $link,
+    "edit_profile" => "<a href='".site_url("wp-admin/profile.php") . "'>".__("Edit Profile", "mingleforum"),
+    "edit_settings" => "<a href='".$this->base_url."editprofile&user_id={$user_ID}'>".__("Settings", "mingleforum")."</a>",
+    "logout" => '<a href="'.wp_logout_url($this->options['forum_logout_redirect_url']).'">'.__('Logout', 'mingleforum').'</a>',
+    "move" 		=> "<a href='".$this->get_forumlink($this->current_forum)."&getNewForumID&topic={$this->current_thread}'>".__("Move Topic", "mingleforum")."</a>");
+    
+		$menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
+    if($user_ID) {
+      $menu .= "<td valign='top' class='menu_sub'>{$menuitems['new_topics']}</td>";
+      $menu .= "<td valign='top' class='menu_sub'>{$menuitems['view_profile']}</td>";
+      $menu .= "<td valign='top' class='menu_sub'>{$menuitems['edit_profile']}</td>";
+      $menu .= "<td valign='top' class='menu_sub'>{$menuitems['edit_settings']}</td>";
+      $menu .= "<td valign='top' class='menu_sub'>{$menuitems['logout']}</td>";
+      
+      switch($this->current_view) {
+        case THREAD:
+          if($this->is_moderator($user_ID, $this->current_forum))
+            $menu .= "<td valign='top' class='menu_sub'>{$menuitems['move']}</td>";
+          break;
+      }
+    } else {
+      if($this->options['forum_show_login_form'])
+        $menu .= "<td valign='top' class='manu_sub'>".$this->login_form()."</td>";
+      else {
+        $menu .= "<td valign='top' class='menu_sub'>";
+        $menu .= __('Please', 'mingleforum')." {$menuitems['login']} ".__('or', 'mingleforum')." {$menuitems['signup']} ";
+        if(!$this->allow_unreg())
+          $menu .= __("to participate in this forum.", 'mingleforum');
+        $menu .= "</td>";
+      }
+    }
+    
+    $menu .= "</tr></table>";
+    
 		return $menu;			
 	}
 
@@ -1763,36 +1773,23 @@ class mingleforum{
 			update_option('wpf_mod_option_vers', '2');	
 		}		
 	}
-
-	function login_form(){
-		global $user_ID;
-		if($user_ID)
-			$user = get_userdata($user_ID);
-		$login_msg = "";
-		if ($user_ID)
-			$login_msg = "<p>".__("You are logged in as:", "mingleforum")." ".$user->user_login."</p>";
-		else
-			$login_msg = "";
-
-		if(!is_user_logged_in() && $this->options['forum_show_login_form']){
-			return "<form class='login-form' action='".site_url()."/wp-login.php' method='post'>
-				<div class='login-Input'>
-               <label style='font-size:100%;' for='log'>".__("Username: ", "mingleforum")."</label>	  
-                  <span class='wpfInput'>			  
-                     <input type='text' name='log' id='log' value='' size='20' class='wpf-input'/>
-                        </span></div>
-					<div class='login-Input'>
-                  <label style='font-size:100%;' for='pwd'>".__("Password: ", "mingleforum")."</label> 
-                       <span class='wpfInput'><input type='password' name='pwd' id='pwd' size='20' class='wpf-input'/></span></div></br>
-		            <input type='submit' name='submit' value='Login' id='wpf-login-button' class='button' />
-				<label style='font-size:100%;' for='rememberme'><input name='rememberme' id='rememberme' type='checkbox' checked='checked' value='forever' /> ".__("Remember Me", "mingleforum")."                               </label>
-				<input type='hidden' name='redirect_to' value='".$_SERVER['REQUEST_URI']."'/>
-			</form>";
-		}
-		else
-			return $login_msg;
-	}
-
+  
+  function login_form() {
+    return "<form class='login-form' action='".site_url()."/wp-login.php' method='post'>
+              <label for='log' style='vertical-align:middle'>".__("Username: ", "mingleforum")."</label>
+              <input type='text' name='log' id='log' value='' size='10' class='wpf-input' />
+              
+              <label style='font-size:100%;vertical-align:middle;' for='pwd'>".__("Password: ", "mingleforum")."</label> 
+              <input type='password' name='pwd' id='pwd' size='10' class='wpf-input' />
+              
+              <input name='rememberme' id='rememberme' type='hidden' value='forever' />
+              <input type='hidden' name='redirect_to' value='".$_SERVER['REQUEST_URI']."' />
+              
+              <input type='submit' name='submit' value='".__('Login', 'mingleforum')."' id='wpf-login-button' class='button' />
+              ".__('or', 'mingleforum')." <a href='{$this->options['forum_signup_url']}'>".__('Register', 'mingleforum')."</a>
+            </form>";
+  }
+  
 	// function pre($array){
 		// echo "<pre>";
 		// print_r($array);
@@ -1957,73 +1954,36 @@ class mingleforum{
 		else
 			return "";
 	}
-
-	function header(){
-		global $user_ID, $wpdb, $mingleforum;
-		$avatar = "";
-		$this->setup_links();
-		if(!function_exists('is_plugin_active'))
-			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-		if(is_plugin_active('mingle/mingle.php'))
-		{
-			$ProfLinky = "";
-		}
-		else
-		{
-			$ProfLinky = "<a href='".site_url("wp-admin/profile.php") . "'>".__("Edit Profile", "mingleforum")."<br />";
-		}
-
-		if($user_ID){
-			$welcome = __("Welcome", "mingleforum")." ".$this->get_userdata($user_ID, $this->options['forum_display_name']);
-			$meta = "<div style='float:left'>".__("Your last visit was:", "mingleforum")." ".$this->format_date($this->last_visit())."<br />";
-			$meta .= $this->get_inbox_link();
-			$meta .= "<a href='".$this->base_url."shownew'>".__("Show new topics since your last visit", "mingleforum")."</a><br />";
-			$meta .= "<a href='".$this->base_url."editprofile&user_id={$user_ID}'>".__("Edit your forum options", "mingleforum")."</a><br />";
-			$meta .= $ProfLinky;
-			$meta .= "<a href='".wp_nonce_url( site_url("wp-login.php?action=logout&redirect_to=".get_permalink($this->get_pageid()), 'login'), 'log-out' )."'>".__("Log out", "mingleforum")."</a></div>";
-			$avatar = "<td class='wpf-alt' width='6%'>".$this->get_avatar($user_ID, 60)."</td>";
-			$colspan = "colspan = '2'";
-		}
-		else{
-			$meta = apply_filters('wpwf_guest_welcome_msg', "<p>".__("Welcome Guest, please login or", "mingleforum")." "."<a href='{$this->reg_link}'>".__("register.", "mingleforum")."</a></p>".$this->login_form()); //--weaver--
-			$welcome = __("Welcome", "mingleforum"). " <strong>".$this->get_userdata($user_ID, $this->options['forum_display_name'])."</strong>";
-			$colspan = "";
-		}
-		if(!$user_ID && !$this->allow_unreg()){
-			$meta = "<p>".__("Welcome Guest, posting in this forum requires", "mingleforum")." <a href='{$this->reg_link}'>".__("registration.", "mingleforum")."</a></p>".$this->login_form();
-			$colspan = "";
-		}
-		$o = "<div class='wpf'>
-
-				<table width='100%' class='wpf-table' id='profileHeader'>
-					<tr>
-						<th {$colspan}><h4 style='float:left;'>{$welcome}&nbsp;</h4>
-						<a id='upshrink' style='float:right;' href='#' onclick='shrinkHeader(!current_header); return false;'>".__("Show/Hide Header", "mingleforum")."</a>
-						</th>
-					</tr>
-
-					<tr id='upshrinkHeader'>
-						{$avatar}
-						<td valign='top'>{$meta}</td>
-					</tr>
-
-					<tr id='upshrinkHeader2'>
-						<th class='wpf-bright' {$colspan} align='right'>
-							<div>
-								<form name='wpf_search_form' method='post' action='{$this->base_url}"."search'>
-									<input type='text' name='search_words' class='wpf-input' />
-									<input type='submit' id='wpf-search-submit' name='search_submit' value='".__("Search forums", "mingleforum")."' />
-								</form>
-							</div>
-						</th>
-					</tr>
-				</table>
-			</div>";
-		$o .= $this->setup_menu();
-		$o .= $this->trail();
-		$this->o .= $o;
-	}
-
+  
+  function header(){
+    global $user_ID;
+    $this->setup_links();
+    $avatar = $this->get_avatar((int)$user_ID, 30);
+    
+    if($user_ID)
+      $welcome = __("Welcome", "mingleforum")." ".$this->get_userdata($user_ID, $this->options['forum_display_name']);
+    else
+      $welcome = __("Welcome Guest", "mingleforum");
+    
+    $o = "<div class='wpf'>
+            <table width='100%' class='wpf-table' id='profileHeader'>
+              <tr>
+                <th>
+                  {$avatar}
+                  <h4 style='display:inline;vertical-align:middle;'>{$welcome}</h4>
+                  <form name='wpf_search_form' method='post' action='{$this->base_url}"."search' style='float:right'>
+                    <input type='text' name='search_words' class='wpf-input' />
+                    <input type='submit' id='wpf-search-submit' name='search_submit' value='".__("Search forums", "mingleforum")."' />
+                  </form>
+                </th>
+              </tr>
+            </table>
+          </div>";
+    $o .= $this->setup_menu();
+    $o .= $this->trail();
+    $this->o .= $o;
+  }
+  
 	function post_pageing($thread_id){
 		global $wpdb;
 		$out =  __("Pages:", "mingleforum");
