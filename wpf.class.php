@@ -706,8 +706,7 @@ class mingleforum{
      $this->o .= "<div id='wpf-info'><small>
        <img  style='margin: 0 3px -3px 0 ;' alt='' align='top' src='".WPFURL."/images/logo.png' /> ".__("Mingle Forum ", "mingleforum")." by <a href='http://cartpauj.com'>cartpauj</a> |
         ".__("Version:", "mingleforum").$this->get_version()." |
-        $load</small></div>
-      </div>";
+        {$load}</small></div>";
     }
     
 		$above_forum_ad = apply_filters('mf_ad_above_forum', ''); //Adsense Area -- Above Forum
