@@ -33,6 +33,7 @@
 }
 /*Menu Header ---------------------------------------*/ 
 #wpf-wrapper #wp-mainmenu { margin-left: 5px; margin-top: 5px; }
+#wpf-wrapper #wp-mainmenu .menu_sub{ padding-right:10px;}
 #wp-mainmenu .menu_sub a {
 	border-right-style:solid;
 	-moz-border-radius:3px;
