@@ -666,7 +666,7 @@ class mingleforum{
 						include(WPFPATH.'wpf-thread.php');
 						break;
 				case 'postreply':
-						if($this->is_closed($_GET['thread'])){
+						if($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID, $this->get_parent_id(THREAD, (int)$_GET['thread']))){
 							wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
 						}else{
               $this->current_thread = $this->check_parms($_GET['thread']);
@@ -996,7 +996,7 @@ class mingleforum{
 		//QUICK REPLY AREA
     if(!in_array($this->current_group, $this->options['forum_disabled_cats']) || is_super_admin() || $this->is_moderator($user_ID, $this->current_forum) || $this->options['allow_user_replies_locked_cats'])
     {
-      if(!$this->is_closed() && ($user_ID || !$this->options['forum_require_registration'])) {
+      if((!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)) && ($user_ID || !$this->options['forum_require_registration'])) {
         $out .= "<table class='wpf-post-table' width='100%' id='wpf-quick-reply'>
           <form action='".WPFURL."wpf-insert.php' name='addform' method='post'>
             <tr>
@@ -1039,7 +1039,7 @@ class mingleforum{
 				<tr>";
 						if($this->options['forum_use_seo_friendly_urls'])
 					{
-						if(($user_ID || $this->allow_unreg()) && !$this->is_closed())
+						if(($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)))
 							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/quote.gif' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> ".__("Quote", "mingleforum")."</a></td>";
 						if($this->is_moderator($user_ID, $this->current_forum))
 							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/delete.gif' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='".$this->thread_link.$this->current_thread."&remove_post&id={$post_id}'> ".__("Remove", "mingleforum")."</a></td>";
@@ -1048,7 +1048,7 @@ class mingleforum{
 					}
 					else
 					{
-						if(($user_ID || $this->allow_unreg()) && !$this->is_closed())
+						if(($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)))
 							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/quote.gif' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> ".__("Quote", "mingleforum")."</a></td>";
 						if($this->is_moderator($user_ID, $this->current_forum))
 							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/delete.gif' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='".$this->get_threadlink($this->current_thread)."&remove_post&id={$post_id}'> ".__("Remove", "mingleforum")."</a></td>";
@@ -1661,7 +1661,7 @@ class mingleforum{
 			$menu .= "<tr><td class='".$class."_first'>&nbsp;</td>";
       if(!in_array($this->current_group, $this->options['forum_disabled_cats']) || is_super_admin() || $this->is_moderator($user_ID, $this->current_forum) || $this->options['allow_user_replies_locked_cats'])
       {
-        if(!$this->is_closed())
+        if(!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
           $menu .= "<td valign='top' class='".$class."_back' nowrap='nowrap'><a href='".$this->get_post_reply_link()."'>".__("Reply", "mingleforum")."</a></td>";
       }
 			if($user_ID)
@@ -2131,11 +2131,9 @@ class mingleforum{
   
 	function sticky_post(){
 		global $user_ID, $wpdb;
-		if(current_user_can("administrator") || is_super_admin($user_ID)){
-			if(!$this->is_moderator($user_ID, $this->current_forum)){
-				wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
-				}
-		}
+    if(!$this->is_moderator($user_ID, $this->current_forum)){
+      wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
+    }
 		$id = (isset($_GET['id']) && is_numeric($_GET['id']))?$_GET['id']:0;
 		$status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$this->t_threads} WHERE id = %d", $id));
     
@@ -2265,11 +2263,11 @@ class mingleforum{
 
 	function closed_post(){
 		global $user_ID, $wpdb;
-		if(current_user_can("administrator") || is_super_admin($user_ID)){
-			if(!$this->is_moderator($user_ID, $this->current_forum)){
-				wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
-			}
-		}
+    
+    if(!$this->is_moderator($user_ID, $this->current_forum)){
+      wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
+    }
+    
 		$strSQL = "UPDATE {$this->t_threads} SET closed = %d WHERE id = %d";
 		$wpdb->query($wpdb->prepare($strSQL, (int)$_GET['closed'], (int)$_GET['id']));
 	}

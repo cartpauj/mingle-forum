@@ -130,6 +130,7 @@ n/a
 * Changed permalink structure to not update on every page load
 * Changed recent posts widget (ddart)
 * Changed length of username before auto wrap occurs (ddart)
+* Fixed Admins/Mods not being able to reply to closed topics
 * Fixed possible SQL injection sites
 * Fixed SPAM time limit not working for guests
 * Fixed common style problems with many themes (ddart)

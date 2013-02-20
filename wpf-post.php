@@ -64,7 +64,7 @@ if(($_GET['mingleforumaction'] == "editpost")){
 		$id = 0;
 	$thread = $this->check_parms($_GET['t']);
 	$out = $this->header();
-	$post = $wpdb->get_row($wpdb->prepare("SELECT * FROM $mingleforum->t_posts WHERE id = %d", $id));
+	$post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$mingleforum->t_posts} WHERE id = %d", $id));
 	if(($user_ID == $post->author_id && $user_ID) || $mingleforum->is_moderator($user_ID, $mingleforum->forum_get_forum_from_post($thread))) //Make sure only admins/mods/post authors can edit posts
 	{
 		$out .= "<form action='".WPFURL."wpf-insert.php' name='addform' method='post'>";
