@@ -252,8 +252,7 @@ class mingleforum{
 			{
 				//$user = get_userdata($post->author_id);
 				if($this->have_access($this->forum_get_group_from_post($post->parent_id)))
-					echo "<li class='wpf_widget_item'><div style='float:left; margin:10px 13px 0px 0;'>".$this->get_avatar($post->author_id, 35)."</div><div style='margin:0 0 0 50px;line-height:17px;'><a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'>".$this->output_filter($post->subject)."</a></div><div style='margin: 0px 0px 0px 50px;'>".__("by:", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div style='margin: 0px 0px 0px 50px;'><small>".$this->format_date($post->date)."</small>
-					<a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:0px 0 0px 0; border-radius:0px; box-shadow: none; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a>
+					echo "<li style='list-style: none outside none;' ><div style='float:left;   margin:10px 13px 0px 0;'>".$this->get_avatar($post->author_id, 35)."</div><div style='margin:0px 0px 12px 0; line-height: 17px;'><div style='margin: 0px 0px 0px 50px;'><a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'>".$this->output_filter($post->subject)."</a></div><div style='margin: 0px 0px 0px 50px;'>".__("by:", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div style='margin: 0px 0px 0px 50px;'><small>".$this->format_date($post->date)."</small><a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:0px 0 0px 0; border-radius:0px; box-shadow: none; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a></div>
 					</div></li>";
 				$unique[] = $post->parent_id;
 				$toShow += 1;
@@ -1113,7 +1112,7 @@ class mingleforum{
         <a href='#' id='hidden-{$g->id}' class='wpf_click_me show-hide-hidden' data-value='{$g->id}' title='".__('Expand this group', 'mingleforum')."'><img src='{$this->skin_url}/images/icons/icon_hidden.png' class='show_hide_icon' /></a>
         
         </td></tr>";
-				$this->o .= "<tr class='forumstatus group-shrink-{$g->id}'><th style='text-align:center;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
+				$this->o .= "<tr class='forumstatus group-shrink-{$g->id}'><th style='text-align:center; width: 9%;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
 				<th style='text-align:center;'></th><th>".__("Last post", "mingleforum")."</th></tr>";
 				$frs = $this->get_forums($g->id);
 				foreach($frs as $f){
@@ -1166,7 +1165,7 @@ class mingleforum{
 			if($this->have_access($g->id)){
 				$this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";	
 				$this->o .= "<tr><td class='forumtitle' colspan='4'><a href='".$this->get_grouplink($g->id)."'>".$this->output_filter($g->name)."</a></td></tr>";
-				$this->o .= "<tr class='forumstatus'><th style='text-align:center;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
+				$this->o .= "<tr class='forumstatus'><th style='text-align:center; width: 9%;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
 				<th style='text-align:center;'></th><th>".__("Last post", "mingleforum")."</th></tr>";
 				$frs = $this->get_forums($g->id);
 				foreach($frs as $f){

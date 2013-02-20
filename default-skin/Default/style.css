@@ -168,6 +168,7 @@
 	font-weight: bold;
 	color: #FFF;
 	text-transform: none;
+	 text-shadow:none;
 }
 
 #wpf-wrapper table, #wpf-wrapper div, #wpf-wrapper h2, #wpf-wrapper h3, #wpf-wrapper h4, #wpf-wrapper form{
@@ -300,6 +301,7 @@ ul#wpf-menu li, .wpf-postmeta li{
 	/*white-space: nowrap;*/
 	overflow: auto;
 	border-width: 0;
+	text-shadow:none !important;
 }
  
 #wpf-wrapper .forumtitle a, th.InfoCenter b {
@@ -393,6 +395,8 @@ th.wpf-bright,
     overflow: auto;
 	border:none!important;
 	text-shadow: 0 1px 0 white;
+	font-size: 12px !important;
+	 text-transform: none!important;
 
 }
 td.autorpostbox {
@@ -642,7 +646,7 @@ pre.code{
 
 }
 #wpf-wrapper td, #wpf-wrapper th{
-	vertical-align: top;
+	 vertical-align: top;
 	 line-height: 20px;
 }
 #wpf-wrapper th{
@@ -762,10 +766,4 @@ a.show-hide-hidden {
 #profileHeader img {
   vertical-align:middle;
   margin-right:5px;
-}
-
-li.wpf_widget_item {
-  clear:both;
-  margin-bottom:10px;
-  border-bottom:1px dashed #CCC;
 }
