@@ -778,7 +778,7 @@ class mingleforum{
 						</table>";
 				$out .= "<div class='wpf'><table class='wpf-table' id='topicTable'>
 								<tr>
-									<th width='7%' class='forumIcon'>".__("Status", "mingleforum")."</th>
+									<th width='9%' class='forumIcon'>".__("Status", "mingleforum")."</th>
 									<th>".__("Topic Title", "mingleforum")."</th>
 									<th width='12%' nowrap='nowrap'>".__("Started by", "mingleforum")."</th>
 									<th width='10%'>".__("Replies", "mingleforum")."</th>
@@ -2390,7 +2390,7 @@ class mingleforum{
 							<th colspan='5' class='wpf-bright'>".__("New topics since your last visit", "mingleforum")."</th>
 						</tr>
 						<tr>
-							<th width='7%'>".__("Status", "mingleforum")."</th>
+							<th width='9%'>".__("Status", "mingleforum")."</th>
 							<th>".__("Topic Title", "mingleforum")."</th>
 							<th width='11%' nowrap='nowrap'>".__("Started by", "mingleforum")."</th>
 							<th width='10%'>".__("Replies", "mingleforum")."</th>
@@ -2501,7 +2501,7 @@ class mingleforum{
 			$const = 100/$max;
 		$o .= "<table class='wpf-table' cellspacing='0' cellpadding='0' width='100%'>
 				<tr>
-					<th width='7%'>Status</th>
+					<th width='9%'>Status</th>
 					<th width='54%'>".__("Subject", "mingleforum")."</th>
 					<th>".__("Relevance", "mingleforum")."</th>
 					<th>".__("Started by", "mingleforum")."</th>
