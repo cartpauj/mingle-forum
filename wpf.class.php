@@ -252,9 +252,8 @@ class mingleforum{
 			{
 				//$user = get_userdata($post->author_id);
 				if($this->have_access($this->forum_get_group_from_post($post->parent_id)))
-					echo "<li><div style='float:left;   margin:10px 13px 0px 0;'>".$this->get_avatar($post->author_id, 35)."</div><div style='margin:0px 0px 12px 0; line-height: 17px;'><div style='margin: 0px 0px 0px 50px;'><a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'>".$this->output_filter($post->subject)."</a></div><div style='margin: 0px 0px 0px 50px;'>".__("by:", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div style='margin: 0px 0px 0px 50px;'><small>".$this->format_date($post->date)."</small>
-					
-	<a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:0px 0 0px 0; border-radius:0px; box-shadow: none; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a>
+					echo "<li><div style='float:left;   margin:10px 13px 0px 0;'>".$this->get_avatar($post->author_id, 35)."</div><div style='margin:0px 0px 12px 0; line-height: 17px;'><a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'>".$this->output_filter($post->subject)."</a></div><div style='margin: 0px 0px 0px 50px;'>".__("by:", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div style='margin: 0px 0px 0px 50px;'><small>".$this->format_date($post->date)."</small>
+					<a href='".$this->get_paged_threadlink($post->parent_id, '#postid-'.$post->id)."'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:0px 0 0px 0; border-radius:0px; box-shadow: none; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a>
 					</div></li>";
 				$unique[] = $post->parent_id;
 				$toShow += 1;
@@ -1144,7 +1143,7 @@ class mingleforum{
 								$this->o .= $this->get_forum_moderators($f->id)
 							."</td>";
 					$this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'><small>".__("Topics: ", "mingleforum")."".$this->num_threads($f->id)."<br />".__("Posts: ", "mingleforum").$this->num_posts_forum($f->id)."</small></td>";
-					$this->o .= "<td  class='poster_in_forum' width='29%' style='vertical-align:middle;' ><small>".$this->last_poster_in_forum($f->id)."</small></td>";
+					$this->o .= "<td  class='poster_in_forum' width='29%' style='vertical-align:middle;' >".$this->last_poster_in_forum($f->id)."</td>";
 					$this->o .= "</tr>";
 				}
 			$this->o .= "</table>
@@ -1197,7 +1196,7 @@ class mingleforum{
 								$this->o .= $this->get_forum_moderators($f->id)
 							."</td>";
 					$this->o .= "<td nowrap='nowrap' width='11%' align='left' class='wpf-alt forumstats'><small>".__("Topics: ", "mingleforum")."".$this->num_threads($f->id)."<br />".__("Posts: ", "mingleforum").$this->num_posts_forum($f->id)."</small></td>";
-					$this->o .= "<td  width='28%' style='vertical-align:middle;' class='poster_in_forum' ><small>".$this->last_poster_in_forum($f->id)."</small></td>";
+					$this->o .= "<td  width='28%' style='vertical-align:middle;' class='poster_in_forum' >".$this->last_poster_in_forum($f->id)."</td>";
 					$this->o .= "</tr>";
 				}
 			$this->o .= "</table>
@@ -1274,10 +1273,10 @@ class mingleforum{
 		if($post_date && is_object($date))
 			return $date->date;
 		if(!$date)
-			return __("No topics yet", "mingleforum");
+			return "<small>".__("No topics yet", "mingleforum")."</small>";
 		$d =  date($this->opt['forum_date_format'], strtotime($date->date));
-		return "<div class='wpf-item-avatar'><span>".$this->get_avatar($date->author_id, 35)."</span></div><div class='wpf-item'><div class='wpf-item-title'><strong>".__("Last post", "mingleforum")."</strong> ".__("by", "mingleforum")." ".$this->profile_link($date->author_id)."</div>
-		<div class='wpf-item-title'>".__("in", "mingleforum")." <a href='".$this->get_paged_threadlink($date->parent_id)."#postid-$date->id'>".$this->get_postname($date->id)."</a></div><div class='wpf-item-title'>".__("on", "mingleforum")." {$d}" ."<a href='".$this->get_paged_threadlink($date->parent_id)."#postid-{$date->id}'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.gif' /></a></div>";
+		return "<div class='wpf-item-avatar'><span>".$this->get_avatar($date->author_id, 35)."</span></div><div class='wpf-item'><div class='wpf-item-title'><small><strong>".__("Last post", "mingleforum")."</strong> ".__("by", "mingleforum")." ".$this->profile_link($date->author_id)."</small></div>
+		<div class='wpf-item-title'><small>".__("in", "mingleforum")." <a href='".$this->get_paged_threadlink($date->parent_id)."#postid-$date->id'>".$this->get_postname($date->id)."</a></small></div><div class='wpf-item-title'><small>".__("on", "mingleforum")." {$d}" ."<a href='".$this->get_paged_threadlink($date->parent_id)."#postid-{$date->id}'><img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.gif' /></a></small></div></div>";
 	}
 
 	function last_poster_in_thread($thread_id) {
@@ -1723,7 +1722,7 @@ class mingleforum{
     "signup" => '<a href="'.stripslashes($this->options['forum_signup_url']).'">'.__('Register', 'mingleforum').'</a>',
     "new_topics" => "<a href='".$this->base_url."shownew'>".__("Unread Topics", "mingleforum")."</a>",
     "view_profile" 	=> $link,
-    "edit_profile" => "<a href='".site_url("wp-admin/profile.php") . "'>".__("Edit Profile", "mingleforum"),
+    "edit_profile" => "<a href='".site_url("wp-admin/profile.php") . "'>".__("Edit Profile", "mingleforum")."</a>",
     "edit_settings" => "<a href='".$this->base_url."editprofile&user_id={$user_ID}'>".__("Settings", "mingleforum")."</a>",
     "logout" => '<a href="'.wp_logout_url($this->options['forum_logout_redirect_url']).'">'.__('Logout', 'mingleforum').'</a>',
     "move" 		=> "<a href='".$this->get_forumlink($this->current_forum)."&getNewForumID&topic={$this->current_thread}'>".__("Move Topic", "mingleforum")."</a>");
