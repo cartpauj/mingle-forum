@@ -1039,17 +1039,17 @@ class mingleforum{
 				<tr>";
 						if($this->options['forum_use_seo_friendly_urls'])
 					{
-						if(is_user_logged_in() && !$this->is_closed())
+						if(($user_ID || $this->allow_unreg()) && !$this->is_closed())
 							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/quote.gif' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> ".__("Quote", "mingleforum")."</a></td>";
 						if($this->is_moderator($user_ID, $this->current_forum))
 							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/delete.gif' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='".$this->thread_link.$this->current_thread."&remove_post&id={$post_id}'> ".__("Remove", "mingleforum")."</a></td>";
 						if(($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
-							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/modify.gif' alt='' align='left'><a href='".$this->base_url."editpost&id={$post_id}&t=$this->current_thread.0'>" .__("Edit", "mingleforum")."</a></td>";
+							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/modify.gif' alt='' align='left'><a href='".$this->base_url."editpost&id={$post_id}&t={$this->current_thread}.0'>" .__("Edit", "mingleforum")."</a></td>";
 					}
 					else
 					{
-						if(is_user_logged_in() && !$this->is_closed())
-							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/quote.gif' alt='' align='left'><a href='$this->post_reply_link&quote={$post_id}.{$this->curr_page}'> ".__("Quote", "mingleforum")."</a></td>";
+						if(($user_ID || $this->allow_unreg()) && !$this->is_closed())
+							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/quote.gif' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> ".__("Quote", "mingleforum")."</a></td>";
 						if($this->is_moderator($user_ID, $this->current_forum))
 							 $o .= "<td nowrap='nowrap' width='12%'><img src='{$this->skin_url}/images/buttons/delete.gif' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='".$this->get_threadlink($this->current_thread)."&remove_post&id={$post_id}'> ".__("Remove", "mingleforum")."</a></td>";
 						if(($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
