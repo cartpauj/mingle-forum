@@ -1680,7 +1680,7 @@ class mingleforum{
 	function setup_menu(){
 		global $user_ID;
 		$this->setup_links();
-
+    
 		if(isset($_GET['closed']))
 			$this->closed_post();
 		//START MINGLE MY PROFILE LINK
@@ -1722,14 +1722,17 @@ class mingleforum{
     "edit_profile" => "<a href='".site_url("wp-admin/profile.php") . "'>".__("Edit Profile", "mingleforum")."</a>",
     "edit_settings" => "<a href='".$this->base_url."editprofile&user_id={$user_ID}'>".__("Settings", "mingleforum")."</a>",
     "logout" => '<a href="'.wp_logout_url($this->options['forum_logout_redirect_url']).'">'.__('Logout', 'mingleforum').'</a>',
-    "move" 		=> "<a href='".$this->get_forumlink($this->current_forum)."&getNewForumID&topic={$this->current_thread}'>".__("Move Topic", "mingleforum")."</a>");
+    "move" => "<a href='".$this->forum_link.$this->current_forum.".".$this->curr_page."&getNewForumID&topic={$this->current_thread}'>".__("Move Topic", "mingleforum")."</a>");
     
 		$menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
     if($user_ID) {
-      $menu .= "<td valign='top' class='menu_sub'>{$menuitems['new_topics']}</td>";
-      $menu .= "<td valign='top' class='menu_sub'>{$menuitems['view_profile']}</td>";
+      $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'shownew')?'menu_current':'';
+      $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['new_topics']}</td>";
+      $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'profile')?'menu_current':'';
+      $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['view_profile']}</td>";
       $menu .= "<td valign='top' class='menu_sub'>{$menuitems['edit_profile']}</td>";
-      $menu .= "<td valign='top' class='menu_sub'>{$menuitems['edit_settings']}</td>";
+      $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'editprofile')?'menu_current':'';
+      $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['edit_settings']}</td>";
       $menu .= "<td valign='top' class='menu_sub'>{$menuitems['logout']}</td>";
       
       switch($this->current_view) {
@@ -2406,7 +2409,7 @@ class mingleforum{
 								.$this->get_paged_threadlink($thread->id)."'>"
 								.$this->output_filter($this->get_threadname($thread->id))."</a>
 							</td>
-							<td class='img-avatar-forumstats' style='vertical-align: middle;'>".$this->get_avatar($thread->starter, 15)."".$this->profile_link($starter_id)."</td>
+							<td class='img-avatar-forumstats' style='vertical-align: middle;'>".$this->get_avatar($starter_id, 15)."".$this->profile_link($starter_id)."</td>
 							<td style='vertical-align: middle;' class='wpf-alt forumstats' align='center'>".( $this->num_posts($thread->id) - 1 )."</td>
 							<td style='vertical-align: middle;'><small>".$this->get_lastpost($thread->id)."</small></td>
 						</tr>";
