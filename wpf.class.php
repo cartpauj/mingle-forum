@@ -709,7 +709,7 @@ class mingleforum{
     
 		$above_forum_ad = apply_filters('mf_ad_above_forum', ''); //Adsense Area -- Above Forum
 		$below_forum_ad = apply_filters('mf_ad_below_forum', ''); //Adsense Area -- Below Forum
-		return $above_forum_ad."<div id='wpf-wrapper'>".$o .= $this->trail()."".$this->o."</div>".$below_forum_ad;
+		return $above_forum_ad."<div id='wpf-wrapper'>".$this->trail().$this->o."</div>".$below_forum_ad;
 	}
 
 	function get_version(){
@@ -1875,7 +1875,7 @@ class mingleforum{
 			{
 				$group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->current_forum))."-group".$this->get_parent_id(FORUM, $this->current_forum));
 				$forum = $this->get_seo_friendly_title($this->get_forumname($this->current_forum)."-forum".$this->current_forum);
-				$trail .= " <span class='wpf_nav_sep'>&rarr;;</span> <a href='".rtrim($this->home_url, '/').'/'.$group.'/'.$forum.".0'>".$this->get_forumname($this->current_forum)."</a>";
+				$trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='".rtrim($this->home_url, '/').'/'.$group.'/'.$forum.".0'>".$this->get_forumname($this->current_forum)."</a>";
 			}
 			else
 				$trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}"."viewforum&f={$this->current_forum}.0'>".$this->get_forumname($this->current_forum)."</a>";
