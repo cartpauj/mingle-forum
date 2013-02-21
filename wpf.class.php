@@ -709,7 +709,7 @@ class mingleforum{
     
 		$above_forum_ad = apply_filters('mf_ad_above_forum', ''); //Adsense Area -- Above Forum
 		$below_forum_ad = apply_filters('mf_ad_below_forum', ''); //Adsense Area -- Below Forum
-		return $above_forum_ad."<div id='wpf-wrapper'>".$this->o."</div>".$below_forum_ad;
+		return $above_forum_ad."<div id='wpf-wrapper'>".$o .= $this->trail()."".$this->o."</div>".$below_forum_ad;
 	}
 
 	function get_version(){
@@ -778,7 +778,7 @@ class mingleforum{
 						</table>";
 				$out .= "<div class='wpf'><table class='wpf-table' id='topicTable'>
 								<tr>
-									<th width='9%' class='forumIcon'>".__("Status", "mingleforum")."</th>
+									<th width='7%' class='forumIcon'>".__("Status", "mingleforum")."</th>
 									<th>".__("Topic Title", "mingleforum")."</th>
 									<th width='12%' nowrap='nowrap'>".__("Started by", "mingleforum")."</th>
 									<th width='10%'>".__("Replies", "mingleforum")."</th>
@@ -1112,7 +1112,7 @@ class mingleforum{
         <a href='#' id='hidden-{$g->id}' class='wpf_click_me show-hide-hidden' data-value='{$g->id}' title='".__('Expand this group', 'mingleforum')."'><img src='{$this->skin_url}/images/icons/icon_hidden.png' class='show_hide_icon' /></a>
         
         </td></tr>";
-				$this->o .= "<tr class='forumstatus group-shrink-{$g->id}'><th style='text-align:center; width: 9%;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
+				$this->o .= "<tr class='forumstatus group-shrink-{$g->id}'><th style='text-align:center; width: 7%;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
 				<th style='text-align:center;'></th><th>".__("Last post", "mingleforum")."</th></tr>";
 				$frs = $this->get_forums($g->id);
 				foreach($frs as $f){
@@ -1165,7 +1165,7 @@ class mingleforum{
 			if($this->have_access($g->id)){
 				$this->o .= "<div class='wpf'><table width='100%' class='wpf-table forumsList'>";	
 				$this->o .= "<tr><td class='forumtitle' colspan='4'><a href='".$this->get_grouplink($g->id)."'>".$this->output_filter($g->name)."</a></td></tr>";
-				$this->o .= "<tr class='forumstatus'><th style='text-align:center; width: 9%;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
+				$this->o .= "<tr class='forumstatus'><th style='text-align:center; width: 7%;'>".__("Status", "mingleforum")."</th><th>".__("Forum", "mingleforum")."</th>
 				<th style='text-align:center;'></th><th>".__("Last post", "mingleforum")."</th></tr>";
 				$frs = $this->get_forums($g->id);
 				foreach($frs as $f){
@@ -1865,20 +1865,20 @@ class mingleforum{
 			if($this->options['forum_use_seo_friendly_urls'])
 			{
 				$group = $this->get_seo_friendly_title($this->get_groupname($this->current_group))."-group".$this->current_group;
-				$trail .= " <strong>&raquo;</strong> <a href='".rtrim($this->home_url, '/').'/'.$group.".0'>".$this->get_groupname($this->current_group)."</a>";
+				$trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='".rtrim($this->home_url, '/').'/'.$group.".0'>".$this->get_groupname($this->current_group)."</a>";
 			}
 			else
-				$trail .= " <strong>&raquo;</strong> <a href='{$this->base_url}"."vforum&g={$this->current_group}.0'>".$this->get_groupname($this->current_group)."</a>";
+				$trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}"."vforum&g={$this->current_group}.0'>".$this->get_groupname($this->current_group)."</a>";
 
 		if($this->current_forum)
 			if ($this->options['forum_use_seo_friendly_urls'])
 			{
 				$group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->current_forum))."-group".$this->get_parent_id(FORUM, $this->current_forum));
 				$forum = $this->get_seo_friendly_title($this->get_forumname($this->current_forum)."-forum".$this->current_forum);
-				$trail .= " <strong>&raquo;</strong> <a href='".rtrim($this->home_url, '/').'/'.$group.'/'.$forum.".0'>".$this->get_forumname($this->current_forum)."</a>";
+				$trail .= " <span class='wpf_nav_sep'>&rarr;;</span> <a href='".rtrim($this->home_url, '/').'/'.$group.'/'.$forum.".0'>".$this->get_forumname($this->current_forum)."</a>";
 			}
 			else
-				$trail .= " <strong>&raquo;</strong> <a href='{$this->base_url}"."viewforum&f={$this->current_forum}.0'>".$this->get_forumname($this->current_forum)."</a>";
+				$trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}"."viewforum&f={$this->current_forum}.0'>".$this->get_forumname($this->current_forum)."</a>";
 
 		if($this->current_thread)
 			if ($this->options['forum_use_seo_friendly_urls'])
@@ -1886,32 +1886,32 @@ class mingleforum{
 				$group = $this->get_seo_friendly_title($this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread)))."-group".$this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->current_thread)));
 				$forum = $this->get_seo_friendly_title($this->get_forumname($this->get_parent_id(THREAD, $this->current_thread))."-forum".$this->get_parent_id(THREAD, $this->current_thread));
 				$thread = $this->get_seo_friendly_title($this->get_threadname($this->current_thread)."-thread".$this->current_thread);
-				$trail .= " <strong>&raquo;</strong> <a href='".rtrim($this->home_url, '/').'/'.$group.'/'.$forum.'/'.$thread.".0'>".$this->get_threadname($this->current_thread)."</a>";
+				$trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='".rtrim($this->home_url, '/').'/'.$group.'/'.$forum.'/'.$thread.".0'>".$this->get_threadname($this->current_thread)."</a>";
 			}
 			else
-				$trail .= " <strong>&raquo;</strong> <a href='{$this->base_url}"."viewtopic&t={$this->current_thread}.0'>".$this->get_threadname($this->current_thread)."</a>";
+				$trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='{$this->base_url}"."viewtopic&t={$this->current_thread}.0'>".$this->get_threadname($this->current_thread)."</a>";
 
 		if($this->current_view == NEWTOPICS)
-			$trail .= " <strong>&raquo;</strong> ".__("New Topics since last visit", "mingleforum");
+			$trail .= " <span class='wpf_nav_sep'>&rarr;</span> ".__("New Topics since last visit", "mingleforum");
 
 		if($this->current_view == SEARCH){
 			$terms = "";
 			if(isset($_POST['search_words']))
 				$terms = htmlentities($wpdb->escape($_POST['search_words']), ENT_QUOTES);
-			$trail .= " <strong>&raquo;</strong> ".__("Search Results", "mingleforum")." &raquo; $terms";
+			$trail .= " <span class='wpf_nav_sep'>&rarr;</span> ".__("Search Results", "mingleforum")." &raquo; $terms";
 		}
 
 		if($this->current_view == PROFILE)
-			$trail .= " <strong>&raquo;</strong> ".__("Profile Info", "mingleforum");
+			$trail .= " <span class='wpf_nav_sep'>&rarr;</span> ".__("Profile Info", "mingleforum");
 
 		if($this->current_view == POSTREPLY)
-			$trail .= " <strong>&raquo;</strong> ".__("Post Reply", "mingleforum");
+			$trail .= " <span class='wpf_nav_sep'>&rarr;</span> ".__("Post Reply", "mingleforum");
 
 		if($this->current_view == EDITPOST)
-			$trail .= " <strong>&raquo;</strong> ".__("Edit Post", "mingleforum");
+			$trail .= " <span class='wpf_nav_sep'>&rarr;</span> ".__("Edit Post", "mingleforum");
 
 		if($this->current_view == NEWTOPIC)
-			$trail .= " <strong>&raquo;</strong> ".__("New Topic", "mingleforum");
+			$trail .= " <span class='wpf_nav_sep'>&rarr;</span> ".__("New Topic", "mingleforum");
 
 		return apply_filters('mf_ad_above_breadcrumbs', '')."<p id='trail' class='breadcrumbs'>{$trail}</p>"; //Adsense Area -- Above Breadcrumbs
 	}
@@ -1979,7 +1979,6 @@ class mingleforum{
             </table>
           </div>";
     $o .= $this->setup_menu();
-    $o .= $this->trail();
     $this->o .= $o;
   }
   
@@ -2393,7 +2392,7 @@ class mingleforum{
 							<th colspan='5' class='wpf-bright'>".__("New topics since your last visit", "mingleforum")."</th>
 						</tr>
 						<tr>
-							<th width='9%'>".__("Status", "mingleforum")."</th>
+							<th width='7%'>".__("Status", "mingleforum")."</th>
 							<th>".__("Topic Title", "mingleforum")."</th>
 							<th width='11%' nowrap='nowrap'>".__("Started by", "mingleforum")."</th>
 							<th width='10%'>".__("Replies", "mingleforum")."</th>
@@ -2504,7 +2503,7 @@ class mingleforum{
 			$const = 100/$max;
 		$o .= "<table class='wpf-table' cellspacing='0' cellpadding='0' width='100%'>
 				<tr>
-					<th width='9%'>Status</th>
+					<th width='7%'>Status</th>
 					<th width='54%'>".__("Subject", "mingleforum")."</th>
 					<th>".__("Relevance", "mingleforum")."</th>
 					<th>".__("Started by", "mingleforum")."</th>

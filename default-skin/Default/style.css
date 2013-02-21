@@ -7,6 +7,11 @@
 	Version: 1.34
 */
 
+/*Font body ---------------------------------------*/ 
+#wpf-wrapper { font: 11pt Calibri,Arial,Helvetica,sans-serif;}
+#wpf-wrapper td.topic_text{ font-size:14px;}
+/*End Font body ----------------------------------*/ 
+
 #wpf-wrapper table#wp-mainmenu {
     width: auto !important;
 }
@@ -32,7 +37,7 @@
 	/*background-color: white; ENABLE THIS IF YOU'RE HAVING TROUBLE SEEING MENU FONTS*/
 }
 /*Menu Header ---------------------------------------*/ 
-#wpf-wrapper #wp-mainmenu { margin-left:0; margin-top: 5px; }
+#wpf-wrapper #wp-mainmenu { margin-left:0; margin-top: 5px; margin-bottom:20px; }
 #wpf-wrapper #wp-mainmenu .menu_sub{ padding-right:10px;}
 #wp-mainmenu .menu_sub a {
 	border-right-style:solid;
@@ -96,6 +101,18 @@ background-image:linear-gradient(to bottom,#fafafa 0,#dcdcdc 100%)}
     background-image:-webkit-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
     background-image:linear-gradient(to bottom,#c8c8c8 0,#e6e6e6 100%)}
 /*END Menu Header -----------------------------------*/ 
+
+/*Breadcrumb -------------------------------------------*/
+#wpf-wrapper #trail.breadcrumbs a{ color:#636363;}
+#wpf-wrapper #trail.breadcrumbs a:hover{ color:#B85B5A; text-decoration:none; }
+#wpf-wrapper #trail .wpf_nav_sep{ margin:0px 3px 0px 3px; color:#757575;}
+#wpf-wrapper #trail.breadcrumbs{ font-size:12px;}
+#wpf-wrapper p#trail {
+	 margin: 0 0 0.8rem !important;
+}
+ 
+/*End Breadcrumb ---------------------------------------*/
+ 
 /*Wpf itemv 1.1.0---------------------------------------*/ 
 #wpf-wrapper .wpf-item {  margin:0px 0px 0px 0; line-height: 16px;}
 #wpf-wrapper .wpf-item-avatar{ vertical-align: middle;}
@@ -204,7 +221,7 @@ background-image:linear-gradient(to bottom,#fafafa 0,#dcdcdc 100%)}
 #wpf-wrapper .poster_in_forum span img{
 	float:left;
 	vertical-align: middle;
-	margin: 6px 9px 6px 0px
+	margin: 8px 9px 6px 0px
 	}
 #wpf-wrapper .poster_img_avatar img{
 	float:left;
@@ -695,10 +712,6 @@ pre.code{
 	font-size: 95%; /*If font is too small try increasing this*/
 }
 
-#trail{
-	margin-top: 20px;
-}
- 
 #wpf-info{
 	text-align:center; 
 	padding:5px !important; 
@@ -758,9 +771,9 @@ pre.code{
 	 border-radius: 3px; 
     color: #FFFFFF;
     display: inline;
-    font-size: 90%;
+    font-size: 95%;
     text-shadow:none;
-    padding: 0px 4px;
+    padding: 0px 5px;
 	 margin-left: 1px;
 	 margin-right:1px;
 	}
@@ -771,9 +784,9 @@ pre.code{
 	 border-radius: 3px; 
     color: #FFFFFF;
     display: inline;
-    font-size: 90%;
+    font-size: 95%;
     text-shadow:none;
-    padding: 0px 4px;
+    padding: 0px 5px;
 	 margin-left: 1px;
 	 margin-right:1px;
 	}
@@ -784,9 +797,9 @@ pre.code{
 	 border-radius: 3px; 
     color: #FFFFFF !important;
     display: inline;
-    font-size: 90%;
+    font-size: 95%;
 	text-decoration:none !important;
-    padding: 0px 4px;
+    padding: 0px 5px;
 	text-shadow:none!important;
 	 margin-left: 1px;
 	 margin-right:1px;
@@ -800,8 +813,8 @@ pre.code{
 	 border-radius: 3px; 
     color: #FFFFFF !important;
     display: inline;
-    font-size: 90%; 
-    padding: 0px 4px;
+    font-size: 95%; 
+    padding: 0px 5px;
 	text-shadow:none!important;
 	text-decoration:none !important;
 }
