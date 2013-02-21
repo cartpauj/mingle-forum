@@ -51,7 +51,7 @@
     font-weight: bold;
     height: 2.95em;
     outline: 0 none;
-    padding: 4px 12px !important;
+    padding: 4px 7px 4px 6px  !important;
     vertical-align: middle;
     white-space: nowrap;
     word-wrap: normal;
@@ -108,7 +108,7 @@ background-image:linear-gradient(to bottom,#fafafa 0,#dcdcdc 100%)}
 #wpf-wrapper #trail .wpf_nav_sep{ margin:0px 3px 0px 3px; color:#757575;}
 #wpf-wrapper #trail.breadcrumbs{ font-size:12px;}
 #wpf-wrapper p#trail {
-	 margin: 0 0 0.8rem !important;
+	 margin: 0 0.5rem 0.8rem !important;
 }
  
 /*End Breadcrumb ---------------------------------------*/
@@ -845,3 +845,43 @@ a.show-hide-hidden {
   vertical-align:middle;
   margin-right:5px;
 }
+
+/*------------------------------------------------*/
+/*-------------------[icomoon]--------------------*/
+/*------------(http://icomoon.io)-----------------*/
+/*------------------------------------------------*/
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot');
+	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.woff') format('woff'),
+		url('fonts/icomoon.ttf') format('truetype'),
+		url('fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.icomoon {
+	float:left;
+	 color: inherit;
+    font-family: "icomoon";
+    font-size: 123%;
+    font-weight: normal;
+    padding-right: 2px;
+    position: relative;
+	vertical-align: middle;
+    top: 0px;
+}
+[data-icon]:before {
+	font-family: 'icomoon';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	padding-right:3px;
+	font-size: 1.37em;
+	vertical-align: text-top;
+}
+
+/*-------------------[end icomoon]--------------------*/

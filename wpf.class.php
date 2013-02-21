@@ -1706,23 +1706,23 @@ class mingleforum{
 					$myProfURL2 = "{$permalink}{$param_char}u={$MnglUser->user_login}";
 				}
 			}
-			$link = "<a id='user_button' href='" . $myProfURL2 . "' title='".__("My profile", "mingleforum")."'>".__("My Profile", "mingleforum")."</a>";
+			$link = "<a aria-hidden='true' data-icon='&#xe070;'  id='user_button' href='" . $myProfURL2 . "' title='".__("My profile", "mingleforum")."'>".__("My Profile", "mingleforum")."</a>";
 		}
 		else
 		{
-			$link = "<a id='user_button' href='".$this->base_url."profile&id={$user_ID}' title='".__("My profile", "mingleforum")."'>".__("My Profile", "mingleforum")."</a>";
+			$link = "<a aria-hidden='true' data-icon='&#xe070;'  id='user_button' href='".$this->base_url."profile&id={$user_ID}' title='".__("My profile", "mingleforum")."'>".__("My Profile", "mingleforum")."</a>";
 		}
 		//END MINGLE MY PROFILE LINK
     
     $menuitems = array(
     "login" => '<a href="'.stripslashes($this->options['forum_login_url']).'">'.__('Login', 'mingleforum').'</a>',
     "signup" => '<a href="'.stripslashes($this->options['forum_signup_url']).'">'.__('Register', 'mingleforum').'</a>',
-    "new_topics" => "<a href='".$this->base_url."shownew'>".__("Unread Topics", "mingleforum")."</a>",
+    "new_topics" => "<a aria-hidden='true' data-icon='&#xe06c;' href='".$this->base_url."shownew'>".__("Unread Topics", "mingleforum")."</a>",
     "view_profile" 	=> $link,
-    "edit_profile" => "<a href='".site_url("wp-admin/profile.php") . "'>".__("Edit Profile", "mingleforum")."</a>",
-    "edit_settings" => "<a href='".$this->base_url."editprofile&user_id={$user_ID}'>".__("Settings", "mingleforum")."</a>",
-    "logout" => '<a href="'.wp_logout_url($this->options['forum_logout_redirect_url']).'">'.__('Logout', 'mingleforum').'</a>',
-    "move" => "<a href='".$this->forum_link.$this->current_forum.".".$this->curr_page."&getNewForumID&topic={$this->current_thread}'>".__("Move Topic", "mingleforum")."</a>");
+    "edit_profile" => "<a aria-hidden='true' data-icon='&#xe005;' href='".site_url("wp-admin/profile.php") . "'>".__("Edit Profile", "mingleforum")."</a>",
+    "edit_settings" => "<a aria-hidden='true' data-icon='&#xe08d;'  href='".$this->base_url."editprofile&user_id={$user_ID}'>".__("Settings", "mingleforum")."</a>",
+    "logout" => '<a data-icon="&#xe10c;" href="'.wp_logout_url($this->options['forum_logout_redirect_url']).'" >'.__('Logout', 'mingleforum').'</a>',
+    "move" => "<a aria-hidden='true' data-icon='&#xe057;' href='".$this->forum_link.$this->current_forum.".".$this->curr_page."&getNewForumID&topic={$this->current_thread}'>".__("Move Topic", "mingleforum")."</a>");
     
 		$menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
     if($user_ID) {
@@ -1859,7 +1859,7 @@ class mingleforum{
 	global $wpdb;
 		$this->setup_links();
 
-		$trail = "<a href='".get_permalink($this->page_id)."'>".__("Forum Home", "mingleforum")."</a>";
+		$trail = "<a data-icon='&#xe0b8;' href='".get_permalink($this->page_id)."'>".__("Forum Home", "mingleforum")."</a>";
 
 		if($this->current_group)
 			if($this->options['forum_use_seo_friendly_urls'])
