@@ -732,7 +732,7 @@ class mingleforum{
 		$post = $wpdb->get_row($wpdb->prepare("SELECT `date`, author_id, id FROM {$this->t_posts} WHERE parent_id = %d ORDER BY `date` DESC LIMIT 1", $thread_id));
 		if (!empty($post)) {
 			$link = $this->get_paged_threadlink($thread_id);
-			return "<div class='poster_img_avatar' >".$this->get_avatar($post->author_id, 25)."</div><div class='wpf-item-poster'><div class='wpf-item-poster-li'>".__("by", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div class='wpf-item-poster-li'>".__("on", "mingleforum")."  <a href='".$link."'>".date($this->opt['forum_date_format'], strtotime($post->date))."<img title='".__("Last post", "mingleforum")."' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a></div>";
+			return "<div class='poster_img_avatar' >".$this->get_avatar($post->author_id, 25)."</div><div class='wpf-item-poster'><div class='wpf-item-poster-li'>".__("by", "mingleforum")." ".$this->profile_link($post->author_id)."</div><div class='wpf-item-poster-li'><a href='".$link."'>".date($this->opt['forum_date_format'], strtotime($post->date))."<img title='".__("Last post", "mingleforum")."' style='vertical-align:middle;padding-left:5px;margin:-3px 0 0px 0;' src='{$this->skin_url}/images/post/lastpost.gif' /> </a></div>";
 		}
 		else
 			return false;
@@ -780,10 +780,10 @@ class mingleforum{
 								<tr>
 									<th width='7%' class='forumIcon'>".__("Status", "mingleforum")."</th>
 									<th>".__("Topic Title", "mingleforum")."</th>
-									<th width='12%' nowrap='nowrap'>".__("Started by", "mingleforum")."</th>
-									<th width='10%'>".__("Replies", "mingleforum")."</th>
-									<th width='10%'>".__("Views", "mingleforum")."</th>
-									<th width='22%'>".__("Last post", "mingleforum")."</th>
+									<th width='16%' nowrap='nowrap'>".__("Started by", "mingleforum")."</th>
+									<th width='7%'>".__("Replies", "mingleforum")."</th>
+									<th width='7%'>".__("Views", "mingleforum")."</th>
+									<th width='24%'>".__("Last post", "mingleforum")."</th>
 								</tr>";
 		/***************************************************************************************/
 			if($sticky_threads){
@@ -794,7 +794,7 @@ class mingleforum{
 							$strCommands = "<a href='".$this->forum_link.$this->current_forum."&getNewForumID&topic={$thread->id}'>".__("Move Topic", "mingleforum")."</a> | <a href='".$this->forum_link.$this->current_forum."&delete_topic&topic={$thread->id}' onclick='return wpf_confirm();'>".__("Delete Topic", "mingleforum")."</a>";
 						else
 							$strCommands = "<a href='".$this->get_forumlink($this->current_forum)."&getNewForumID&topic={$thread->id}'>".__("Move Topic", "mingleforum")."</a> | <a href='".$this->get_forumlink($this->current_forum)."&delete_topic&topic={$thread->id}' onclick='return wpf_confirm();'>".__("Delete Topic", "mingleforum")."</a>";
-						$del = "<small><br />($strCommands)</small>";
+						$del = "<small><br />({$strCommands})</small>";
 					}
 					$image = "";
 					if($user_ID){
@@ -814,7 +814,7 @@ class mingleforum{
 										.$this->output_filter($thread->subject)."</a>&nbsp;&nbsp;{$image}</span> {$del}
 									</td>
 									<td class='img-avatar-forumstats' align='center'>".$this->get_avatar($thread->starter, 15)."".$this->profile_link($thread->starter)."</td>
-									<td class='wpf-alt forumstats' align='center'>".( $this->num_posts($thread->id) - 1 )."</td>
+									<td class='wpf-alt forumstats' align='center'>".($this->num_posts($thread->id) - 1)."</td>
 									<td class='wpf-alt forumstats' align='center'>".$thread->views."</td>
 									<td><small>".$this->get_lastpost($thread->id)."</small></td>
 								</tr>";
