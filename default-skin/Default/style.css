@@ -707,11 +707,11 @@ pre.code {
 /*Attempt to make the forum look better with more themes*/
 #forummenu td,
 #topicmenu td {
-  padding: 1px 4px 1px !important;
+  padding: 5px 4px 1px !important;
   padding: 1px !important;
   padding-left: 3px !important;
   margin: 0 !important;
-  height: 25px !important;
+  height: 31px !important;
   width: 1px !important;
   vertical-align: middle !important;
 }
@@ -838,5 +838,95 @@ a.show-hide-hidden {
   padding-right: 3px;
   font-size: 1.37em;
   vertical-align: text-top;
+}
+.unread-topics:before,
+.icon-profile:before,
+.icon-settings:before,
+.icon-my-profile:before,
+.icon-logout:before,
+.icon-move-topic:before,
+.icon-forum-home:before,
+.icon-replies:before,
+.icon-views:before,
+.icon-inbox:before,
+.icon-rss-feed:before,
+.icon-unsubscribe:before,
+.icon-subscribe:before,
+.icon-reply:before,
+.icon-close:before,
+.icon-re-open:before,
+.icon-sticky:before,
+.icon-undo-sticky:before,
+.icon-checkmark:before,
+.icon-topic:before {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  padding-right: 3px;
+  font-size: 1.4em;
+  vertical-align: text-top;
+}
+.unread-topics:before {
+  content: "\e01c";
+}
+.icon-profile:before {
+  content: "\e005";
+}
+.icon-settings:before {
+  content: "\e011";
+}
+.icon-my-profile:before{ 
+  content: "\e00a";
+}
+.icon-logout:before {
+  content: "\e05a";
+}
+.icon-move-topic:before {
+  content: "\e076";
+}
+.icon-forum-home:before {
+  content: "\e000";
+}
+.icon-replies:before {
+  content: "\e01e";
+}
+.icon-views:before {
+  content: "\e053";
+}
+.icon-inbox:before {
+  content: "\e08b";
+}
+.icon-subscribe:before {
+  content: "\e028";
+}
+.icon-unsubscribe:before{
+  content: "\e02e";
+}
+.icon-rss-feed:before {
+  content: "\e08b";
+}
+.icon-reply:before{
+  content: "\e01a";
+}
+.icon-close:before{
+ content: "\e056";
+}
+.icon-re-open:before{
+  content: "\e057";
+}
+.icon-sticky:before{
+  content: "\e07a";
+}
+.icon-undo-sticky:before{
+  content: "\e079";
+}
+.icon-checkmark:before{
+  content: "\e031";
+}
+.icon-topic:before{
+  content: "\e01f";
 }
 /*-------------------[end icomoon]--------------------*/

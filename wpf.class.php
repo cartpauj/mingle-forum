@@ -943,10 +943,17 @@ if (!class_exists('mingleforum'))
                         <td class='forumIcon' align='center'>{$sticky_img}</td>
                         <td class='wpf-alt sticky wpf-topic-title'><span class='topicTitle'><a href='" . $this->get_threadlink($thread->id) . "'>" . $this->output_filter($thread->subject) . "</a>&nbsp;&nbsp;{$image}</span> {$del}
                         </td>
+<<<<<<< HEAD
                         <td class='img-avatar-forumstats' align='center'>" . $this->get_avatar($thread->starter, 15) . "" . $this->profile_link($thread->starter) . "</td>
                         <td class='wpf-alt forumstats' align='center'>" . ($this->num_posts($thread->id) - 1) . "</td>
                         <td class='wpf-alt forumstats' align='center'>" . $thread->views . "</td>
                         <td><small>" . $this->get_lastpost($thread->id) . "</small></td>
+=======
+                        <td class='img-avatar-forumstats' align='center'>".$this->get_avatar($thread->starter, 15)."".$this->profile_link($thread->starter)."</td>
+                        <td class='wpf-alt forumstats' align='center'><span class='icon-replies'>".($this->num_posts($thread->id) - 1)."<span></td>
+                        <td class='wpf-alt forumstats' align='center'><span class='icon-views'>".$thread->views."</span></td>
+                        <td><small>".$this->get_lastpost($thread->id)."</small></td>
+>>>>>>> Adding new fonts, icons #29
                       </tr>";
             }
 
@@ -984,10 +991,17 @@ if (!class_exists('mingleforum'))
                       <td class='forumIcon' align='center'>" . $this->get_topic_image($thread->id) . "</td>
                       <td class='wpf-alt'><span class='topicTitle'><a href='" . $this->get_threadlink($thread->id) . "'>" . $this->output_filter($thread->subject) . "</a>&nbsp;&nbsp;{$image}</span> {$del}
                       </td>
+<<<<<<< HEAD
                       <td class='img-avatar-forumstats' align='center'>" . $this->get_avatar($thread->starter, 15) . "" . $this->profile_link($thread->starter) . "</td>
                       <td class='wpf-alt forumstats' align='center'>" . ( $this->num_posts($thread->id) - 1 ) . "</td>
                       <td class='wpf-alt forumstats' align='center'>" . $thread->views . "</td>
                       <td><small>" . $this->get_lastpost($thread->id) . "</small></td>
+=======
+                      <td class='img-avatar-forumstats' align='center'>".$this->get_avatar($thread->starter, 15)."".$this->profile_link($thread->starter)."</td>
+                      <td class='wpf-alt forumstats' align='center'><span class='icon-replies'>".( $this->num_posts($thread->id) - 1 )."</span></td>
+                      <td class='wpf-alt forumstats' align='center'><span class='icon-views'>".$thread->views."</span></td>
+                      <td><small>".$this->get_lastpost($thread->id)."</small></td>
+>>>>>>> Adding new fonts, icons #29
                     </tr>";
           }
 
@@ -1053,16 +1067,26 @@ if (!class_exists('mingleforum'))
                     <td>" . $this->topic_menu($thread_id) . "</td>
                   </tr>
                 </table>";
+<<<<<<< HEAD
         if ($this->is_closed())
           $meClosed = " " . __("TOPIC CLOSED", "mingleforum") . " ";
+=======
+        if($this->is_closed())
+          $meClosed = " <span class='icon-close'>".__("TOPIC CLOSED", "mingleforum")."</span> ";
+>>>>>>> Adding new fonts, icons #29
         else
           $meClosed = "";
 
         $out .= "<div class='wpf'>
                   <table class='wpf-table' width='100%'>
                     <tr>
+<<<<<<< HEAD
                       <th width='135' style='text-align: center;'>" . __("Author", "mingleforum") . "</th>
                       <th>" . __("Topic: ", "mingleforum") . $this->get_subject($thread_id) . $meClosed . "</th>
+=======
+                      <th width='135' style='text-align: center;'><span class='icon-my-profile'>".__("Author", "mingleforum")."</span></th>
+                      <th><span class='icon-topic'></span>".__("Topic: ", "mingleforum").$this->get_subject($thread_id).$meClosed."</th>
+>>>>>>> Adding new fonts, icons #29
                     </tr>
                   </table>";
         $out .= "</div>";
@@ -1335,7 +1359,11 @@ if (!class_exists('mingleforum'))
 
       $this->o .= apply_filters('wpwf_new_posts', "<table>
             <tr>
+<<<<<<< HEAD
               <td><small><img alt='' align='top' src='{$this->skin_url}/images/new_some.gif' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.gif' /> " . __("No new posts", "mingleforum") . " - <a href='" . get_permalink($this->get_pageid()) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></small></td>
+=======
+              <td><small><img alt='' align='top' src='{$this->skin_url}/images/new_some.gif' /> ".__("New posts", "mingleforum")." <img alt='' align='top' src='{$this->skin_url}/images/new_none.gif' /> ".__("No new posts", "mingleforum")." - <span class='icon-checkmark'><a href='".get_permalink($this->get_pageid()).$delim."markallread=true'>".__("Mark All Read", "mingleforum")."</a></small></td>
+>>>>>>> Adding new fonts, icons #29
             </tr>
           </table><br class='clear'/>");
 
@@ -1906,6 +1934,7 @@ if (!class_exists('mingleforum'))
         {
           if ($this->options['forum_use_seo_friendly_urls'])
           {
+<<<<<<< HEAD
             if ($this->is_sticky())
               $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'>" . __("Undo Sticky", "mingleforum") . "</a></td>";
             else
@@ -1927,6 +1956,29 @@ if (!class_exists('mingleforum'))
               $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'>" . __("Re-open", "mingleforum") . "</a></td>";
             else
               $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'>" . __("Close", "mingleforum") . "</a></td>";
+=======
+            if($this->is_sticky())
+              $stick = "<td class='".$class."_back icon-undo-sticky' nowrap='nowrap'><a href='".$this->thread_link.$this->current_thread.".".$this->curr_page."&sticky&id={$this->current_thread}'>".__("Undo Sticky", "mingleforum")."</a></td>";
+            else
+              $stick = "<td class='".$class."_back icon-sticky' nowrap='nowrap'><a href='".$this->thread_link.$this->current_thread.".".$this->curr_page."&sticky&id={$this->current_thread}'>".__("Sticky", "mingleforum")."</a></td>";
+            
+            if($this->is_closed())
+              $closed = "<td class='".$class."_back icon-re-open' nowrap='nowrap'><a href='".$this->thread_link.$this->current_thread.".".$this->curr_page."&closed=0&id={$this->current_thread}'>".__("Re-open", "mingleforum")."</a></td>";
+            else
+              $closed = "<td class='".$class."_back icon-close' nowrap='nowrap'><a href='".$this->thread_link.$this->current_thread.".".$this->curr_page."&closed=1&id={$this->current_thread}'>".__("Close", "mingleforum")."</a></td>";
+          }
+          else
+          {
+            if($this->is_sticky())
+              $stick = "<td class='".$class."_back icon-undo-sticky' nowrap='nowrap'><a href='".$this->get_threadlink($this->current_thread)."&sticky&id={$this->current_thread}'>".__("Undo Sticky", "mingleforum")."</a></td>";
+            else
+              $stick = "<td class='".$class."_back icon-sticky' nowrap='nowrap'><a href='".$this->get_threadlink($this->current_thread)."&sticky&id={$this->current_thread}'>".__("Sticky", "mingleforum")."</a></td>";
+            
+            if($this->is_closed())
+              $closed = "<td class='".$class."_back icon-re-open' nowrap='nowrap'><a href='".$this->get_threadlink($this->current_thread)."&closed=0&id={$this->current_thread}'>".__("Re-open", "mingleforum")."</a></td>";
+            else
+              $closed = "<td class='".$class."_back icon-close' nowrap='nowrap'><a href='".$this->get_threadlink($this->current_thread)."&closed=1&id={$this->current_thread}'>".__("Close", "mingleforum")."</a></td>";
+>>>>>>> Adding new fonts, icons #29
           }
         }
 
@@ -1937,12 +1989,18 @@ if (!class_exists('mingleforum'))
                 is_super_admin() || $this->is_moderator($user_ID, $this->current_forum) ||
                 $this->options['allow_user_replies_locked_cats'])
         {
+<<<<<<< HEAD
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
             $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'>" . __("Reply", "mingleforum") . "</a></td>";
+=======
+          if(!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
+            $menu .= "<td valign='top' class='".$class."_back icon-reply' nowrap='nowrap'><a href='".$this->get_post_reply_link()."'>".__("Reply", "mingleforum")."</a></td>";
+>>>>>>> Adding new fonts, icons #29
         }
 
         if ($user_ID)
         {
+<<<<<<< HEAD
           if ($this->is_thread_subscribed()) //Check if user has already subscribed to topic
             $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&threadsubs'>" . __("Unsubscribe", "mingleforum") . "</a></td>";
           else
@@ -1953,6 +2011,18 @@ if (!class_exists('mingleforum'))
           $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a href='{$this->topic_feed_url}" . "{$this->current_thread}'>" . __("RSS feed", "mingleforum") . "</a></td>";
 
         $menu .= $stick . $closed . "<td valign='top' class='" . $class . "_last'>&nbsp;&nbsp;</td></tr></table>";
+=======
+          if($this->is_thread_subscribed()) //Check if user has already subscribed to topic
+            $menu .= "<td class='".$class."_back icon-unsubscribe' nowrap='nowrap'><a onclick='return notify();' href='".$this->thread_link.$this->current_thread.".".$this->curr_page."&threadsubs'>".__("Unsubscribe", "mingleforum")."</a></td>";
+          else
+            $menu .= "<td class='".$class."_back icon-subscribe' nowrap='nowrap'><a onclick='return notify();' href='".$this->thread_link.$this->current_thread.".".$this->curr_page."&threadsubs'>".__("Subscribe", "mingleforum")."</a></td>";
+        }
+        
+        if($this->options['forum_use_rss'])
+          $menu .= "<td class='".$class."_back' nowrap='nowrap'><a class='icon-rss-feed' href='{$this->topic_feed_url}"."{$this->current_thread}'>".__("RSS feed", "mingleforum")."</a></td>";
+        
+        $menu .= $stick.$closed."<td valign='top' class='".$class."_last'>&nbsp;&nbsp;</td></tr></table>";
+>>>>>>> Adding new fonts, icons #29
       }
 
       return $menu;
@@ -1988,6 +2058,7 @@ if (!class_exists('mingleforum'))
             $myProfURL2 = "{$permalink}{$param_char}u={$MnglUser->user_login}";
           }
         }
+<<<<<<< HEAD
         $link = "<a aria-hidden='true' data-icon='&#xe070;'  id='user_button' href='" . $myProfURL2 . "' title='" . __("My profile", "mingleforum") . "'>" . __("My Profile", "mingleforum") . "</a>";
       }
       else
@@ -2003,6 +2074,23 @@ if (!class_exists('mingleforum'))
           "logout" => '<a data-icon="&#xe10c;" href="' . wp_logout_url($this->options['forum_logout_redirect_url']) . '" >' . __('Logout', 'mingleforum') . '</a>',
           "move" => "<a aria-hidden='true' data-icon='&#xe057;' href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'>" . __("Move Topic", "mingleforum") . "</a>");
 
+=======
+        $link = "<a aria-hidden='true'  class='icon-my-profile'   id='user_button' href='" . $myProfURL2 . "' title='".__("My profile", "mingleforum")."'>".__("My Profile", "mingleforum")."</a>";
+      }
+      else
+        $link = "<a aria-hidden='true' class='icon-my-profile' id='user_button' href='".$this->base_url."profile&id={$user_ID}' title='".__("My profile", "mingleforum")."'>".__("My Profile", "mingleforum")."</a>";
+      //END MINGLE MY PROFILE LINK
+      
+      $menuitems = array( "login" => '<a href="'.stripslashes($this->options['forum_login_url']).'">'.__('Login', 'mingleforum').'</a>',
+                          "signup" => '<a href="'.stripslashes($this->options['forum_signup_url']).'">'.__('Register', 'mingleforum').'</a>',
+                          "new_topics" => "<a class='unread-topics' href='".$this->base_url."shownew'>".__("Unread Topics", "mingleforum")."</a>",
+                          "view_profile" 	=> $link,
+                          "edit_profile" => "<a class='icon-profile' href='".site_url("wp-admin/profile.php") . "'>".__("Edit Profile", "mingleforum")."</a>",
+                          "edit_settings" => "<a class='icon-settings'  href='".$this->base_url."editprofile&user_id={$user_ID}'>".__("Settings", "mingleforum")."</a>",
+                          "logout" => '<a  class="icon-logout" href="'.wp_logout_url($this->options['forum_logout_redirect_url']).'" >'.__('Logout', 'mingleforum').'</a>',
+                          "move" => "<a aria-hidden='true' class='icon-move-topic' href='".$this->forum_link.$this->current_forum.".".$this->curr_page."&getNewForumID&topic={$this->current_thread}'>".__("Move Topic", "mingleforum")."</a>" );
+      
+>>>>>>> Adding new fonts, icons #29
       $menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
       if ($user_ID)
       {
@@ -2164,11 +2252,19 @@ if (!class_exists('mingleforum'))
       global $wpdb;
 
       $this->setup_links();
+<<<<<<< HEAD
 
       $trail = "<a data-icon='&#xe0b8;' href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "mingleforum") . "</a>";
 
       if ($this->current_group)
         if ($this->options['forum_use_seo_friendly_urls'])
+=======
+      
+      $trail = "<a class='icon-forum-home' href='".get_permalink($this->page_id)."'>".__("Forum Home", "mingleforum")."</a>";
+      
+      if($this->current_group)
+        if($this->options['forum_use_seo_friendly_urls'])
+>>>>>>> Adding new fonts, icons #29
         {
           $group = $this->get_seo_friendly_title($this->get_groupname($this->current_group)) . "-group" . $this->current_group;
           $trail .= " <span class='wpf_nav_sep'>&rarr;</span> <a href='" . rtrim($this->home_url, '/') . '/' . $group . ".0'>" . $this->get_groupname($this->current_group) . "</a>";
@@ -2795,9 +2891,15 @@ if (!class_exists('mingleforum'))
                   . $this->get_paged_threadlink($thread->id) . "'>"
                   . $this->output_filter($this->get_threadname($thread->id)) . "</a>
           </td>
+<<<<<<< HEAD
           <td class='img-avatar-forumstats' style='vertical-align: middle;'>" . $this->get_avatar($starter_id, 15) . "" . $this->profile_link($starter_id) . "</td>
           <td style='vertical-align: middle;' class='wpf-alt forumstats' align='center'>" . ( $this->num_posts($thread->id) - 1 ) . "</td>
           <td style='vertical-align: middle;'><small>" . $this->get_lastpost($thread->id) . "</small></td></tr>";
+=======
+          <td class='img-avatar-forumstats' style='vertical-align: middle;'>".$this->get_avatar($starter_id, 15)."".$this->profile_link($starter_id)."</td>
+          <td style='vertical-align: middle;' class='wpf-alt forumstats' align='center'><span class='icon-replies'>".( $this->num_posts($thread->id) - 1 )."</span></td>
+          <td style='vertical-align: middle;'><small>".$this->get_lastpost($thread->id)."</small></td></tr>";
+>>>>>>> Adding new fonts, icons #29
         }
 
       $o .= "</table></div>";
