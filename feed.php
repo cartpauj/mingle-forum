@@ -14,10 +14,9 @@ if($mingleforum->options['forum_use_rss'])
 {
 	$mingleforum->setup_links();
 
+    $topic = 'all';
 	if(is_numeric($_GET['topic'])) //is_numeric will prevent SQL injections
 		$topic = $_GET['topic'];
-	else
-		$topic = 'all';
 
 	if($topic == "all"){
 		$posts = $wpdb->get_results("SELECT * FROM {$mingleforum->t_posts} ORDER BY `date` DESC LIMIT 20");
@@ -31,7 +30,7 @@ if($mingleforum->options['forum_use_rss'])
 	}
 	$link = $mingleforum->home_url;
 
-	header ("Content-type: application/rss+xml");  
+	header ("Content-type: application/rss+xml");
 
 	echo ("<?xml version=\"1.0\" encoding=\"".get_bloginfo('charset')."\"?>\n");
 	?>
@@ -51,7 +50,6 @@ if($mingleforum->options['forum_use_rss'])
 		if(empty($groups)) //don't show protected group posts in the feed
 		{
 			$link = $mingleforum->get_threadlink($post->parent_id);
-			$user = get_userdata($post->author_id);
 			$title = $post->subject;
 
 			echo "<item>\n

@@ -1,7 +1,7 @@
 <?php
 if ( !defined('WP_CONTENT_DIR') )
 	define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
-	
+
 define('WPFPLUGIN', "mingle-forum");
 
 define('WPFDIR', dirname(plugin_basename(__FILE__)));

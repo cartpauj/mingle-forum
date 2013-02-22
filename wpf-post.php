@@ -1,6 +1,6 @@
 <?php
 $q = "";
-global $wpdb, $mingleforum;
+global $wpdb, $mingleforum, $user_ID;
 if($user_ID || $this->allow_unreg()){
 if(isset($_GET['quote'])){
 	$quote_id = $this->check_parms($_GET['quote']);
@@ -10,7 +10,6 @@ if(isset($_GET['quote'])){
 	$q = "[quote][quotetitle]".__("Quote from", "mingleforum")." ".$user->$display_name." ".__("on", "mingleforum")." ".$mingleforum->format_date($text->date)."[/quotetitle]\n".$text->text."[/quote]";
 }
 if(($_GET['mingleforumaction'] == "postreply")){
-	$options = get_option("mingleforum_options");
 	$this->current_view = POSTREPLY;
 	$thread = $this->check_parms($_GET['thread']);
 	$out = $this->header();
@@ -19,11 +18,11 @@ if(($_GET['mingleforumaction'] == "postreply")){
 			<tr>
 				<th colspan='2'>".__("Post Reply", "mingleforum")."</th>
 			</tr>
-			<tr>	
+			<tr>
 				<td>".__("Subject:", "mingleforum")."</tf>
 				<td><input size='50%' type='text' name='add_post_subject' class='wpf-input' value='".__('Re:', 'mingleforum')." ".$this->get_subject($thread)."'/></td>
 			</tr>
-			<tr>	
+			<tr>
 				<td valign='top'>".__("Message:", "mingleforum")."</td>
 				<td>";
 					$out .= $this->form_buttons().$this->form_smilies();
@@ -58,10 +57,9 @@ if(($_GET['mingleforumaction'] == "postreply")){
 
 if(($_GET['mingleforumaction'] == "editpost")){
 	$this->current_view = EDITPOST;
+    $id = 0;
 	if(is_numeric($_GET['id'])) //is_numeric prevents SQL injections here
 		$id = $_GET['id'];
-	else
-		$id = 0;
 	$thread = $this->check_parms($_GET['t']);
 	$out = $this->header();
 	$post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$mingleforum->t_posts} WHERE id = %d", $id));
@@ -72,11 +70,11 @@ if(($_GET['mingleforumaction'] == "editpost")){
 				<tr>
 					<th colspan='2'>".__("Edit Post", "mingleforum")."</th>
 				</tr>
-				<tr>	
+				<tr>
 					<td>".__("Subject:", "mingleforum")."</tf>
 					<td><input size='50%' type='text' name='edit_post_subject' class='wpf-input' value='".stripslashes($post->subject)."'/></td>
 				</tr>
-				<tr>	
+				<tr>
 					<td valign='top'>".__("Message:", "mingleforum")."</td>
 					<td>";
 							$out .= $mingleforum->form_buttons()."<br/>".$mingleforum->form_smilies();

@@ -1,7 +1,6 @@
 <?php
 global $user_ID, $user_level;
 if(isset($_POST['edit_user_submit'])){
-	$op = get_user_meta($user_ID, "wpf_useroptions", true);
 	$ops = array(	"allow_profile" => $_POST['allow_profile'],
 					"signature" => $this->sig_input_filter(stripslashes($_POST['message'])));
 	update_user_meta($user_ID, "wpf_useroptions", $ops);

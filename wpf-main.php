@@ -44,6 +44,9 @@ add_action('wp', array($mingleforum, "before_go")); //Redirects Old URL's to SEO
 //Filter Hooks
 add_filter("wp_title", array($mingleforum, "set_pagetitle"));
 
+//Fix for duplication with JetPack
+add_filter('jetpack_enable_open_graph', '__return_false', 99);
+
 //Functions
 function latest_activity($num = 5){
   global $mingleforum;

@@ -11,36 +11,36 @@
 *
 * Modified by: Mythos and Rini
 * Date: 2007-09-10
-* Description: Modified the code and remove use of Session 
+* Description: Modified the code and remove use of Session
 *
-* 
-* This program is free software; you can redistribute it and/or 
-* modify it under the terms of the GNU General Public License 
-* as published by the Free Software Foundation; either version 2 
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
 * of the License, or (at your option) any later version.
-* 
-* This program is distributed in the hope that it will be useful, 
-* but WITHOUT ANY WARRANTY; without even the implied warranty of 
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-* GNU General Public License for more details: 
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details:
 * http://www.gnu.org/licenses/gpl.html
 *
 *
 */
 
-include("shared.php"); 
+include("shared.php");
 
 class CaptchaSecurityImages {
 
 	var $font = 'monofont.ttf';
-	
-	function GenerateImage($width='120',$height='40', $code) {
-			
+
+	function GenerateImage($width='120',$height='40', $code='') {
+
 		/* font size will be 75% of the image height */
 		$font_size = $height * 0.75;
 		$image = @imagecreate($width, $height) or die('Cannot initialize new GD image stream');
 		/* set the colours */
-		$background_color = imagecolorallocate($image, 255, 255, 255);
+		imagecolorallocate($image, 255, 255, 255);
 		$text_color = imagecolorallocate($image, 20, 40, 100);
 		$noise_color = imagecolorallocate($image, 100, 120, 180);
 		/* generate random dots in background */

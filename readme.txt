@@ -96,7 +96,7 @@ You can try Mingle Forum out on my site:
 * Turkish
 
 == Installation ==
-* Great [setup videos here](http://cartpauj.com/projects/mingle-forum-plugin/tutorials/) by cartpauj or use Roberts [text guide here](http://minglecommunities.com/mingle-forum-install-guide/). 
+* Great [setup videos here](http://cartpauj.com/projects/mingle-forum-plugin/tutorials/) by cartpauj or use Roberts [text guide here](http://minglecommunities.com/mingle-forum-install-guide/).
 * Download Mingle Forum
 * Create a new page for your forum to display on
 * Head to the page you just created for the forum, paste [mingleforum] and save, (NOTE: Its best to paste that under the HTML tab of your page editor)

@@ -1,9 +1,10 @@
 <?php
-global $wpdb, $mingleforum, $user_ID, $user_level;
+global $wpdb, $mingleforum, $user_ID;
 $error = false;
 $root = dirname(dirname(dirname(dirname(__FILE__))));
 require_once($root.'/wp-load.php');
-$mingleforum->setup_linksdk($_POST['add_topic_plink']);
+$add_topic_plink = (isset($_POST['add_topic_plink'])) ? $_POST['add_topic_plink'] : '';
+$mingleforum->setup_linksdk($add_topic_plink);
 $options = get_option("mingleforum_options");
 
 //Checking if current categories have been disabled to admin posting only
@@ -21,7 +22,7 @@ if(isset($_POST['thread_id']) && !empty($_POST['thread_id']) && isset($_POST['ed
 if(is_numeric($the_forum_id))
 {
   $the_cat_id = $wpdb->get_var("SELECT `parent_id` FROM {$mingleforum->t_forums} WHERE `id` = {$the_forum_id}");
-  
+
   if(in_array($the_cat_id, $options['forum_disabled_cats']) && !is_super_admin($user_ID) && !$mingleforum->is_moderator($user_ID, $the_forum_id) && !$mingleforum->options['allow_user_replies_locked_cats'])
     wp_die(__("Oops only Administrators can post in this Forum!", "mingleforum"));
 }
@@ -85,12 +86,14 @@ function ip_to_string()
   function mf_check_uploaded_images()
   {
     $valid = array('im1' => true, 'im2' => true, 'im3' => true);
-    if($_FILES["mfimage1"]["error"] > 0 && !empty($_FILES["mfimage1"]["name"]))
-      $valid['im1'] = false;
-    if($_FILES["mfimage2"]["error"] > 0 && !empty($_FILES["mfimage2"]["name"]))
-      $valid['im2'] = false;
-    if($_FILES["mfimage3"]["error"] > 0 && !empty($_FILES["mfimage3"]["name"]))
-      $valid['im3'] = false;
+    if (!empty($_FILES)) {
+      if($_FILES["mfimage1"]["error"] > 0 && !empty($_FILES["mfimage1"]["name"]))
+        $valid['im1'] = false;
+      if($_FILES["mfimage2"]["error"] > 0 && !empty($_FILES["mfimage2"]["name"]))
+        $valid['im2'] = false;
+      if($_FILES["mfimage3"]["error"] > 0 && !empty($_FILES["mfimage3"]["name"]))
+        $valid['im3'] = false;
+    }
     if(!empty($_FILES["mfimage1"]["name"]))
     {
       $ext = strtolower(MFGetExt(stripslashes($_FILES["mfimage1"]["name"])));
@@ -145,7 +148,7 @@ function ip_to_string()
 
   //ADDING A NEW TOPIC?
   if(isset($_POST['add_topic_submit'])) {
-    $myReplaceSub = array("'", "\\");
+    $myReplaceSub = array("\\");
     $subject = str_replace($myReplaceSub, "", $mingleforum->input_filter($_POST['add_topic_subject']));
     $content = $mingleforum->input_filter($_POST['message']);
     $forum_id = $mingleforum->check_parms($_POST['add_topic_forumid']);
@@ -162,9 +165,9 @@ function ip_to_string()
     }
     else{
       $date = $mingleforum->wpf_current_time_fixed('mysql', 0);
-      
-      $sql_thread = "INSERT INTO {$mingleforum->t_threads} 
-                      (last_post, subject, parent_id, `date`, status, starter) 
+
+      $sql_thread = "INSERT INTO {$mingleforum->t_threads}
+                      (last_post, subject, parent_id, `date`, status, starter)
                     VALUES
                       (%s, %s, %d, %s, 'open', %d)";
       $wpdb->query($wpdb->prepare($sql_thread, $date, $subject, $forum_id, $date, $cur_user_ID));
@@ -193,13 +196,13 @@ function ip_to_string()
           $content .= MFAttachImage($_FILES["mfimage3"]["tmp_name"], stripslashes($_FILES["mfimage3"]["name"]));
       }
 
-      $sql_post = "INSERT INTO {$mingleforum->t_posts} 
+      $sql_post = "INSERT INTO {$mingleforum->t_posts}
                     (text, parent_id, `date`, author_id, subject)
                   VALUES
                     (%s, %d, %s, %d, %s)";
       $wpdb->query($wpdb->prepare($sql_post, $content, $id, $date, $cur_user_ID, $subject));
       $new_post_id = $wpdb->insert_id;
-      
+
       //UPDATE PROPER Mngl ID
       $sql_thread = "UPDATE {$mingleforum->t_threads}
                       SET mngl_id = %d
@@ -219,7 +222,7 @@ function ip_to_string()
 
   //ADDING A POST REPLY?
   if(isset($_POST['add_post_submit'])){
-    $myReplaceSub = array("'", "\\");
+    $myReplaceSub = array("\\");
     $subject = str_replace($myReplaceSub, "", $mingleforum->input_filter($_POST['add_post_subject']));
     $content = $mingleforum->input_filter($_POST['message']);
     $thread = $mingleforum->check_parms($_POST['add_post_forumid']);
@@ -227,7 +230,7 @@ function ip_to_string()
     //GET PROPER Mngl ID
     $MngBID = $wpdb->get_var($wpdb->prepare("SELECT mngl_id FROM {$mingleforum->t_threads} WHERE id = %d", $thread));
     //END GET PROPER Mngl ID
-    
+
     if($subject == ""){
       $msg .= "<h2>".__("An error occured", "mingleforum")."</h2>";
       $msg .= ("<div id='error'><p>".__("You must enter a subject", "mingleforum")."</p></div>");
@@ -246,6 +249,7 @@ function ip_to_string()
       if(is_plugin_active('mingle/mingle.php') and is_user_logged_in() and $MngBID > 0)
       {
         $board_post =& MnglBoardPost::get_stored_object();
+        global $mngl_board_comment;
         $mngl_board_comment->create( $MngBID, $cur_user_ID, "[b]".__("replied to the forum topic:", "mingleforum")."[/b] <a href='" . $mingleforum->get_threadlink($thread) . "'>" . $mingleforum->output_filter($subject) . "</a>" );
       }
       //End add to mingle board
@@ -282,7 +286,7 @@ function ip_to_string()
 
   //EDITING A POST?
   if(isset($_POST['edit_post_submit'])) {
-    $myReplaceSub = array("'", "\\");
+    $myReplaceSub = array("\\");
     $subject = str_replace($myReplaceSub, "", $mingleforum->input_filter($_POST['edit_post_subject']));
     $content = $mingleforum->input_filter($_POST['message']);
     $thread = $mingleforum->check_parms($_POST['thread_id']);

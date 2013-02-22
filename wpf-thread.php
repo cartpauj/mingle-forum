@@ -1,7 +1,6 @@
 <?php
 	if($user_ID || $this->allow_unreg())
 	{
-		$options = get_option("mingleforum_options");
 		$this->current_view = NEWTOPIC;
 		$out = $this->header();
 		$out .= "<form action='".WPFURL."wpf-insert.php' name='addform' method='post' enctype='multipart/form-data'>";
@@ -9,11 +8,11 @@
 			<tr>
 				<th colspan='2'>".__("Post new Topic", "mingleforum")."</th>
 			</tr>
-			<tr>	
+			<tr>
 				<td>".__("Subject:", "mingleforum")."</td>
 				<td><input size='50%' type='text' name='add_topic_subject' class='wpf-input' /></td>
 			</tr>
-			<tr>	
+			<tr>
 				<td valign='top'>".__("Message:", "mingleforum")."</td>
 				<td>
 					".$this->form_buttons().$this->form_smilies()."
