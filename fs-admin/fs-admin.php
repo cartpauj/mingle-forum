@@ -239,7 +239,6 @@ $image = WPFURL."images/user.png";
         $image = WPFURL."images/logomain.png";
         echo "<div class='wrap'><h2><img src='$image' />".__("Mingle Forum >> Skin options", "mingleforum")."</h2><br class='clear' /><table class='widefat'>
           <h3><a style='color:blue;' href='http://cartpauj.icomnow.com/forum/?mingleforumaction=viewforum&f=5.0'>".__("Get More Skins", "mingleforum")."</a></h3>
-          <h3><font color='red'>".__("IMPORTANT: As of version 1.0.03 the skins directory has been moved to /wp-content/mingle-forum-skins/", "mingleforum")." - "."<a href='http://cartpauj.icomnow.com/forum/?mingleforumaction=viewtopic&t=64.0'>".__("Why did you change it?", "mingleforum")."</a></font></h3>
             <thead>
               <tr>
                 <th>".__("Screenshot", "mingleforum")."</th>
@@ -254,7 +253,7 @@ $image = WPFURL."images/user.png";
             $filed = "Default";
             $p = file_get_contents(OLDSKINDIR."Default/style.css");
             $class = ($class == "alternate")?"":"alternate";
-            echo "<tr class='$class'>
+            echo "<tr class='{$class}'>
                 <td><a href='".OLDSKINURL."Default/screenshot.jpg'><img src='".OLDSKINURL."Default/screenshot.jpg' width='100' height='100'></a></td>
                 <td>".$this->get_skinmeta('Name', $p)."</td>
                 <td>".$this->get_skinmeta('Version', $p)."</td>
@@ -262,7 +261,7 @@ $image = WPFURL."images/user.png";
                 if($op['forum_skin'] == "Default")
                   echo "<td>".__("In Use", "mingleforum")."</td></tr>";
                 else
-                  echo "<td><a href='admin.php?page=mfskins&mingleforum_action=skins&action=activateskin&skin=$filed'>".__("Activate", "mingleforum")."</a></td></tr>";
+                  echo "<td><a href='admin.php?page=mfskins&mingleforum_action=skins&action=activateskin&skin={$filed}'>".__("Activate", "mingleforum")."</a></td></tr>";
           //SHOW THE REST OF THE THEMES
            while (($file = readdir($dh)) !== false) {
             if(filetype(SKINDIR . $file) == "dir" && $file != ".." && $file != "." && substr($file, 0, 1) != "."){
@@ -277,7 +276,7 @@ $image = WPFURL."images/user.png";
                   if($op['forum_skin'] == $file)
                     echo "<td>".__("In Use", "mingleforum")."</td></tr>";
                   else
-                    echo "<td><a href='admin.php?page=mfskins&mingleforum_action=skins&action=activateskin&skin=$file'>".__("Activate", "mingleforum")."</a></td></tr>";
+                    echo "<td><a href='admin.php?page=mfskins&mingleforum_action=skins&action=activateskin&skin={$file}'>".__("Activate", "mingleforum")."</a></td></tr>";
             }
           }
         }
