@@ -1785,7 +1785,7 @@ class mingleforum{
               <input type='hidden' name='redirect_to' value='".$_SERVER['REQUEST_URI']."' />
               
               <input type='submit' name='submit' value='".__('Login', 'mingleforum')."' id='wpf-login-button' class='button' />
-              ".__('or', 'mingleforum')." <a href='{$this->options['forum_signup_url']}'>".__('Register', 'mingleforum')."</a>
+              ".__('or', 'mingleforum')." <a href='{$this->options['forum_signup_url']}' id='or_register'>".__('Register', 'mingleforum')."</a>
             </form>";
   }
   

@@ -1,887 +1,836 @@
 /*
-	Skin name: Default
-	Description: A sleek Royal Blue theme
-	Author: Gene53
-	Author url: http://cartpauj.com
-	Mingle Forum url: http://cartpauj.com/projects/mingle-forum-plugin
-	Version: 1.34
-*/
-
-/*Font body ---------------------------------------*/ 
-#wpf-wrapper { font: 11pt Calibri,Arial,Helvetica,sans-serif;}
-#wpf-wrapper td.topic_text{ font-size:14px;}
-/*End Font body ----------------------------------*/ 
-
+Skin name: Default
+Description: A sleek Royal Blue theme
+Author: ddart
+Author url: http://ddart-bg.com/
+Mingle Forum url: http://cartpauj.com/projects/mingle-forum-plugin/
+Version: 1.34
+ */
+ 
+/*Font body ---------------------------------------*/
+#wpf-wrapper {
+  font: 11pt Calibri,Arial,Helvetica,sans-serif;
+}
+#wpf-wrapper td.topic_text {
+  font-size: 14px;
+}
+/*End Font body ----------------------------------*/
 #wpf-wrapper table#wp-mainmenu {
-    width: auto !important;
+  width: auto !important;
 }
 #wpf-wrapper tr td {
-    border: medium none;
+  border: medium none;
 }
 #wpf-wrapper table {
-    border: medium none;
-    width: 100%;
+  border: medium none;
+  width: 100%;
 }
 #wpf-wrapper td.forumIcon {
-	 vertical-align: middle !important;
-	 text-align: center!important;
-	}
+  vertical-align: middle !important;
+  text-align: center !important;
+}
 #wpf-wrapper .forumstats {
-    padding-right: 15px;
-    text-align: right;
+  padding-right: 15px;
+  text-align: right;
 }
-
-#wpf-wrapper{
-	line-height: normal;
-	color: #000;
-	/*background-color: white; ENABLE THIS IF YOU'RE HAVING TROUBLE SEEING MENU FONTS*/
+#wpf-wrapper {
+  line-height: normal;
+  color: #000; /*background-color: white;
+  ENABLE THIS IF YOU'RE HAVING TROUBLE SEEING MENU FONTS*/
 }
-/*Menu Header ---------------------------------------*/ 
-#wpf-wrapper #wp-mainmenu { margin-left:0; margin-top: 5px; margin-bottom:20px; }
-#wpf-wrapper #wp-mainmenu .menu_sub{ padding-right:10px;}
-#wp-mainmenu .menu_sub a {
-	border-right-style:solid;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	border-radius:3px;
-    border-style: solid;
-    border-width: 1px;
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: bold;
-    height: 2.95em;
-    outline: 0 none;
-    padding: 4px 7px 4px 6px  !important;
-    vertical-align: middle;
-    white-space: nowrap;
-    word-wrap: normal;
-	border-color:#ccc #ccc #aaa;
-	}
-
-#wp-mainmenu .menu_sub a {
-text-shadow:0 1px 0 #fff;
-border-color:#ccc #ccc #aaa;
-background-color:#e0e0e0;-moz-box-shadow:inset 0 0 1px #fff;
--ms-box-shadow:inset 0 0 1px #fff;-webkit-box-shadow:inset 0 0 1px #fff;
-box-shadow:inset 0 0 1px #fff;
-filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fffafafa,EndColorStr=#ffdcdcdc);
-background-image:-moz-linear-gradient(top,#fafafa 0,#dcdcdc 100%);background-image:-ms-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
-background-image:-o-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
-background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#fafafa),color-stop(100%,#dcdcdc));
-background-image:-webkit-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
-background-image:linear-gradient(to bottom,#fafafa 0,#dcdcdc 100%)}	
-#wp-mainmenu .menu_sub a:hover{
-	color:#555 !important;
-	text-decoration: none;
-	border-color:#aaa #aaa #999;
-	-moz-box-shadow:0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
-	-ms-box-shadow:0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
-	-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
-	box-shadow:0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
-	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fff0f0f0,EndColorStr=#ffe6e6e6);
-	background-image:-moz-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
-	background-image:-ms-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
-	background-image:-o-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
-	background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f0f0f0),color-stop(100%,#e6e6e6));
-	background-image:-webkit-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
-	background-image:linear-gradient(to bottom,#f0f0f0 0,#e6e6e6 100%)
-	}
+/*Menu Header ---------------------------------------*/
+#wpf-wrapper #wp-mainmenu {
+  margin-left: 0;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+#wpf-wrapper #wp-mainmenu .menu_sub {
+  padding-right: 10px;
+}
+#wp-mainmenu .menu_sub a,
+#or_register {
+  border-right-style: solid;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: bold;
+  height: 2.95em;
+  outline: 0 none;
+  padding: 4px 7px 4px 6px !important;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: normal;
+  border-color: #ccc #ccc #aaa;
+}
+#wp-mainmenu .menu_sub a,
+#or_register {
+  color: #084d8f;
+  text-shadow: 0 1px 0 #fff;
+  border-color: #ccc #ccc #aaa;
+  background-color: #e0e0e0;
+  -webkit-box-shadow: inset 0 0 1px #fff;
+  box-shadow: inset 0 0 1px #fff;
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fffafafa,EndColorStr=#ffdcdcdc);
+  background-image: -webkit-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+  background-image: -moz-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+  background-image: -o-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+  background-image: -ms-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+  background-image: linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+}
+#wp-mainmenu .menu_sub a:hover {
+  color: #555 !important;
+  text-decoration: none;
+  border-color: #aaa #aaa #999;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fff0f0f0,EndColorStr=#ffe6e6e6);
+  background-image: -webkit-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+  background-image: -moz-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+  background-image: -o-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+  background-image: -ms-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+  background-image: linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+}
 #wp-mainmenu .menu_current a,
 #wp-mainmenu .menu_current a:hover,
 #wp-mainmenu .menu_current a:active {
-    border-color:#888 #aaa #ccc;-moz-box-shadow:inset 0 1px 5px rgba(0,0,0,0.25),0 1px 0 #fff;
-    -ms-box-shadow:inset 0 1px 5px rgba(0,0,0,0.25),0 1px 0 #fff;
-    -webkit-box-shadow:inset 0 1px 5px rgba(0,0,0,0.25),0 1px 0 #fff;
-    box-shadow:inset 0 1px 5px rgba(0,0,0,0.25),0 1px 0 #fff;
-    filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#ffc8c8c8,EndColorStr=#ffe6e6e6);
-    background-image:-moz-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
-    background-image:-ms-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
-    background-image:-o-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
-    background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#c8c8c8),color-stop(100%,#e6e6e6));
-    background-image:-webkit-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
-    background-image:linear-gradient(to bottom,#c8c8c8 0,#e6e6e6 100%)}
-/*END Menu Header -----------------------------------*/ 
+  color: #555;
+  border-color: #888 #aaa #ccc;
+  -webkit-box-shadow: inset 0 1px 5px rgba(0,0,0,0.25),0 1px 0 #fff;
+  box-shadow: inset 0 1px 5px rgba(0,0,0,0.25),0 1px 0 #fff;
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#ffc8c8c8,EndColorStr=#ffe6e6e6);
+  background-image: -webkit-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
+  background-image: -moz-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
+  background-image: -o-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
+  background-image: -ms-linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
+  background-image: linear-gradient(top,#c8c8c8 0,#e6e6e6 100%);
+}
+/*END Menu Header -----------------------------------*/
 
 /*Breadcrumb -------------------------------------------*/
-#wpf-wrapper #trail.breadcrumbs a{ color:#636363;}
-#wpf-wrapper #trail.breadcrumbs a:hover{ color:#B85B5A; text-decoration:none; }
-#wpf-wrapper #trail .wpf_nav_sep{ margin:0px 3px 0px 3px; color:#757575;}
-#wpf-wrapper #trail.breadcrumbs{ font-size:12px;}
-#wpf-wrapper p#trail {
-	 margin: 0 0.5rem 0.8rem !important;
+#wpf-wrapper #trail.breadcrumbs a {
+  color: #636363;
 }
- 
+#wpf-wrapper #trail.breadcrumbs a:hover {
+  color: #B85B5A;
+  text-decoration: none;
+}
+#wpf-wrapper #trail .wpf_nav_sep {
+  margin: 0px 3px 0px 3px;
+  color: #757575;
+}
+#wpf-wrapper #trail.breadcrumbs {
+  font-size: 12px;
+}
+#wpf-wrapper p#trail {
+  margin: 0 0.5rem 0.8rem !important;
+}
 /*End Breadcrumb ---------------------------------------*/
- 
-/*Wpf itemv 1.1.0---------------------------------------*/ 
-#wpf-wrapper .wpf-item {  margin:0px 0px 0px 0; line-height: 16px;}
-#wpf-wrapper .wpf-item-avatar{ vertical-align: middle;}
-#wpf-wrapper .wpf-item-title{
-	margin: 0px 0px 0px 45px;
-	}
-#wpf-wrapper .wpf-category-title strong a{
-	font-size:14px;}
-	
-#wpf-wrapper .wpf-item-poster{ margin:0px 0px 0px 0; line-height: 16px;}
-#wpf-wrapper .wpf-item-poster-li{ margin: 0px 0px 0px 35px;}
 
+/*Wpf itemv 1.1.0---------------------------------------*/
+#wpf-wrapper .wpf-item {
+  margin: 0px 0px 0px 0;
+  line-height: 16px;
+}
+#wpf-wrapper .wpf-item-avatar {
+  vertical-align: middle;
+}
+#wpf-wrapper .wpf-item-title {
+  margin: 0px 0px 0px 45px;
+}
+#wpf-wrapper .wpf-category-title strong a {
+  font-size: 14px;
+}
+#wpf-wrapper .wpf-item-poster {
+  margin: 0px 0px 0px 0;
+  line-height: 16px;
+}
+#wpf-wrapper .wpf-item-poster-li {
+  margin: 0px 0px 0px 35px;
+}
 #wpf-wrapper .img-avatar-forumstats img.avatar {
-	margin:0px 4px -3px 3px;}
-	
-#wpf-wrapper #forum-category-img { 
-	margin: 0 -2px -8px 0;/*This will serve for future versions*/ 
-	}
+  margin: 0px 4px -3px 3px;
+}
+#wpf-wrapper #forum-category-img {
+  margin: 0 -2px -8px 0; /*This will serve for future versions*/
+}
+/*End wpf item v 1.1.0----------------------------------*/
 
-/*End wpf item v 1.1.0----------------------------------*/ 
-
-/*Login v 1.34---------------------------------------*/ 
-#wpf-wrapper .login-form{}
-#wpf-wrapper .login-Input{
-    clear: none;
-    float: left;
-    margin-bottom: 4px;
-    width: 160px;
-	}
-.wpfInput input {  
-    height: 17px;
-    line-height: 17px;
-    padding: 7px 5px 6px;
-    vertical-align: middle;
-    width: 135px;
+/*Login v 1.34---------------------------------------*/
+#wpf-wrapper .login-Input {
+  clear: none;
+  float: left;
+  margin-bottom: 4px;
+  width: 160px;
+}
+.wpfInput input {
+  height: 17px;
+  line-height: 17px;
+  padding: 7px 5px 6px;
+  vertical-align: middle;
+  width: 135px;
 }
 #wpf-wrapper .button-view-login {
-    top: 13px;
+  top: 13px;
 }
-#wpf-wrapper #upshrinkHeader p{
-    margin: 0 0 0.514rem !important;
+#wpf-wrapper #upshrinkHeader p {
+  margin: 0 0 0.514rem !important;
 }
-/*button v 1.34---------------------------------------*/ 
+/*button v 1.34---------------------------------------*/
 #wpf-post-submit,
 #wpf-search-submit,
 #quick-reply-submit,
 #wpf-login-button,
 #wpf-login-button,
 #wpf-edit-button,
-#wpf-wrapper input[type=submit]{
-	color: #555;
-    letter-spacing: normal !important;
-    text-shadow:0 1px 0 #fff;
-    border-color:#ccc #ccc #aaa;
-    background-color:#e0e0e0;-moz-box-shadow:inset 0 0 1px #fff;
-    -ms-box-shadow:inset 0 0 1px #fff;-webkit-box-shadow:inset 0 0 1px #fff;
-    box-shadow:inset 0 0 1px #fff;
-    filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fffafafa,EndColorStr=#ffdcdcdc);
-    background-image:-moz-linear-gradient(top,#fafafa 0,#dcdcdc 100%);background-image:-ms-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
-    background-image:-o-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
-    background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#fafafa),color-stop(100%,#dcdcdc));
-    background-image:-webkit-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
-    background-image:linear-gradient(to bottom,#fafafa 0,#dcdcdc 100%)
-	vertical-align:middle;
-	padding: 3px 6px;
+#wpf-wrapper input[type=submit] {
+  color: #555;
+  letter-spacing: normal !important;
+  text-shadow: 0 1px 0 #fff;
+  border-color: #ccc #ccc #aaa;
+  background-color: #e0e0e0;
+  -webkit-box-shadow: inset 0 0 1px #fff;
+  box-shadow: inset 0 0 1px #fff;
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fffafafa,EndColorStr=#ffdcdcdc);
+  background-image: -webkit-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+  background-image: -moz-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+  background-image: -o-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+  background-image: -ms-linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+  background-image: linear-gradient(top,#fafafa 0,#dcdcdc 100%);
+  -image -image padding: 3px 6px;
 }
-
-
 #wpf-post-submit:hover,
 #wpf-search-submit:hover,
 #quick-reply-submit:hover,
 #wpf-login-button:hover,
 #wpf-login-button:hover,
 #wpf-edit-button:hover,
-#wpf-wrapper input[type=submit]:hover{
-	color:#555;
-	border-color:#aaa #aaa #999;
-	-moz-box-shadow:0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
-	-ms-box-shadow:0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
-	-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
-	box-shadow:0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
-	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fff0f0f0,EndColorStr=#ffe6e6e6);
-	background-image:-moz-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
-	background-image:-ms-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
-	background-image:-o-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
-	background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f0f0f0),color-stop(100%,#e6e6e6));
-	background-image:-webkit-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
-	background-image:linear-gradient(to bottom,#f0f0f0 0,#e6e6e6 100%);
-	text-decoration: none;
-	
-	
-	
+#wpf-wrapper input[type=submit]:hover {
+  color: #555;
+  border-color: #aaa #aaa #999;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fff0f0f0,EndColorStr=#ffe6e6e6);
+  background-image: -webkit-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+  background-image: -moz-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+  background-image: -o-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+  background-image: -ms-linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+  background-image: linear-gradient(top,#f0f0f0 0,#e6e6e6 100%);
+  -image -image text-decoration: none;
 }
-#wpf-wrapper  input{
-     margin: 2px 0px !important;
-	 vertical-align:middle;
-	 padding: 3px 6px;
-	 border: 1px solid #CCCCCC;
-     -moz-border-radius: 3px; /* FF1+ */ 
-	 -webkit-border-radius: 3px; /* Saf3+, Chrome */ 
-	 border-radius: 3px; /* Opera 10.5, IE 9 */
-     font-family: inherit;
+#wpf-wrapper input {
+  margin: 2px 0px !important;
+  vertical-align: middle;
+  padding: 3px 6px;
+  border: 1px solid #CCCCCC;
+  border-radius: 3px; /* FF1+ */
+  /* Saf3+, Chrome */
+  /* Opera 10.5, IE 9 */
+  font-family: inherit;
 }
-/*end button --------------------------------------------*/ 
-/*poster_in_forum v1.34 ---------------------------------*/ 
-#wpf-wrapper .poster_in_forum span img{
-	float:left;
-	vertical-align: middle;
-	margin: 8px 9px 6px 0px
-	}
-#wpf-wrapper .poster_img_avatar img{
-	float:left;
-	vertical-align: middle;
-	margin: 4px 9px 0px 0px
-	}
-#wpf-wrapper .wpf-img-mark-all-read	{
-	background: url("images/markallread.png");
-	margin: 0 0px -7px 0;
-	}
+/*end button --------------------------------------------*/
 
+/*poster_in_forum v1.34 ---------------------------------*/
+#wpf-wrapper .poster_in_forum span img {
+  float: left;
+  vertical-align: middle;
+  margin: 8px 9px 6px 0px;
+}
+#wpf-wrapper .poster_img_avatar img {
+  float: left;
+  vertical-align: middle;
+  margin: 4px 9px 0px 0px;
+}
+#wpf-wrapper .wpf-img-mark-all-read {
+  background: url("images/markallread.png");
+  margin: 0 0px -7px 0;
+}
 #wpf-wrapper img.avatar,
-#wpf-wrapper .topic_text a img{
-	-moz-border-radius: 3px; /* FF1+ */ 
-	 -webkit-border-radius: 3px; /* Saf3+, Chrome */ 
-	 border-radius: 3px; /* Opera 10.5, IE 9 */
-	-webkit-box-shadow:  0 1px 4px rgba(0, 0, 0, 0.2);
-	-moz-box-shadow:  0 1px 4px rgba(0, 0, 0, 0.2);
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+#wpf-wrapper .topic_text a img {
+  border-radius: 3px; /* FF1+ */
+  /* Saf3+, Chrome */
+  /* Opera 10.5, IE 9 */
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 #wpf-wrapper td.poster_in_forum {
-    line-height: 15px;
+  line-height: 15px;
 }
-/*end poster_in_forum ---------------------------------*/ 
-#wpf-wrapper th h4{
-	font-weight: bold;
-	color: #FFF;
-	text-transform: none;
-	 text-shadow:none;
+/*end poster_in_forum ---------------------------------*/
+#wpf-wrapper th h4 {
+  font-weight: bold;
+  color: #FFF;
+  text-transform: none;
+  text-shadow: none;
 }
-
-#wpf-wrapper table, #wpf-wrapper div, #wpf-wrapper h2, #wpf-wrapper h3, #wpf-wrapper h4, #wpf-wrapper form{
-	margin: 0;
-	padding: 0;
+#wpf-wrapper table,
+#wpf-wrapper div,
+#wpf-wrapper h2,
+#wpf-wrapper h3,
+#wpf-wrapper h4,
+#wpf-wrapper form {
+  margin: 0;
+  padding: 0;
 }
 #wpf-wrapper form {
-	text-align:inherit!important
+  text-align: inherit !important;
 }
-#wpf-wrapper small{
-	color: #333;
+#wpf-wrapper small {
+  color: #333;
 }
-
-.wpf-table a, .wpf-post-table a, #wpf-wrapper p a, #wpf-wrapper span a, #wpf-wrapper a{
-	color: #084d8f;
-	text-decoration: none;
+.wpf-table a,
+.wpf-post-table a,
+#wpf-wrapper p a,
+#wpf-wrapper span a,
+#wpf-wrapper a {
+  color: #084d8f;
+  text-decoration: none;
 }
-#wpf-wrapper .odd td, #wpf-wrapper .even td, #wpf-wrapper .sticky td {
-    vertical-align: middle;
+#wpf-wrapper .odd td,
+#wpf-wrapper .even td,
+#wpf-wrapper .sticky td {
+  vertical-align: middle;
 }
-#wp-mainmenu a{
-	color: #636363;
-	font-weight: bold;
+.wpf-table a:hover,
+.wpf-post-table a:hover,
+#wpf-wrapper a:hover {
+  text-decoration: underline;
 }
-#wp-mainmenu a:hover{
-	color: #181818;
-	font-weight: bold;
-}
-.wpf-table a:hover, .wpf-post-table a:hover, #wpf-wrapper a:hover {
-	text-decoration: underline;
-}
-
 #wpf-wrapper th a {
-	color: #fff;
+  color: #fff;
 }
-
 #wpf-wrapper th {
-	color: #fff;
+  color: #fff;
 }
 #wpf-wrapper th.wpf-bright {
-	color: #777;
+  color: #777;
 }
-table.search td{
-	border: none;
+table.search td {
+  border: none;
 }
-table.search{
-	background: #ecedf3;
+table.search {
+  background: #ecedf3;
 }
-
-.topic_text p img { /*Edit This Value To Fit Your Theme*/
-	max-width: 475px;
+.topic_text p img {
+/*Edit This Value To Fit Your Theme*/
+max-width: 475px;
 }
-
 img.avatar {
   float: none;
   margin: 0px;
 }
 #wpf-wrapper .author small {
-    color: #4D4D4D;
-    text-shadow: 1px 1px 0 #FDFDFD;
+  color: #4D4D4D;
+  text-shadow: 1px 1px 0 #FDFDFD;
 }
 #wpf-wrapper small img {
-    margin: 0 5px -7px 5px;
+  margin: 0 5px -7px 5px;
 }
 .author .wpf-meta img {
-    margin: 2px 2px 0 !important;
+  margin: 2px 2px 0 !important;
 }
-#wpf-wrapper .wpf-meta-topic{
-	color:  #777;
-	background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
-    background-position: bottom !important;
-	padding: 2px;
-	margin: 0;
-	vertical-align: middle;
-	font-size:14px;
-	font-weight:bold;
-	text-shadow: 1px 1px 0 #FDFDFD;
-	}
-	
+#wpf-wrapper .wpf-meta-topic {
+  color: #777;
+  background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
+  background-position: bottom !important;
+  padding: 2px;
+  margin: 0;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #FDFDFD;
+}
 #wpf-wrapper .wpf-meta-topic img {
-	padding-right:5px;
-	margin: 0px 0px -5px;
-	}
+  padding-right: 5px;
+  margin: 0px 0px -5px;
+}
 .author .wpf-meta {
-	margin: -7px 0px -7px 0 !important;
-	width:auto;
-	float:right;
+  margin: -7px 0px -7px 0 !important;
+  width: auto;
+  float: right;
 }
-
-.wpf-post-table .permalink{
-	float: right;
-    height: 18px;
-	margin: 0 -10px 10px 0;
-	}
-ul#wpf-menu, ul.wpf-postmeta {
-	margin: 0;
-	padding: 0;
-	padding-top: 5px;
-	padding-bottom: 5px;
+.wpf-post-table .permalink {
+  float: right;
+  height: 18px;
+  margin: 0 -10px 10px 0;
 }
-ul#wpf-menu li, .wpf-postmeta li{
-	list-style: none;
-	padding-right: 10px;
-	display: inline;
+ul#wpf-menu,ul.wpf-postmeta {
+  margin: 0;
+  padding: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
-.wpf-table{
-	border-collapse: collapse;
-	padding: 5px;
-	border: 1px solid #696969;
-	background: #f6f6f6;
-	font-size:  95%; /*If your fonts are too small try increasing this number*/
+ul#wpf-menu li,.wpf-postmeta li {
+  list-style: none;
+  padding-right: 10px;
+  display: inline;
 }
-.wpf-post-table{
-	border-collapse: collapse;
-	padding: 15px;
-	border-left: 1px solid #adadad!important;
-	border-right: 1px solid #adadad!important;
-	border-bottom: 1px solid #adadad!important;
-	border-top: 1px solid #eaeaea !important;
-	background: #f6f6f6;
+.wpf-table {
+  border-collapse: collapse;
+  padding: 5px;
+  border: 1px solid #696969;
+  background: #f6f6f6;
+  font-size: 95%; /*If your fonts are too small try increasing this number*/
 }
-.wpf-table th, .wpf-post-table th,
-.wpf-table td.forumtitle{
-	text-align:left;
-	overflow: auto;
-	background: url('images/catbg.jpg') !important;
-  /*border: 1px solid #adadad;*/
-	padding: 5px;
-	color: #fff;
-	/*white-space: nowrap;*/
-	overflow: auto;
-	border-width: 0;
-	text-shadow:none !important;
+.wpf-post-table {
+  border-collapse: collapse;
+  padding: 15px;
+  border-left: 1px solid #adadad !important;
+  border-right: 1px solid #adadad !important;
+  border-bottom: 1px solid #adadad !important;
+  border-top: 1px solid #eaeaea !important;
+  background: #f6f6f6;
 }
- 
-#wpf-wrapper .forumtitle a, th.InfoCenter b {
-    color: #FFFFFF;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    padding: 2px 7px;
+.wpf-table th,
+.wpf-post-table th,
+.wpf-table td.forumtitle {
+  text-align: left;
+  overflow: auto;
+  background: url('images/catbg.jpg') !important;
+  padding: 5px;
+  color: #fff;
+  overflow: auto;
+  border-width: 0;
+  text-shadow: none !important;
 }
-.wpf-post-table td{
-	padding: 5px 10px 5px 10px !important;
+#wpf-wrapper .forumtitle a,
+th.InfoCenter b {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 2px 7px;
 }
-
-.wpf-table td{
-	border: 1px solid ;
-	padding-left: 5px;
-	padding-right: 5px;
-	padding: 5px;
-	border-left: 1px solid #d9d7d7 !important;
-	border-right: 1px solid #CECECE !important;
-	border-bottom: 1px solid #CECECE !important;
-	border-top: 1px solid #d9d7d7 !important;
-
+.wpf-post-table td {
+  padding: 5px 10px 5px 10px !important;
+}
+.wpf-table td {
+  border: 1px solid;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding: 5px;
+  border-left: 1px solid #d9d7d7 !important;
+  border-right: 1px solid #CECECE !important;
+  border-bottom: 1px solid #CECECE !important;
+  border-top: 1px solid #d9d7d7 !important;
 }
 .wpf-table textarea {
-	width: 98%;
+  width: 98%;
 }
-#wpf-wrapper .wpf{
-	padding: 1px;
-	border: 1px solid #CACACA;
+#wpf-wrapper .wpf {
+  padding: 1px;
+  border: 1px solid #CACACA;
 }
-.wpf-alt{
-	background: #ecedf3;
+.wpf-alt {
+  background: #ecedf3;
 }
-#wpf-wrapper .sticky{
-	background:#e0e1e8;
+#wpf-wrapper .sticky {
+  background: #e0e1e8;
 }
-#wpf-wrapper .sticky a{
-	font-weight: bold;
+#wpf-wrapper .sticky a {
+  font-weight: bold;
 }
-td.wpf-meta{
-	border-bottom: 1px solid #adadad !important;
-	padding: 0;
-	margin: 0;
+td.wpf-meta {
+  border-bottom: 1px solid #adadad !important;
+  padding: 0;
+  margin: 0;
 }
-#wpf-wrapper .wpf-post-table .user_desc{ 
-   background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
-   background-position: top !important;
-   padding: 0;
-   margin: 0;
-   vertical-align: middle;}
-td.wpf-meta a{
-	font-weight: bold;
+#wpf-wrapper .wpf-post-table .user_desc {
+  background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
+  background-position: top !important;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
 }
-.wpf-small{
-	margin-bottom: 10px;
+td.wpf-meta a {
+  font-weight: bold;
+}
+.wpf-small {
+  margin-bottom: 10px;
 }
 #wpf-wrapper th.author a {
-	color: #757575 !important;
-	text-shadow: 1px 1px 0 #E3E3E3;
-    text-transform: none !important;	
+  color: #757575 !important;
+  text-shadow: 1px 1px 0 #E3E3E3;
+  text-transform: none !important;
 }
 #wpf-wrapper th.author {
-    border: none !important;
-	border-bottom: 1px solid #CACACA !important;
-   
- 
+  border: none !important;
+  border-bottom: 1px solid #CACACA !important;
 }
 #wpf-wrapper th.author a:hover {
-    color: #B85B5A !important;
-    text-shadow: 1px 1px 0 #E3E3E3;
-	}
-.wpf-table h2{
-	margin: 0;
-	padding: 0;
-	margin-top: 3px;
-	margin-bottom: 3px;
-	color: #fff;
+  color: #B85B5A !important;
+  text-shadow: 1px 1px 0 #E3E3E3;
 }
-
+.wpf-table h2 {
+  margin: 0;
+  padding: 0;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  color: #fff;
+}
 th.wpf-bright,
-.wpf-table tr.forumstatus th, td.statistik{
-	background: url('images/titlebg.jpg') !important;
-	color: #000;
-   /*border-top: 1px solid #375576;*/
+.wpf-table tr.forumstatus th,
+td.statistik {
+  background: url('images/titlebg.jpg') !important;
+  color: #000;
 }
-.wpf-table tr.forumstatus th, td.statistik {
-    box-shadow: none !important;
-    color: #777 !important;
-    font-weight: bold;
-    overflow: auto;
-	border:none!important;
-	text-shadow: 0 1px 0 white;
-	font-size: 12px !important;
-	 text-transform: none!important;
-
+.wpf-table tr.forumstatus th,
+td.statistik {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  color: #777 !important;
+  font-weight: bold;
+  overflow: auto;
+  border: none !important;
+  text-shadow: 0 1px 0 white;
+  font-size: 12px !important;
+  text-transform: none !important;
 }
 td.autorpostbox {
-	text-align: center;
-	background-image: url("images/post/hr-a.png")  ;
-	background-position:right ;
-	background-repeat:repeat-y;
-	padding: 9px;
-
+  text-align: center;
+  background-image: url("images/post/hr-a.png");
+  background-position: right;
+  background-repeat: repeat-y;
+  padding: 9px;
 }
-th.wpf-bright h3{
-	margin: 0;
-	padding: 0;
-	margin-top: 3px;
-	margin-bottom: 3px;
+th.wpf-bright h3 {
+  margin: 0;
+  padding: 0;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
-.wpf-avatar{
-	padding: 5px;
+.wpf-avatar {
+  padding: 5px;
 }
-
-#wpf-wrapper a img, #wpf-wrapper img {
-	border: none;
-	padding: 0;
-	margin: 0;
-	background: transparent;
-	display: inline!important;
-    height: inherit !important;
-    max-width: none !important;
+#wpf-wrapper a img,
+#wpf-wrapper img {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  display: inline !important;
+  height: inherit !important;
+  max-width: none !important;
 }
-.wpf #wpf-wrapper a img, #wpf-wrapper img {
-	border: none;
-	padding:0;
-	box-shadow: none ;
-	-webkit-box-shadow: none ;
-	-moz-box-shadow: none ;
-	background: transparent;
-
+.wpf #wpf-wrapper a img,
+#wpf-wrapper img {
+  border: none;
+  padding: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent;
 }
-
-
 .updated {
-	color: #333;
-	border: 1px solid #e1ca82;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	font-weight: normal;
-	margin-top: 3px !important;
-	margin-bottom:6px !important;
-	text-decoration: none;
-	background: #ffeaa6;
-	background-image: -webkit-linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255, 255, 255, .5)), color-stop(100%,rgba(255, 255, 255, 0))); /* Chrome,Safari4+ */
-	background-image: -moz-linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
-	background-image: -ms-linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
-	background-image: -o-linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
-	background-image: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
-	height: 20px;
-	width: 100%;
-	text-align: center;
-	font-size: 12px;
-	font-weight: bold;
-	padding-top:3px !important;
-
+  color: #333;
+  border: 1px solid #e1ca82;
+  border-radius: 3px;
+  font-weight: normal;
+  margin-top: 3px !important;
+  margin-bottom: 6px !important;
+  text-decoration: none;
+  background: #ffeaa6;
+  background-image: -webkit-linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+  background-image: -moz-linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+  background-image: -o-linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+  background-image: -ms-linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+  background-image: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+  height: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  padding-top: 3px !important;
 }
-
-#wpf-wrapper blockquote{
-	padding: 1.71429rem;
-	margin: 10px 0;
+#wpf-wrapper blockquote {
+  padding: 1.71429rem;
+  margin: 10px 0;
 }
-
 /* add quote title */
-#wpf-wrapper blockquote .quotetitle{
-	background: #d7daec;
-	border: 1px solid #6081a0;
-	padding-left: 5px;
-	margin: 0;
-	padding: 1.71429rem;
+#wpf-wrapper blockquote .quotetitle {
+  background: #d7daec;
+  border: 1px solid #6081a0;
+  padding-left: 5px;
+  margin: 0;
+  padding: 1.71429rem;
 }
 #wpf-wrapper .hr {
-    background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
-    clear: both;
-    height: 5px;
-    margin: 5px 0 1px;
-    padding: 0;	
+  background: url("images/post/hr-bg.png") repeat-x scroll 0 0 transparent;
+  clear: both;
+  height: 5px;
+  margin: 5px 0 1px;
+  padding: 0;
 }
 #wpf-wrapper blockquote .quotetitle {
-	border: 1px solid #848383;
-    background: #E0E1E1;
-    border-radius: 4px 4px 4px 4px;
-    color: #181818 !important;
-	text-shadow: 1px 1px 0 #FFFFFF;
-    font-weight: bolder;
-    margin: -35px -4px 0 0px !important;
-    min-width: 100px;
-    padding: 2px 10px;
-    position: absolute;
-	 box-shadow: 2px 1px 4px   rgba(63, 63, 63, 0.7); -moz-box-shadow: 2px 1px 4px     rgba(63, 63, 63, 0.7); 
-    -webkit-box-shadow: 2px 1px 4px  rgba(63, 63, 63, 0.7);
+  border: 1px solid #848383;
+  background: #E0E1E1;
+  border-radius: 4px 4px 4px 4px;
+  color: #181818 !important;
+  text-shadow: 1px 1px 0 #FFFFFF;
+  font-weight: bolder;
+  margin: -35px -4px 0 0px !important;
+  min-width: 100px;
+  padding: 2px 10px;
+  position: absolute;
+  -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
+  box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.7);
 }
-
-.topic_text blockquote{
-	background: #E1E0E0 !important; 
-	border: 1px solid #ADADAD;
-	border-left: 4px solid #ADADAD !important;
-	color: #181818;
-	font-style: italic;
-	text-shadow: 0 1px 0 #FFFFFF;
-	-moz-border-radius: 0 7px 7px 0 !important; /* FF1+ */ 
-	-webkit-border-radius: 0 7px 7px 0 !important; /* Saf3+, Chrome */ 
-	 border-radius: 0 7px 7px 0x !important; /* Opera 10.5, IE 9 */
-	 box-shadow: 2px 1px 4px   rgba(63, 63, 63, 0.3); 
-	 -moz-box-shadow: 2px 1px 4px     rgba(63, 63, 63, 0.3);
-	 -webkit-box-shadow: 2px 1px 4px  rgba(63, 63, 63, 0.3);
-	 -moz-border-radius: 0 10px 10px 0px; /* FF1+ */ 
-	 -webkit-border-radius: 0 10px 10px 0px; /* Saf3+, Chrome */ 
-	 border-radius: 0 10px 10px 0px; /* Opera 10.5, IE 9 */	
-	
-	}
+.topic_text blockquote {
+  background: #E1E0E0 !important;
+  border: 1px solid #ADADAD;
+  border-left: 4px solid #ADADAD !important;
+  color: #181818;
+  font-style: italic;
+  text-shadow: 0 1px 0 #FFFFFF;
+  border-radius: 0 7px 7px 0 !important;
+  -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
+  box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
+}
 /* definitions for the main tab, active means the tab reflects which page is displayed */
-.maintab_first, .maintab_back, .maintab_last, .maintab_active_first, .maintab_active_back, .maintab_active_last
-{
-	color: white;
-	_text-transform: uppercase;
-	vertical-align: top;
+.maintab_first,
+.maintab_back,
+.maintab_last,
+.maintab_active_first,
+.maintab_active_back,
+.maintab_active_last {
+  color: white;
+  _text-transform: uppercase;
+  vertical-align: top;
 }
-.maintab_back, .maintab_active_back
-{
-	color: white;
-	text-decoration: none;
-	vertical-align: top;
-	padding: 2px 6px 6px 6px;
-	font-family: tahoma, sans-serif;
+.maintab_back,
+.maintab_active_back {
+  color: white;
+  text-decoration: none;
+  vertical-align: top;
+  padding: 2px 6px 6px 6px;
+  font-family: tahoma, sans-serif;
 }
-.maintab_first
-{
-	background: url(images/maintab_first.gif) left bottom no-repeat !important;
-	width: 10px;
+.maintab_first {
+  background: url(images/maintab_first.gif) left bottom no-repeat !important;
+  width: 10px;
 }
-.maintab_back
-{
-	background: url(images/maintab_back.gif) left bottom repeat-x !important;
-  white-space:nowrap;
+.maintab_back {
+  background: url(images/maintab_back.gif) left bottom repeat-x !important;
+  white-space: nowrap;
 }
-.maintab_last
-{
-	background: url(images/maintab_last.gif) left bottom no-repeat !important;
-	width: 8px;
+.maintab_last {
+  background: url(images/maintab_last.gif) left bottom no-repeat !important;
+  width: 8px;
 }
-/*
-.maintab_active_first
-{
-	background: url(images/maintab_active_first.gif) left bottom no-repeat !important;
-	width: 6px;
-}
-.maintab_active_back
-{
-	background: url(images/maintab_active_back.gif) left bottom repeat-x !important;
-}
-.maintab_active_last
-{
-	background: url(images/maintab_active_last.gif) left bottom no-repeat !important;
-	width: 8px;
-}
-*/
-
 /* how links behave in main tab. */
-#wpf-wrapper .maintab_back a:link , #wpf-wrapper .maintab_back a:visited, #wpf-wrapper .maintab_active_back a:link , #wpf-wrapper .maintab_active_back a:visited
-{
-	color: white;
-	text-decoration: none;
+#wpf-wrapper .maintab_back a:link,
+#wpf-wrapper .maintab_back a:visited,
+#wpf-wrapper .maintab_active_back a:link,
+#wpf-wrapper .maintab_active_back a:visited {
+  color: white;
+  text-decoration: none;
 }
-
-.maintab_back a:hover, .maintab_active_back a:hover
-{
-	color: #e0e0ff;
-	text-decoration: none;
-	
+.maintab_back a:hover,
+.maintab_active_back a:hover {
+  color: #e0e0ff;
+  text-decoration: none;
 }
-
 /* definitions for the mirror tab */
-#wpf-wrapper .mirrortab_first, #wpf-wrapper .mirrortab_back, #wpf-wrapper .mirrortab_last, #wpf-wrapper .mirrortab_active_first, #wpf-wrapper .mirrortab_active_back, #wpf-wrapper .mirrortab_active_last
-{
-	color: white;
-	vertical-align: top;
+#wpf-wrapper .mirrortab_first,
+#wpf-wrapper .mirrortab_back,
+#wpf-wrapper .mirrortab_last,
+#wpf-wrapper .mirrortab_active_first,
+#wpf-wrapper .mirrortab_active_back,
+#wpf-wrapper .mirrortab_active_last {
+  color: white;
+  vertical-align: top;
 }
-#wpf-wrapper .mirrortab_back, #wpf-wrapper .mirrortab_active_back
-{
-	color: white;
-	text-decoration: none;
-	vertical-align: bottom;
-	padding: 6px 6px 2px 6px;
-	font-family: tahoma, sans-serif;
+#wpf-wrapper .mirrortab_back,
+#wpf-wrapper .mirrortab_active_back {
+  color: white;
+  text-decoration: none;
+  vertical-align: bottom;
+  padding: 6px 6px 2px 6px;
+  font-family: tahoma, sans-serif;
 }
-
-.mirrortab_first
-{
-	background: url(images/mirrortab_first.gif) no-repeat !important;
-	width: 10px;
+.mirrortab_first {
+  background: url(images/mirrortab_first.gif) no-repeat !important;
+  width: 10px;
 }
-.mirrortab_back
-{
-  white-space:nowrap;
-	background: url(images/mirrortab_back.gif) repeat-x !important;
+.mirrortab_back {
+  white-space: nowrap;
+  background: url(images/mirrortab_back.gif) repeat-x !important;
 }
-.mirrortab_last
-{
-	background: url(images/mirrortab_last.gif) no-repeat !important;
-	width: 6px;
+.mirrortab_last {
+  background: url(images/mirrortab_last.gif) no-repeat !important;
+  width: 6px;
 }
 /* how links behave in mirror tab. */
-#wpf-wrapper .mirrortab_back a:link ,#wpf-wrapper  .mirrortab_back a:visited,#wpf-wrapper  .mirrortab_active_back a:link , #wpf-wrapper .mirrortab_active_back a:visited
-{
-	color: white;
-	text-decoration: none;
+#wpf-wrapper .mirrortab_back a:link,
+#wpf-wrapper .mirrortab_back a:visited,
+#wpf-wrapper .mirrortab_active_back a:link,
+#wpf-wrapper .mirrortab_active_back a:visited {
+  color: white;
+  text-decoration: none;
 }
-
-.mirrortab_back a:hover, .mirrortab_active_back a:hover
-{
-	color: #e0e0ff;
-	text-decoration: none;
+.mirrortab_back a:hover,
+.mirrortab_active_back a:hover {
+  color: #e0e0ff;
+  text-decoration: none;
 }
-
-pre.code{
-	width: 90%;
-	background: #eee;
-	border: solid 1px #ccc;
-	padding: 5px;
-	overflow: auto;
-	white-space: pre-wrap;
-	font-size: 95%; /*If font is too small try increasing this*/
+pre.code {
+  width: 90%;
+  background: #eee;
+  border: solid 1px #ccc;
+  padding: 5px;
+  overflow: auto;
+  white-space: pre-wrap;
+  font-size: 95%; /*If font is too small try increasing this*/
 }
-
-#wpf-info{
-	text-align:center; 
-	padding:5px !important; 
-	border:1px solid #CACACA;
-	margin-top:15px !important;
-	background: #f6f6f6;
+#wpf-info {
+  text-align: center;
+  padding: 5px !important;
+  border: 1px solid #CACACA;
+  margin-top: 15px !important;
+  background: #f6f6f6;
 }
-#wpf-wrapper{
-		font-size: 95%; /*If fonts are too small try increasing this*/
-
+#wpf-wrapper {
+  font-size: 95%; /*If fonts are too small try increasing this*/
 }
-#wpf-wrapper td, #wpf-wrapper th{
-	 vertical-align: top;
-	 line-height: 20px;
+#wpf-wrapper td,
+#wpf-wrapper th {
+  vertical-align: top;
+  line-height: 20px;
 }
-#wpf-wrapper th{
-	vertical-align: middle;
+#wpf-wrapper th {
+  vertical-align: middle;
 }
-
 /*Attempt to make the forum look better with more themes*/
-#forummenu td, #topicmenu td {
-	padding: 1px 4px 1px !important;
-	padding:1px !important;
-	padding-left:3px !important;
-	margin:0 !important;
-	height:25px !important;
-	width:1px !important;
-	vertical-align:middle !important;
+#forummenu td,
+#topicmenu td {
+  padding: 1px 4px 1px !important;
+  padding: 1px !important;
+  padding-left: 3px !important;
+  margin: 0 !important;
+  height: 25px !important;
+  width: 1px !important;
+  vertical-align: middle !important;
 }
 .mirrortab_first td,
 .maintab_last td {
-	width:1px !important;
-	}
-.mirrortab_back, .maintab_back{
-	min-width:62px;
-	text-align:center;
-	}
-
+  width: 1px !important;
+}
+.mirrortab_back,
+.maintab_back {
+  min-width: 62px;
+  text-align: center;
+}
 #topicmenu a {
-	padding: 0 2px;!important;
+  padding: 0 2px;
 }
 #topicmenu a:hover {
-	text-decoration:underline !important;
+  text-decoration: underline !important;
 }
-.maintab_first, .mirrortab_first {
-	font-size:5px !important;
+.maintab_first,
+.mirrortab_first {
+  font-size: 5px !important;
 }
 .pop_menus td {
-    border: medium none;
-    margin: 0 !important;
-    padding: 0 7px 0 0 !important;
+  border: medium none;
+  margin: 0 !important;
+  padding: 0 7px 0 0 !important;
 }
-#upshrinkHeader strong{
-	background-color: #d66240;
-	 -moz-border-radius: 3px; 
-	-webkit-border-radius: 3px; 
-	 border-radius: 3px; 
-    color: #FFFFFF;
-    display: inline;
-    font-size: 95%;
-    text-shadow:none;
-    padding: 0px 5px;
-	 margin-left: 1px;
-	 margin-right:1px;
-	}
-.wpf-pages strong{
-	background-color: #737373;
-	 -moz-border-radius: 3px; 
-	-webkit-border-radius: 3px; 
-	 border-radius: 3px; 
-    color: #FFFFFF;
-    display: inline;
-    font-size: 95%;
-    text-shadow:none;
-    padding: 0px 5px;
-	 margin-left: 1px;
-	 margin-right:1px;
-	}
-.wpf-pages a{
-	background: none repeat scroll 0 0 #1FB3DD;
-	 -moz-border-radius: 3px; 
-	-webkit-border-radius: 3px; 
-	 border-radius: 3px; 
-    color: #FFFFFF !important;
-    display: inline;
-    font-size: 95%;
-	text-decoration:none !important;
-    padding: 0px 5px;
-	text-shadow:none!important;
-	 margin-left: 1px;
-	 margin-right:1px;
-
-	}	
-	
-.wpf-pages a:hover	{
-	background-color: #737373;
-	 -moz-border-radius: 3px; 
-	-webkit-border-radius: 3px; 
-	 border-radius: 3px; 
-    color: #FFFFFF !important;
-    display: inline;
-    font-size: 95%; 
-    padding: 0px 5px;
-	text-shadow:none!important;
-	text-decoration:none !important;
+#upshrinkHeader strong {
+  background-color: #d66240;
+  border-radius: 3px;
+  color: #FFFFFF;
+  display: inline;
+  font-size: 95%;
+  text-shadow: none;
+  padding: 0px 5px;
+  margin-left: 1px;
+  margin-right: 1px;
 }
- 
- /* Buttons fix */
- div.forum_smilies,
- div.forum_buttons {
-  padding:0;
-  margin:0;
- }
- 
+.wpf-pages strong {
+  background-color: #737373;
+  border-radius: 3px;
+  color: #FFFFFF;
+  display: inline;
+  font-size: 95%;
+  text-shadow: none;
+  padding: 0px 5px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.wpf-pages a {
+  background: none repeat scroll 0 0 #1FB3DD;
+  border-radius: 3px;
+  color: #FFFFFF !important;
+  display: inline;
+  font-size: 95%;
+  text-decoration: none !important;
+  padding: 0px 5px;
+  text-shadow: none !important;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.wpf-pages a:hover {
+  background-color: #737373;
+  border-radius: 3px;
+  color: #FFFFFF !important;
+  display: inline;
+  font-size: 95%;
+  padding: 0px 5px;
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
+/* Buttons fix */
+div.forum_smilies,div.forum_buttons {
+  padding: 0;
+  margin: 0;
+}
 .forum_smilies a,
 .forum_buttons a {
-  margin-right:3px;
+  margin-right: 3px;
 }
-
 /* Header shrink/hide */
 img.show_hide_icon {
-  float:right;
-  vertical-align:middle;
+  float: right;
+  vertical-align: middle;
 }
-
 a.show-hide-hidden {
-  display:none;
+  display: none;
 }
-
 #profileHeader img {
-  vertical-align:middle;
-  margin-right:5px;
+  vertical-align: middle;
+  margin-right: 5px;
 }
-
 /*------------------------------------------------*/
 /*-------------------[icomoon]--------------------*/
 /*------------(http://icomoon.io)-----------------*/
 /*------------------------------------------------*/
-
 @font-face {
-	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot');
-	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('fonts/icomoon.woff') format('woff'),
-		url('fonts/icomoon.ttf') format('truetype'),
-		url('fonts/icomoon.svg#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'icomoon';
+  src: url('fonts/icomoon.eot');
+  src: url('fonts/icomoon.eot?#iefix') format('embedded-opentype'), url('fonts/icomoon.woff') format('woff'), url('fonts/icomoon.ttf') format('truetype'), url('fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 .icomoon {
-	float:left;
-	 color: inherit;
-    font-family: "icomoon";
-    font-size: 123%;
-    font-weight: normal;
-    padding-right: 2px;
-    position: relative;
-	vertical-align: middle;
-    top: 0px;
+  float: left;
+  color: inherit;
+  font-family: "icomoon";
+  font-size: 123%;
+  font-weight: normal;
+  padding-right: 2px;
+  position: relative;
+  vertical-align: middle;
+  top: 0px;
 }
 [data-icon]:before {
-	font-family: 'icomoon';
-	content: attr(data-icon);
-	speak: none;
-	font-weight: normal;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-	padding-right:3px;
-	font-size: 1.37em;
-	vertical-align: text-top;
+  font-family: 'icomoon';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  padding-right: 3px;
+  font-size: 1.37em;
+  vertical-align: text-top;
 }
-
 /*-------------------[end icomoon]--------------------*/
