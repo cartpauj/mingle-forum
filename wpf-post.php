@@ -19,7 +19,7 @@ if(($_GET['mingleforumaction'] == "postreply")){
 				<th colspan='2'>".__("Post Reply", "mingleforum")."</th>
 			</tr>
 			<tr>
-				<td>".__("Subject:", "mingleforum")."</tf>
+				<td>".__("Subject:", "mingleforum")."</td>
 				<td><input size='50%' type='text' name='add_post_subject' class='wpf-input' value='".__('Re:', 'mingleforum')." ".$this->get_subject($thread)."'/></td>
 			</tr>
 			<tr>
@@ -71,7 +71,7 @@ if(($_GET['mingleforumaction'] == "editpost")){
 					<th colspan='2'>".__("Edit Post", "mingleforum")."</th>
 				</tr>
 				<tr>
-					<td>".__("Subject:", "mingleforum")."</tf>
+					<td>".__("Subject:", "mingleforum")."</td>
 					<td><input size='50%' type='text' name='edit_post_subject' class='wpf-input' value='".stripslashes($post->subject)."'/></td>
 				</tr>
 				<tr>
