@@ -126,10 +126,13 @@ n/a
 * Added smilies to quick reply (ddart)
 * Added ability to shrink Categories to save space
 * Changed styling of default skin (HUGE Thanks to ddart)
+* Changed profile header at top of Forum to save space
+* Changed breadcrumbs location
 * Changed the bulky profile header to be more sleek
 * Changed permalink structure to not update on every page load
 * Changed recent posts widget (ddart)
 * Changed length of username before auto wrap occurs (ddart)
+* Fixed some JS issues
 * Fixed Admins/Mods not being able to reply to closed topics
 * Fixed possible SQL injection sites
 * Fixed SPAM time limit not working for guests

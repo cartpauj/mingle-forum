@@ -5,7 +5,7 @@ Author: ddart
 Author url: http://ddart-bg.com/
 Mingle Forum url: http://cartpauj.com/projects/mingle-forum-plugin/
 Version: 1.34
- */
+*/
  
 /*Font body ---------------------------------------*/
 #wpf-wrapper {
@@ -15,6 +15,7 @@ Version: 1.34
   font-size: 14px;
 }
 /*End Font body ----------------------------------*/
+
 #wpf-wrapper table#wp-mainmenu {
   width: auto !important;
 }
@@ -35,9 +36,9 @@ Version: 1.34
 }
 #wpf-wrapper {
   line-height: normal;
-  color: #000; /*background-color: white;
-  ENABLE THIS IF YOU'RE HAVING TROUBLE SEEING MENU FONTS*/
+  color: #000;
 }
+
 /*Menu Header ---------------------------------------*/
 #wpf-wrapper #wp-mainmenu {
   margin-left: 0;
@@ -177,6 +178,7 @@ Version: 1.34
 #wpf-wrapper #upshrinkHeader p {
   margin: 0 0 0.514rem !important;
 }
+
 /*button v 1.34---------------------------------------*/
 #wpf-post-submit,
 #wpf-search-submit,
@@ -224,9 +226,7 @@ Version: 1.34
   vertical-align: middle;
   padding: 3px 6px;
   border: 1px solid #CCCCCC;
-  border-radius: 3px; /* FF1+ */
-  /* Saf3+, Chrome */
-  /* Opera 10.5, IE 9 */
+  border-radius: 3px;
   font-family: inherit;
 }
 /*end button --------------------------------------------*/
@@ -248,9 +248,7 @@ Version: 1.34
 }
 #wpf-wrapper img.avatar,
 #wpf-wrapper .topic_text a img {
-  border-radius: 3px; /* FF1+ */
-  /* Saf3+, Chrome */
-  /* Opera 10.5, IE 9 */
+  border-radius: 3px;
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
@@ -258,6 +256,7 @@ Version: 1.34
   line-height: 15px;
 }
 /*end poster_in_forum ---------------------------------*/
+
 #wpf-wrapper th h4 {
   font-weight: bold;
   color: #FFF;
@@ -313,8 +312,7 @@ table.search {
   background: #ecedf3;
 }
 .topic_text p img {
-/*Edit This Value To Fit Your Theme*/
-max-width: 475px;
+  max-width: 475px;
 }
 img.avatar {
   float: none;
@@ -546,6 +544,7 @@ th.wpf-bright h3 {
   padding: 1.71429rem;
   margin: 10px 0;
 }
+
 /* add quote title */
 #wpf-wrapper blockquote .quotetitle {
   background: #d7daec;
@@ -586,6 +585,7 @@ th.wpf-bright h3 {
   -webkit-box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
   box-shadow: 2px 1px 4px rgba(63, 63, 63, 0.3);
 }
+
 /* definitions for the main tab, active means the tab reflects which page is displayed */
 .maintab_first,
 .maintab_back,
@@ -617,6 +617,7 @@ th.wpf-bright h3 {
   background: url(images/maintab_last.gif) left bottom no-repeat !important;
   width: 8px;
 }
+
 /* how links behave in main tab. */
 #wpf-wrapper .maintab_back a:link,
 #wpf-wrapper .maintab_back a:visited,
@@ -630,6 +631,7 @@ th.wpf-bright h3 {
   color: #e0e0ff;
   text-decoration: none;
 }
+
 /* definitions for the mirror tab */
 #wpf-wrapper .mirrortab_first,
 #wpf-wrapper .mirrortab_back,
@@ -660,6 +662,7 @@ th.wpf-bright h3 {
   background: url(images/mirrortab_last.gif) no-repeat !important;
   width: 6px;
 }
+
 /* how links behave in mirror tab. */
 #wpf-wrapper .mirrortab_back a:link,
 #wpf-wrapper .mirrortab_back a:visited,
@@ -700,6 +703,7 @@ pre.code {
 #wpf-wrapper th {
   vertical-align: middle;
 }
+
 /*Attempt to make the forum look better with more themes*/
 #forummenu td,
 #topicmenu td {
@@ -779,6 +783,7 @@ pre.code {
   text-shadow: none !important;
   text-decoration: none !important;
 }
+
 /* Buttons fix */
 div.forum_smilies,div.forum_buttons {
   padding: 0;
@@ -788,6 +793,7 @@ div.forum_smilies,div.forum_buttons {
 .forum_buttons a {
   margin-right: 3px;
 }
+
 /* Header shrink/hide */
 img.show_hide_icon {
   float: right;
