@@ -52,7 +52,7 @@ if (!class_exists('mingleforum'))
     var $t_forums = "";
     var $t_threads = "";
     var $t_posts = "";
-    var $_usergroups = "";
+    var $t_usergroups = "";
     var $t_usergroup2user = "";
     var $o = "";
     var $current_group = "";
@@ -72,7 +72,7 @@ if (!class_exists('mingleforum'))
     // Initialize varables
     function init()
     {
-      global $wpdb, $user_ID;
+      global $wpdb;
       $table_prefix = $wpdb->prefix;
 
       $this->page_id = $this->get_pageid();
@@ -209,7 +209,6 @@ if (!class_exists('mingleforum'))
 
     function setup_header()
     {
-      global $user_ID;
       $this->setup_links();
 
       if ($this->options['forum_use_rss']):
@@ -867,7 +866,7 @@ if (!class_exists('mingleforum'))
 
       $post = $wpdb->get_row("SELECT `date`, author_id, id FROM {$this->t_posts} ORDER BY `date` DESC LIMIT 1");
 
-      return __("Latest Post by", "mingleforum") . " <span class='img-avatar-forumstats' >" . $this->get_avatar($post->author_id, 15) . "</span>" . $this->profile_link($post->author_id) . "<br/>" . __("on", "mingleforum") . " " . date_i18n($this->options['forum_date_format'], strtotime($post->date));
+      return ($post) ? __("Latest Post by", "mingleforum") . " <span class='img-avatar-forumstats' >" . $this->get_avatar($post->author_id, 15) . "</span>" . $this->profile_link($post->author_id) . "<br/>" . __("on", "mingleforum") . " " . date_i18n($this->options['forum_date_format'], strtotime($post->date)) : '';
     }
 
     function showforum($forum_id)
@@ -959,8 +958,9 @@ if (!class_exists('mingleforum'))
         $this->sticky_post();
 
       $this->thread_subscribe();
+      $posts = $this->get_posts($thread_id);
 
-      if ($posts = $this->get_posts($thread_id))
+      if ($posts)
       {
         if ($this->is_thread_subscribed())
           $this->notify_msg = __("Remove this Topic from your email notifications?", "mingleforum");
@@ -1353,8 +1353,6 @@ if (!class_exists('mingleforum'))
 
     function input_filter($string)
     {
-      global $wpdb;
-
       $Find = array("<", "%", "$");
       $Replace = array("&#60;", "&#37;", "&#36;");
       $newStr = str_replace($Find, $Replace, $string);
@@ -1364,8 +1362,6 @@ if (!class_exists('mingleforum'))
 
     function sig_input_filter($string)
     {
-      global $wpdb;
-
       $Find = array("<", "%", "$");
       $Replace = array("&#60;", "&#37;", "&#36;");
       $newStr = str_replace($Find, $Replace, $string);
@@ -1424,7 +1420,7 @@ if (!class_exists('mingleforum'))
 
     function last_poster_in_forum($forum, $post_date = false)
     {
-      global $wpdb, $table_posts, $profile, $table_threads;
+      global $wpdb;
 
       $date = $wpdb->get_row($wpdb->prepare("SELECT {$this->t_posts}.date, {$this->t_posts}.id, {$this->t_posts}.parent_id, {$this->t_posts}.author_id FROM {$this->t_posts} INNER JOIN {$this->t_threads} ON {$this->t_posts}.parent_id={$this->t_threads}.id WHERE {$this->t_threads}.parent_id = %d ORDER BY {$this->t_posts}.date DESC", $forum));
 
@@ -1453,8 +1449,7 @@ if (!class_exists('mingleforum'))
       if (current_user_can("administrator") || is_super_admin($user_ID))
         return true;
 
-      $user_groups = $wpdb->get_var("SELECT usergroups FROM {$this->t_groups} WHERE id = {$groupid}");
-      $user_groups = maybe_unserialize($user_groups);
+      $user_groups = maybe_unserialize($wpdb->get_var("SELECT usergroups FROM {$this->t_groups} WHERE id = {$groupid}"));
       if (!$user_groups)
         return true;
 
@@ -1474,7 +1469,7 @@ if (!class_exists('mingleforum'))
 
     function get_members($usergroup)
     {
-      global $wpdb, $table_prefix;
+      global $wpdb;
 
       return $wpdb->get_results($wpdb->prepare("SELECT user_id FROM {$this->t_usergroup2user} WHERE `group` = %d", $usergroup));
     }
@@ -1578,14 +1573,14 @@ if (!class_exists('mingleforum'))
 
     function get_usergroup_name($usergroup_id)
     {
-      global $wpdb, $table_prefix;
+      global $wpdb;
 
       return $wpdb->get_var($wpdb->prepare("SELECT name FROM {$this->t_usergroups} WHERE id = %d", $usergroup_id));
     }
 
     function get_usergroup_description($usergroup_id)
     {
-      global $wpdb, $table_prefix;
+      global $wpdb;
 
       return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_usergroups} WHERE id = %d", $usergroup_id));
     }
@@ -1613,14 +1608,14 @@ if (!class_exists('mingleforum'))
 
     function get_users()
     {
-      global $wpdb, $table_prefix;
+      global $wpdb;
 
       return $wpdb->get_results("SELECT user_login, ID FROM {$wpdb->users} ORDER BY user_login ASC");
     }
 
     function get_moderators()
     {
-      global $wpdb, $table_prefix;
+      global $wpdb;
 
       return $wpdb->get_results("
         SELECT {$wpdb->usermeta}.user_id, {$wpdb->users}.user_login
@@ -1979,7 +1974,7 @@ if (!class_exists('mingleforum'))
 
     function convert_moderators()
     {
-      global $wpdb, $table_prefix;
+      global $wpdb;
 
       if (!get_option('wpf_mod_option_vers'))
       {
@@ -2068,21 +2063,21 @@ if (!class_exists('mingleforum'))
 
     function forum_get_group_id($group)
     {
-      global $wpdb, $table_groups;
+      global $wpdb;
 
       return $wpdb->get_var($wpdb->prepare("SELECT id FROM {$this->t_groups} WHERE id = %d", $group));
     }
 
     function forum_get_parent($forum)
     {
-      global $wpdb, $table_forums;
+      global $wpdb;
 
       return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_forums} WHERE id = %d", $forum));
     }
 
     function forum_get_forum_from_post($thread)
     {
-      global $wpdb, $table_threads;
+      global $wpdb;
 
       return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $thread));
     }
@@ -2341,7 +2336,7 @@ if (!class_exists('mingleforum'))
 
     function getNewForumID()
     {
-      global $user_ID, $wpdb;
+      global $user_ID;
 
       $topic = !empty($_GET['topic']) ? (int) $_GET['topic'] : 0;
       $topic = !empty($_GET['t']) ? (int) $_GET['t'] : $topic;
@@ -2370,7 +2365,6 @@ if (!class_exists('mingleforum'))
       global $user_ID, $wpdb;
 
       $topic = $_GET['topic'];
-      $currentForumID = $this->check_parms($_GET['f']);
       $newForumID = !empty($_GET['newForumID']) ? (int) $_GET['newForumID'] : 0;
       $newForumID = !empty($_POST['newForumID']) ? (int) $_POST['newForumID'] : $newForumID;
 
@@ -2378,8 +2372,8 @@ if (!class_exists('mingleforum'))
       {
         $strSQL = $wpdb->prepare("UPDATE {$this->t_threads} SET `parent_id` = {$newForumID} WHERE id = %d", $topic);
         $wpdb->query($strSQL);
-        @header("location: " . $this->base_url . "viewforum&f=" . $newForumID);
-        @exit;
+        header("Location: " . $this->base_url . "viewforum&f=" . $newForumID);
+        exit;
       }
       else
         wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
@@ -2749,8 +2743,6 @@ if (!class_exists('mingleforum'))
 
     function view_profile()
     {
-      global $wpdb, $user_ID;
-
       $this->current_view = PROFILE;
 
       if (is_numeric($_GET['id'])) //Security fix to prevent SQL injections
@@ -3015,7 +3007,7 @@ if (!class_exists('mingleforum'))
       $subject = __("Forum post - ", "mingleforum") . $subject;
       $message = __("DETAILS:", "mingleforum") . "<br/><br/>" .
               __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
-              //					__("Email:", "mingleforum")." ".$submitter_email."<br/>".
+              __("Email:", "mingleforum")." ".$submitter_email."<br/>".
               __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
               __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
               __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
@@ -3039,7 +3031,7 @@ if (!class_exists('mingleforum'))
       $subject = __("Forum post - ", "mingleforum") . $subject;
       $message = __("DETAILS:", "mingleforum") . "<br/><br/>" .
               __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
-              //					__("Email:", "mingleforum")." ".$submitter_email."<br/>".
+              __("Email:", "mingleforum")." ".$submitter_email."<br/>".
               __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
               __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
               __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
@@ -3153,7 +3145,7 @@ if (!class_exists('mingleforum'))
                   MnglUser::user_exists_and_visible($mngl_user->id) and
                   $mngl_friend->is_friend($mngl_user->id, $id)) or current_user_can('administrator') or is_super_admin($user_ID))
           {
-            $param_char = MnglAppController::get_param_delimiter_char($permalink);
+            $param_char = MnglAppController::get_param_delimiter_char();
 
             return "<a href='" . get_permalink($mngl_options->inbox_page_id) . $param_char . "u=" . $id . "'>" . __("Send Message", "mingleforum") . "</a><br/>";
           }
@@ -3167,6 +3159,7 @@ if (!class_exists('mingleforum'))
     {
       $plugin_data = implode('', file(ABSPATH . "wp-content/plugins/mingle/mingle.php"));
 
+      $version = '';
       if (preg_match("|Version:(.*)|i", $plugin_data, $version))
         $version = $version[1];
 
@@ -3200,12 +3193,12 @@ if (!class_exists('mingleforum'))
       $end = array();
       $request_uri = $_SERVER['REQUEST_URI'];
       $link = str_replace(site_url(), '', get_permalink($this->get_pageid()));
-      $uri = trim(str_replace($link, '', $request_uri), '/');
-      $uri = explode('/', $uri);
+      $uri = explode('/', trim(str_replace($link, '', $request_uri), '/'));
 
       if (array_count_values($uri))
       {
         $m = end($uri);
+        $found = '';
         preg_match("/.*-(group|forum|thread)(\d*(\.?\d+)?)$/", $m, $found);
       }
 
@@ -3245,8 +3238,6 @@ if (!class_exists('mingleforum'))
     //Add a dynamic sitemap for the forum posts
     function do_sitemap()
     {
-      global $wpdb;
-
       $priority = "0.8";
       $freq = "daily";
       $threads = $this->get_threads(false);
@@ -3278,7 +3269,7 @@ if (!class_exists('mingleforum'))
     }
 
     //Filter function for ads
-    function mf_ad_above_forum($value)
+    function mf_ad_above_forum()
     {
       if ($this->ads_options['mf_ad_above_forum_on'])
         $str = "<div class='mf-ad-above-forum'>" . stripslashes($this->ads_options['mf_ad_above_forum']) . "</div><br/>";
@@ -3288,7 +3279,7 @@ if (!class_exists('mingleforum'))
       return $str;
     }
 
-    function mf_ad_below_forum($value)
+    function mf_ad_below_forum()
     {
       if ($this->ads_options['mf_ad_below_forum_on'])
         $str = "<br/><div class='mf-ad-below-forum'>" . stripslashes($this->ads_options['mf_ad_below_forum']) . "</div>";
@@ -3298,7 +3289,7 @@ if (!class_exists('mingleforum'))
       return $str;
     }
 
-    function mf_ad_above_branding($value)
+    function mf_ad_above_branding()
     {
       if ($this->ads_options['mf_ad_above_branding_on'])
         $str = "<br/><div class='mf-ad-above-branding'>" . stripslashes($this->ads_options['mf_ad_above_branding']) . "</div><br/>";
@@ -3308,7 +3299,7 @@ if (!class_exists('mingleforum'))
       return $str;
     }
 
-    function mf_ad_above_info_center($value)
+    function mf_ad_above_info_center()
     {
       if ($this->ads_options['mf_ad_above_info_center_on'])
         $str = "<div class='mf-ad-above-info-center'>" . stripslashes($this->ads_options['mf_ad_above_info_center']) . "</div><br/>";
@@ -3318,7 +3309,7 @@ if (!class_exists('mingleforum'))
       return $str;
     }
 
-    function mf_ad_above_quick_reply($value)
+    function mf_ad_above_quick_reply()
     {
       if ($this->ads_options['mf_ad_above_quick_reply_on'])
         $str = "<div class='mf-ad-above-quick-reply'>" . stripslashes($this->ads_options['mf_ad_above_quick_reply']) . "</div>";
@@ -3328,7 +3319,7 @@ if (!class_exists('mingleforum'))
       return $str;
     }
 
-    function mf_ad_above_breadcrumbs($value)
+    function mf_ad_above_breadcrumbs()
     {
       if ($this->ads_options['mf_ad_above_breadcrumbs_on'])
         $str = "<br/><div class='mf-ad-above-breadcrumbs'>" . stripslashes($this->ads_options['mf_ad_above_breadcrumbs']) . "</div>";
@@ -3338,7 +3329,7 @@ if (!class_exists('mingleforum'))
       return $str;
     }
 
-    function mf_ad_below_first_post($value)
+    function mf_ad_below_first_post()
     {
       if ($this->ads_options['mf_ad_below_first_post_on'])
         $str = "<tr><td colspan='2'><div class='mf-ad-below-first-post'>" . stripslashes($this->ads_options['mf_ad_below_first_post']) . "</div></td></tr>";
@@ -3403,8 +3394,6 @@ if (!class_exists('mingleforum'))
 
     function strip_single_quote($string)
     {
-      global $wpdb;
-
       $Find = array("'", "\\");
       $Replace = array("", "");
       $newStr = str_replace($Find, $Replace, $string);
