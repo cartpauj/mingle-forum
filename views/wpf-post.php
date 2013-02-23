@@ -24,7 +24,7 @@ if ($user_ID || $this->allow_unreg())
 			</tr>
 			<tr>
 				<td>" . __("Subject:", "mingleforum") . "</td>
-				<td><input size='50%' type='text' name='add_post_subject' class='wpf-input' value='" . __('Re:', 'mingleforum') . " " . $this->get_subject($thread) . "'/></td>
+				<td><input size='50%' type='text' name='add_post_subject' class='wpf-input' value='" . $this->get_subject($thread) . "'/></td>
 			</tr>
 			<tr>
 				<td valign='top'>" . __("Message:", "mingleforum") . "</td>

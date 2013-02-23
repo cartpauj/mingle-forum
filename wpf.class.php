@@ -1088,7 +1088,7 @@ if (!class_exists('mingleforum'))
             $out .= apply_filters('mf_ad_above_quick_reply', ''); //Adsense Area -- Above Quick Reply Form
             $out .= "<strong>" . __("Quick Reply", "mingleforum") . ": </strong><br/>" .
                     $this->form_buttons() . $this->form_smilies() . "<br/>
-                    <input type='hidden' name='add_post_subject' value='" . __('Re:', 'mingleforum') . " " . $this->get_subject(floor($quick_thread)) . "'/>
+                    <input type='hidden' name='add_post_subject' value='" . $this->get_subject(floor($quick_thread)) . "'/>
                     <textarea rows='6' style='width:99% !important;' name='message' class='wpf-textarea' ></textarea>
                 </td>
               </tr>";
