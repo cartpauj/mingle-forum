@@ -265,7 +265,7 @@ if (!class_exists('mingleforum'))
         {
           //$user = get_userdata($post->author_id);
           if ($this->have_access($this->forum_get_group_from_post($post->parent_id)))
-            require(WPFPATH . 'views/widget.php');
+            require('views/widget.php');
 
           $unique[] = $post->parent_id;
           $toShow += 1;
@@ -852,7 +852,7 @@ if (!class_exists('mingleforum'))
 
         $link = $this->get_paged_threadlink($thread_id);
 
-        require(WPFPATH . 'views/lastpost.php');
+        require('views/lastpost.php');
 
         return ob_get_clean();
       }
@@ -904,7 +904,7 @@ if (!class_exists('mingleforum'))
           if (!$this->have_access($this->current_group))
             wp_die(__("Sorry, but you don't have access to this forum", "mingleforum"));
 
-          require(WPFPATH . 'views/showforum.php');
+          require('views/showforum.php');
 
           $out .= ob_get_clean();
         }
