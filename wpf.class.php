@@ -377,7 +377,7 @@ if (!class_exists('mingleforum'))
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
       if (is_plugin_active('mingle/mingle.php'))
       {
-        global $mngl_options;
+        global $mngl_options, $mngl_blogurl;
 
         if (!empty($mngl_options->signup_page_id) and $mngl_options->signup_page_id > 0)
           $this->reg_link = get_permalink($mngl_options->signup_page_id);
@@ -385,13 +385,13 @@ if (!class_exists('mingleforum'))
           $this->reg_link = $mngl_blogurl . '/wp-login.php?action=register';
       }
       else
-        $this->reg_link = site_url() . "/wp-login.php?action=register";
+        $this->reg_link = wp_login_url() . "?action=register";
       //END MINGLE REG LINK
 
       $this->topic_feed_url = WPFURL . "feed.php?topic=";
       $this->global_feed_url = WPFURL . "feed.php?topic=all";
       $this->home_url = $perm;
-      $this->logout_link = site_url() . "/wp-login.php?action=logout&redirect_to=" . get_permalink($this->get_pageid());
+      $this->logout_link = wp_logout_url(get_permalink($this->get_pageid()));
     }
 
     //Not sure why the previous author needed two of these setup links funcs
@@ -417,7 +417,7 @@ if (!class_exists('mingleforum'))
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
       if (is_plugin_active('mingle/mingle.php'))
       {
-        global $mngl_options;
+        global $mngl_options, $mngl_blogurl;
 
         if (!empty($mngl_options->signup_page_id) and $mngl_options->signup_page_id > 0)
           $this->reg_link = get_permalink($mngl_options->signup_page_id);
@@ -425,13 +425,13 @@ if (!class_exists('mingleforum'))
           $this->reg_link = $mngl_blogurl . '/wp-login.php?action=register';
       }
       else
-        $this->reg_link = site_url() . "/wp-login.php?action=register";
+        $this->reg_link = wp_login_url() . "?action=register";
       //END MINGLE REG LINK
 
       $this->topic_feed_url = WPFURL . "feed.php?topic=";
       $this->global_feed_url = WPFURL . "feed.php?topic=all";
       $this->home_url = $perm;
-      $this->logout_link = site_url() . "/wp-login.php?action=logout&redirect_to=" . get_permalink($this->get_pageid());
+      $this->logout_link = wp_logout_url(get_permalink($this->get_pageid()));
     }
 
     function get_addtopic_link()
@@ -822,6 +822,7 @@ if (!class_exists('mingleforum'))
     {
       $plugin_data = implode('', file(ABSPATH . "wp-content/plugins/" . WPFPLUGIN . "/wpf-main.php"));
 
+      $version = '';
       if (preg_match("|Version:(.*)|i", $plugin_data, $version))
         $version = $version[1];
 
@@ -830,8 +831,6 @@ if (!class_exists('mingleforum'))
 
     function get_userdata($user_id, $data)
     {
-      global $wpdb;
-
       $user = get_userdata($user_id);
 
       if (!$user)
@@ -1993,7 +1992,7 @@ if (!class_exists('mingleforum'))
 
     function login_form()
     {
-      return "<form class='login-form' action='" . site_url() . "/wp-login.php' method='post'>
+      return "<form class='login-form' action='" . wp_login_url() . "' method='post'>
                 <label for='log' style='vertical-align:middle'>" . __("Username: ", "mingleforum") . "</label>
                 <input type='text' name='log' id='log' value='' size='10' class='wpf-input' />
 
