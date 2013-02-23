@@ -1,7 +1,4 @@
 <?php
-include("wpf_define.php");
-include_once('bbcode.php');
-
 if (!class_exists('mingleforum'))
 {
 
@@ -16,6 +13,8 @@ if (!class_exists('mingleforum'))
       $this->get_set_ads_options();
       add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
       add_action("admin_menu", array($this, "add_admin_pages"));
+      add_action("init", array($this, "kill_canonical_urls"));
+      add_action("admin_init", array($this, "wp_forum_install")); //Easy Multisite-friendly way of setting up the DB
       add_action("admin_enqueue_scripts", array($this, 'enqueue_admin_scripts'));
       add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
       add_action("wp_head", array($this, "setup_header"));
@@ -73,7 +72,8 @@ if (!class_exists('mingleforum'))
     // Initialize varables
     function init()
     {
-      global $table_prefix, $user_ID;
+      global $wpdb, $user_ID;
+      $table_prefix = $wpdb->prefix;
 
       $this->page_id = $this->get_pageid();
       $this->profile_link = site_url() . "/wp-admin/profile.php";
@@ -82,8 +82,8 @@ if (!class_exists('mingleforum'))
       $this->t_forums = $table_prefix . "forum_forums";
       $this->t_threads = $table_prefix . "forum_threads";
       $this->t_posts = $table_prefix . "forum_posts";
-      $this->t_usergroups = $table_prefix . "forum_usergroups"; //! check this later
-      $this->t_usergroup2user = $table_prefix . "forum_usergroup2user"; //x testing
+      $this->t_usergroups = $table_prefix . "forum_usergroups";
+      $this->t_usergroup2user = $table_prefix . "forum_usergroup2user";
 
       $this->current_forum = false;
       $this->current_group = false;
@@ -91,13 +91,20 @@ if (!class_exists('mingleforum'))
 
       $this->curr_page = 0;
 
-      $this->user_options = array('allow_profile' => true,
-          'signature' => "");
-      // Get the options
+      $this->user_options = array('allow_profile' => true, 'signature' => "");
+
       if ($this->options['forum_skin'] == "Default")
         $this->skin_url = OLDSKINURL . $this->options['forum_skin'];
       else
         $this->skin_url = SKINURL . $this->options['forum_skin'];
+    }
+
+    function kill_canonical_urls()
+    {
+      global $post;
+
+      if(isset($post) && $post instanceof WP_Post && $post->ID == $this->get_pageid())
+        remove_filter('template_redirect', 'redirect_canonical');
     }
 
     function get_set_ads_options()
@@ -167,7 +174,7 @@ if (!class_exists('mingleforum'))
 
       $stored_ops = get_option('mingleforum_options', array());
 
-      //Don't overwrite current opitions but allow the flexibility to add more options
+      //Merge defaults with user's settings
       $this->options = array_merge($default_ops, $stored_ops);
     }
 
@@ -234,8 +241,8 @@ if (!class_exists('mingleforum'))
 
     function wpf_load_widget()
     {
-      wp_register_sidebar_widget("MFWidget", __("Forums Latest Activity", "mingleforum"), array(&$this, "widget"));
-      wp_register_widget_control("MFWidget", __("Forums Latest Activity", "mingleforum"), array(&$this, "widget_wpf_control"));
+      wp_register_sidebar_widget("MFWidget", __("Forums Latest Activity", "mingleforum"), array($this, "widget"));
+      wp_register_widget_control("MFWidget", __("Forums Latest Activity", "mingleforum"), array($this, "widget_wpf_control"));
     }
 
     function widget($args)
@@ -246,6 +253,8 @@ if (!class_exists('mingleforum'))
       $unique = array();
       $this->setup_links();
       $widget_option = get_option("wpf_widget");
+      //Uhhh yeah, this is a horrible way to do this
+      //We need to re-write this query to just get the Distinct values
       $posts = $wpdb->get_results("SELECT * FROM {$this->t_posts} ORDER BY `date` DESC LIMIT 50");
 
       echo $args['before_widget'];
@@ -268,6 +277,7 @@ if (!class_exists('mingleforum'))
       echo $args['after_widget'];
     }
 
+    //Should probably kill this soon
     function latest_activity($num = 5, $ul = true)
     {
       global $wpdb;
@@ -296,6 +306,7 @@ if (!class_exists('mingleforum'))
         echo "</ul>";
     }
 
+    //Needs HTML put into its own view
     function widget_wpf_control()
     {
       if (isset($_POST["wpf_submit"]))
@@ -384,6 +395,8 @@ if (!class_exists('mingleforum'))
       $this->logout_link = site_url() . "/wp-login.php?action=logout&redirect_to=" . get_permalink($this->get_pageid());
     }
 
+    //Not sure why the previous author needed two of these setup links funcs
+    //We'll need to look into this one later too
     function setup_linksdk($perm)
     {
       global $wp_rewrite;
@@ -1646,8 +1659,10 @@ if (!class_exists('mingleforum'))
       $table_usergroup2user = $table_prefix . "forum_usergroup2user";
       $table_usergroups = $table_prefix . "forum_usergroups";
       $oldops = get_option('mingleforum_options');
+      $force = false; //I'd like to create a way for users to force this if they have problems installing
 
-      if ($oldops['forum_db_version'] < $this->db_version) //Don't run all the friggin queries if db is already at latest version
+      //Only run if we need to
+      if ($oldops['forum_db_version'] < $this->db_version || $force)
       {
         $charset_collate = '';
         if ($wpdb->has_cap('collation'))
