@@ -2,16 +2,7 @@
 global $wpdb, $mingleforum;
 
 $root = dirname(dirname(dirname(dirname(__FILE__))));
-if (file_exists($root . '/wp-load.php'))
-{
-  // WP 2.6
-  require_once($root . '/wp-load.php');
-}
-else
-{
-  // before WP 2.6
-  require_once($root . '/wp-config.php');
-}
+require_once($root . '/wp-load.php');
 
 if ($mingleforum->options['forum_use_rss'])
 {
@@ -52,8 +43,7 @@ if ($mingleforum->options['forum_use_rss'])
       foreach ($posts as $post)
       {
         $catid = $mingleforum->forum_get_group_from_post($post->parent_id);
-        $groups = $wpdb->get_var("select usergroups from {$mingleforum->t_groups} where id = {$catid}");
-        $groups = maybe_unserialize($groups);
+        $groups = maybe_unserialize($wpdb->get_var("select usergroups from {$mingleforum->t_groups} where id = {$catid}"));
         if (empty($groups)) //don't show protected group posts in the feed
         {
           $link = $mingleforum->get_threadlink($post->parent_id);
