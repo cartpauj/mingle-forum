@@ -11,7 +11,7 @@ if (!class_exists('mingleforum'))
 
     function mingleforum()
     {
-      $this->options = $this->get_forum_admin_ops();
+      $this->get_forum_admin_ops();
       $this->get_set_ads_options();
       add_filter("rewrite_rules_array", array($this, "set_seo_friendly_rules"));
       add_action("admin_menu", array($this, "add_admin_pages"));
@@ -93,11 +93,10 @@ if (!class_exists('mingleforum'))
       $this->user_options = array('allow_profile' => true,
           'signature' => "");
       // Get the options
-      $this->opt = get_option('mingleforum_options');
-      if ($this->opt['forum_skin'] == "Default")
-        $this->skin_url = OLDSKINURL . $this->opt['forum_skin'];
+      if ($this->options['forum_skin'] == "Default")
+        $this->skin_url = OLDSKINURL . $this->options['forum_skin'];
       else
-        $this->skin_url = SKINURL . $this->opt['forum_skin'];
+        $this->skin_url = SKINURL . $this->options['forum_skin'];
     }
 
     function get_set_ads_options()
@@ -129,7 +128,7 @@ if (!class_exists('mingleforum'))
 
     function get_forum_admin_ops()
     {
-      $this->options = array('wp_posts_to_forum' => false,
+      $default_ops = array('wp_posts_to_forum' => false,
           'forum_posts_per_page' => 10,
           'forum_threads_per_page' => 20,
           'forum_require_registration' => true,
@@ -164,16 +163,11 @@ if (!class_exists('mingleforum'))
           'forum_login_url' => '',
           'forum_signup_url' => '',
           'forum_logout_redirect_url' => '');
-      $initOps = get_option('mingleforum_options');
+
+      $stored_ops = get_option('mingleforum_options', array());
 
       //Don't overwrite current opitions but allow the flexibility to add more options
-      if (!empty($initOps))
-        foreach ($initOps as $key => $option)
-          $this->options[$key] = $option;
-
-      update_option('mingleforum_options', $this->options);
-
-      return $this->options;
+      $this->options = array_merge($default_ops, $stored_ops);
     }
 
     // Add admin pages
@@ -250,7 +244,6 @@ if (!class_exists('mingleforum'))
       $toShow = 0;
       $unique = array();
       $this->setup_links();
-      $this->get_forum_admin_ops();
       $widget_option = get_option("wpf_widget");
       $posts = $wpdb->get_results("SELECT * FROM {$this->t_posts} ORDER BY `date` DESC LIMIT 50");
 
@@ -263,8 +256,8 @@ if (!class_exists('mingleforum'))
         {
           //$user = get_userdata($post->author_id);
           if ($this->have_access($this->forum_get_group_from_post($post->parent_id)))
-            echo "<li style='list-style: none outside none;' ><div style='float:left;   margin:10px 13px 0px 0;'>" . $this->get_avatar($post->author_id, 35) . "</div><div style='margin:0px 0px 12px 0; line-height: 17px;'><div style='margin: 0px 0px 0px 50px;'><a href='" . $this->get_paged_threadlink($post->parent_id, '#postid-' . $post->id) . "'>" . $this->output_filter($post->subject) . "</a></div><div style='margin: 0px 0px 0px 50px;'>" . __("by:", "mingleforum") . " " . $this->profile_link($post->author_id) . "</div><div style='margin: 0px 0px 0px 50px;'><small>" . $this->format_date($post->date) . "</small><a href='" . $this->get_paged_threadlink($post->parent_id, '#postid-' . $post->id) . "'><img title='" . __("Last post", "mingleforum") . "' style='vertical-align:middle; padding-left:10px; margin:0px 0 0px 0; border-radius:0px; box-shadow: none; ' src='{$this->skin_url}/images/post/lastpost.gif' /> </a></div>
-            </div></li>";
+            require(WPFPATH.'views/widget.php');
+
           $unique[] = $post->parent_id;
           $toShow += 1;
         }
@@ -539,8 +532,8 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      $start = $this->curr_page * $this->opt['forum_threads_per_page'];
-      $end = $this->opt['forum_threads_per_page'];
+      $start = $this->curr_page * $this->options['forum_threads_per_page'];
+      $end = $this->options['forum_threads_per_page'];
       if ($id)
       {
         $threads = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->t_threads} WHERE parent_id = %d AND status='open' ORDER BY last_post " . SORT_ORDER . " LIMIT %d, %d", $id, $start, $end));
@@ -566,8 +559,8 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      $start = $this->curr_page * $this->opt['forum_posts_per_page'];
-      $end = $this->opt['forum_posts_per_page'];
+      $start = $this->curr_page * $this->options['forum_posts_per_page'];
+      $end = $this->options['forum_posts_per_page'];
 
       if ($thread_id)
       {
@@ -705,6 +698,7 @@ if (!class_exists('mingleforum'))
       global $user_ID;
       $start_time = microtime(true);
       get_currentuserinfo();
+      ob_start();
 
       $this->o = "";
 
@@ -757,7 +751,7 @@ if (!class_exists('mingleforum'))
             $this->showthread($this->check_parms($_GET['t']));
             break;
           case 'addtopic':
-            include(WPFPATH . 'wpf-thread.php');
+            include(WPFPATH . 'views/wpf-thread.php');
             break;
           case 'postreply':
             if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID, $this->get_parent_id(THREAD, (int) $_GET['thread'])))
@@ -765,14 +759,14 @@ if (!class_exists('mingleforum'))
             else
             {
               $this->current_thread = $this->check_parms($_GET['thread']);
-              include(WPFPATH . 'wpf-post.php');
+              include(WPFPATH . 'views/wpf-post.php');
             }
             break;
           case 'shownew':
             $this->show_new();
             break;
           case 'editpost':
-            include(WPFPATH . 'wpf-post.php');
+            include(WPFPATH . 'views/wpf-post.php');
             break;
           case 'profile':
             $this->view_profile();
@@ -781,7 +775,7 @@ if (!class_exists('mingleforum'))
             $this->search_results();
             break;
           case 'editprofile':
-            include(WPFPATH . 'wpf-edit-profile.php');
+            include(WPFPATH . 'views/wpf-edit-profile.php');
             break;
           case 'vforum':
             $this->vforum($this->check_parms($_GET['g']));
@@ -806,7 +800,9 @@ if (!class_exists('mingleforum'))
       $above_forum_ad = apply_filters('mf_ad_above_forum', ''); //Adsense Area -- Above Forum
       $below_forum_ad = apply_filters('mf_ad_below_forum', ''); //Adsense Area -- Below Forum
 
-      return $above_forum_ad . "<div id='wpf-wrapper'>" . $this->trail() . $this->o . "</div>" . $below_forum_ad;
+      echo $above_forum_ad . "<div id='wpf-wrapper'>" . $this->trail() . $this->o . "</div>" . $below_forum_ad;
+      
+      return ob_get_clean();
     }
 
     function get_version()
@@ -839,8 +835,13 @@ if (!class_exists('mingleforum'))
 
       if (!empty($post))
       {
+        ob_start();
+        
         $link = $this->get_paged_threadlink($thread_id);
-        return "<div class='poster_img_avatar' >" . $this->get_avatar($post->author_id, 25) . "</div><div class='wpf-item-poster'><div class='wpf-item-poster-li'>" . __("by", "mingleforum") . " " . $this->profile_link($post->author_id) . "</div><div class='wpf-item-poster-li'><a href='" . $link . "'>" . date_i18n($this->opt['forum_date_format'], strtotime($post->date)) . "<img title='" . __("Last post", "mingleforum") . "' style='vertical-align:middle;padding-left:5px;margin:-3px 0 0px 0;' src='{$this->skin_url}/images/post/lastpost.gif' /> </a></div>";
+        
+        require(WPFPATH.'views/lastpost.php');
+        
+        return ob_get_clean();
       }
       else
         return false;
@@ -852,7 +853,7 @@ if (!class_exists('mingleforum'))
 
       $post = $wpdb->get_row("SELECT `date`, author_id, id FROM {$this->t_posts} ORDER BY `date` DESC LIMIT 1");
 
-      return __("Latest Post by", "mingleforum") . " <span class='img-avatar-forumstats' >" . $this->get_avatar($post->author_id, 15) . "</span>" . $this->profile_link($post->author_id) . "<br />" . __("on", "mingleforum") . " " . date_i18n($this->opt['forum_date_format'], strtotime($post->date));
+      return __("Latest Post by", "mingleforum") . " <span class='img-avatar-forumstats' >" . $this->get_avatar($post->author_id, 15) . "</span>" . $this->profile_link($post->author_id) . "<br/>" . __("on", "mingleforum") . " " . date_i18n($this->options['forum_date_format'], strtotime($post->date));
     }
 
     function showforum($forum_id)
@@ -868,14 +869,12 @@ if (!class_exists('mingleforum'))
       if (!empty($forum_id))
       {
         $out = "";
-        $del = "";
         $threads = $this->get_threads($forum_id);
         $sticky_threads = $this->get_sticky_threads($forum_id);
-        $t = $sticky_threads + $threads;
         $this->current_group = $this->get_parent_id(FORUM, $forum_id);
         $this->current_forum = $forum_id;
-        $this->forum_subscribe();
 
+        $this->forum_subscribe();
         if ($this->is_forum_subscribed())
           $this->notify_msg = __("Remove this Forum from your email notifications?", "mingleforum");
         else
@@ -887,121 +886,42 @@ if (!class_exists('mingleforum'))
           $out .= $this->getNewForumID();
         else
         {
+          ob_start();
+
           if (!$this->have_access($this->current_group))
             wp_die(__("Sorry, but you don't have access to this forum", "mingleforum"));
 
-          $out .= "<table cellpadding='0' cellspacing='0'>
-                    <tr class='pop_menus'>
-                      <td width='100%'>" . $this->thread_pageing($forum_id) . "</td>
-                      <td>" . $this->forum_menu($this->current_group) . "</td>
-                    </tr>
-                  </table>";
-          $out .= "<div class='wpf'><table class='wpf-table' id='topicTable'>
-                    <tr>
-                      <th width='7%' class='forumIcon'>" . __("Status", "mingleforum") . "</th>
-                      <th>" . __("Topic Title", "mingleforum") . "</th>
-                      <th width='16%' nowrap='nowrap'>" . __("Started by", "mingleforum") . "</th>
-                      <th width='7%'>" . __("Replies", "mingleforum") . "</th>
-                      <th width='7%'>" . __("Views", "mingleforum") . "</th>
-                      <th width='24%'>" . __("Last post", "mingleforum") . "</th>
-                    </tr>";
-          /*           * ************************************************************************************ */
-          if ($sticky_threads)
-          {
-            $out .= "<tr><th class='wpf-bright' colspan='6'>" . __("Sticky Topics", "mingleforum") . "</th></tr>";
-            foreach ($sticky_threads as $thread)
-            {
-              if ($this->is_moderator($user_ID, $this->current_forum))
-              {
-                if ($this->options['forum_use_seo_friendly_urls'])
-                  $strCommands = "<a href='" . $this->forum_link . $this->current_forum . "&getNewForumID&topic={$thread->id}'>" . __("Move Topic", "mingleforum") . "</a> | <a href='" . $this->forum_link . $this->current_forum . "&delete_topic&topic={$thread->id}' onclick='return wpf_confirm();'>" . __("Delete Topic", "mingleforum") . "</a>";
-                else
-                  $strCommands = "<a href='" . $this->get_forumlink($this->current_forum) . "&getNewForumID&topic={$thread->id}'>" . __("Move Topic", "mingleforum") . "</a> | <a href='" . $this->get_forumlink($this->current_forum) . "&delete_topic&topic={$thread->id}' onclick='return wpf_confirm();'>" . __("Delete Topic", "mingleforum") . "</a>";
+          require(WPFPATH.'views/showforum.php');
 
-                $del = "<small><br />({$strCommands})</small>";
-              }
-
-              $image = "";
-
-              if ($user_ID)
-              {
-                $poster_id = $this->last_posterid_thread($thread->id); // date and author_id
-
-                if ($user_ID != $poster_id)
-                {
-                  $lp = strtotime($this->last_poster_in_thread($thread->id)); // date
-                  $lv = strtotime($this->last_visit());
-
-                  if ($lp > $lv)
-                    $image = "<img src='{$this->skin_url}/images/new.gif' alt='" . __("New posts since last visit", "mingleforum") . "'>";
-                }
-              }
-
-              $sticky_img = "<img alt='' src='{$this->skin_url}/images/topic/normal_post_sticky.gif'/>";
-              $out .= "<tr>
-                        <td class='forumIcon' align='center'>{$sticky_img}</td>
-                        <td class='wpf-alt sticky wpf-topic-title'><span class='topicTitle'><a href='" . $this->get_threadlink($thread->id) . "'>" . $this->output_filter($thread->subject) . "</a>&nbsp;&nbsp;{$image}</span> {$del}
-                        </td>
-                        <td class='img-avatar-forumstats' align='center'>" . $this->get_avatar($thread->starter, 15) . "" . $this->profile_link($thread->starter) . "</td>
-                        <td class='wpf-alt forumstats' align='center'><span class='icon-replies'>" . ($this->num_posts($thread->id) - 1) . "<span></td>
-                        <td class='wpf-alt forumstats' align='center'><span class='icon-views'>" . $thread->views . "</span></td>
-                        <td><small>" . $this->get_lastpost($thread->id) . "</small></td>
-                      </tr>";
-            }
-
-            $out .= "<tr><th class='wpf-bright forumTopics' colspan='6'>" . __("Forum Topics", "mingleforum") . "</th></tr>";
-          }
-
-          $alt = "alt even";
-          foreach ($threads as $thread)
-          {
-            $alt = ($alt == "alt even") ? "odd" : "alt even";
-            if ($user_ID)
-            {
-              $image = "";
-              $poster_id = $this->last_posterid_thread($thread->id); // date and author_id
-
-              if ($user_ID != $poster_id)
-              {
-                $lp = strtotime($this->last_poster_in_thread($thread->id)); // date
-                $lv = strtotime($this->last_visit());
-
-                if ($lp > $lv)
-                  $image = "<img src='{$this->skin_url}/images/new.gif' alt='" . __("New posts since last visit", "mingleforum") . "'>";
-              }
-            }
-            if ($this->is_moderator($user_ID, $this->current_forum))
-            {
-              if ($this->options['forum_use_seo_friendly_urls'])
-                $strCommands = "<a href='" . $this->forum_link . $this->current_forum . "&getNewForumID&topic={$thread->id}'>" . __("Move Topic", "mingleforum") . "</a> | <a href='" . $this->forum_link . $this->current_forum . "&delete_topic&topic={$thread->id}' onclick='return wpf_confirm();'>" . __("Delete Topic", "mingleforum") . "</a>";
-              else
-                $strCommands = "<a href='" . $this->get_forumlink($this->current_forum) . "&getNewForumID&topic={$thread->id}'>" . __("Move Topic", "mingleforum") . "</a> | <a href='" . $this->get_forumlink($this->current_forum) . "&delete_topic&topic={$thread->id}' onclick='return wpf_confirm();'>" . __("Delete Topic", "mingleforum") . "</a>";
-              $del = "<small class='adminActions'><br/>({$strCommands})</small>";
-            }
-
-            $out .= "<tr class='{$alt}'>
-                      <td class='forumIcon' align='center'>" . $this->get_topic_image($thread->id) . "</td>
-                      <td class='wpf-alt'><span class='topicTitle'><a href='" . $this->get_threadlink($thread->id) . "'>" . $this->output_filter($thread->subject) . "</a>&nbsp;&nbsp;{$image}</span> {$del}
-                      </td>
-                      <td class='img-avatar-forumstats' align='center'>" . $this->get_avatar($thread->starter, 15) . "" . $this->profile_link($thread->starter) . "</td>
-                      <td class='wpf-alt forumstats' align='center'><span class='icon-replies'>" . ( $this->num_posts($thread->id) - 1 ) . "</span></td>
-                      <td class='wpf-alt forumstats' align='center'><span class='icon-views'>" . $thread->views . "</span></td>
-                      <td><small>" . $this->get_lastpost($thread->id) . "</small></td>
-                    </tr>";
-          }
-
-          $out .= "</table></div>";
-          $out .= "<table cellpadding='0' cellspacing='0'>
-                    <tr class='pop_menus'>
-                      <td width='100%'>" . $this->thread_pageing($forum_id) . "</td>
-                      <td>" . $this->forum_menu($this->current_group, "bottom") . "</td>
-                    </tr>
-                  </table>";
+          $out .= ob_get_clean();
         }
 
         $this->o .= $out;
         $this->footer();
       }
+    }
+
+    function maybe_get_unread_image($thread_id)
+    {
+      global $user_ID;
+      
+      $image = "";
+      
+      if ($user_ID)
+      {
+        $poster_id = $this->last_posterid_thread($thread_id); // date and author_id
+
+        if ($user_ID != $poster_id)
+        {
+          $lp = strtotime($this->last_poster_in_thread($thread_id)); // date
+          $lv = strtotime($this->last_visit());
+
+          if ($lp > $lv)
+            $image = '<img src="' . $this->skin_url . '/images/new.gif" alt="' . __("New posts since your last visit", "mingleforum") . '">';
+        }
+      }
+      
+      return $image;
     }
 
     function get_subject($id)
@@ -1082,11 +1002,11 @@ if (!class_exists('mingleforum'))
                     <tr><th class='wpf-bright author' style='text-align: center;' >" . $this->profile_link($post->author_id, true);
           $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.gif' alt='" . __("Post", "mingleforum") . "' style='width:16px; padding-right:5px; margin:2px 0 0 0; '/>";
 
-          $out .= "<small>" . date_i18n($this->opt['forum_date_format'], strtotime($post->date)) . "</small><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr class='{$class}'><td class='autorpostbox' valign='top' width='125'>";
+          $out .= "<small>" . date_i18n($this->options['forum_date_format'], strtotime($post->date)) . "</small><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr class='{$class}'><td class='autorpostbox' valign='top' width='125'>";
 
           $out .= "<div class='wpf-small'>" . $this->get_send_message_link($post->author_id);
 
-          if ($this->opt["forum_use_gravatar"])
+          if ($this->options["forum_use_gravatar"])
             $out .= $this->get_avatar($post->author_id);
 
           $out .= "<div class='hr'></div>";
@@ -1222,7 +1142,7 @@ if (!class_exists('mingleforum'))
     function format_date($date)
     {
       if ($date)
-        return date_i18n($this->opt['forum_date_format'], strtotime($date));
+        return date_i18n($this->options['forum_date_format'], strtotime($date));
       else
         return false;
     }
@@ -1499,7 +1419,7 @@ if (!class_exists('mingleforum'))
       if (!$date)
         return "<small>" . __("No topics yet", "mingleforum") . "</small>";
 
-      $d = date_i18n($this->opt['forum_date_format'], strtotime($date->date));
+      $d = date_i18n($this->options['forum_date_format'], strtotime($date->date));
 
       return "<div class='wpf-item-avatar'><span>" . $this->get_avatar($date->author_id, 35) . "</span></div><div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "mingleforum") . "</strong> " . __("by", "mingleforum") . " " . $this->profile_link($date->author_id) . "</small></div>
       <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-$date->id'>" . $this->get_postname($date->id) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}" . "<a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'><img title='" . __("Last post", "mingleforum") . "' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.gif' /></a></small></div></div>";
@@ -2117,14 +2037,14 @@ if (!class_exists('mingleforum'))
       else
       {
         $mePosts = $this->get_userposts_num($user_id);
-        if ($mePosts < $this->opt['level_one'])
-          return __($this->opt['level_newb_name'], "mingleforum");
-        if ($mePosts < $this->opt['level_two'])
-          return __($this->opt['level_one_name'], "mingleforum");
-        if ($mePosts < $this->opt['level_three'])
-          return __($this->opt['level_two_name'], "mingleforum");
+        if ($mePosts < $this->options['level_one'])
+          return __($this->options['level_newb_name'], "mingleforum");
+        if ($mePosts < $this->options['level_two'])
+          return __($this->options['level_one_name'], "mingleforum");
+        if ($mePosts < $this->options['level_three'])
+          return __($this->options['level_two_name'], "mingleforum");
         else
-          return __($this->opt['level_three_name'], "mingleforum");
+          return __($this->options['level_three_name'], "mingleforum");
       }
     }
 
@@ -2264,7 +2184,7 @@ if (!class_exists('mingleforum'))
 
     function get_avatar($user_id, $size = 60)
     {
-      if ($this->opt['forum_use_gravatar'] == 'true')
+      if ($this->options['forum_use_gravatar'] == 'true')
         return get_avatar($user_id, $size);
       else
         return "";
@@ -2305,7 +2225,7 @@ if (!class_exists('mingleforum'))
 
       $out = __("Pages:", "mingleforum");
       $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->t_posts} WHERE parent_id = %d", $thread_id));
-      $num_pages = ceil($count / $this->opt['forum_posts_per_page']);
+      $num_pages = ceil($count / $this->options['forum_posts_per_page']);
 
       if ($num_pages <= 6)
       {
@@ -2343,7 +2263,7 @@ if (!class_exists('mingleforum'))
 
       $out = __("Pages:", "mingleforum");
       $count = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM {$this->t_threads} WHERE parent_id = %d AND `status` <> 'sticky'", $forum_id));
-      $num_pages = ceil($count / $this->opt['forum_threads_per_page']);
+      $num_pages = ceil($count / $this->options['forum_threads_per_page']);
 
       if ($num_pages <= 6)
       {
@@ -2658,7 +2578,7 @@ if (!class_exists('mingleforum'))
 
     function allow_unreg()
     {
-      if ($this->opt['forum_require_registration'] == false)
+      if ($this->options['forum_require_registration'] == false)
         return true;
 
       return false;
@@ -2994,29 +2914,30 @@ if (!class_exists('mingleforum'))
       if ($this->is_closed($thread))
         return "<img src='{$this->skin_url}/images/topic/closed.gif' alt='" . __("Closed topic", "mingleforum") . "' title='" . __("Closed topic", "mingleforum") . "'>";
 
-      if ($post_count < $this->opt['hot_topic'])
+      if ($post_count < $this->options['hot_topic'])
         return "<img src='{$this->skin_url}/images/topic/normal_post.gif' alt='" . __("Normal topic", "mingleforum") . "' title='" . __("Normal topic", "mingleforum") . "'>";
 
-      if ($post_count >= $this->opt['hot_topic'] && $post_count < $this->opt['veryhot_topic'])
+      if ($post_count >= $this->options['hot_topic'] && $post_count < $this->options['veryhot_topic'])
         return "<img src='{$this->skin_url}/images/topic/hot_post.gif' alt='" . __("Hot topic", "mingleforum") . "' title='" . __("Hot topic", "mingleforum") . "'>";
 
-      if ($post_count >= $this->opt['veryhot_topic'])
+      if ($post_count >= $this->options['veryhot_topic'])
         return "<img src='{$this->skin_url}/images/topic/my_hot_post.gif' alt='" . __("Very Hot topic", "mingleforum") . "' title='" . __("Very Hot topic", "mingleforum") . "'>";
     }
 
     function get_topic_image_two($thread)
     {
       $post_count = $this->num_posts($thread);
+      
       if ($this->is_closed($thread))
         return "closed.gif";
 
-      if ($post_count < $this->opt['hot_topic'])
+      if ($post_count < $this->options['hot_topic'])
         return "normal_post.gif";
 
-      if ($post_count >= $this->opt['hot_topic'] && $post_count < $this->opt['veryhot_topic'])
+      if ($post_count >= $this->options['hot_topic'] && $post_count < $this->options['veryhot_topic'])
         return "hot_post.gif";
 
-      if ($post_count >= $this->opt['veryhot_topic'])
+      if ($post_count >= $this->options['veryhot_topic'])
         return "my_hot_post.gif";
     }
 
@@ -3026,7 +2947,7 @@ if (!class_exists('mingleforum'))
 
       $out = "";
 
-      if (!$user_ID && $this->opt['forum_captcha'])
+      if (!$user_ID && $this->options['forum_captcha'])
       {
         include_once(WPFPATH . "captcha/shared.php");
         include_once(WPFPATH . "captcha/captcha_code.php");
@@ -3049,7 +2970,7 @@ if (!class_exists('mingleforum'))
       $out = "";
       $out .= apply_filters('wpwf_quick_form_guestinfo', ""); //--weaver-- show the guest info form
 
-      if (!$user_ID && $this->opt['forum_captcha'])
+      if (!$user_ID && $this->options['forum_captcha'])
       {
         include_once(WPFPATH . "captcha/shared.php");
         include_once(WPFPATH . "captcha/captcha_code.php");

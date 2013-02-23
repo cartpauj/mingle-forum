@@ -9,8 +9,8 @@ if ($user_ID || $this->allow_unreg())
     $quote_id = $this->check_parms($_GET['quote']);
     $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, `date` FROM {$this->t_posts} WHERE id = %d", $quote_id));
     $user = get_userdata($text->author_id);
-    $display_name = $this->options['forum_display_name'];
-    $q = "[quote][quotetitle]" . __("Quote from", "mingleforum") . " " . $user->$display_name . " " . __("on", "mingleforum") . " " . $mingleforum->format_date($text->date) . "[/quotetitle]\n" . $text->text . "[/quote]";
+    $display_name = (!empty($user))?$user->$this->options['forum_display_name']:__('Guest', 'mingleforum');
+    $q = "[quote][quotetitle]" . __("Quote from", "mingleforum") . " " . $display_name . " " . __("on", "mingleforum") . " " . $mingleforum->format_date($text->date) . "[/quotetitle]\n" . $text->text . "[/quote]";
   }
   if (($_GET['mingleforumaction'] == "postreply"))
   {
