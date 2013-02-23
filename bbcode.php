@@ -81,7 +81,7 @@ if (!class_exists('cartpaujBBCodeParser'))
 
       foreach ($codes[1] as $num => $code)
       {
-        $subject = str_replace("[code$num]", '<pre class="code">' . $code . '</pre>', $subject);
+        $subjectTwo = str_replace("[code$num]", '<pre class="code">' . $code . '</pre>', $subjectTwo);
       }
 
       return $subjectTwo;
