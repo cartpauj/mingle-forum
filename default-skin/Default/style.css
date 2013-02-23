@@ -311,9 +311,6 @@ table.search td {
 table.search {
   background: #ecedf3;
 }
-.topic_text p img {
-  max-width: 475px;
-}
 img.avatar {
   float: none;
   margin: 0px;
@@ -508,7 +505,7 @@ th.wpf-bright h3 {
   background: transparent;
   display: inline !important;
   height: inherit !important;
-  max-width: none !important;
+  max-width: none;
 }
 .wpf #wpf-wrapper a img,
 #wpf-wrapper img {
@@ -804,6 +801,9 @@ a.show-hide-hidden {
 #profileHeader img {
   vertical-align: middle;
   margin-right: 5px;
+}
+.topic_text img {
+  max-width: 475px;
 }
 /*------------------------------------------------*/
 /*-------------------[icomoon]--------------------*/
