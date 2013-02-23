@@ -384,11 +384,10 @@ ul#wpf-menu li,.wpf-postmeta li {
 .wpf-post-table th,
 .wpf-table td.forumtitle {
   text-align: left;
-  overflow: auto;
+  overflow: hidden;
   background: url('images/catbg.jpg') !important;
   padding: 5px;
   color: #fff;
-  overflow: auto;
   border-width: 0;
   text-shadow: none !important;
 }

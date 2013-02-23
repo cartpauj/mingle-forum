@@ -7,7 +7,6 @@ if (!class_exists('mingleforum'))
 
   class mingleforum
   {
-
     var $db_version = 1; //MANAGES DB VERSION
 
     function mingleforum()

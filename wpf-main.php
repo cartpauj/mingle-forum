@@ -4,7 +4,7 @@
   Plugin Name: Mingle Forum
   Plugin URI: http://cartpauj.com/projects/mingle-forum-plugin
   Description: Mingle Forum is growing rapidly in popularity because it is simple, reliable, lightweight and does just enough to keep things interesting. If you like this plugin please consider making a donation at http://cartpauj.com/donate/
-  Version: 1.1.0
+  Version: 1.1.0beta
   Author: Cartpauj
   Author URI: http://cartpauj.com/
   Text Domain: mingleforum

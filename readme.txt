@@ -96,7 +96,7 @@ You can try Mingle Forum out on my site:
 * Turkish
 
 == Installation ==
-* Great [setup videos here](http://cartpauj.com/projects/mingle-forum-plugin/tutorials/) by cartpauj or use Roberts [text guide here](http://minglecommunities.com/mingle-forum-install-guide/).
+* Great [setup videos here](http://cartpauj.com/projects/mingle-forum-plugin/tutorials/) by cartpauj or use Roberts [text guide here](http://minglecommunities.com/mingle-forum-install-guide/)
 * Download Mingle Forum
 * Create a new page for your forum to display on
 * Head to the page you just created for the forum, paste [mingleforum] and save, (NOTE: Its best to paste that under the HTML tab of your page editor)
@@ -120,11 +120,14 @@ n/a
 == Changelog ==
 = 1.1.0 =
 * We owe 99% of this one to ddart!!! Please send him a donation, http://ddart-bg.com/
+* Also want to give a special thanks to Xefir for his awesome contributions as well
 * Added option to define Login, Logout, and Signup URL's
 * Added more BBCode options & images (ddart)
 * Added more smilies (ddart)
+* Added prettier icons (ddart)
 * Added smilies to quick reply (ddart)
 * Added ability to shrink Categories to save space
+* Added localized dates for non-english users (xefir)
 * Changed styling of default skin (HUGE Thanks to ddart)
 * Changed profile header at top of Forum to save space
 * Changed breadcrumbs location
@@ -139,6 +142,7 @@ n/a
 * Fixed common style problems with many themes (ddart)
 * Fixed some unclosed HTML elements
 * Fixed quote link issue
+* Code refactor & cleanup (xefir)
 * Updated Bulgarian Translation (Big thanks to DDArt)
 = 1.0.34 =
 * Added ability to limit SPAM by setting a time interval users must wait between posts
