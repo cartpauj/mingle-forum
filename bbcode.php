@@ -36,9 +36,7 @@ if (!class_exists('cartpaujBBCodeParser'))
         '/\[img=(.+)\](.+)\[\/img\]/Ui',
         '/\[code\](.+)\[\/code\]/Uis',
         '/\[color=(\#[0-9a-f]{6}|[a-z]+)\](.+)\[\/color\]/Ui',
-        '/\[color=(\#[0-9a-f]{6}|[a-z]+)\](.+)\[\/color\]/Uis',
-        '/\[quote\]/Uis',
-        '/\[/quote\]/Uis'
+        '/\[color=(\#[0-9a-f]{6}|[a-z]+)\](.+)\[\/color\]/Uis'
     );
     var $replacements = array(
         '<ul>\1</ul>',
@@ -64,14 +62,18 @@ if (!class_exists('cartpaujBBCodeParser'))
         '<a href="\1"><img src="\1" alt="\2" /></a>',
         '<pre class="code">\1</pre>',
         '<span style="color: \1;">\2</span>',
-        '<div style="color: \1;">\2</div>',
-        '<blockquote>',
-        '</blockquote>'
+        '<div style="color: \1;">\2</div>'
     );
 
     function bbc2html($subject)
     {
-      return preg_replace($this->patterns, $this->replacements, $subject);
+      $subject = preg_replace($this->patterns, $this->replacements, $subject);
+
+      $findQ = array("[quote]", "[/quote]", "[QUOTE]", "[/QUOTE]");
+      $replaceQ = array("<blockquote>", "</blockquote>", "<blockquote>", "</blockquote>");
+      $subjectTwo = str_replace($findQ, $replaceQ, $subject);
+
+      return $subjectTwo;
     }
 
   }
