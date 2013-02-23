@@ -12,8 +12,7 @@ if (!class_exists('cartpaujBBCodeParser'))
   class cartpaujBBCodeParser
   {
 
-    var $patterns = array
-        (
+    var $patterns = array(
         '/\[list\](.+)\[\/list\]/Uis',
         '/\[\*\](.+)\\n/Ui',
         '/\[spoil\](.+)\[\/spoil\]/Uis',
@@ -37,10 +36,11 @@ if (!class_exists('cartpaujBBCodeParser'))
         '/\[img=(.+)\](.+)\[\/img\]/Ui',
         '/\[code\](.+)\[\/code\]/Uis',
         '/\[color=(\#[0-9a-f]{6}|[a-z]+)\](.+)\[\/color\]/Ui',
-        '/\[color=(\#[0-9a-f]{6}|[a-z]+)\](.+)\[\/color\]/Uis'
+        '/\[color=(\#[0-9a-f]{6}|[a-z]+)\](.+)\[\/color\]/Uis',
+        '/\[quote\]/Uis',
+        '/\[/quote\]/Uis'
     );
-    var $replacements = array
-        (
+    var $replacements = array(
         '<ul>\1</ul>',
         '<li>\1</li>',
         '<span style="color:transparent;">\1</span>',
@@ -64,18 +64,14 @@ if (!class_exists('cartpaujBBCodeParser'))
         '<a href="\1"><img src="\1" alt="\2" /></a>',
         '<pre class="code">\1</pre>',
         '<span style="color: \1;">\2</span>',
-        '<div style="color: \1;">\2</div>'
+        '<div style="color: \1;">\2</div>',
+        '<blockquote>',
+        '</blockquote>'
     );
 
     function bbc2html($subject)
     {
-      $subject = preg_replace($this->patterns, $this->replacements, $subject);
-
-      $findQ = array("[quote]", "[/quote]", "[QUOTE]", "[/QUOTE]");
-      $replaceQ = array("<blockquote>", "</blockquote>", "<blockquote>", "</blockquote>");
-      $subjectTwo = str_replace($findQ, $replaceQ, $subject);
-
-      return $subjectTwo;
+      return preg_replace($this->patterns, $this->replacements, $subject);
     }
 
   }
