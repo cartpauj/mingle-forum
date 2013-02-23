@@ -1645,7 +1645,8 @@ if (!class_exists('mingleforum'))
 
     function wp_forum_install()
     {
-      global $table_prefix, $wpdb;
+      global $wpdb;
+      $table_prefix = $wpdb->prefix;
 
       $table_threads = $table_prefix . "forum_threads";
       $table_posts = $table_prefix . "forum_posts";
@@ -1653,11 +1654,10 @@ if (!class_exists('mingleforum'))
       $table_groups = $table_prefix . "forum_groups";
       $table_usergroup2user = $table_prefix . "forum_usergroup2user";
       $table_usergroups = $table_prefix . "forum_usergroups";
-      $oldops = get_option('mingleforum_options');
       $force = false; //I'd like to create a way for users to force this if they have problems installing
 
       //Only run if we need to
-      if ($oldops['forum_db_version'] < $this->db_version || $force)
+      if ($this->options['forum_db_version'] < $this->db_version || $force)
       {
         $charset_collate = '';
         if ($wpdb->has_cap('collation'))
@@ -1779,8 +1779,8 @@ if (!class_exists('mingleforum'))
         if (!file_exists($target_path))
           @mkdir($target_path . "/");
 
-        $oldops['forum_db_version'] = 1;
-        update_option('mingleforum_options', $oldops);
+        $this->options['forum_db_version'] = $this->db_version;
+        update_option('mingleforum_options', $this->options);
       }
       $this->convert_moderators();
     }
@@ -3145,9 +3145,10 @@ if (!class_exists('mingleforum'))
                   MnglUser::user_exists_and_visible($mngl_user->id) and
                   $mngl_friend->is_friend($mngl_user->id, $id)) or current_user_can('administrator') or is_super_admin($user_ID))
           {
-            $param_char = MnglAppController::get_param_delimiter_char();
+            $permalink = get_permalink($mngl_options->inbox_page_id);
+            $param_char = MnglAppController::get_param_delimiter_char($permalink);
 
-            return "<a href='" . get_permalink($mngl_options->inbox_page_id) . $param_char . "u=" . $id . "'>" . __("Send Message", "mingleforum") . "</a><br/>";
+            return "<a href='" . $permalink . $param_char . "u=" . $id . "'>" . __("Send Message", "mingleforum") . "</a><br/>";
           }
         }
       }
