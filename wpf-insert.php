@@ -164,6 +164,7 @@ if (isset($_POST['add_topic_submit']))
   $subject = str_replace($myReplaceSub, "", $mingleforum->input_filter($_POST['add_topic_subject']));
   $content = $mingleforum->input_filter($_POST['message']);
   $forum_id = $mingleforum->check_parms($_POST['add_topic_forumid']);
+  $msg = '';
 
   if ($subject == "")
   {
@@ -243,6 +244,7 @@ if (isset($_POST['add_post_submit']))
   $subject = str_replace($myReplaceSub, "", $mingleforum->input_filter($_POST['add_post_subject']));
   $content = $mingleforum->input_filter($_POST['message']);
   $thread = $mingleforum->check_parms($_POST['add_post_forumid']);
+  $msg = '';
 
   //GET PROPER Mngl ID
   $MngBID = $wpdb->get_var($wpdb->prepare("SELECT mngl_id FROM {$mingleforum->t_threads} WHERE id = %d", $thread));
@@ -313,6 +315,7 @@ if (isset($_POST['edit_post_submit']))
   $content = $mingleforum->input_filter($_POST['message']);
   $thread = $mingleforum->check_parms($_POST['thread_id']);
   $edit_post_id = $_POST['edit_post_id'];
+  $msg = '';
 
   if ($subject == "")
   {
