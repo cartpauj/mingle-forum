@@ -1,6 +1,6 @@
 <table cellpadding="0" cellspacing="0">
   <tr class="pop_menus">
-    <td width="100%"><?php echo $this->thread_pageing($forum_id);?></td>
+    <td width="100%"><?php echo $this->thread_pageing($forum_id); ?></td>
     <td><?php echo $this->forum_menu($this->current_group); ?></td>
   </tr>
 </table>
@@ -15,7 +15,7 @@
       <th width="7%"><?php _e("Views", "mingleforum"); ?></th>
       <th width="24%"><?php _e("Last post", "mingleforum"); ?></th>
     </tr>
-    
+
     <?php if ($sticky_threads): ?>
       <tr>
         <th class="wpf-bright" colspan="6">
@@ -52,11 +52,11 @@
             <?php echo $this->get_avatar($thread->starter, 15) . '&nbsp;' . $this->profile_link($thread->starter); ?>
           </td>
           <td class="wpf-alt forumstats" align="center">
-            <span class="icon-replies"><?php echo (int)($this->num_posts($thread->id) - 1); ?></span>
+            <span class="icon-replies"><?php echo (int) ($this->num_posts($thread->id) - 1); ?></span>
           </td>
           <td class="wpf-alt forumstats" align="center">
             <span class="icon-views">
-              <?php echo (int)$thread->views; ?>
+              <?php echo (int) $thread->views; ?>
             </span>
           </td>
           <td><small><?php echo $this->get_lastpost($thread->id); ?></small></td>
@@ -71,7 +71,10 @@
     <?php endif; //END STICKIES ?>
 
     <?php foreach ($threads as $thread): ?>
-      <tr class="<?php $alt = 'alt even'; echo ($alt == 'alt even') ? 'odd' : 'alt even'; ?>">
+      <tr class="<?php
+      $alt = 'alt even';
+      echo ($alt == 'alt even') ? 'odd' : 'alt even';
+      ?>">
         <td class="forumIcon" align="center"><?php echo $this->get_topic_image($thread->id); ?></td>
         <td class="wpf-alt">
           <span class="topicTitle">
@@ -98,12 +101,12 @@
         </td>
         <td class="wpf-alt forumstats" align="center">
           <span class="icon-replies">
-            <?php echo (int)($this->num_posts($thread->id) - 1); ?>
+            <?php echo (int) ($this->num_posts($thread->id) - 1); ?>
           </span>
         </td>
         <td class="wpf-alt forumstats" align="center">
           <span class="icon-views">
-            <?php echo (int)$thread->views; ?>
+            <?php echo (int) $thread->views; ?>
           </span>
         </td>
         <td><small><?php echo $this->get_lastpost($thread->id); ?></small></td>

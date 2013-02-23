@@ -1205,10 +1205,12 @@ class mingleforumadmin
           <tbody>
             <tr>
               <td>
-                <input type="checkbox" name="mf_ad_above_forum_on" value="true" <?php if ($mingleforum->ads_options['mf_ad_above_forum_on'])
-    {
-      echo 'checked="checked"';
-    } ?> />
+                <input type="checkbox" name="mf_ad_above_forum_on" value="true" <?php
+                if ($mingleforum->ads_options['mf_ad_above_forum_on'])
+                {
+                  echo 'checked="checked"';
+                }
+                ?> />
                 <strong><?php echo __('Enable Area Above Forum', 'mingleforum'); ?></strong><br/>
                 <textarea name="mf_ad_above_forum_text" rows="10" cols="60"><?php echo stripslashes($mingleforum->ads_options['mf_ad_above_forum']) ?></textarea><br/>
                 <small><strong><?php echo __('css-value:', 'mingleforum'); ?></strong> div.mf-ad-above-forum</small>
@@ -1216,10 +1218,12 @@ class mingleforumadmin
             </tr>
             <tr>
               <td>
-                <input type="checkbox" name="mf_ad_below_forum_on" value="true" <?php if ($mingleforum->ads_options['mf_ad_below_forum_on'])
-    {
-      echo 'checked="checked"';
-    } ?> />
+                <input type="checkbox" name="mf_ad_below_forum_on" value="true" <?php
+                if ($mingleforum->ads_options['mf_ad_below_forum_on'])
+                {
+                  echo 'checked="checked"';
+                }
+                ?> />
                 <strong><?php echo __('Enable Area Below Forum', 'mingleforum'); ?></strong><br/>
                 <textarea name="mf_ad_below_forum_text" rows="10" cols="60"><?php echo stripslashes($mingleforum->ads_options['mf_ad_below_forum']) ?></textarea><br/>
                 <small><strong><?php echo __('css-value:', 'mingleforum'); ?></strong> div.mf-ad-below-forum</small>
@@ -1227,10 +1231,12 @@ class mingleforumadmin
             </tr>
             <tr>
               <td>
-                <input type="checkbox" name="mf_ad_above_branding_on" value="true" <?php if ($mingleforum->ads_options['mf_ad_above_branding_on'])
-    {
-      echo 'checked="checked"';
-    } ?> />
+                <input type="checkbox" name="mf_ad_above_branding_on" value="true" <?php
+                if ($mingleforum->ads_options['mf_ad_above_branding_on'])
+                {
+                  echo 'checked="checked"';
+                }
+                ?> />
                 <strong><?php echo __('Enable Area Above Branding', 'mingleforum'); ?></strong><br/>
                 <textarea name="mf_ad_above_branding_text" rows="10" cols="60"><?php echo stripslashes($mingleforum->ads_options['mf_ad_above_branding']) ?></textarea><br/>
                 <small><strong><?php echo __('css-value:', 'mingleforum'); ?></strong> div.mf-ad-above-branding</small>
@@ -1238,10 +1244,12 @@ class mingleforumadmin
             </tr>
             <tr>
               <td>
-                <input type="checkbox" name="mf_ad_above_info_center_on" value="true" <?php if ($mingleforum->ads_options['mf_ad_above_info_center_on'])
-    {
-      echo 'checked="checked"';
-    } ?> />
+                <input type="checkbox" name="mf_ad_above_info_center_on" value="true" <?php
+                if ($mingleforum->ads_options['mf_ad_above_info_center_on'])
+                {
+                  echo 'checked="checked"';
+                }
+                ?> />
                 <strong><?php echo __('Enable Area Above Info Center', 'mingleforum'); ?></strong><br/>
                 <textarea name="mf_ad_above_info_center_text" rows="10" cols="60"><?php echo stripslashes($mingleforum->ads_options['mf_ad_above_info_center']) ?></textarea><br/>
                 <small><strong><?php echo __('css-value:', 'mingleforum'); ?></strong> div.mf-ad-above-info-center</small>
@@ -1249,10 +1257,12 @@ class mingleforumadmin
             </tr>
             <tr>
               <td>
-                <input type="checkbox" name="mf_ad_above_breadcrumbs_on" value="true" <?php if ($mingleforum->ads_options['mf_ad_above_breadcrumbs_on'])
-    {
-      echo 'checked="checked"';
-    } ?> />
+                <input type="checkbox" name="mf_ad_above_breadcrumbs_on" value="true" <?php
+                if ($mingleforum->ads_options['mf_ad_above_breadcrumbs_on'])
+                {
+                  echo 'checked="checked"';
+                }
+                ?> />
                 <strong><?php echo __('Enable Area Above Breadcrumbs', 'mingleforum'); ?></strong><br/>
                 <textarea name="mf_ad_above_breadcrumbs_text" rows="10" cols="60"><?php echo stripslashes($mingleforum->ads_options['mf_ad_above_breadcrumbs']) ?></textarea><br/>
                 <small><strong><?php echo __('css-value:', 'mingleforum'); ?></strong> div.mf-ad-above-breadcrumbs</small>
@@ -1260,10 +1270,12 @@ class mingleforumadmin
             </tr>
             <tr>
               <td>
-                <input type="checkbox" name="mf_ad_above_quick_reply_on" value="true" <?php if ($mingleforum->ads_options['mf_ad_above_quick_reply_on'])
-    {
-      echo 'checked="checked"';
-    } ?> />
+                <input type="checkbox" name="mf_ad_above_quick_reply_on" value="true" <?php
+                if ($mingleforum->ads_options['mf_ad_above_quick_reply_on'])
+                {
+                  echo 'checked="checked"';
+                }
+                ?> />
                 <strong><?php echo __('Enable Area Above Quick Reply Form', 'mingleforum'); ?></strong><br/>
                 <textarea name="mf_ad_above_quick_reply_text" rows="10" cols="60"><?php echo stripslashes($mingleforum->ads_options['mf_ad_above_quick_reply']) ?></textarea><br/>
                 <small><strong><?php echo __('css-value:', 'mingleforum'); ?></strong> div.mf-ad-above-quick-reply</small>
@@ -1271,10 +1283,12 @@ class mingleforumadmin
             </tr>
             <tr>
               <td>
-                <input type="checkbox" name="mf_ad_below_first_post_on" value="true" <?php if ($mingleforum->ads_options['mf_ad_below_first_post_on'])
-    {
-      echo 'checked="checked"';
-    } ?> />
+                <input type="checkbox" name="mf_ad_below_first_post_on" value="true" <?php
+                if ($mingleforum->ads_options['mf_ad_below_first_post_on'])
+                {
+                  echo 'checked="checked"';
+                }
+                ?> />
                 <strong><?php echo __('Enable Area Below First Post', 'mingleforum'); ?></strong><br/>
                 <textarea name="mf_ad_below_first_post_text" rows="10" cols="60"><?php echo stripslashes($mingleforum->ads_options['mf_ad_below_first_post']) ?></textarea><br/>
                 <small><strong><?php echo __('css-value:', 'mingleforum'); ?></strong> div.mf-ad-below-first-post</small>

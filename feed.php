@@ -42,8 +42,10 @@ if ($mingleforum->options['forum_use_rss'])
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title><?php echo $title; ?></title>
-      <description><?php bloginfo('name');
-    echo " $description"; ?></description>
+      <description><?php
+        bloginfo('name');
+        echo " $description";
+        ?></description>
       <link><?php echo $link; ?></link>
       <language><?php bloginfo('language'); ?></language>
       <?php
@@ -69,7 +71,7 @@ if ($mingleforum->options['forum_use_rss'])
       }
       echo "</channel>
 	</rss>";
-    }
-    else
-      echo "<html><body>" . __("Feeds are disabled", "mingleforum") . "</body></html>";
-    ?>
+}
+else
+  echo "<html><body>" . __("Feeds are disabled", "mingleforum") . "</body></html>";
+?>

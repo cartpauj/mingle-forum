@@ -7,6 +7,7 @@ if (!class_exists('mingleforum'))
 
   class mingleforum
   {
+
     var $db_version = 1; //MANAGES DB VERSION
 
     function mingleforum()
@@ -215,7 +216,7 @@ if (!class_exists('mingleforum'))
         <?php endif; ?>
 
         <link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
-      <?php
+        <?php
       endif;
     }
 
@@ -256,7 +257,7 @@ if (!class_exists('mingleforum'))
         {
           //$user = get_userdata($post->author_id);
           if ($this->have_access($this->forum_get_group_from_post($post->parent_id)))
-            require(WPFPATH.'views/widget.php');
+            require(WPFPATH . 'views/widget.php');
 
           $unique[] = $post->parent_id;
           $toShow += 1;
@@ -331,14 +332,14 @@ if (!class_exists('mingleforum'))
         ?>
         <script type="text/javascript" >
         <?php echo "var skinurl = '{$this->skin_url}';"; ?>
-            function notify() {
+          function notify() {
 
-              var answer = confirm ('<?php echo $this->notify_msg; ?>');
-              if(!answer)
-                return false;
-              else
-                return true;
-            }
+            var answer = confirm('<?php echo $this->notify_msg; ?>');
+            if (!answer)
+              return false;
+            else
+              return true;
+          }
         </script>
         <?php
       }
@@ -801,7 +802,7 @@ if (!class_exists('mingleforum'))
       $below_forum_ad = apply_filters('mf_ad_below_forum', ''); //Adsense Area -- Below Forum
 
       echo $above_forum_ad . "<div id='wpf-wrapper'>" . $this->trail() . $this->o . "</div>" . $below_forum_ad;
-      
+
       return ob_get_clean();
     }
 
@@ -836,11 +837,11 @@ if (!class_exists('mingleforum'))
       if (!empty($post))
       {
         ob_start();
-        
+
         $link = $this->get_paged_threadlink($thread_id);
-        
-        require(WPFPATH.'views/lastpost.php');
-        
+
+        require(WPFPATH . 'views/lastpost.php');
+
         return ob_get_clean();
       }
       else
@@ -891,7 +892,7 @@ if (!class_exists('mingleforum'))
           if (!$this->have_access($this->current_group))
             wp_die(__("Sorry, but you don't have access to this forum", "mingleforum"));
 
-          require(WPFPATH.'views/showforum.php');
+          require(WPFPATH . 'views/showforum.php');
 
           $out .= ob_get_clean();
         }
@@ -904,9 +905,9 @@ if (!class_exists('mingleforum'))
     function maybe_get_unread_image($thread_id)
     {
       global $user_ID;
-      
+
       $image = "";
-      
+
       if ($user_ID)
       {
         $poster_id = $this->last_posterid_thread($thread_id); // date and author_id
@@ -920,7 +921,7 @@ if (!class_exists('mingleforum'))
             $image = '<img src="' . $this->skin_url . '/images/new.gif" alt="' . __("New posts since your last visit", "mingleforum") . '">';
         }
       }
-      
+
       return $image;
     }
 
@@ -2927,7 +2928,7 @@ if (!class_exists('mingleforum'))
     function get_topic_image_two($thread)
     {
       $post_count = $this->num_posts($thread);
-      
+
       if ($this->is_closed($thread))
         return "closed.gif";
 

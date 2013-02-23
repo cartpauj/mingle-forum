@@ -101,7 +101,6 @@ if (function_exists('home_url'))
       }
       echo "</tr></table>";
     }
-
     else
       echo __("There are no User Groups", "mingleforum");
 

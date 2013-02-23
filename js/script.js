@@ -17,7 +17,7 @@ function surroundText(tag1, tag2, myarea)
     var scrollLeft = myarea.scrollLeft;
     sel = myarea.value.substring(start, end);
     var rep = tag1 + sel + tag2;
-    myarea.value =  myarea.value.substring(0,start) + rep + myarea.value.substring(end,len);
+    myarea.value = myarea.value.substring(0, start) + rep + myarea.value.substring(end, len);
     myarea.scrollTop = scrollTop;
     myarea.scrollLeft = scrollLeft;
   }
@@ -28,7 +28,7 @@ function invertAll(headerfield, checkform, mask)
 {
   for (var i = 0; i < checkform.length; i++)
   {
-    if (typeof(checkform[i].name) == "undefined" || (typeof(mask) != "undefined" && checkform[i].name.substr(0, mask.length) != mask))
+    if (typeof(checkform[i].name) === "undefined" || (typeof(mask) !== "undefined" && checkform[i].name.substr(0, mask.length) !== mask))
       continue;
 
     if (!checkform[i].disabled)
@@ -36,13 +36,13 @@ function invertAll(headerfield, checkform, mask)
   }
 }
 
-function uncheckglobal(headerfield, checkform){
+function uncheckglobal(headerfield, checkform) {
   checkform.mod_global.checked = false;
 }
 
-function wpf_confirm(){
+function wpf_confirm() {
   var answer = confirm('Are you sure you want to remove this?');
-  if(!answer)
+  if (!answer)
     return false;
   else
     return true;
@@ -54,13 +54,13 @@ function wpf_confirm(){
     $('a.wpf_click_me').click(function() {
       var id = $(this).attr('data-value');
 
-      if($(this).hasClass('show-hide-hidden')) {
-        $('tr.group-shrink-'+id).fadeIn(800);
-        $('a#shown-'+id).show();
+      if ($(this).hasClass('show-hide-hidden')) {
+        $('tr.group-shrink-' + id).fadeIn(800);
+        $('a#shown-' + id).show();
         $(this).hide();
       } else {
-        $('tr.group-shrink-'+id).fadeOut(200);
-        $('a#hidden-'+id).show();
+        $('tr.group-shrink-' + id).fadeOut(200);
+        $('a#hidden-' + id).show();
         $(this).hide();
       }
 
