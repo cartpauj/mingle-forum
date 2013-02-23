@@ -1,13 +1,14 @@
 <?php
-if(function_exists('home_url'))
+
+if (function_exists('home_url'))
 {
-/************************ wpf-add-usergroup.php ************************************/
-$image = WPFURL."images/user.png";
-echo "<div class='wrap'> <h2>";
-echo "<h2><img src='$image'> Add User Group</h2>";
-echo '<form id="usergroupadd" name="usergroupadd" method="post" action="">';
-if (function_exists('wp_nonce_field'))
-				wp_nonce_field('mingleforum-add_usergroup');
+  /*   * ********************** wpf-add-usergroup.php *********************************** */
+  $image = WPFURL . "images/user.png";
+  echo "<div class='wrap'> <h2>";
+  echo "<h2><img src='$image'> Add User Group</h2>";
+  echo '<form id="usergroupadd" name="usergroupadd" method="post" action="">';
+  if (function_exists('wp_nonce_field'))
+    wp_nonce_field('mingleforum-add_usergroup');
   echo "<table class='widefat'>
     <thead>
       <tr>
@@ -20,14 +21,14 @@ if (function_exists('wp_nonce_field'))
       <td><input type='text' value='' name='group_description' /></td>
      </tr>
       <tr class='alternate'>
-      <td colspan='2'><input class='button' type='submit' name='add_usergroup' value='".__("Save user group", "mingleforum")."'/></td>
+      <td colspan='2'><input class='button' type='submit' name='add_usergroup' value='" . __("Save user group", "mingleforum") . "'/></td>
      </tr>
   </table></form>
 </div>";
-/*********************************************************************/
+  /*   * ****************************************************************** */
 }
 else
 {
-	echo '<p>Nice TRY!</p>';
+  echo '<p>Nice TRY!</p>';
 }
 ?>
