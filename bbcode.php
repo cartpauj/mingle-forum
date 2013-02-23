@@ -43,7 +43,7 @@ if (!class_exists('cartpaujBBCodeParser'))
         (
         '<ul>\1</ul>',
         '<li>\1</li>',
-        '<span style="color:black;background:black;">\1</span>',
+        '<span style="color:transparent;">\1</span>',
         '<b>\1</b>',
         '<div class="quotetitle">\1</div>',
         '<i>\1</i>',
