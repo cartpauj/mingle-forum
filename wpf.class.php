@@ -1171,7 +1171,7 @@ if (!class_exists('mingleforum'))
 
       $this->o .= apply_filters('wpwf_new_posts', "<table>
             <tr>
-              <td><small><img alt='' align='top' src='{$this->skin_url}/images/new_some.gif' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.gif' /> " . __("No new posts", "mingleforum") . " - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->get_page) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></small></td>
+              <td><small><img alt='' align='top' src='{$this->skin_url}/images/new_some.gif' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.gif' /> " . __("No new posts", "mingleforum") . " - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></small></td>
             </tr>
           </table><br class='clear'/>");
 
