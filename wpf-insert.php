@@ -26,7 +26,7 @@ if (is_numeric($the_forum_id))
 {
   $the_cat_id = $wpdb->get_var("SELECT `parent_id` FROM {$mingleforum->t_forums} WHERE `id` = {$the_forum_id}");
 
-  if (in_array($the_cat_id, $options['forum_disabled_cats']) && !is_super_admin($user_ID) && !$mingleforum->is_moderator($user_ID, $the_forum_id) && !$mingleforum->options['allow_user_replies_locked_cats'])
+  if (isset($options['forum_disabled_cats']) && in_array($the_cat_id, $options['forum_disabled_cats']) && !is_super_admin($user_ID) && !$mingleforum->is_moderator($user_ID, $the_forum_id) && !$mingleforum->options['allow_user_replies_locked_cats'])
     wp_die(__("Oops only Administrators can post in this Forum!", "mingleforum"));
 }
 //End Check
@@ -140,9 +140,9 @@ if (!isset($_POST['edit_post_submit']))
 }
 //--weaver-- end guest form check
 
-if ($options['forum_captcha'] == true && !$user_ID)
+if (isset($options['forum_captcha']) && $options['forum_captcha'] == true && !$user_ID)
 {
-  include_once(WPFPATH . "captcha/shared.php");
+  include_once("captcha/shared.php");
   $wpf_code = wpf_str_decrypt($_POST['wpf_security_check']);
   if (($wpf_code == $_POST['wpf_security_code']) && (!empty($wpf_code)))
   {

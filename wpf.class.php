@@ -116,7 +116,7 @@ if (!class_exists('mingleforum'))
           'mf_ad_above_branding_on' => false,
           'mf_ad_above_branding' => '',
           'mf_ad_above_info_center_on' => false,
-          'mf_ad_avove_info_center' => '',
+          'mf_ad_above_info_center' => '',
           'mf_ad_above_quick_reply_on' => false,
           'mf_ad_above_quick_reply' => '',
           'mf_ad_above_breadcrumbs_on' => false,
@@ -764,7 +764,7 @@ if (!class_exists('mingleforum'))
             $this->showthread($this->check_parms($_GET['t']));
             break;
           case 'addtopic':
-            include(WPFPATH . 'views/wpf-thread.php');
+            include('views/wpf-thread.php');
             break;
           case 'postreply':
             if ($this->is_closed($_GET['thread']) && !$this->is_moderator($user_ID, $this->get_parent_id(THREAD, (int) $_GET['thread'])))
@@ -772,14 +772,14 @@ if (!class_exists('mingleforum'))
             else
             {
               $this->current_thread = $this->check_parms($_GET['thread']);
-              include(WPFPATH . 'views/wpf-post.php');
+              include('views/wpf-post.php');
             }
             break;
           case 'shownew':
             $this->show_new();
             break;
           case 'editpost':
-            include(WPFPATH . 'views/wpf-post.php');
+            include('views/wpf-post.php');
             break;
           case 'profile':
             $this->view_profile();
@@ -788,7 +788,7 @@ if (!class_exists('mingleforum'))
             $this->search_results();
             break;
           case 'editprofile':
-            include(WPFPATH . 'views/wpf-edit-profile.php');
+            include('views/wpf-edit-profile.php');
             break;
           case 'vforum':
             $this->vforum($this->check_parms($_GET['g']));
@@ -820,7 +820,7 @@ if (!class_exists('mingleforum'))
 
     function get_version()
     {
-      $plugin_data = implode('', file(ABSPATH . "wp-content/plugins/" . WPFPLUGIN . "/wpf-main.php"));
+      $plugin_data = implode('', file(WPFPATH . "wpf-main.php"));
 
       $version = '';
       if (preg_match("|Version:(.*)|i", $plugin_data, $version))
@@ -2956,8 +2956,8 @@ if (!class_exists('mingleforum'))
 
       if (!$user_ID && $this->options['forum_captcha'])
       {
-        include_once(WPFPATH . "captcha/shared.php");
-        include_once(WPFPATH . "captcha/captcha_code.php");
+        include_once("captcha/shared.php");
+        include_once("captcha/captcha_code.php");
         $wpf_captcha = new CaptchaCode();
         $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
         $out .= "	<tr>
@@ -2979,8 +2979,8 @@ if (!class_exists('mingleforum'))
 
       if (!$user_ID && $this->options['forum_captcha'])
       {
-        include_once(WPFPATH . "captcha/shared.php");
-        include_once(WPFPATH . "captcha/captcha_code.php");
+        include_once("captcha/shared.php");
+        include_once("captcha/captcha_code.php");
         $wpf_captcha = new CaptchaCode();
         $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
         $out .= "	<tr>
