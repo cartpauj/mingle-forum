@@ -101,7 +101,7 @@ if (!class_exists('mingleforum'))
     {
       global $post;
 
-      if(isset($post) && $post instanceof WP_Post && $post->ID == $this->get_pageid())
+      if (isset($post) && $post instanceof WP_Post && $post->ID == $this->get_pageid())
         remove_filter('template_redirect', 'redirect_canonical');
     }
 
@@ -1044,8 +1044,8 @@ if (!class_exists('mingleforum'))
           if ((!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)) &&
                   ($user_ID || !$this->options['forum_require_registration']))
           {
-            $out .= "<table class='wpf-post-table' width='100%' id='wpf-quick-reply'>
-            <form action='" . WPFURL . "wpf-insert.php' name='addform' method='post'>
+            $out .= "<form action='" . WPFURL . "wpf-insert.php' name='addform' method='post'>
+            <table class='wpf-post-table' width='100%' id='wpf-quick-reply'>
               <tr>
                 <td>";
             $out .= apply_filters('mf_ad_above_quick_reply', ''); //Adsense Area -- Above Quick Reply Form
@@ -1063,8 +1063,8 @@ if (!class_exists('mingleforum'))
                   <input type='hidden' name='add_topic_plink' value='" . get_permalink($this->page_id) . "'/>
                 </td>
               </tr>
-            </form>
-          </table>";
+              </table>
+            </form>";
           }
         }
         $out .= "<table cellpadding='0' cellspacing='0'>
@@ -1618,7 +1618,6 @@ if (!class_exists('mingleforum'))
       $table_usergroup2user = $table_prefix . "forum_usergroup2user";
       $table_usergroups = $table_prefix . "forum_usergroups";
       $force = false; //I'd like to create a way for users to force this if they have problems installing
-
       //Only run if we need to
       if ($this->options['forum_db_version'] < $this->db_version || $force)
       {
@@ -2971,7 +2970,7 @@ if (!class_exists('mingleforum'))
       $subject = __("Forum post - ", "mingleforum") . $subject;
       $message = __("DETAILS:", "mingleforum") . "<br/><br/>" .
               __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
-              __("Email:", "mingleforum")." ".$submitter_email."<br/>".
+              __("Email:", "mingleforum") . " " . $submitter_email . "<br/>" .
               __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
               __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
               __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
@@ -2995,7 +2994,7 @@ if (!class_exists('mingleforum'))
       $subject = __("Forum post - ", "mingleforum") . $subject;
       $message = __("DETAILS:", "mingleforum") . "<br/><br/>" .
               __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
-              __("Email:", "mingleforum")." ".$submitter_email."<br/>".
+              __("Email:", "mingleforum") . " " . $submitter_email . "<br/>" .
               __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
               __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
               __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
