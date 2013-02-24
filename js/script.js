@@ -1,11 +1,10 @@
 // Surrounds the selected text with text1 and text2.
 function surroundText(tag1, tag2, myarea)
 {
-  var sel;
   if (document.selection) //IE
   {
     myarea.focus();
-    sel = document.selection.createRange();
+    var sel = document.selection.createRange();
     sel.text = tag1 + sel.text + tag2;
   }
   else //Other Browsers
@@ -15,7 +14,7 @@ function surroundText(tag1, tag2, myarea)
     var end = myarea.selectionEnd;
     var scrollTop = myarea.scrollTop;
     var scrollLeft = myarea.scrollLeft;
-    sel = myarea.value.substring(start, end);
+    var sel = myarea.value.substring(start, end);
     var rep = tag1 + sel + tag2;
     myarea.value = myarea.value.substring(0, start) + rep + myarea.value.substring(end, len);
     myarea.scrollTop = scrollTop;

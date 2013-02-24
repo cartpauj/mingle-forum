@@ -4,7 +4,7 @@ global $wpdb, $table_prefix, $mingleforum;
 $users = $mingleforum->get_users();
 $groups = $mingleforum->get_groups();
 $image = WPFURL . "images/user.png";
-echo "<h2>" . __("<img src='$image'> Add moderator", "mingleforum") . "</h2>
+echo "<h2><img src='$image' alt=''>" . __("Add moderator", "mingleforum") . "</h2>
 <form name='add_mod_form' method='post' action='admin.php?page=mfmods&mingleforum_action=moderators'>
 <table class='widefat'>
 <thead>

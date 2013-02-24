@@ -8,9 +8,10 @@ if ($mingleforum->options['forum_use_rss'])
 {
   $mingleforum->setup_links();
 
-  $topic = 'all';
   if (is_numeric($_GET['topic'])) //is_numeric will prevent SQL injections
     $topic = $_GET['topic'];
+  else
+    $topic = 'all';
 
   if ($topic == "all")
   {

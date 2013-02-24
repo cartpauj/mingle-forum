@@ -898,7 +898,7 @@ if (!class_exists('mingleforum'))
                   <table class='wpf-table' width='100%'>
                     <tr>
                       <th width='135' style='text-align: center;'><span aria-hidden='true' class='icon-my-profile'>" . __("Author", "mingleforum") . "</span></th>
-                      <th><span aria-hidden='true' class='icon-topic'></span>" . __("Topic: ", "mingleforum") . $this->get_subject($thread_id) . $meClosed . "</th>
+                      <th><span aria-hidden='true' class='icon-topic'></span>" . $this->get_subject($thread_id) . $meClosed . "</th>
                     </tr>
                   </table>";
         $out .= "</div>";
@@ -1919,15 +1919,15 @@ if (!class_exists('mingleforum'))
 
     public function forum_get_group_id($group)
     {
+      $group = ($group) ? $group : 0;
       global $wpdb;
-
       return $wpdb->get_var($wpdb->prepare("SELECT id FROM {$this->t_groups} WHERE id = %d", $group));
     }
 
     public function forum_get_parent($forum)
     {
+      $forum = ($forum) ? $forum : 0;
       global $wpdb;
-
       return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_forums} WHERE id = %d", $forum));
     }
 
@@ -2238,19 +2238,23 @@ if (!class_exists('mingleforum'))
       global $user_ID, $wpdb;
 
       $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-      $author = $wpdb->get_var($wpdb->prepare("SELECT author_id from {$this->t_posts} where id = %d", $id));
+      $thread = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id from {$this->t_posts} where id = %d", $id));
 
       $del = "fail";
       if (current_user_can("administrator") || is_super_admin($user_ID))
         $del = "ok";
       if ($this->is_moderator($user_ID, $this->current_forum))
         $del = "ok";
-      if ($user_ID == $author)
+      if ($user_ID == $thread->author_id)
         $del = "ok";
 
       if ($del == "ok")
       {
         $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
+        $nbmsg = $wpdb->get_var("SELECT COUNT(*) FROM {$this->t_posts} WHERE parent_id = %d", $thread->parent_id);
+        if (!$nbmsg) {
+          $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $thread->parent_id));
+        }
         $this->o .= "<div class='wpf-info'><div class='updated'><span aria-hidden='true' class='icon-warning'>" . __("Post deleted", "mingleforum") . "</div></div>";
       }
       else
