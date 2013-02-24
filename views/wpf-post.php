@@ -1,7 +1,5 @@
 <?php
 
-$q = "";
-global $wpdb, $mingleforum, $user_ID;
 if ($user_ID || $this->allow_unreg())
 {
   if (isset($_GET['quote']))
@@ -9,9 +7,11 @@ if ($user_ID || $this->allow_unreg())
     $quote_id = $this->check_parms($_GET['quote']);
     $text = $wpdb->get_row($wpdb->prepare("SELECT text, author_id, `date` FROM {$this->t_posts} WHERE id = %d", $quote_id));
     $user = get_userdata($text->author_id);
-    $display_name = (!empty($user)) ? $user->$this->options['forum_display_name'] : __('Guest', 'mingleforum');
-    $q = "[quote][quotetitle]" . __("Quote from", "mingleforum") . " " . $display_name . " " . __("on", "mingleforum") . " " . $mingleforum->format_date($text->date) . "[/quotetitle]\n" . $text->text . "[/quote]";
+    $display_type = $this->options['forum_display_name'];
+    $display_name = (!empty($user)) ? $user->$display_type : __('Guest', 'mingleforum');
+    $q = "[quote][quotetitle]" . __("Quote from", "mingleforum") . " " . $display_name . " " . __("on", "mingleforum") . " " . $this->format_date($text->date) . "[/quotetitle]\n" . $text->text . "[/quote]";
   }
+
   if (($_GET['mingleforumaction'] == "postreply"))
   {
     $this->current_view = POSTREPLY;
@@ -36,6 +36,7 @@ if ($user_ID || $this->allow_unreg())
 			</tr>";
     $out .= apply_filters('wpwf_form_guestinfo', ''); //--weaver--
     $out .= $this->get_captcha();
+
     if ($this->options['forum_allow_image_uploads'])
     {
       $out .= "
@@ -50,10 +51,8 @@ if ($user_ID || $this->allow_unreg())
     }
     $out .= "
 			<tr>
-				<td></td>
-				<td><input type='submit' id='wpf-post-submit' name='add_post_submit' value='" . __("Submit", "mingleforum") . "' /></td>
+				<td colspan='2'><input type='submit' id='wpf-post-submit' name='add_post_submit' value='" . __("Submit", "mingleforum") . "' /></td>
 				<input type='hidden' name='add_post_forumid' value='" . $this->check_parms($thread) . "'/>
-				<input type='hidden' name='add_topic_plink' value='" . get_permalink($this->page_id) . "'/>
 			</tr>
 			</table></form>";
     $this->o .= $out;
@@ -67,8 +66,9 @@ if ($user_ID || $this->allow_unreg())
       $id = $_GET['id'];
     $thread = $this->check_parms($_GET['t']);
     $out = $this->header();
-    $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$mingleforum->t_posts} WHERE id = %d", $id));
-    if (($user_ID == $post->author_id && $user_ID) || $mingleforum->is_moderator($user_ID, $mingleforum->forum_get_forum_from_post($thread))) //Make sure only admins/mods/post authors can edit posts
+    $post = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE id = %d", $id));
+
+    if (($user_ID == $post->author_id && $user_ID) || $this->is_moderator($user_ID, $this->forum_get_forum_from_post($thread))) //Make sure only admins/mods/post authors can edit posts
     {
       $out .= "<form action='" . WPFURL . "wpf-insert.php' name='addform' method='post'>";
       $out .= "<table class='wpf-table' width='100%'>
@@ -82,7 +82,7 @@ if ($user_ID || $this->allow_unreg())
 				<tr>
 					<td valign='top'>" . __("Message:", "mingleforum") . "</td>
 					<td>";
-      $out .= $mingleforum->form_buttons() . "<br/>" . $mingleforum->form_smilies();
+      $out .= $this->form_buttons() . "<br/>" . $this->form_smilies();
 
       $out .= "<br /><textarea " . ROW_COL . " name='message' class='wpf-textarea' >" . stripslashes($post->text) . "</textarea>";
       $out .= "</td>
@@ -92,15 +92,14 @@ if ($user_ID || $this->allow_unreg())
 					<td><input type='submit' id='wpf-post-submit' name='edit_post_submit' value='" . __("Save Post", "mingleforum") . "' /></td>
 					<input type='hidden' name='edit_post_id' value='" . $post->id . "'/>
 					<input type='hidden' name='thread_id' value='" . $thread . "'/>
-					<input type='hidden' name='add_topic_plink' value='" . get_permalink($this->page_id) . "'/>
 				</tr>
 				</table></form>";
       $this->o .= $out;
     }
     else
-      wp_die("Haha, nice try!");
+      wp_die("Hey, that's not vary nice ... didn't your mother raise you better?");
   }
 }
 else
-  wp_die("Thanks, but no thanks");
+  wp_die("You do not have permission.");
 ?>

@@ -4,8 +4,8 @@ global $wpdb, $mingleforum, $user_ID;
 $error = false;
 $root = dirname(dirname(dirname(dirname(__FILE__))));
 require_once($root . '/wp-load.php');
-$add_topic_plink = (isset($_POST['add_topic_plink'])) ? $_POST['add_topic_plink'] : '';
-$mingleforum->setup_linksdk($add_topic_plink);
+
+$mingleforum->setup_links();
 $options = get_option("mingleforum_options");
 
 //Checking if current categories have been disabled to admin posting only

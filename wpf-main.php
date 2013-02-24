@@ -1,5 +1,4 @@
 <?php
-
 /*
   Plugin Name: Mingle Forum
   Plugin URI: http://cartpauj.com/projects/mingle-forum-plugin
@@ -40,24 +39,4 @@ require("wpf.class.php");
 //Set $mingleforum global
 global $mingleforum;
 $mingleforum = new mingleforum();
-
-//Shortcode Hook
-add_shortcode('mingleforum', array($mingleforum, "go"));
-//Action Hooks
-add_action('init', array($mingleforum, "set_cookie"));
-add_action('wp', array($mingleforum, "before_go")); //Redirects Old URL's to SEO URL's
-//Filter Hooks
-add_filter("wp_title", array($mingleforum, "set_pagetitle"));
-//Fix for duplication with JetPack
-add_filter('jetpack_enable_open_graph', '__return_false', 99);
-
-//Functions
-//Not sure if anyone uses this anymore
-//We may consider killing it in the future
-function latest_activity($num = 5)
-{
-  global $mingleforum;
-  return $mingleforum->latest_activity($num);
-}
-
 ?>
