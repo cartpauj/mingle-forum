@@ -39,9 +39,7 @@ if (!class_exists('mingleforum'))
     // !Member variables
     var $showing = false;
     var $page_id = "";
-    var $reg_link = "";
     var $profile_link = "";
-    var $logout_link = "";
     var $home_url = "";
     var $forum_link = "";
     var $group_link = "";
@@ -372,26 +370,9 @@ if (!class_exists('mingleforum'))
       $this->post_reply_link = $perm . $delim . "mingleforumaction=postreply&thread={$this->current_thread}";
       $this->base_url = $perm . $delim . "mingleforumaction=";
 
-      //START MINGLE REG LINK
-      if (!function_exists('is_plugin_active'))
-        require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-      if (is_plugin_active('mingle/mingle.php'))
-      {
-        global $mngl_options, $mngl_blogurl;
-
-        if (!empty($mngl_options->signup_page_id) and $mngl_options->signup_page_id > 0)
-          $this->reg_link = get_permalink($mngl_options->signup_page_id);
-        else
-          $this->reg_link = $mngl_blogurl . '/wp-login.php?action=register';
-      }
-      else
-        $this->reg_link = wp_login_url() . "?action=register";
-      //END MINGLE REG LINK
-
       $this->topic_feed_url = WPFURL . "feed.php?topic=";
       $this->global_feed_url = WPFURL . "feed.php?topic=all";
       $this->home_url = $perm;
-      $this->logout_link = wp_logout_url(get_permalink($this->get_pageid()));
     }
 
     //Not sure why the previous author needed two of these setup links funcs
@@ -412,26 +393,9 @@ if (!class_exists('mingleforum'))
       $this->post_reply_link = $perm . $delim . "mingleforumaction=postreply&thread={$this->current_thread}";
       $this->base_url = $perm . $delim . "mingleforumaction=";
 
-      //START MINGLE REG LINK
-      if (!function_exists('is_plugin_active'))
-        require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-      if (is_plugin_active('mingle/mingle.php'))
-      {
-        global $mngl_options, $mngl_blogurl;
-
-        if (!empty($mngl_options->signup_page_id) and $mngl_options->signup_page_id > 0)
-          $this->reg_link = get_permalink($mngl_options->signup_page_id);
-        else
-          $this->reg_link = $mngl_blogurl . '/wp-login.php?action=register';
-      }
-      else
-        $this->reg_link = wp_login_url() . "?action=register";
-      //END MINGLE REG LINK
-
       $this->topic_feed_url = WPFURL . "feed.php?topic=";
       $this->global_feed_url = WPFURL . "feed.php?topic=all";
       $this->home_url = $perm;
-      $this->logout_link = wp_logout_url(get_permalink($this->get_pageid()));
     }
 
     function get_addtopic_link()
@@ -1990,6 +1954,7 @@ if (!class_exists('mingleforum'))
       }
     }
 
+    //This should be moved to a separate view too
     function login_form()
     {
       return "<form class='login-form' action='" . wp_login_url() . "' method='post'>
