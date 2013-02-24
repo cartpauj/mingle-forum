@@ -1,4 +1,5 @@
 <?php
+
 /*
   Plugin Name: Mingle Forum
   Plugin URI: http://cartpauj.com/projects/mingle-forum-plugin

@@ -1,4 +1,9 @@
-<?php if(!defined('ABSPATH')) {die('You are not allowed to call this page directly.');}
+<?php
+
+if (!defined('ABSPATH'))
+{
+  die('You are not allowed to call this page directly.');
+}
 
 echo "<h2>" . __("Add forum to", "mingleforum") . " \"" . stripslashes($mingleforum->get_groupname($_GET['groupid'])) . "\"</h2>";
 echo "<form name='add_forum_form' id='add_forum_form' method='post' action='admin.php?page=mfstructure&mingleforum_action=structure'>";

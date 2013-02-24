@@ -1,4 +1,9 @@
-<?php if(!defined('ABSPATH')) {die('You are not allowed to call this page directly.');}
+<?php
+
+if (!defined('ABSPATH'))
+{
+  die('You are not allowed to call this page directly.');
+}
 
 global $wpdb, $table_prefix, $mingleforum;
 $users = $mingleforum->get_users();

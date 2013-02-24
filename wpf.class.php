@@ -873,7 +873,7 @@ if (!class_exists('mingleforum'))
         if ($this->is_thread_subscribed())
           $this->notify_msg = __("Remove this Topic from your email notifications?", "mingleforum");
         else
-          $this->notify_msg = __(" This will notify you of all responses to this Topic. Are you sure that is what you want to do?", "mingleforum");
+          $this->notify_msg = __("This will notify you of all responses to this Topic. Are you sure that is what you want to do?", "mingleforum");
 
         if (!current_user_can('administrator') && !is_super_admin($user_ID) && !$this->is_moderator($user_ID, $this->current_forum))
           $wpdb->query($wpdb->prepare("UPDATE {$this->t_threads} SET views = views+1 WHERE id = %d", $thread_id));
@@ -1933,8 +1933,8 @@ if (!class_exists('mingleforum'))
 
     public function forum_get_forum_from_post($thread)
     {
+      $thread = ($thread) ? $thread : 0;
       global $wpdb;
-
       return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $thread));
     }
 
@@ -2252,7 +2252,8 @@ if (!class_exists('mingleforum'))
       {
         $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
         $nbmsg = $wpdb->get_var("SELECT COUNT(*) FROM {$this->t_posts} WHERE parent_id = %d", $thread->parent_id);
-        if (!$nbmsg) {
+        if (!$nbmsg)
+        {
           $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $thread->parent_id));
         }
         $this->o .= "<div class='wpf-info'><div class='updated'><span aria-hidden='true' class='icon-warning'>" . __("Post deleted", "mingleforum") . "</div></div>";
