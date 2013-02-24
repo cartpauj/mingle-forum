@@ -337,7 +337,7 @@ if (!class_exists('mingleforum'))
       global $wp_rewrite;
 
       //We need to change all of these $delims to use a regex on the
-      //request URI instead. This is preventing the form from 
+      //request URI instead. This is preventing the form from
       //working as the home page
       if ($wp_rewrite->using_permalinks())
         $delim = "?";
@@ -1023,7 +1023,7 @@ if (!class_exists('mingleforum'))
     {
       global $user_ID;
 
-      $o = "<table width='100% cellspacing='0' cellpadding='0' style='margin:0; padding:0; border-collapse:collapse:' border='0'><tr>";
+      $o = "<table width='100%' cellspacing='0' cellpadding='0' style='margin:0; padding:0; border-collapse:collapse:' border='0'><tr>";
 
       if ($this->options['forum_use_seo_friendly_urls'])
       {
