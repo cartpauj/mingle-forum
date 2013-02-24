@@ -41,7 +41,6 @@ if (!class_exists('mingleforum'))
       add_filter('mf_ad_below_first_post', array($this, 'mf_ad_below_first_post'));
       add_filter("wp_title", array($this, "set_pagetitle"));
       add_filter('jetpack_enable_open_graph', '__return_false', 99); //Fix for duplication with JetPack
-
       //Shortcode hooks
       add_shortcode('mingleforum', array($this, "go"));
 
@@ -219,7 +218,7 @@ if (!class_exists('mingleforum'))
       $this->setup_links();
 
       if ($this->options['forum_use_rss']):
-      ?>
+        ?>
         <link rel='alternate' type='application/rss+xml' title="<?php echo __("Forums RSS", "mingleforum"); ?>" href="<?php echo $this->global_feed_url; ?>" />
       <?php endif; ?>
 
@@ -229,7 +228,7 @@ if (!class_exists('mingleforum'))
         <?php endif; ?>
 
         <link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
-      <?php
+        <?php
       endif;
     }
 
@@ -1539,7 +1538,6 @@ if (!class_exists('mingleforum'))
       global $wpdb;
 
       $force = false; //I'd like to create a way for users to force this if they have problems installing
-
       //Only run if we need to
       if ($this->options['forum_db_version'] < $this->db_version || $force)
       {
@@ -1620,7 +1618,7 @@ if (!class_exists('mingleforum'))
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-        if($this->options['forum_db_version'] < 1 || $force)
+        if ($this->options['forum_db_version'] < 1 || $force)
         {
           dbDelta($sql1);
           dbDelta($sql2);
@@ -1635,7 +1633,7 @@ if (!class_exists('mingleforum'))
             @mkdir($target_path . "/");
         }
 
-        if($this->options['forum_db_version'] < 2 || $force)
+        if ($this->options['forum_db_version'] < 2 || $force)
         {
           //We need to kill this one after we fix how the forum search works
           $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM;"); //InnoDB doesn't support FULLTEXT
