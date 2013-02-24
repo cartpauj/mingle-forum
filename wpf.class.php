@@ -950,15 +950,15 @@ if (!class_exists('mingleforum'))
                   </tr>
                 </table>";
         if ($this->is_closed())
-          $meClosed = " <span class='icon-close'>" . __("TOPIC CLOSED", "mingleforum") . "</span> ";
+          $meClosed = " <span aria-hidden='true' class='icon-close'>" . __("TOPIC CLOSED", "mingleforum") . "</span> ";
         else
           $meClosed = "";
 
         $out .= "<div class='wpf'>
                   <table class='wpf-table' width='100%'>
                     <tr>
-                      <th width='135' style='text-align: center;'><span class='icon-my-profile'>" . __("Author", "mingleforum") . "</span></th>
-                      <th><span class='icon-topic'></span>" . __("Topic: ", "mingleforum") . $this->get_subject($thread_id) . $meClosed . "</th>
+                      <th width='135' style='text-align: center;'><span aria-hidden='true' class='icon-my-profile'>" . __("Author", "mingleforum") . "</span></th>
+                      <th><span aria-hidden='true' class='icon-topic'></span>" . __("Topic: ", "mingleforum") . $this->get_subject($thread_id) . $meClosed . "</th>
                     </tr>
                   </table>";
         $out .= "</div>";
@@ -1231,7 +1231,7 @@ if (!class_exists('mingleforum'))
 
       $this->o .= apply_filters('wpwf_new_posts', "<table>
             <tr>
-              <td><small><img alt='' align='top' src='{$this->skin_url}/images/new_some.gif' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.gif' /> " . __("No new posts", "mingleforum") . " - <span class='icon-checkmark'><a href='" . get_permalink($this->get_pageid()) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></small></td>
+              <td><small><img alt='' align='top' src='{$this->skin_url}/images/new_some.gif' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.gif' /> " . __("No new posts", "mingleforum") . " - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->get_pageid()) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></small></td>
             </tr>
           </table><br class='clear'/>");
 
@@ -1842,7 +1842,7 @@ if (!class_exists('mingleforum'))
         }
 
         if ($this->options['forum_use_rss'])
-          $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a class='icon-rss-feed' href='{$this->topic_feed_url}" . "{$this->current_thread}'>" . __("RSS feed", "mingleforum") . "</a></td>";
+          $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a aria-hidden='true' class='icon-rss-feed' href='{$this->topic_feed_url}" . "{$this->current_thread}'>" . __("RSS feed", "mingleforum") . "</a></td>";
 
         $menu .= $stick . $closed . "<td valign='top' class='" . $class . "_last'>&nbsp;&nbsp;</td></tr></table>";
       }
@@ -1890,9 +1890,9 @@ if (!class_exists('mingleforum'))
           "signup" => '<a href="' . stripslashes($this->options['forum_signup_url']) . '">' . __('Register', 'mingleforum') . '</a>',
           "new_topics" => "<a class='unread-topics' href='" . $this->base_url . "shownew'>" . __("Unread Topics", "mingleforum") . "</a>",
           "view_profile" => $link,
-          "edit_profile" => "<a class='icon-profile' href='" . site_url("wp-admin/profile.php") . "'>" . __("Edit Profile", "mingleforum") . "</a>",
-          "edit_settings" => "<a class='icon-settings'  href='" . $this->base_url . "editprofile&user_id={$user_ID}'>" . __("Settings", "mingleforum") . "</a>",
-          "logout" => '<a  class="icon-logout" href="' . wp_logout_url($this->options['forum_logout_redirect_url']) . '" >' . __('Logout', 'mingleforum') . '</a>',
+          "edit_profile" => "<a aria-hidden='true' class='icon-profile' href='" . site_url("wp-admin/profile.php") . "'>" . __("Edit Profile", "mingleforum") . "</a>",
+          "edit_settings" => "<a aria-hidden='true' class='icon-settings'  href='" . $this->base_url . "editprofile&user_id={$user_ID}'>" . __("Settings", "mingleforum") . "</a>",
+          "logout" => '<a  aria-hidden="true" class="icon-logout" href="' . wp_logout_url($this->options['forum_logout_redirect_url']) . '" >' . __('Logout', 'mingleforum') . '</a>',
           "move" => "<a aria-hidden='true' class='icon-move-topic' href='" . $this->forum_link . $this->current_forum . "." . $this->curr_page . "&getNewForumID&topic={$this->current_thread}'>" . __("Move Topic", "mingleforum") . "</a>");
 
       $menu = "<table cellpadding='0' cellspacing='5' id='wp-mainmenu'><tr>";
@@ -2058,7 +2058,7 @@ if (!class_exists('mingleforum'))
 
       $this->setup_links();
 
-      $trail = "<a class='icon-forum-home' href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "mingleforum") . "</a>";
+      $trail = "<a aria-hidden='true' class='icon-forum-home' href='" . get_permalink($this->page_id) . "'>" . __("Forum Home", "mingleforum") . "</a>";
 
       if ($this->current_group)
         if ($this->options['forum_use_seo_friendly_urls'])
@@ -2360,7 +2360,7 @@ if (!class_exists('mingleforum'))
       if ($del == "ok")
       {
         $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
-        $this->o .= "<div class='updated'>" . __("Post deleted", "mingleforum") . "</div>";
+        $this->o .= "<div class='wpf-info'><div class='updated'><span aria-hidden='true' class='icon-warning'>" . __("Post deleted", "mingleforum") . "</div></div>";
       }
       else
         wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
@@ -2688,7 +2688,7 @@ if (!class_exists('mingleforum'))
                   . $this->output_filter($this->get_threadname($thread->id)) . "</a>
           </td>
           <td class='img-avatar-forumstats' style='vertical-align: middle;'>" . $this->get_avatar($starter_id, 15) . "" . $this->profile_link($starter_id) . "</td>
-          <td style='vertical-align: middle;' class='wpf-alt forumstats' align='center'><span class='icon-replies'>" . ( $this->num_posts($thread->id) - 1 ) . "</span></td>
+          <td style='vertical-align: middle;' class='wpf-alt forumstats' align='center'><span aria-hidden='true' class='icon-replies'>" . ( $this->num_posts($thread->id) - 1 ) . "</span></td>
           <td style='vertical-align: middle;'><small>" . $this->get_lastpost($thread->id) . "</small></td></tr>";
         }
 
