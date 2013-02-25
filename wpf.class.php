@@ -1476,7 +1476,7 @@ if (!class_exists('mingleforum'))
 
     public function is_moderator($user_id, $forum_id = '')
     {
-      if (!$user_id) //If guest
+      if (!$user_id || !$forum_id) //If guest or no forum ID
         return false;
 
       if (is_super_admin($user_id))
@@ -1486,13 +1486,10 @@ if (!class_exists('mingleforum'))
 
       $forums = get_user_meta($user_id, 'wpf_moderator', true);
 
-      if (!$forum_id)
-        return false; //Can't be a mod of a non-existant forum
-
       if ($forums == "mod_global")
         return true;
 
-      return in_array($forum_id, $forums);
+      return in_array($forum_id, (array)$forums);
     }
 
     public function get_users()
