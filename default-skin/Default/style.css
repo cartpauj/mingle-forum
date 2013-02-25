@@ -771,12 +771,11 @@ th.wpf-bright h3 {
   color: white;
   text-decoration: none;
 }
-.maintab_back a:hover,
-.maintab_active_back a:hover {
-  color: #e0e0ff;
-  text-decoration: none;
+#wpf-wrapper .maintab_back a:hover,
+#wpf-wrapper .maintab_active_back a:hover {
+  color:#CCC;
+  text-decoration: none !important;
 }
-
 /* definitions for the mirror tab */
 #wpf-wrapper .mirrortab_first,
 #wpf-wrapper .mirrortab_back,
@@ -816,10 +815,10 @@ th.wpf-bright h3 {
   color: white;
   text-decoration: none;
 }
-.mirrortab_back a:hover,
-.mirrortab_active_back a:hover {
-  color: #e0e0ff;
-  text-decoration: none;
+#wpf-wrapper .mirrortab_back a:hover,
+#wpf-wrapper .mirrortab_active_back a:hover {
+  color:#CCC;
+  text-decoration: none !important;
 }
 pre.code {
   width: 90%;

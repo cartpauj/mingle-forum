@@ -1664,14 +1664,14 @@ if (!class_exists('mingleforum'))
         $menu = "<table cellpadding='0' cellspacing='0' style='margin-right:10px;' id='forummenu'>";
         $menu .= "<tr>
                 <td class='" . $class . "_first'>&nbsp;</td>
-                <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_addtopic_link() . "'>" . __("New Topic", "mingleforum") . "</a></td>";
+                <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_addtopic_link() . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "mingleforum") . "</span></a></td>";
 
         if ($user_ID)
         {
           if ($this->is_forum_subscribed()) //Check if user has already subscribed to topic
-            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->forum_link . $this->current_forum . "&forumsubs'>" . __("Unsubscribe", "mingleforum") . "</a></td>";
+            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->forum_link . $this->current_forum . "&forumsubs'><span aria-hidden='true' class=' icon-unsubscribe'>" . __("Unsubscribe", "mingleforum") . "</span></a></td>";
           else
-            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->forum_link . $this->current_forum . "&forumsubs'>" . __("Subscribe", "mingleforum") . "</a></td>";
+            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->forum_link . $this->current_forum . "&forumsubs'><span  aria-hidden='true' class='icon-subscribe'>" . __("Subscribe", "mingleforum") . "</a></td>";
         }
 
         $menu .= "<td valign='top' class='" . $class . "_last'>&nbsp;&nbsp;</td>
@@ -1701,26 +1701,26 @@ if (!class_exists('mingleforum'))
           if ($this->options['forum_use_seo_friendly_urls'])
           {
             if ($this->is_sticky())
-              $stick = "<td class='" . $class . "_back icon-undo-sticky' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'>" . __("Undo Sticky", "mingleforum") . "</a></td>";
+              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "mingleforum") . "</span></a></td>";
             else
-              $stick = "<td class='" . $class . "_back icon-sticky' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'>" . __("Sticky", "mingleforum") . "</a></td>";
+              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "mingleforum") . "</span></a></td>";
 
             if ($this->is_closed())
-              $closed = "<td class='" . $class . "_back icon-re-open' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'>" . __("Re-open", "mingleforum") . "</a></td>";
+              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-re-open' aria-hidden='true'>" . __("Re-open", "mingleforum") . "</span></a></td>";
             else
-              $closed = "<td class='" . $class . "_back icon-close' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'>" . __("Close", "mingleforum") . "</a></td>";
+              $closed = "<td class='" . $class . "_back icon-close' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "mingleforum") . "</span></a></td>";
           }
           else
           {
             if ($this->is_sticky())
-              $stick = "<td class='" . $class . "_back icon-undo-sticky' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'>" . __("Undo Sticky", "mingleforum") . "</a></td>";
+              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-undo-sticky' aria-hidden='true'>" . __("Undo Sticky", "mingleforum") . "</span></a></td>";
             else
-              $stick = "<td class='" . $class . "_back icon-sticky' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'>" . __("Sticky", "mingleforum") . "</a></td>";
+              $stick = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&sticky&id={$this->current_thread}'><span class='icon-sticky' aria-hidden='true'>" . __("Sticky", "mingleforum") . "</span></a></td>";
 
             if ($this->is_closed())
-              $closed = "<td class='" . $class . "_back icon-re-open' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'>" . __("Re-open", "mingleforum") . "</a></td>";
+              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=0&id={$this->current_thread}'><span class=' icon-re-open' aria-hidden='true'>" . __("Re-open", "mingleforum") . "</span></a></td>";
             else
-              $closed = "<td class='" . $class . "_back icon-close' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'>" . __("Close", "mingleforum") . "</a></td>";
+              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_threadlink($this->current_thread) . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "mingleforum") . "</span></a></td>";
           }
         }
 
@@ -1732,19 +1732,19 @@ if (!class_exists('mingleforum'))
                 $this->options['allow_user_replies_locked_cats'])
         {
           if (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum))
-            $menu .= "<td valign='top' class='" . $class . "_back icon-reply' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'>" . __("Reply", "mingleforum") . "</a></td>";
+            $menu .= "<td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_post_reply_link() . "'><span class='icon-reply' aria-hidden='true' >" . __("Reply", "mingleforum") . "</span></a></td>";
         }
 
         if ($user_ID)
         {
           if ($this->is_thread_subscribed()) //Check if user has already subscribed to topic
-            $menu .= "<td class='" . $class . "_back icon-unsubscribe' nowrap='nowrap'><a onclick='return notify();' href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&threadsubs'>" . __("Unsubscribe", "mingleforum") . "</a></td>";
+            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&threadsubs'><span class='icon-unsubscribe' aria-hidden='true'>" . __("Unsubscribe", "mingleforum") . "</span></a></td>";
           else
-            $menu .= "<td class='" . $class . "_back icon-subscribe' nowrap='nowrap'><a onclick='return notify();' href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&threadsubs'>" . __("Subscribe", "mingleforum") . "</a></td>";
+            $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&threadsubs'><span class='icon-subscribe aria-hidden='true'>" . __("Subscribe", "mingleforum") . "</span></a></td>";
         }
 
         if ($this->options['forum_use_rss'])
-          $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a aria-hidden='true' class='icon-rss-feed' href='{$this->topic_feed_url}" . "{$this->current_thread}'>" . __("RSS feed", "mingleforum") . "</a></td>";
+          $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a href='{$this->topic_feed_url}" . "{$this->current_thread}'><span class='icon-rss-feed' aria-hidden='true'>" . __("RSS feed", "mingleforum") . "</span></a></td>";
 
         $menu .= $stick . $closed . "<td valign='top' class='" . $class . "_last'>&nbsp;&nbsp;</td></tr></table>";
       }
