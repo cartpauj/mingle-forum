@@ -119,7 +119,7 @@ Need help?:
 * Can I put different forums on different pages? - No. Not right now, and maybe not ever.
 * SEO friedly URL's are not working - Make sure you have permalinks enabled in WordPress. Any setting but "default" should work. We personally like Day & Name for blogs, or Postname for non-blogs.
 * Google isn't indexing my forum pages - Step 1: Turn on SEO Friendly URLs in the options. Step 2: Make sure you don't have Canonical URLs enabled on the forum page. In fact, if your SEO plugin/theme supports disabling its features on certain pages, just disable any SEO functionality on your Forum page. Mingle Forum implements some of its own SEO features making this unneccessary.
-* I can only see the front page of the forum. No matter what I click, it goes back to the front page - Step 1: Make sure the forum isn't the home page of your site. Mingle Forum does not currently work when set to the home page. Step 2: Try enabling or disabling SEO Friendly URL's in the Forum Options. Step 3: Are you using WP SEO by Yoast? If so, we're working on a fix for this, so you'll just have to bug us to see where we're at.
+* I can only see the front page of the forum. No matter what I click, it goes back to the front page - Step 1: Make sure the forum isn't the home page of your site. Mingle Forum does not currently work when set to the home page. Step 2: Try enabling or disabling SEO Friendly URL's in the Forum Options. Step 3: Are you using WP SEO by Yoast? If so, disable the option to rewrite ugly permalinks.
 * No images are showing up after I installed a new Skin - Either you got a bad skin, or you didn't upload the file structure correctly. The file structure after uploading the skin should be: /wp-content/mingle-forum-skins/THEMNAME/style.css...
 
 == Upgrade Notice ==
@@ -144,6 +144,7 @@ Need help?:
 * Changed recent posts widget (ddart)
 * Changed length of username before auto wrap occurs (ddart)
 * Changed database to be more Multisite-friendly
+* Fixed known conflict with WordPress SEO by Yoast
 * Fixed SEO issue caused by Canonical URLs
 * Fixed some JS issues
 * Fixed Admins/Mods not being able to reply to closed topics

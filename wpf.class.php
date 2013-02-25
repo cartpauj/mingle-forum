@@ -24,6 +24,7 @@ if (!class_exists('mingleforum'))
       add_action("wp_footer", array($this, "wpf_footer"));
       add_action('init', array($this, "set_cookie"));
       add_action('wp', array($this, "before_go")); //Redirects Old URL's to SEO URL's
+      add_filter('wpseo_whitelist_permalink_vars', array($this, 'yoast_seo_whitelist_vars'));
       if ($this->options['wp_posts_to_forum'])
       {
         add_action("add_meta_boxes", array($this, "send_wp_posts_to_forum"));
@@ -314,6 +315,14 @@ if (!class_exists('mingleforum'))
 
       echo '</select>';
       echo '</label></p> <input type="hidden" id="wpf_submit" name="wpf_submit" value="1" />';
+    }
+
+    //Fix SEO by Yoast conflict
+    public function yoast_seo_whitelist_vars($vars)
+    {
+      $my_vars = array('vforum', 'g', 'viewforum', 'f', 'viewtopic', 't', 'mingleforumaction', 'topic', 'user_id', 'quote', 'thread', 'id', 'action', 'forum', 'markallread', 'getNewForumID', 'delete_topic', 'remove_post', 'forumsubs', 'threadsubs', 'sticky', 'closed', 'move_topic');
+
+      return array_merge($vars, $my_vars);
     }
 
     public function wpf_footer()
