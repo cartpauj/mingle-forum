@@ -22,20 +22,6 @@ function surroundText(tag1, tag2, myarea)
   }
 }
 
-// Show/Hide  input value on focus - Search
-function placeholder(ele) {
-  if (ele.value === ele.defaultValue)
-  {
-    ele.value = '';
-    ele.className = 'inputShow';
-  }
-  else if (ele.value === '')
-  {
-    ele.value = ele.defaultValue;
-    ele.className = 'wpf-input';
-  }
-}
-
 // Invert all checkboxes at once by clicking a single checkbox.
 function invertAll(headerfield, checkform, mask)
 {
