@@ -65,5 +65,55 @@ function wpf_confirm() {
 
       return false;
     });
+
+    //Add a placeholder to the input boxes
+    //Username
+    //Load initial text
+    if($('.mf_uname').val() == '')
+      $('.mf_uname').val(MFl10n.uname);
+    //Empty when clicked
+    $('.mf_uname').focus(function() {
+      if($(this).val() == MFl10n.uname) {
+        $(this).val('');
+      }
+    });
+    //Fill again if empty on blur
+    $('.mf_uname').blur(function() {
+      if($(this).val() == '') {
+        $(this).val(MFl10n.uname);
+      }
+    });
+    //Password
+    //Load initial text
+    if($('.mf_pwd').val() == '')
+      $('.mf_pwd').val('********');
+    //Empty when clicked
+    $('.mf_pwd').focus(function() {
+      if($(this).val() == '********') {
+        $(this).val('');
+      }
+    });
+    //Fill again if empty on blur
+    $('.mf_pwd').blur(function() {
+      if($(this).val() == '') {
+        $(this).val('********');
+      }
+    });
+    //Search
+    //Load initial text
+    if($('.mf_search').val() == '')
+      $('.mf_search').val(MFl10n.search);
+    //Empty when clicked
+    $('.mf_search').focus(function() {
+      if($(this).val() == MFl10n.search) {
+        $(this).val('');
+      }
+    });
+    //Fill again if empty on blur
+    $('.mf_search').blur(function() {
+      if($(this).val() == '') {
+        $(this).val(MFl10n.search);
+      }
+    });
   });
 })(jQuery);
