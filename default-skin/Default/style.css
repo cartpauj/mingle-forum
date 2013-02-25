@@ -51,8 +51,70 @@ Version: 1.34
 #wpf-wrapper #wp-mainmenu .menu_sub {
   padding-right: 10px;
 }
-#wp-mainmenu .menu_sub a,
-#or_register {
+.icon-my-profile,.icon-password{
+  margin: 0px -1px 0 6px;
+	}
+a#or_register {
+  color:#FDFDFD !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  border-right-style: solid;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d37267 #d37267 #b5493e;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: bold;
+  height: 2.95em;
+  outline: 0 none;
+  padding: 4px 7px 4px 7px !important;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: normal;
+  background-color: #ba4134;
+  background-image:-moz-linear-gradient(top,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+  background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(255,255,255,0.3)),color-stop(100%,rgba(255,255,255,0)));
+  background-image:-webkit-linear-gradient(top,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+  background-image:-o-linear-gradient(top,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+  background-image:-ms-linear-gradient(top,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+  background-image:linear-gradient(to bottom,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+}
+a#or_register:hover {
+ background-color: #D44A3B;
+ text-decoration: none !important
+}
+#wpf-login-button{
+  color:#FDFDFD !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  border-right-style: solid;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #80a27e #80a27e #53904e !important;
+  font-size: 11px;
+  font-weight: bold;
+  outline: 0 none;
+  padding: 3px 7px 3px 7px !important;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: normal;
+  background-color: #63ac5e;
+  background-image:-moz-linear-gradient(top,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+  background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(255,255,255,0.3)),color-stop(100%,rgba(255,255,255,0)));
+  background-image:-webkit-linear-gradient(top,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+  background-image:-o-linear-gradient(top,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+  background-image:-ms-linear-gradient(top,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+  background-image:linear-gradient(to bottom,rgba(255,255,255,0.3) 0,rgba(255,255,255,0) 100%);
+}
+#wpf-login-button:hover {
+ background-color: #78af73 !important;
+ text-decoration: none !important
+}
+#wpf-wrapper input#wpf-login-button,
+#wpf-wrapper a#or_register{
+  margin: 4px !important;
+	}
+#wp-mainmenu .menu_sub a {
   border-right-style: solid;
   border-radius: 3px;
   border-style: solid;
@@ -68,8 +130,7 @@ Version: 1.34
   word-wrap: normal;
   border-color: #ccc #ccc #aaa;
 }
-#wp-mainmenu .menu_sub a,
-#or_register {
+#wp-mainmenu .menu_sub a{
   color: #084d8f;
   text-shadow: 0 1px 0 #fff;
   border-color: #ccc #ccc #aaa;
@@ -198,10 +259,7 @@ Version: 1.34
 #wpf-post-submit,
 #wpf-search-submit,
 #quick-reply-submit,
-#wpf-login-button,
-#wpf-login-button,
-#wpf-edit-button,
-#wpf-wrapper input[type=submit] {
+#wpf-edit-button{
   color: #555;
   letter-spacing: normal !important;
   text-shadow: 0 1px 0 #fff;
@@ -220,10 +278,7 @@ Version: 1.34
 #wpf-post-submit:hover,
 #wpf-search-submit:hover,
 #quick-reply-submit:hover,
-#wpf-login-button:hover,
-#wpf-login-button:hover,
-#wpf-edit-button:hover,
-#wpf-wrapper input[type=submit]:hover {
+#wpf-edit-button:hover{
   color: #555;
   border-color: #aaa #aaa #999;
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.25),inset 0 0 3px #fff;
@@ -240,23 +295,24 @@ Version: 1.34
   margin: 2px 0px !important;
   vertical-align: middle;
   padding: 3px 6px;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #888;
   border-radius: 3px;
   font-family: inherit;
 }
-#wpf-wrapper  input#log.wpf-input,
-#wpf-wrapper  input#pwd.wpf-input,
-#wpf-wrapper input.wpf-input{
+#wpf-wrapper input#log.wpf-input,
+#wpf-wrapper input#pwd.wpf-input,
+#wpf-wrapper input.wpf-input,
+#wpf-wrapper input.inputDefault{
   box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.4);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   background-color: rgba(193,193,193,0.4);	
-  color: #7b7a7a;
-  text-shadow: 1px 1px 5px rgba(255,255,255,0.8);
+  color: #595858;
+  text-shadow: 0px 1px 1px #FFF;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  border: 1px solid #ACACAC;
+  border: 1px solid #888;
   background-color:none !important;
   margin: 2px 0px !important;
   vertical-align:middle;
@@ -266,22 +322,26 @@ Version: 1.34
 }
 #wpf-wrapper  input#log.wpf-input:focus,
 #wpf-wrapper  input#pwd.wpf-input:focus,
-#wpf-wrapper input.wpf-input:focus{
+#wpf-wrapper input.wpf-input:focus,
+#wpf-wrapper input.inputShow:focus{
   box-shadow: 0 1px 2px rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0, 0.7);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.1), inset 0 1px 5px rgba(0,0,0,1);
   background-color: rgba(193,193,193,0.4);
   color: #181818;
 }
-#profileHeader .wpf-input {
+#wpf-wrapper input.inputDefault,
+#profileHeader .wpf-input,
+#profileHeader .inputShow{
   background-image: url("images/icons/search_btn.png");
   background-position: 4px 4px;
   background-repeat: no-repeat; 
   padding-left:25px !important;
-  width:100px;
+  width:120px;
 }
+#profileHeader input.inputShow:focus,
 #profileHeader .wpf-input:focus {
-  width:180px;
+  width:190px;
 }
 /*end button --------------------------------------------*/
 

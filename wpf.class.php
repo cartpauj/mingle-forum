@@ -1855,11 +1855,11 @@ if (!class_exists('mingleforum'))
     public function login_form()
     {
       return "<form class='login-form' action='" . wp_login_url() . "' method='post'>
-                <label for='log' style='vertical-align:middle'>" . __("Username: ", "mingleforum") . "</label>
-                <input type='text' name='log' id='log' value='' size='10' class='wpf-input' />
+                <span class='icon-my-profile'></span>
+                <input onfocus='up_Text(this)' onblur='up_Text(this)' type='text' name='log' id='log' value='" . __("Username: ", "mingleforum") . "' size='15' class='wpf-input' />
 
-                <label style='font-size:100%;vertical-align:middle;' for='pwd'>" . __("Password: ", "mingleforum") . "</label>
-                <input type='password' name='pwd' id='pwd' size='10' class='wpf-input' />
+                <span class='icon-password'></span>
+				<input onfocus='up_Text(this)' onblur='up_Text(this)' type='password' name='pwd' id='pwd' size='15' value='" . __("Password: ", "mingleforum") . "' class='wpf-input' />
 
                 <input name='rememberme' id='rememberme' type='hidden' value='forever' />
                 <input type='hidden' name='redirect_to' value='" . $_SERVER['REQUEST_URI'] . "' />
@@ -2075,9 +2075,8 @@ if (!class_exists('mingleforum'))
                   <th>
                     {$avatar}
                     <h4 style='display:inline;vertical-align:middle;'>{$welcome}</h4>
-                    <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
-                      <input type='text' name='search_words' class='wpf-input' />
-                      <input type='submit' id='wpf-search-submit' name='search_submit' value='" . __("Search forums", "mingleforum") . "' />
+                    <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>		 
+					 <input onfocus='Search_Text(this)' onblur='Search_Text(this)' type='text' name='search_words' class='wpf-input' value='" . __("Search forums", "mingleforum") . "' />
                     </form>
                   </th>
                 </tr>

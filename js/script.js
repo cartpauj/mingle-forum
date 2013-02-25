@@ -1,4 +1,4 @@
-// Surrounds the selected text with text1 and text2.
+// Surrounds the selected text with text1 and text2. 
 function surroundText(tag1, tag2, myarea)
 {
   if (document.selection) //IE
@@ -21,7 +21,38 @@ function surroundText(tag1, tag2, myarea)
     myarea.scrollLeft = scrollLeft;
   }
 }
-
+// Show/Hide  input value on focus - Search
+function Search_Text(ele)  
+{  
+    if(ele.value == ele.defaultValue)  
+    {  
+        ele.value = ''; 
+        ele.className = 'inputShow';  
+  
+    }  
+    else if (ele.value == '')  
+    {  
+        ele.value = ele.defaultValue;  
+        ele.className = 'inputDefault';
+  
+    }  
+}
+// Show/Hide  input value on focus - username, passworld
+function up_Text(ele)  
+{  
+    if(ele.value == ele.defaultValue)  
+    {  
+        ele.value = ''; 
+        ele.className = 'inputShow';  
+  
+    }  
+    else if (ele.value == '')  
+    {  
+        ele.value = ele.defaultValue;  
+        ele.className = 'wpf-input';
+  
+    }  
+}
 // Invert all checkboxes at once by clicking a single checkbox.
 function invertAll(headerfield, checkform, mask)
 {
