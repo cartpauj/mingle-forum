@@ -587,7 +587,6 @@ th.wpf-bright h3 {
   background: transparent;
   display: inline !important;
   height: inherit !important;
-  max-width: none;
 }
 .wpf #wpf-wrapper a img,
 #wpf-wrapper img {
