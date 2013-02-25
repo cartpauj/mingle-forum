@@ -2608,7 +2608,8 @@ if (!class_exists('mingleforum'))
 
       $user_id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int) $_GET['id'] : false;
 
-      wp_die(__('This user does not exist.', 'mingleforum'));
+      if(!$user_id)
+        wp_die(__('This user does not exist.', 'mingleforum'));
 
       $user = get_userdata($user_id);
       $this->header();
