@@ -1856,10 +1856,10 @@ if (!class_exists('mingleforum'))
     {
       return "<form class='login-form' action='" . wp_login_url() . "' method='post'>
                 <span class='icon-my-profile'></span>
-                <input onfocus='up_Text(this)' onblur='up_Text(this)' type='text' name='log' id='log' value='" . __("Username: ", "mingleforum") . "' size='15' class='wpf-input' />
+                <input placeholder='" . __("Username: ", "mingleforum") . "' type='text' name='log' id='log' value='' size='15' class='wpf-input' />
 
                 <span class='icon-password'></span>
-				<input onfocus='up_Text(this)' onblur='up_Text(this)' type='password' name='pwd' id='pwd' size='15' value='" . __("Password: ", "mingleforum") . "' class='wpf-input' />
+				<input placeholder='" . __("Password: ", "mingleforum") . "' type='password' name='pwd' id='pwd' size='15' value='' class='wpf-input' />
 
                 <input name='rememberme' id='rememberme' type='hidden' value='forever' />
                 <input type='hidden' name='redirect_to' value='" . $_SERVER['REQUEST_URI'] . "' />
@@ -2075,8 +2075,8 @@ if (!class_exists('mingleforum'))
                   <th>
                     {$avatar}
                     <h4 style='display:inline;vertical-align:middle;'>{$welcome}</h4>
-                    <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>		 
-					 <input onfocus='Search_Text(this)' onblur='Search_Text(this)' type='text' name='search_words' class='wpf-input' value='" . __("Search forums", "mingleforum") . "' />
+                    <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
+					 <input placeholder='" . __("Search forums", "mingleforum") . "' type='text' name='search_words' class='wpf-input' value='' />
                     </form>
                   </th>
                 </tr>
