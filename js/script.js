@@ -49,17 +49,52 @@ function wpf_confirm() {
 
 (function($) {
   $(document).ready(function() {
+    //Cookie Array Handler
+    var cookieList = function(cookieName) {
+      var cookie = $.cookie(cookieName);
+      var items = cookie ? cookie.split(/,/) : new Array();
+
+      return {
+        "add": function(val) {
+            items.push(val);
+            $.cookie(cookieName, items.join(','));
+        },
+        "remove": function (val) { 
+            indx = items.indexOf(val); 
+            if(indx!=-1) items.splice(indx, 1); 
+            $.cookie(cookieName, items.join(','));
+        },
+        "clear": function() {
+            items = null;
+            $.cookie(cookieName, null);
+        },
+        "items": function() {
+            return items;
+        }
+      }
+    }
+
     //Show/Hide groups
+    var groups_cookie = new cookieList('mf_groups');
+    //Loop through the cookie and hide categories that have been hidden before
+    groups_cookie.items().map(function(id) {
+      $('tr.group-shrink-' + id).hide();
+      $('a#shown-' + id).hide();
+      $('a#hidden-' + id).show();
+    });
+
     $('a.wpf_click_me').click(function() {
       var id = $(this).attr('data-value');
 
       if ($(this).hasClass('show-hide-hidden')) {
         $('tr.group-shrink-' + id).fadeIn(800);
         $('a#shown-' + id).show();
+        groups_cookie.remove(id);
         $(this).hide();
       } else {
         $('tr.group-shrink-' + id).fadeOut(200);
         $('a#hidden-' + id).show();
+        groups_cookie.add(id);
         $(this).hide();
       }
 
@@ -69,49 +104,49 @@ function wpf_confirm() {
     //Add a placeholder to the input boxes
     //Username
     //Load initial text
-    if($('.mf_uname').val() == '')
+    if ($('.mf_uname').val() == '')
       $('.mf_uname').val(MFl10n.uname);
     //Empty when clicked
     $('.mf_uname').focus(function() {
-      if($(this).val() == MFl10n.uname) {
+      if ($(this).val() == MFl10n.uname) {
         $(this).val('');
       }
     });
     //Fill again if empty on blur
     $('.mf_uname').blur(function() {
-      if($(this).val() == '') {
+      if ($(this).val() == '') {
         $(this).val(MFl10n.uname);
       }
     });
     //Password
     //Load initial text
-    if($('.mf_pwd').val() == '')
+    if ($('.mf_pwd').val() == '')
       $('.mf_pwd').val('********');
     //Empty when clicked
     $('.mf_pwd').focus(function() {
-      if($(this).val() == '********') {
+      if ($(this).val() == '********') {
         $(this).val('');
       }
     });
     //Fill again if empty on blur
     $('.mf_pwd').blur(function() {
-      if($(this).val() == '') {
+      if ($(this).val() == '') {
         $(this).val('********');
       }
     });
     //Search
     //Load initial text
-    if($('.mf_search').val() == '')
+    if ($('.mf_search').val() == '')
       $('.mf_search').val(MFl10n.search);
     //Empty when clicked
     $('.mf_search').focus(function() {
-      if($(this).val() == MFl10n.search) {
+      if ($(this).val() == MFl10n.search) {
         $(this).val('');
       }
     });
     //Fill again if empty on blur
     $('.mf_search').blur(function() {
-      if($(this).val() == '') {
+      if ($(this).val() == '') {
         $(this).val(MFl10n.search);
       }
     });

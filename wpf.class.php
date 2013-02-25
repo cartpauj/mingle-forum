@@ -212,7 +212,8 @@ if (!class_exists('mingleforum'))
       {
         //Not using the stylesheet yet as it causes some problems if loaded before the theme's stylesheets
         //wp_enqueue_style('mingle-forum-skin-css', $this->skin_url.'/style.css');
-        wp_enqueue_script('mingle-forum-js', plugin_dir_url(__FILE__) . "js/script.js", array('jquery'));
+        wp_enqueue_script('mingle-forum-cookie-js', WPFURL . "js/cookie.js", array('jquery'));
+        wp_enqueue_script('mingle-forum-js', WPFURL . "js/script.js", array('jquery'));
         wp_localize_script('mingle-forum-js', 'MFl10n', $localized);
       }
     }
