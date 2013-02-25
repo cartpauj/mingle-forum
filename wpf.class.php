@@ -1860,7 +1860,7 @@ if (!class_exists('mingleforum'))
                 <input placeholder='" . __("Username: ", "mingleforum") . "' type='text' name='log' id='log' value='' size='15' class='wpf-input' />
 
                 <span aria-hidden='true' class='icon-password'></span>
-				<input placeholder='" . __("Password: ", "mingleforum") . "' type='password' name='pwd' id='pwd' size='15' value='' class='wpf-input' />
+                <input placeholder='" . __("Password: ", "mingleforum") . "' type='password' name='pwd' id='pwd' size='15' value='' class='wpf-input' />
 
                 <input name='rememberme' id='rememberme' type='hidden' value='forever' />
                 <input type='hidden' name='redirect_to' value='" . $_SERVER['REQUEST_URI'] . "' />
@@ -2077,7 +2077,7 @@ if (!class_exists('mingleforum'))
                     {$avatar}
                     <h4 style='display:inline;vertical-align:middle;'>{$welcome}</h4>
                     <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
-					 <input placeholder='" . __("Search forums", "mingleforum") . "' type='text' name='search_words' class='wpf-input' value='' />
+                     <input placeholder='" . __("Search forums", "mingleforum") . "' type='text' name='search_words' class='wpf-input' value='' />
                     </form>
                   </th>
                 </tr>
@@ -2745,7 +2745,7 @@ if (!class_exists('mingleforum'))
         $wpf_captcha = new CaptchaCode();
         $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
 
-        $out .= "	<tr>
+        $out .= "<tr>
               <td><img alt='' src='" . WPFURL . "captcha/captcha_images.php?width=120&height=40&code=" . $wpf_code . "' />
               <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'></td>
               <td>" . __("Security Code:", "mingleforum") . "<input id='wpf_security_code' name='wpf_security_code' type='text' class='wpf-input'/></td>
@@ -2768,7 +2768,7 @@ if (!class_exists('mingleforum'))
         include_once("captcha/captcha_code.php");
         $wpf_captcha = new CaptchaCode();
         $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
-        $out .= "	<tr>
+        $out .= "<tr>
                 <td>
                   <img src='" . WPFURL . "captcha/captcha_images.php?width=120&height=40&code=" . $wpf_code . "' />
                   <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'><br/>

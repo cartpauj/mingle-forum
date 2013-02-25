@@ -951,7 +951,7 @@ class mingleforumadmin
           </tr>";
         } // foreach($forums as $forum)
       } // if($forums)
-      echo "	<tr>
+      echo "<tr>
     <td colspan='2' align='left'><input type='submit' name='delete_forum_groups' class='button-secondary delete' value='" . __("Delete", "mingleforum") . "'/></td>
           <td colspan='3' align='right'><a href='admin.php?page=mfstructure&mingleforum_action=structure&do=addforum&groupid=$group->id'>" . __("Add forum", "mingleforum") . "</a></td>
         </tr>
