@@ -2707,7 +2707,7 @@ if (!class_exists('mingleforum'))
                 <td valign='top' class='wpf-alt'><a href='" . $this->get_threadlink($result->parent_id) . "'>" . stripslashes($result->subject) . "</a>
                 </td>
                 <td valign='top'><small>" . round($result->score * $const, 1) . "%</small></td>
-                <td valign='top' nowrap='nowrap' class='wpf-alt'>" . $this->profile_link($starter) . "</td>
+                <td valign='top' nowrap='nowrap' class='wpf-alt'><span class='img-avatar-forumstats' >" . $this->get_avatar($starter, 15) . "</span>" . $this->profile_link($starter) . "</td>
                 <td valign='top' class='wpf-alt' nowrap='nowrap'>" . $this->format_date($result->date) . "</td>
               </tr>";
         }
