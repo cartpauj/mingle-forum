@@ -37,7 +37,7 @@ if (!class_exists('mingleforum'))
       add_filter('mf_ad_above_branding', array($this, 'mf_ad_above_branding'));
       add_filter('mf_ad_above_info_center', array($this, 'mf_ad_above_info_center'));
       add_filter('mf_ad_above_quick_reply', array($this, 'mf_ad_above_quick_reply'));
-      add_filter('mf_ad_above_breadcrumbs', array($this, 'mf_ad_above_breadcrumbs'));
+      add_filter('mf_ad_below_menu', array($this, 'mf_ad_below_menu'));
       add_filter('mf_ad_below_first_post', array($this, 'mf_ad_below_first_post'));
       add_filter("wp_title", array($this, "set_pagetitle"));
       add_filter('jetpack_enable_open_graph', '__return_false', 99); //Fix for duplication with JetPack
@@ -125,8 +125,8 @@ if (!class_exists('mingleforum'))
           'mf_ad_above_info_center' => '',
           'mf_ad_above_quick_reply_on' => false,
           'mf_ad_above_quick_reply' => '',
-          'mf_ad_above_breadcrumbs_on' => false,
-          'mf_ad_above_breadcrumbs' => '',
+          'mf_ad_below_menu_on' => false,
+          'mf_ad_below_menu' => '',
           'mf_ad_below_first_post_on' => false,
           'mf_ad_below_first_post' => '',
           'mf_ad_custom_css' => '');
@@ -1832,6 +1832,8 @@ if (!class_exists('mingleforum'))
       }
 
       $menu .= "</tr></table>";
+      
+      $menu .= apply_filters('mf_ad_below_menu', ''); //Adsense Area -- Below menu
 
       return $menu;
     }
@@ -2014,7 +2016,7 @@ if (!class_exists('mingleforum'))
       if ($this->current_view == NEWTOPIC)
         $trail .= " <span class='wpf_nav_sep'>&rarr;</span> " . __("New Topic", "mingleforum");
 
-      return apply_filters('mf_ad_above_breadcrumbs', '') . "<p id='trail' class='breadcrumbs'>{$trail}</p>"; //Adsense Area -- Above Breadcrumbs
+      return "<p id='trail' class='breadcrumbs'>{$trail}</p>";
     }
 
     public function last_visit()
@@ -3098,10 +3100,10 @@ if (!class_exists('mingleforum'))
       return $str;
     }
 
-    public function mf_ad_above_breadcrumbs()
+    public function mf_ad_below_menu()
     {
-      if ($this->ads_options['mf_ad_above_breadcrumbs_on'])
-        $str = "<br/><div class='mf-ad-above-breadcrumbs'>" . stripslashes($this->ads_options['mf_ad_above_breadcrumbs']) . "</div>";
+      if ($this->ads_options['mf_ad_below_menu_on'])
+        $str = "<br/><div class='mf-ad-below-menu'>" . stripslashes($this->ads_options['mf_ad_below_menu']) . "</div>";
       else
         $str = '';
 

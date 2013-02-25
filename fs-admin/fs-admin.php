@@ -1257,15 +1257,15 @@ class mingleforumadmin
             </tr>
             <tr>
               <td>
-                <input type="checkbox" name="mf_ad_above_breadcrumbs_on" value="true" <?php
-                if ($mingleforum->ads_options['mf_ad_above_breadcrumbs_on'])
+                <input type="checkbox" name="mf_ad_below_menu_on" value="true" <?php
+                if ($mingleforum->ads_options['mf_ad_below_menu_on'])
                 {
                   echo 'checked="checked"';
                 }
                 ?> />
-                <strong><?php echo __('Enable Area Above Breadcrumbs', 'mingleforum'); ?></strong><br/>
-                <textarea name="mf_ad_above_breadcrumbs_text" rows="10" cols="60"><?php echo stripslashes($mingleforum->ads_options['mf_ad_above_breadcrumbs']) ?></textarea><br/>
-                <small><strong><?php echo __('css-value:', 'mingleforum'); ?></strong> div.mf-ad-above-breadcrumbs</small>
+                <strong><?php echo __('Enable Area Below Menu', 'mingleforum'); ?></strong><br/>
+                <textarea name="mf_ad_below_menu_text" rows="10" cols="60"><?php echo stripslashes($mingleforum->ads_options['mf_ad_below_menu']) ?></textarea><br/>
+                <small><strong><?php echo __('css-value:', 'mingleforum'); ?></strong> div.mf-ad-below-menu</small>
               </td>
             </tr>
             <tr>
@@ -1318,27 +1318,31 @@ class mingleforumadmin
   function save_mf_ads()
   {
     global $mingleforum;
+
     if (isset($_POST['mf_ads_admin_save']))
     {
-      $mingleforum->ads_options = array('mf_ad_above_forum_on' => $_POST['mf_ad_above_forum_on'],
+      $mingleforum->ads_options = array('mf_ad_above_forum_on' => isset($_POST['mf_ad_above_forum_on']),
           'mf_ad_above_forum' => $_POST['mf_ad_above_forum_text'],
-          'mf_ad_below_forum_on' => $_POST['mf_ad_below_forum_on'],
+          'mf_ad_below_forum_on' => isset($_POST['mf_ad_below_forum_on']),
           'mf_ad_below_forum' => $_POST['mf_ad_below_forum_text'],
-          'mf_ad_above_branding_on' => $_POST['mf_ad_above_branding_on'],
+          'mf_ad_above_branding_on' => isset($_POST['mf_ad_above_branding_on']),
           'mf_ad_above_branding' => $_POST['mf_ad_above_branding_text'],
-          'mf_ad_above_info_center_on' => $_POST['mf_ad_above_info_center_on'],
+          'mf_ad_above_info_center_on' => isset($_POST['mf_ad_above_info_center_on']),
           'mf_ad_above_info_center' => $_POST['mf_ad_above_info_center_text'],
-          'mf_ad_above_quick_reply_on' => $_POST['mf_ad_above_quick_reply_on'],
+          'mf_ad_above_quick_reply_on' => isset($_POST['mf_ad_above_quick_reply_on']),
           'mf_ad_above_quick_reply' => $_POST['mf_ad_above_quick_reply_text'],
-          'mf_ad_above_breadcrumbs_on' => $_POST['mf_ad_above_breadcrumbs_on'],
-          'mf_ad_above_breadcrumbs' => $_POST['mf_ad_above_breadcrumbs_text'],
-          'mf_ad_below_first_post_on' => $_POST['mf_ad_below_first_post_on'],
+          'mf_ad_below_menu_on' => isset($_POST['mf_ad_below_menu_on']),
+          'mf_ad_below_menu' => $_POST['mf_ad_below_menu_text'],
+          'mf_ad_below_first_post_on' => isset($_POST['mf_ad_below_first_post_on']),
           'mf_ad_below_first_post' => $_POST['mf_ad_below_first_post_text'],
           'mf_ad_custom_css' => strip_tags($_POST['mf_ad_custom_css'])
       );
+
       update_option('mingleforum_ads_options', $mingleforum->ads_options);
+
       return true;
     }
+
     return false;
   }
 
