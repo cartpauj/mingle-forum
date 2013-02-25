@@ -228,7 +228,8 @@ if (!class_exists('mingleforum'))
         <?php endif; ?>
 
         <link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
-        <?php endif;
+        <?php
+      endif;
     }
 
     public function enqueue_admin_scripts($hook)
@@ -295,7 +296,7 @@ if (!class_exists('mingleforum'))
       $widget_option = get_option("wpf_widget");
 
       echo '<p><label for="wpf_title">' . __('Title to display in the sidebar:', 'mingleforum') . '
-        <input style="width: 250px;" id="wpf_title" name="wpf_title" type="text" class="wpf-input" value="'.$widget_option['wpf_title'].' /></label></p>';
+        <input style="width: 250px;" id="wpf_title" name="wpf_title" type="text" class="wpf-input" value="' . $widget_option['wpf_title'] . ' /></label></p>';
       echo '<p><label for="wpf_num">' . __('How many items would you like to display?', 'mingleforum');
       echo '<select name="wpf_num">';
 
@@ -304,7 +305,7 @@ if (!class_exists('mingleforum'))
           $selected = 'selected="selected';
         else
           $selected = '';
-      echo '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
+      echo '<option value="' . $i . '" ' . $selected . '>' . $i . '</option>';
 
       echo '</select>';
       echo '</label></p> <input type="hidden" id="wpf_submit" name="wpf_submit" value="1" />';
@@ -715,7 +716,7 @@ if (!class_exists('mingleforum'))
       if (!$this->options['forum_hide_branding'])
       {
         $this->o .= apply_filters('mf_ad_above_branding', ''); //Adsense Area -- Above Branding
-        $this->o .= '<div id="wpf-info"><small><img style="margin: 0 3px -3px 0;" alt="" align="top" src="' . WPFURL . '/images/logo.png" />' . __('Mingle Forum by', 'mingleforum') . ' <a href="http://cartpauj.com">Cartpauj</a> | ' . __('Version:', 'mingleforum') . $this->get_version() . ' | ' . $load. '</small></div>';
+        $this->o .= '<div id="wpf-info"><small><img style="margin: 0 3px -3px 0;" alt="" align="top" src="' . WPFURL . '/images/logo.png" />' . __('Mingle Forum by', 'mingleforum') . ' <a href="http://cartpauj.com">Cartpauj</a> | ' . __('Version:', 'mingleforum') . $this->get_version() . ' | ' . $load . '</small></div>';
       }
 
       $above_forum_ad = apply_filters('mf_ad_above_forum', ''); //Adsense Area -- Above Forum
@@ -1489,7 +1490,7 @@ if (!class_exists('mingleforum'))
       if ($forums == "mod_global")
         return true;
 
-      return in_array($forum_id, (array)$forums);
+      return in_array($forum_id, (array) $forums);
     }
 
     public function get_users()
@@ -2600,7 +2601,7 @@ if (!class_exists('mingleforum'))
     {
       $this->current_view = PROFILE;
 
-      $user_id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : false;
+      $user_id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int) $_GET['id'] : false;
 
       wp_die(__('This user does not exist.', 'mingleforum'));
 
@@ -2835,13 +2836,13 @@ if (!class_exists('mingleforum'))
       $submitter_email = (!$user_ID) ? "guest@nosite.com" : $this->get_userdata($user_ID, 'user_email');
       $sender = get_bloginfo("name");
       $to = get_bloginfo("admin_email");
-      $subject =  __("New Forum content - ", "mingleforum") . $subject;
-      $message =  __("DETAILS:", "mingleforum") . "<br/><br/>" .
-                  __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
-                  __("Email:", "mingleforum") . " " . $submitter_email . "<br/>" .
-                  __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
-                  __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
-                  __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
+      $subject = __("New Forum content - ", "mingleforum") . $subject;
+      $message = __("DETAILS:", "mingleforum") . "<br/><br/>" .
+              __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
+              __("Email:", "mingleforum") . " " . $submitter_email . "<br/>" .
+              __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
+              __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
+              __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
       $headers = "MIME-Version: 1.0\r\n" .
               "From: " . $sender . " " . "<" . $to . ">\n" .
               "Content-Type: text/HTML; charset=\"" . get_option('blog_charset') . "\"\r\n";
