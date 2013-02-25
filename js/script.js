@@ -1,14 +1,10 @@
 // Surrounds the selected text with text1 and text2.
-function surroundText(tag1, tag2, myarea)
-{
-  if (document.selection) //IE
-  {
+function surroundText(tag1, tag2, myarea) {
+  if (document.selection) { //IE
     myarea.focus();
     var sel = document.selection.createRange();
     sel.text = tag1 + sel.text + tag2;
-  }
-  else //Other Browsers
-  {
+  } else { //Other Browsers
     var len = myarea.value.length;
     var start = myarea.selectionStart;
     var end = myarea.selectionEnd;
@@ -23,10 +19,8 @@ function surroundText(tag1, tag2, myarea)
 }
 
 // Invert all checkboxes at once by clicking a single checkbox.
-function invertAll(headerfield, checkform, mask)
-{
-  for (var i = 0; i < checkform.length; i++)
-  {
+function invertAll(headerfield, checkform, mask) {
+  for (var i = 0; i < checkform.length; i++) {
     if (typeof(checkform[i].name) === "undefined" || (typeof(mask) !== "undefined" && checkform[i].name.substr(0, mask.length) !== mask))
       continue;
 
@@ -48,45 +42,38 @@ function wpf_confirm() {
 }
 
 // Cookies management =3
-function getCookie()
-{
+function getCookie(name) {
   var i, x, y, ARRcookies = document.cookie.split(";");
-  for (i = 0; i < ARRcookies.length; i++)
-  {
+
+  for (i = 0; i < ARRcookies.length; i++) {
     x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
     y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
     x = x.replace(/^\s+|\s+$/g, "");
-    if (x === 'mf_groups')
-    {
+
+    if (x === name)
       return unescape(y).split(',');
-    }
   }
 }
 
-function setCookie(value, exdays)
-{
+function setCookie(value, exdays, name) {
   value = value.join(',');
   var exdate = new Date();
   exdate.setDate(exdate.getDate() + exdays);
   var c_value = escape(value) + ((exdays === null) ? "" : "; expires=" + exdate.toUTCString());
-  document.cookie = "mf_groups=" + c_value;
+  document.cookie = name + "=" + c_value;
 }
 
 function placeHolder(ele) {
   if (ele.value === ele.defaultValue)
-  {
     ele.value = '';
-  }
   else if (ele.value === '')
-  {
     ele.value = ele.defaultValue;
-  }
 }
 
 (function($) {
   $(document).ready(function() {
     //Show/Hide groups
-    var groups_cookie = getCookie();
+    var groups_cookie = getCookie('mf_groups');
     //Loop through the cookie and hide categories that have been hidden before
     for (var id in groups_cookie) {
       $('tr.group-shrink-' + id).hide();
@@ -101,13 +88,13 @@ function placeHolder(ele) {
         $('tr.group-shrink-' + id).fadeIn(800);
         $('a#shown-' + id).show();
         groups_cookie.splice(groups_cookie.indexOf(id), 1);
-        setCookie(groups_cookie);
+        setCookie(groups_cookie, null, 'mf_groups');
         $(this).hide();
       } else {
         $('tr.group-shrink-' + id).fadeOut(200);
         $('a#hidden-' + id).show();
         groups_cookie.push(id);
-        setCookie(groups_cookie);
+        setCookie(groups_cookie, null, 'mf_groups');
         $(this).hide();
       }
 
