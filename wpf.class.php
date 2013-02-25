@@ -1856,10 +1856,10 @@ if (!class_exists('mingleforum'))
     public function login_form()
     {
       return "<form class='login-form' action='" . wp_login_url() . "' method='post'>
-                <span class='icon-my-profile'></span>
+                <span aria-hidden='true' class='icon-my-profile'></span>
                 <input onfocus='placeholder(this)' onblur='placeholder(this)' type='text' name='log' id='log' value='" . __("Username: ", "mingleforum") . "' size='15' class='wpf-input' />
 
-                <span class='icon-password'></span>
+                <span aria-hidden='true' class='icon-password'></span>
 				<input onfocus='placeholder(this)' onblur='placeholder(this)' type='password' name='pwd' id='pwd' size='15' value='" . __("Password: ", "mingleforum") . "' class='wpf-input' />
 
                 <input name='rememberme' id='rememberme' type='hidden' value='forever' />
