@@ -228,8 +228,7 @@ if (!class_exists('mingleforum'))
         <?php endif; ?>
 
         <link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
-        <?php
-      endif;
+        <?php endif;
     }
 
     public function enqueue_admin_scripts($hook)
@@ -295,20 +294,20 @@ if (!class_exists('mingleforum'))
       }
       $widget_option = get_option("wpf_widget");
 
-      echo "<p><label for='wpf_title'>" . __("Title to display in the sidebar:", "mingleforum") . "
-        <input style='width: 250px;' id='wpf_title' name='wpf_title' type='text' class='wpf-input' value='{$widget_option['wpf_title']}' /></label></p>";
-      echo "<p><label for='wpf_num'>" . __("How many items would you like to display?", "mingleforum");
-      echo "<select name='wpf_num'>";
+      echo '<p><label for="wpf_title">' . __('Title to display in the sidebar:', 'mingleforum') . '
+        <input style="width: 250px;" id="wpf_title" name="wpf_title" type="text" class="wpf-input" value="'.$widget_option['wpf_title'].' /></label></p>';
+      echo '<p><label for="wpf_num">' . __('How many items would you like to display?', 'mingleforum');
+      echo '<select name="wpf_num">';
 
       for ($i = 1; $i < 21; ++$i)
         if ($widget_option["wpf_num"] == $i)
-          $selected = "selected = 'selected'";
+          $selected = 'selected="selected';
         else
-          $selected = "";
-      echo "<option value='{$i}' {$selected}>{$i}</option>";
+          $selected = '';
+      echo '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
 
-      echo "</select>";
-      echo "</label></p> <input type='hidden' id='wpf_submit' name='wpf_submit' value='1' />";
+      echo '</select>';
+      echo '</label></p> <input type="hidden" id="wpf_submit" name="wpf_submit" value="1" />';
     }
 
     public function wpf_footer()
@@ -716,13 +715,13 @@ if (!class_exists('mingleforum'))
       if (!$this->options['forum_hide_branding'])
       {
         $this->o .= apply_filters('mf_ad_above_branding', ''); //Adsense Area -- Above Branding
-        $this->o .= "<div id='wpf-info'><small><img  style='margin: 0 3px -3px 0 ;' alt='' align='top' src='" . WPFURL . "/images/logo.png' /> " . __("Mingle Forum ", "mingleforum") . " by <a href='http://cartpauj.com'>cartpauj</a> | " . __("Version:", "mingleforum") . $this->get_version() . " | {$load}</small></div>";
+        $this->o .= '<div id"wpf-info"><small><img style="margin: 0 3px -3px 0;" align="top" src="' . WPFURL . '/images/logo.png" />' . __('Mingle Forum by', 'mingleforum') . ' ' . '<a href="http://cartpauj.com">Cartpauj</a> | ' . __('Version:', 'mingleforum') . $this->get_version() . ' | ' . $load .'</small></div>';
       }
 
       $above_forum_ad = apply_filters('mf_ad_above_forum', ''); //Adsense Area -- Above Forum
       $below_forum_ad = apply_filters('mf_ad_below_forum', ''); //Adsense Area -- Below Forum
 
-      echo $above_forum_ad . "<div id='wpf-wrapper'>" . $this->trail() . $this->o . "</div>" . $below_forum_ad;
+      echo $above_forum_ad . '<div id="wpf-wrapper">' . $this->trail() . $this->o . '</div>' . $below_forum_ad;
 
       return ob_get_clean();
     }
@@ -1636,7 +1635,7 @@ if (!class_exists('mingleforum'))
         if ($this->options['forum_db_version'] < 2 || $force)
         {
           //We need to kill this one after we fix how the forum search works
-          $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM;"); //InnoDB doesn't support FULLTEXT
+          $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM"); //InnoDB doesn't support FULLTEXT
           $wpdb->query("ALTER TABLE {$this->t_posts} ADD FULLTEXT (`text`)");
         }
 
@@ -1919,22 +1918,28 @@ if (!class_exists('mingleforum'))
 
     public function forum_get_group_id($group)
     {
-      $group = ($group) ? $group : 0;
       global $wpdb;
+
+      $group = ($group) ? $group : 0;
+
       return $wpdb->get_var($wpdb->prepare("SELECT id FROM {$this->t_groups} WHERE id = %d", $group));
     }
 
     public function forum_get_parent($forum)
     {
-      $forum = ($forum) ? $forum : 0;
       global $wpdb;
+
+      $forum = ($forum) ? $forum : 0;
+
       return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_forums} WHERE id = %d", $forum));
     }
 
     public function forum_get_forum_from_post($thread)
     {
-      $thread = ($thread) ? $thread : 0;
       global $wpdb;
+
+      $thread = ($thread) ? $thread : 0;
+
       return $wpdb->get_var($wpdb->prepare("SELECT parent_id FROM {$this->t_threads} WHERE id = %d", $thread));
     }
 
@@ -2058,6 +2063,7 @@ if (!class_exists('mingleforum'))
     public function header()
     {
       global $user_ID;
+
       $this->setup_links();
       $avatar = $this->get_avatar((int) $user_ID, 30);
 
@@ -2230,7 +2236,7 @@ if (!class_exists('mingleforum'))
         exit;
       }
       else
-        wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
+        wp_die(__("You do not have permission to move this topic.", "mingleforum"));
     }
 
     public function remove_post()
@@ -2238,28 +2244,22 @@ if (!class_exists('mingleforum'))
       global $user_ID, $wpdb;
 
       $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-      $thread = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id from {$this->t_posts} where id = %d", $id));
+      $thread = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id FROM {$this->t_posts} WHERE id = %d", $id));
 
-      $del = "fail";
-      if (current_user_can("administrator") || is_super_admin($user_ID))
-        $del = "ok";
-      if ($this->is_moderator($user_ID, $this->current_forum))
-        $del = "ok";
-      if ($user_ID == $thread->author_id)
-        $del = "ok";
-
-      if ($del == "ok")
+      if ($this->is_moderator($user_ID, $this->current_forum) || $user_ID == $thread->author_id)
       {
         $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
         $nbmsg = $wpdb->get_var("SELECT COUNT(*) FROM {$this->t_posts} WHERE parent_id = %d", $thread->parent_id);
+
         if (!$nbmsg)
         {
           $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $thread->parent_id));
         }
+
         $this->o .= "<div class='wpf-info'><div class='updated'><span aria-hidden='true' class='icon-warning'>" . __("Post deleted", "mingleforum") . "</div></div>";
       }
       else
-        wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
+        wp_die(__("You do not have permission to delete this post.", "mingleforum"));
     }
 
     public function sticky_post()
@@ -2604,13 +2604,13 @@ if (!class_exists('mingleforum'))
     {
       $this->current_view = PROFILE;
 
-      if (is_numeric($_GET['id'])) //Security fix to prevent SQL injections
-        $user_id = $_GET['id'];
-      else
-        $user_id = 0;
+      $user_id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int)$_GET['id'] : false;
+
+      wp_die(__('This user does not exist.', 'mingleforum'));
 
       $user = get_userdata($user_id);
       $this->header();
+      //Need to move this to its own view
       $o = "<div class='wpf'>
         <table class='wpf-table' cellpadding='0' cellspacing='0' width='100%'>
           <tr>
@@ -2657,7 +2657,9 @@ if (!class_exists('mingleforum'))
               </table>
             </td>
           </tr>
-        </table></div>";
+        </table>
+      </div>";
+
       $this->o .= $o;
       $this->footer();
     }
@@ -2670,10 +2672,12 @@ if (!class_exists('mingleforum'))
       $this->current_view = SEARCH;
       $this->header();
       $search_string = $wpdb->escape($_POST['search_words']);
+
       $sql = $wpdb->prepare("SELECT {$this->t_posts}.id, `text`, {$this->t_posts}.subject, {$this->t_posts}.parent_id, {$this->t_posts}.`date`, MATCH (`text`) AGAINST (%s) AS score
       FROM {$this->t_posts} JOIN {$this->t_threads} ON {$this->t_posts}.parent_id = {$this->t_threads}.id
       AND MATCH (`text`) AGAINST (%s)
       ORDER BY score DESC LIMIT 50", $search_string, $search_string);
+
       $results = $wpdb->get_results($sql);
       $max = 0;
 
@@ -2743,6 +2747,7 @@ if (!class_exists('mingleforum'))
         include_once("captcha/captcha_code.php");
         $wpf_captcha = new CaptchaCode();
         $wpf_code = wpf_str_encrypt($wpf_captcha->generateCode(6));
+
         $out .= "	<tr>
               <td><img alt='' src='" . WPFURL . "captcha/captcha_images.php?width=120&height=40&code=" . $wpf_code . "' />
               <input type='hidden' name='wpf_security_check' value='" . $wpf_code . "'></td>
@@ -2834,13 +2839,13 @@ if (!class_exists('mingleforum'))
       $submitter_email = (!$user_ID) ? "guest@nosite.com" : $this->get_userdata($user_ID, 'user_email');
       $sender = get_bloginfo("name");
       $to = get_bloginfo("admin_email");
-      $subject = __("New Forum content - ", "mingleforum") . $subject;
-      $message = __("DETAILS:", "mingleforum") . "<br/><br/>" .
-              __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
-              __("Email:", "mingleforum") . " " . $submitter_email . "<br/>" .
-              __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
-              __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
-              __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
+      $subject =  __("New Forum content - ", "mingleforum") . $subject;
+      $message =  __("DETAILS:", "mingleforum") . "<br/><br/>" .
+                  __("Name:", "mingleforum") . " " . $submitter_name . "<br/>" .
+                  __("Email:", "mingleforum") . " " . $submitter_email . "<br/>" .
+                  __("Date:", "mingleforum") . " " . $this->format_date($date) . "<br/>" .
+                  __("Reply Content:", "mingleforum") . "<br/>" . $content . "<br/><br/>" .
+                  __("View Post Here:", "mingleforum") . " " . $this->get_threadlink($thread_id);
       $headers = "MIME-Version: 1.0\r\n" .
               "From: " . $sender . " " . "<" . $to . ">\n" .
               "Content-Type: text/HTML; charset=\"" . get_option('blog_charset') . "\"\r\n";
@@ -2930,12 +2935,12 @@ if (!class_exists('mingleforum'))
             $permalink = get_permalink($mngl_options->inbox_page_id);
             $param_char = MnglAppController::get_param_delimiter_char($permalink);
 
-            return "<a href='" . $permalink . $param_char . "u=" . $id . "'>" . __("Send Message", "mingleforum") . "</a><br/>";
+            return '<a href="' . $permalink . $param_char . 'u=' . $id . '">' . __("Send Message", "mingleforum") . '</a><br/>';
           }
         }
       }
 
-      return "";
+      return '';
     }
 
     //Eventually we're going to drop support for Mingle and rename the Forum
@@ -2955,20 +2960,6 @@ if (!class_exists('mingleforum'))
       $result = str_replace(".", "", $version);
 
       return (int) $result;
-    }
-
-    public function admin_get_pages()
-    {
-      global $wpdb;
-
-      $query = "SELECT * FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type = 'page'";
-
-      $results = $wpdb->get_results($query);
-
-      if ($results)
-        return $results;
-      else
-        return array();
     }
 
     //SEO Friendly URL stuff
@@ -3030,7 +3021,7 @@ if (!class_exists('mingleforum'))
 
       if (!empty($threads))
       {
-        $out = "<?xml version='1.0' encoding='UTF-8'?>" . $nl . "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>" . $nl;
+        $out = '<?xml version="1.0" encoding="UTF-8"?>' . $nl . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . $nl;
 
         foreach ($threads as $t)
         {
