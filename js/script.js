@@ -47,41 +47,52 @@ function wpf_confirm() {
     return true;
 }
 
+// Cookies management =3
+function getCookie()
+{
+  var i, x, y, ARRcookies = document.cookie.split(";");
+  for (i = 0; i < ARRcookies.length; i++)
+  {
+    x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+    y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+    x = x.replace(/^\s+|\s+$/g, "");
+    if (x === 'mf_groups')
+    {
+      return unescape(y).split(',');
+    }
+  }
+}
+
+function setCookie(value, exdays)
+{
+  value = value.join(',');
+  var exdate = new Date();
+  exdate.setDate(exdate.getDate() + exdays);
+  var c_value = escape(value) + ((exdays === null) ? "" : "; expires=" + exdate.toUTCString());
+  document.cookie = "mf_groups=" + c_value;
+}
+
+function placeHolder(ele) {
+  if (ele.value === ele.defaultValue)
+  {
+    ele.value = '';
+  }
+  else if (ele.value === '')
+  {
+    ele.value = ele.defaultValue;
+  }
+}
+
 (function($) {
   $(document).ready(function() {
-    //Cookie Array Handler
-    var cookieList = function(cookieName) {
-      var cookie = $.cookie(cookieName);
-      var items = cookie ? cookie.split(/,/) : new Array();
-
-      return {
-        "add": function(val) {
-            items.push(val);
-            $.cookie(cookieName, items.join(','));
-        },
-        "remove": function (val) { 
-            indx = items.indexOf(val); 
-            if(indx!=-1) items.splice(indx, 1); 
-            $.cookie(cookieName, items.join(','));
-        },
-        "clear": function() {
-            items = null;
-            $.cookie(cookieName, null);
-        },
-        "items": function() {
-            return items;
-        }
-      }
-    }
-
     //Show/Hide groups
-    var groups_cookie = new cookieList('mf_groups');
+    var groups_cookie = getCookie();
     //Loop through the cookie and hide categories that have been hidden before
-    groups_cookie.items().map(function(id) {
+    for (var id in groups_cookie) {
       $('tr.group-shrink-' + id).hide();
       $('a#shown-' + id).hide();
       $('a#hidden-' + id).show();
-    });
+    }
 
     $('a.wpf_click_me').click(function() {
       var id = $(this).attr('data-value');
@@ -89,66 +100,18 @@ function wpf_confirm() {
       if ($(this).hasClass('show-hide-hidden')) {
         $('tr.group-shrink-' + id).fadeIn(800);
         $('a#shown-' + id).show();
-        groups_cookie.remove(id);
+        groups_cookie.splice(groups_cookie.indexOf(id), 1);
+        setCookie(groups_cookie);
         $(this).hide();
       } else {
         $('tr.group-shrink-' + id).fadeOut(200);
         $('a#hidden-' + id).show();
-        groups_cookie.add(id);
+        groups_cookie.push(id);
+        setCookie(groups_cookie);
         $(this).hide();
       }
 
       return false;
-    });
-
-    //Add a placeholder to the input boxes
-    //Username
-    //Load initial text
-    if ($('.mf_uname').val() == '')
-      $('.mf_uname').val(MFl10n.uname);
-    //Empty when clicked
-    $('.mf_uname').focus(function() {
-      if ($(this).val() == MFl10n.uname) {
-        $(this).val('');
-      }
-    });
-    //Fill again if empty on blur
-    $('.mf_uname').blur(function() {
-      if ($(this).val() == '') {
-        $(this).val(MFl10n.uname);
-      }
-    });
-    //Password
-    //Load initial text
-    if ($('.mf_pwd').val() == '')
-      $('.mf_pwd').val('********');
-    //Empty when clicked
-    $('.mf_pwd').focus(function() {
-      if ($(this).val() == '********') {
-        $(this).val('');
-      }
-    });
-    //Fill again if empty on blur
-    $('.mf_pwd').blur(function() {
-      if ($(this).val() == '') {
-        $(this).val('********');
-      }
-    });
-    //Search
-    //Load initial text
-    if ($('.mf_search').val() == '')
-      $('.mf_search').val(MFl10n.search);
-    //Empty when clicked
-    $('.mf_search').focus(function() {
-      if ($(this).val() == MFl10n.search) {
-        $(this).val('');
-      }
-    });
-    //Fill again if empty on blur
-    $('.mf_search').blur(function() {
-      if ($(this).val() == '') {
-        $(this).val(MFl10n.search);
-      }
     });
   });
 })(jQuery);

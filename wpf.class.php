@@ -205,17 +205,12 @@ if (!class_exists('mingleforum'))
     {
       $this->setup_links();
 
-      $localized = array( 'uname' => __('Username', 'mingleforum'),
-                          'search' => __('Search', 'mingleforum') );
-
       //Let's be responsible and only load our shiz where it's needed
       if (is_page($this->page_id))
       {
         //Not using the stylesheet yet as it causes some problems if loaded before the theme's stylesheets
         //wp_enqueue_style('mingle-forum-skin-css', $this->skin_url.'/style.css');
-        wp_enqueue_script('mingle-forum-cookie-js', WPFURL . "js/cookie.js", array('jquery'));
         wp_enqueue_script('mingle-forum-js', WPFURL . "js/script.js", array('jquery'));
-        wp_localize_script('mingle-forum-js', 'MFl10n', $localized);
       }
     }
 
@@ -1841,7 +1836,7 @@ if (!class_exists('mingleforum'))
       }
 
       $menu .= "</tr></table>";
-      
+
       $menu .= apply_filters('mf_ad_below_menu', ''); //Adsense Area -- Below menu
 
       return $menu;
@@ -1873,10 +1868,10 @@ if (!class_exists('mingleforum'))
     {
       return "<form class='login-form' action='" . wp_login_url() . "' method='post'>
                 <span aria-hidden='true' class='icon-my-profile'></span>
-                <input type='text' name='log' id='log' value='' size='15' class='wpf-input mf_uname' />
+                <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='log' id='log' value='" . __("Username: ", "mingleforum") . "' size='15' class='wpf-input mf_uname' />
 
                 <span aria-hidden='true' class='icon-password'></span>
-                <input type='password' name='pwd' id='pwd' size='15' value='' class='wpf-input mf_pwd' />
+                <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='password' name='pwd' id='pwd' size='15' value='*******' class='wpf-input mf_pwd' />
 
                 <input name='rememberme' id='rememberme' type='hidden' value='forever' />
                 <input type='hidden' name='redirect_to' value='" . $_SERVER['REQUEST_URI'] . "' />
@@ -2093,7 +2088,7 @@ if (!class_exists('mingleforum'))
                     {$avatar}
                     <h4 style='display:inline;vertical-align:middle;'>{$welcome}</h4>
                     <form name='wpf_search_form' method='post' action='{$this->base_url}" . "search' style='float:right'>
-                     <input type='text' name='search_words' class='wpf-input mf_search' value='' />
+                     <input onfocus='placeHolder(this)' onblur='placeHolder(this)' type='text' name='search_words' class='wpf-input mf_search' value='" . __("Search forums", "mingleforum") . "' />
                     </form>
                   </th>
                 </tr>
@@ -2619,7 +2614,7 @@ if (!class_exists('mingleforum'))
 
       $user_id = (isset($_GET['id']) && !empty($_GET['id'])) ? (int) $_GET['id'] : false;
 
-      if(!$user_id)
+      if (!$user_id)
         wp_die(__('This user does not exist.', 'mingleforum'));
 
       $user = get_userdata($user_id);
