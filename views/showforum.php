@@ -26,7 +26,7 @@
       <?php foreach ($sticky_threads as $thread): ?>
         <tr>
           <td class="forumIcon" align="center">
-            <img src="<?php echo $this->skin_url; ?>/images/topic/normal_post_sticky.gif" /> <!-- hard coded img needs to be moved to css -->
+            <img src="<?php echo $this->skin_url; ?>/images/topic/normal_post_sticky.png" /> <!-- hard coded img needs to be moved to css -->
           </td>
           <td class="wpf-alt sticky wpf-topic-title">
             <span class="topicTitle">

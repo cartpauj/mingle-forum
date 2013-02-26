@@ -847,7 +847,7 @@ if (!class_exists('mingleforum'))
           $lv = strtotime($this->last_visit());
 
           if ($lp > $lv)
-            $image = '<img src="' . $this->skin_url . '/images/new.gif" alt="' . __("New posts since your last visit", "mingleforum") . '">';
+            $image = '<img src="' . $this->skin_url . '/images/new.png" alt="' . __("New posts since your last visit", "mingleforum") . '">';
         }
       }
 
@@ -926,9 +926,9 @@ if (!class_exists('mingleforum'))
 
           $out .= "<table class='wpf-post-table' width='100%' id='postid-{$post->id}'>
                     <tr><th class='wpf-bright author' style='text-align: center;' >" . $this->profile_link($post->author_id, true);
-          $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.gif' alt='" . __("Post", "mingleforum") . "' style='width:16px; padding-right:5px; margin:2px 0 0 0; '/>";
+          $out .= "<th class='wpf-bright author'><img align='left' src='{$this->skin_url}/images/post/xx.png' alt='" . __("Post", "mingleforum") . "' class='post-calendar-img'/>";
 
-          $out .= "<small>" . date_i18n($this->options['forum_date_format'], strtotime($post->date)) . "</small><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr class='{$class}'><td class='autorpostbox' valign='top' width='125'>";
+          $out .= "<span class='post-data-format'>" . date_i18n($this->options['forum_date_format'], strtotime($post->date)) . "</spanl><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr class='{$class}'><td class='autorpostbox' valign='top' width='125'>";
 
           $out .= "<div class='wpf-small'>" . $this->get_send_message_link($post->author_id);
 
@@ -954,7 +954,7 @@ if (!class_exists('mingleforum'))
                 <table width='100%' cellspacing='0' cellpadding='0' class='wpf-meta-table'>
 
                 <tr width='70%'>
-                  <td class='wpf-meta-topic' valign='top'>" . $this->get_topic_image($post->parent_id) . $this->get_postname($post->id) . "
+                  <td class='wpf-meta-topic' valign='top'><span class='wpf-meta-topic-img'>" . $this->get_topic_image($post->parent_id). "</span>" . $this->get_postname($post->id) . "
                     <span class='permalink'>
                     <a href='" . $this->get_paged_threadlink($post->parent_id, '#postid-' . $post->id) . "' title='" . __("Permalink", "mingleforum") . "'><img alt='' align='top' src='{$this->skin_url}/images/bbc/url.png' /> </a></span>
                   </td>
@@ -1031,25 +1031,25 @@ if (!class_exists('mingleforum'))
     {
       global $user_ID;
 
-      $o = "<table width='100%' cellspacing='0' cellpadding='0' style='margin:0; padding:0; border-collapse:collapse:' border='0'><tr>";
+      $o = "<table class='wpf-meta-button'width='100%' cellspacing='0' cellpadding='0' style='margin:0; padding:0; border-collapse:collapse:' border='0'><tr>";
 
       if ($this->options['forum_use_seo_friendly_urls'])
       {
         if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.gif' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.png' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "mingleforum") . "</a></td>";
         if ($this->is_moderator($user_ID, $this->current_forum))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.gif' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'> " . __("Remove", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'> " . __("Remove", "mingleforum") . "</a></td>";
         if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
           $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.gif' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "mingleforum") . "</a></td>";
       }
       else
       {
         if (($user_ID || $this->allow_unreg()) && (!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.gif' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/quote.png' alt='' align='left'><a href='{$this->post_reply_link}&quote={$post_id}.{$this->curr_page}'> " . __("Quote", "mingleforum") . "</a></td>";
         if ($this->is_moderator($user_ID, $this->current_forum))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.gif' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'> " . __("Remove", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->get_threadlink($this->current_thread) . "&remove_post&id={$post_id}'> " . __("Remove", "mingleforum") . "</a></td>";
         if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.gif' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "mingleforum") . "</a></td>";
       }
 
       $o .= "</tr></table>";
@@ -1139,7 +1139,7 @@ if (!class_exists('mingleforum'))
           {
             $alt = ($alt == "alt even") ? "odd" : "alt even";
             $this->o .= "<tr class='{$alt} group-shrink-{$g->id}'>";
-            $image = "off.gif";
+            $image = "off.png";
 
             if ($user_ID)
             {
@@ -1152,9 +1152,9 @@ if (!class_exists('mingleforum'))
                 $lv = strtotime($this->last_visit());
 
                 if ($lv < $lp)
-                  $image = "on.gif";
+                  $image = "on.png";
                 else
-                  $image = "off.gif";
+                  $image = "off.png";
               }
             }
 
@@ -1179,7 +1179,7 @@ if (!class_exists('mingleforum'))
 
       $this->o .= apply_filters('wpwf_new_posts', "<table>
             <tr>
-              <td><small><img alt='' align='top' src='{$this->skin_url}/images/new_some.gif' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.gif' /> " . __("No new posts", "mingleforum") . " - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></small></td>
+              <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "mingleforum") . " - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></span></td>
             </tr>
           </table><br class='clear'/>");
 
@@ -1209,7 +1209,7 @@ if (!class_exists('mingleforum'))
           {
             $alt = ($alt == "alt even") ? "odd" : "alt even";
             $this->o .= "<tr class='{$alt}'>";
-            $image = "off.gif";
+            $image = "off.png";
 
             if ($user_ID)
             {
@@ -1222,9 +1222,9 @@ if (!class_exists('mingleforum'))
                 $lv = strtotime($this->last_visit());
 
                 if ($lv < $lp)
-                  $image = "on.gif";
+                  $image = "on.png";
                 else
-                  $image = "off.gif";
+                  $image = "off.png";
               }
             }
 
@@ -1249,7 +1249,7 @@ if (!class_exists('mingleforum'))
 
       $this->o .= apply_filters('wpwf_new_posts', "<table>
             <tr>
-              <td><small><img alt='' align='top' src='{$this->skin_url}/images/new_some.gif' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.gif' /> " . __("No new posts", "mingleforum") . "</small></td>
+              <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "mingleforum") . "</span></td>
             </tr>
           </table><br class='clear'/>");
       $this->footer();
@@ -2540,7 +2540,7 @@ if (!class_exists('mingleforum'))
                     <th align='center' colspan='2'>" . __("Info Center", "mingleforum") . "</th>
                   </tr>
                   <tr>
-                    <td width='7%' class='forumIcon' align='center'><img alt='' src='{$this->skin_url}/images/icons/info.gif' /></td>
+                    <td width='7%' class='forumIcon' align='center'><img alt='' src='{$this->skin_url}/images/icons/info.png' /></td>
                     <td>
                       " . $this->num_posts_total() . " " . __("Posts in", "mingleforum") . " " . $this->num_threads_total() . " " . __("Topics Made by", "mingleforum") . " " . count($this->get_users()) . " " . __("Members", "mingleforum") . ". " . __("Latest Member:", "mingleforum") . "<span class='img-avatar-forumstats' >" . $this->get_avatar($this->latest_member(), 15) . "</span>" . $this->profile_link($this->latest_member()) . "
                       <br />" . $this->get_lastpost_all() . "
@@ -2732,16 +2732,16 @@ if (!class_exists('mingleforum'))
       $post_count = $this->num_posts($thread);
 
       if ($this->is_closed($thread))
-        return "<img src='{$this->skin_url}/images/topic/closed.gif' alt='" . __("Closed topic", "mingleforum") . "' title='" . __("Closed topic", "mingleforum") . "'>";
+        return "<img src='{$this->skin_url}/images/topic/closed.png' alt='" . __("Closed topic", "mingleforum") . "' title='" . __("Closed topic", "mingleforum") . "'>";
 
       if ($post_count < $this->options['hot_topic'])
-        return "<img src='{$this->skin_url}/images/topic/normal_post.gif' alt='" . __("Normal topic", "mingleforum") . "' title='" . __("Normal topic", "mingleforum") . "'>";
+        return "<img src='{$this->skin_url}/images/topic/normal_post.png' alt='" . __("Normal topic", "mingleforum") . "' title='" . __("Normal topic", "mingleforum") . "'>";
 
       if ($post_count >= $this->options['hot_topic'] && $post_count < $this->options['veryhot_topic'])
-        return "<img src='{$this->skin_url}/images/topic/hot_post.gif' alt='" . __("Hot topic", "mingleforum") . "' title='" . __("Hot topic", "mingleforum") . "'>";
+        return "<img src='{$this->skin_url}/images/topic/hot_post.png' alt='" . __("Hot topic", "mingleforum") . "' title='" . __("Hot topic", "mingleforum") . "'>";
 
       if ($post_count >= $this->options['veryhot_topic'])
-        return "<img src='{$this->skin_url}/images/topic/my_hot_post.gif' alt='" . __("Very Hot topic", "mingleforum") . "' title='" . __("Very Hot topic", "mingleforum") . "'>";
+        return "<img src='{$this->skin_url}/images/topic/my_hot_post.png' alt='" . __("Very Hot topic", "mingleforum") . "' title='" . __("Very Hot topic", "mingleforum") . "'>";
     }
 
     public function get_captcha()
