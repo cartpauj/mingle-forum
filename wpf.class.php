@@ -1040,7 +1040,7 @@ if (!class_exists('mingleforum'))
         if ($this->is_moderator($user_ID, $this->current_forum))
           $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/delete.png' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='" . $this->thread_link . $this->current_thread . "&remove_post&id={$post_id}'> " . __("Remove", "mingleforum") . "</a></td>";
         if (($this->is_moderator($user_ID, $this->current_forum)) || ($user_ID == $author_id && $user_ID))
-          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.gif' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "mingleforum") . "</a></td>";
+          $o .= "<td nowrap='nowrap'><img src='{$this->skin_url}/images/buttons/modify.png' alt='' align='left'><a href='" . $this->base_url . "editpost&id={$post_id}&t={$this->current_thread}.0'>" . __("Edit", "mingleforum") . "</a></td>";
       }
       else
       {
@@ -1179,7 +1179,7 @@ if (!class_exists('mingleforum'))
 
       $this->o .= apply_filters('wpwf_new_posts', "<table>
             <tr>
-              <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "mingleforum") . " - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></span></td>
+              <td><span class='info-poster_in_forum'><img alt='' align='top' src='{$this->skin_url}/images/new_some.png' /> " . __("New posts", "mingleforum") . " <img alt='' align='top' src='{$this->skin_url}/images/new_none.png' /> " . __("No new posts", "mingleforum") . "</span> - <span aria-hidden='true' class='icon-checkmark'><a href='" . get_permalink($this->page_id) . $delim . "markallread=true'>" . __("Mark All Read", "mingleforum") . "</a></span></td>
             </tr>
           </table><br class='clear'/>");
 
@@ -1343,7 +1343,7 @@ if (!class_exists('mingleforum'))
       $d = date_i18n($this->options['forum_date_format'], strtotime($date->date));
 
       return "<div class='wpf-item-avatar'><span>" . $this->get_avatar($date->author_id, 35) . "</span></div><div class='wpf-item'><div class='wpf-item-title'><small><strong>" . __("Last post", "mingleforum") . "</strong> " . __("by", "mingleforum") . " " . $this->profile_link($date->author_id) . "</small></div>
-      <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-$date->id'>" . $this->get_postname($date->id) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}" . "<a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'><img title='" . __("Last post", "mingleforum") . "' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.gif' /></a></small></div></div>";
+      <div class='wpf-item-title'><small>" . __("in", "mingleforum") . " <a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-$date->id'>" . $this->get_postname($date->id) . "</a></small></div><div class='wpf-item-title'><small>" . __("on", "mingleforum") . " {$d}" . "<a href='" . $this->get_paged_threadlink($date->parent_id) . "#postid-{$date->id}'><img title='" . __("Last post", "mingleforum") . "' style='vertical-align:middle; padding-left:10px; margin:-3px 0 0px 0; ' src='{$this->skin_url}/images/post/lastpost.png' /></a></small></div></div>";
     }
 
     public function last_poster_in_thread($thread_id)
