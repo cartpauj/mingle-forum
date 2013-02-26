@@ -1712,7 +1712,7 @@ if (!class_exists('mingleforum'))
             if ($this->is_closed())
               $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=0&id={$this->current_thread}'><span class='icon-re-open' aria-hidden='true'>" . __("Re-open", "mingleforum") . "</span></a></td>";
             else
-              $closed = "<td class='" . $class . "_back icon-close' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "mingleforum") . "</span></a></td>";
+              $closed = "<td class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->thread_link . $this->current_thread . "." . $this->curr_page . "&closed=1&id={$this->current_thread}'><span class='icon-close' aria-hidden='true'>" . __("Close", "mingleforum") . "</span></a></td>";
           }
           else
           {
@@ -2540,7 +2540,7 @@ if (!class_exists('mingleforum'))
                     <th align='center' colspan='2'>" . __("Info Center", "mingleforum") . "</th>
                   </tr>
                   <tr>
-                    <td width='3%' class='forumIcon' align='center'><img alt='' src='{$this->skin_url}/images/icons/info.gif' /></td>
+                    <td width='7%' class='forumIcon' align='center'><img alt='' src='{$this->skin_url}/images/icons/info.gif' /></td>
                     <td>
                       " . $this->num_posts_total() . " " . __("Posts in", "mingleforum") . " " . $this->num_threads_total() . " " . __("Topics Made by", "mingleforum") . " " . count($this->get_users()) . " " . __("Members", "mingleforum") . ". " . __("Latest Member:", "mingleforum") . "<span class='img-avatar-forumstats' >" . $this->get_avatar($this->latest_member(), 15) . "</span>" . $this->profile_link($this->latest_member()) . "
                       <br />" . $this->get_lastpost_all() . "
