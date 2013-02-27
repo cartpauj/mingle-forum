@@ -2535,7 +2535,7 @@ if (!class_exists('mingleforum'))
         case MAIN:
           $o = apply_filters('mf_ad_above_info_center', ''); //Adsense Area -- Above Info Center
           $o .= "<div class='wpf'>";
-          $o .= "<table class='wpf-table' width='100%' cellspacing='0' cellpadding='0'>";
+          $o .= "<table class='wpf-table InfoCenter' width='100%' cellspacing='0' cellpadding='0'>";
           $o .= "<tr>
                     <th align='center' colspan='2'>" . __("Info Center", "mingleforum") . "</th>
                   </tr>
