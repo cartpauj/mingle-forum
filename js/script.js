@@ -52,6 +52,7 @@ function getCookie(c_name) {
       return unescape(y).split(',');
     }
   }
+  return [];
 }
 
 function setCookie(c_name, value, exdays) {
@@ -84,19 +85,17 @@ function placeHolder(ele) {
       var id = $(this).attr('data-value');
 
       if ($(this).hasClass('show-hide-hidden')) {
+        groups_cookie.splice(groups_cookie.indexOf(id), 1);
+        setCookie('mf_groups', groups_cookie, 365);
         $('tr.group-shrink-' + id).fadeIn(800);
         $('a#shown-' + id).show();
         $('a#hidden-' + id).hide();
-        groups_cookie.splice(groups_cookie.indexOf(id), 1);
-        setCookie('mf_groups', groups_cookie);
-        $(this).hide();
       } else {
+        groups_cookie.push(id);
+        setCookie('mf_groups', groups_cookie, 365);
         $('tr.group-shrink-' + id).fadeOut(200);
         $('a#shown-' + id).hide();
         $('a#hidden-' + id).show();
-        groups_cookie.push(id);
-        setCookie('mf_groups', groups_cookie);
-        $(this).hide();
       }
 
       return false;
