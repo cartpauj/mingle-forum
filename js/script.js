@@ -41,17 +41,42 @@ function wpf_confirm() {
     return true;
 }
 
+//Make sure array has unique values
+Array.prototype.mf_contains = function(v) {
+  for(var i = 0; i < this.length; i++) {
+    if(this[i] === v) return true;
+  }
+
+  return false;
+};
+
+Array.prototype.mf_unique = function() {
+  var arr = [];
+
+  for(var i = 0; i < this.length; i++) {
+    if(!arr.mf_contains(this[i]))
+      arr.push(this[i]);
+  }
+
+  return arr; 
+}
+
 // Cookies management =3
 function getCookie(c_name) {
   var i, x, y, ARRcookies = document.cookie.split(";");
+
   for (i = 0; i < ARRcookies.length; i++) {
     x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
     y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
     x = x.replace(/^\s+|\s+$/g, "");
-    if (x === c_name) {
-      return unescape(y).split(',');
-    }
+
+    if (x === c_name)
+      if(y === null || y == "")
+        return [];
+      else
+        return y.split(',');
   }
+
   return [];
 }
 
@@ -59,7 +84,7 @@ function setCookie(c_name, value, exdays) {
   value = value.join(',');
   var exdate = new Date();
   exdate.setDate(exdate.getDate() + exdays);
-  var c_value = escape(value) + ((exdays === null) ? "" : "; expires=" + exdate.toUTCString());
+  var c_value = value + ((exdays === null) ? "" : "; expires=" + exdate.toUTCString());
   document.cookie = c_name + "=" + c_value;
 }
 
@@ -72,27 +97,30 @@ function placeHolder(ele) {
 
 (function($) {
   $(document).ready(function() {
-    //Show/Hide groups
-    var groups_cookie = getCookie('mf_groups');
+    //Get the value of the mf_groups cookie
+    var closed_groups = getCookie('mf_groups');
+
     //Loop through the cookie and hide categories that have been hidden before
-    for (var id in groups_cookie) {
-      $('tr.group-shrink-' + id).hide();
-      $('a#shown-' + id).hide();
-      $('a#hidden-' + id).show();
+    var i = 0;
+    for (i = 0; i < (closed_groups.length); i++) {
+      $('tr.group-shrink-' + closed_groups[i]).hide();
+      $('a#shown-' + closed_groups[i]).hide();
+      $('a#hidden-' + closed_groups[i]).show();
     }
 
     $('a.wpf_click_me').click(function() {
       var id = $(this).attr('data-value');
 
       if ($(this).hasClass('show-hide-hidden')) {
-        groups_cookie.splice(groups_cookie.indexOf(id), 1);
-        setCookie('mf_groups', groups_cookie, 365);
+        closed_groups.splice(closed_groups.indexOf(id), 1);
+        setCookie('mf_groups', closed_groups, 365);
         $('tr.group-shrink-' + id).fadeIn(800);
         $('a#shown-' + id).show();
         $('a#hidden-' + id).hide();
       } else {
-        groups_cookie.push(id);
-        setCookie('mf_groups', groups_cookie, 365);
+        closed_groups.push(id);
+        closed_groups = closed_groups.mf_unique(); //Make sure the values are unique in the array
+        setCookie('mf_groups', closed_groups, 365);
         $('tr.group-shrink-' + id).fadeOut(200);
         $('a#shown-' + id).hide();
         $('a#hidden-' + id).show();
