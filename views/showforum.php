@@ -16,7 +16,7 @@
       <th width="24%"><?php _e("Last post", "mingleforum"); ?></th>
     </tr>
 
-    <?php if ($sticky_threads): ?>
+    <?php if ($sticky_threads && !$this->curr_page): //Prevent stickies from showing up on page 2...n ?>
       <tr>
         <th class="wpf-bright" colspan="6">
           <?php _e("Sticky Topics", "mingleforum"); ?>

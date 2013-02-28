@@ -8,8 +8,9 @@
   </div>
 
   <div class="wpf-item-poster-li">
-    <a href="<?php echo $link; ?>"><?php echo date_i18n($this->options["forum_date_format"], strtotime($post->date)); ?>
-      <img title="<?php echo __("Last post", "mingleforum"); ?>" style="vertical-align:middle;padding-left:5px;margin:-3px 0 0px 0;" src="<?php echo $this->skin_url; ?>/images/post/lastpost.png" />
+    <?php echo date_i18n($this->options["forum_date_format"], strtotime($post->date)); ?>
+    <a href="<?php echo $link; ?>">
+      <img title="<?php echo __("View last post", "mingleforum"); ?>" style="vertical-align:middle;padding-left:5px;margin:-3px 0 0px 0;" src="<?php echo $this->skin_url; ?>/images/post/lastpost.png" />
     </a>
   </div>
 </div>

@@ -599,14 +599,13 @@ ul#wpf-menu li,.wpf-postmeta li {
   padding: 5px 10px 5px 10px !important;
 }
 .wpf-table td {
-  border: 1px solid;
   padding-left: 5px;
   padding-right: 5px;
   padding: 5px;
-  border-left: 1px solid #d9d7d7 !important;
-  border-right: 1px solid #CECECE !important;
+  border-left: none !important;
+  border-right: none;
   border-bottom: 1px solid #CECECE !important;
-  border-top: 1px solid #d9d7d7 !important;
+  border-top: none;
 }
 .wpf-table textarea {
   width: 98%;
