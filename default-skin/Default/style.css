@@ -603,9 +603,9 @@ ul#wpf-menu li,.wpf-postmeta li {
   padding-right: 5px;
   padding: 5px;
   border-left: none !important;
-  border-right: none;
+  border-right: none !important;
   border-bottom: 1px solid #CECECE !important;
-  border-top: none;
+  border-top: none !important;
 }
 .wpf-table textarea {
   width: 98%;
