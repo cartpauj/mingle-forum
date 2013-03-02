@@ -925,7 +925,7 @@ if (!class_exists('mingleforum'))
         $out .= "<div class='wpf'>
                   <table class='wpf-table' width='100%'>
                     <tr>
-                      <th width='135' style='text-align: center;'><span aria-hidden='true' class='icon-my-profile'>" . __("Author", "mingleforum") . "</span></th>
+                      <th width='125' style='text-align: center;'><span aria-hidden='true' class='icon-my-profile'>" . __("Author", "mingleforum") . "</span></th>
                       <th><span aria-hidden='true' class='icon-topic'></span>" . $this->get_subject($thread_id) . $meClosed . "</th>
                     </tr>
                   </table>";
