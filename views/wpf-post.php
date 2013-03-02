@@ -17,7 +17,7 @@ if ($user_ID || $this->allow_unreg())
     $this->current_view = POSTREPLY;
     $thread = $this->check_parms($_GET['thread']);
     $out = $this->header();
-    $out .= "<form action='" . WPFURL . "wpf-insert.php' name='addform' method='post' enctype='multipart/form-data'>";
+    $out .= "<form action='' name='addform' method='post' enctype='multipart/form-data'>";
     $out .= "<table class='wpf-table' width='100%'>
       <tr>
         <th colspan='2'>" . __("Post Reply:", "mingleforum") . ' ' . $this->get_subject($thread) . "</th>
@@ -66,7 +66,7 @@ if ($user_ID || $this->allow_unreg())
 
     if (($user_ID == $post->author_id && $user_ID) || $this->is_moderator($user_ID, $this->forum_get_forum_from_post($thread))) //Make sure only admins/mods/post authors can edit posts
     {
-      $out .= "<form action='" . WPFURL . "wpf-insert.php' name='addform' method='post'>";
+      $out .= "<form action='' name='addform' method='post'>";
       $out .= "<table class='wpf-table' width='100%'>
         <tr>
           <th colspan='2'>" . __("Edit Post:", "mingleforum") . " " . stripslashes($post->subject) . "

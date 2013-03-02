@@ -4,7 +4,7 @@ if ($user_ID || $this->allow_unreg())
 {
   $this->current_view = NEWTOPIC;
   $out = $this->header();
-  $out .= "<form action='" . WPFURL . "wpf-insert.php' name='addform' method='post' enctype='multipart/form-data'>";
+  $out .= "<form action='' name='addform' method='post' enctype='multipart/form-data'>";
   $out .= "<table class='wpf-table' width='100%'>
 			<tr>
 				<th colspan='2'>" . __("Post new Topic", "mingleforum") . "</th>

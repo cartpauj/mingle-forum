@@ -6,6 +6,7 @@ if (!class_exists('mingleforum'))
   {
 
     var $db_version = 2; //MANAGES DB VERSION
+    var $db_cleanup_name = 'mf_cleanup_db_last_run';
 
     public function __construct()
     {
@@ -15,14 +16,17 @@ if (!class_exists('mingleforum'))
 
       //Action hooks
       add_action("admin_menu", array($this, "add_admin_pages"));
-      add_action("init", array($this, "kill_canonical_urls"));
       add_action("admin_init", array($this, "wp_forum_install")); //Easy Multisite-friendly way of setting up the DB
+      add_action("admin_init", array($this, "maybe_run_db_cleanup"));
       add_action("admin_enqueue_scripts", array($this, 'enqueue_admin_scripts'));
       add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
       add_action("wp_head", array($this, "setup_header"));
       add_action("plugins_loaded", array($this, "wpf_load_widget"));
       add_action("wp_footer", array($this, "wpf_footer"));
+      add_action("init", array($this, "kill_canonical_urls"));
       add_action('init', array($this, "set_cookie"));
+      add_action('init', array($this, "run_wpf_insert"));
+      add_action('init', array($this, "maybe_do_sitemap"));
       add_action('wp', array($this, "before_go")); //Redirects Old URL's to SEO URL's
       add_filter('wpseo_whitelist_permalink_vars', array($this, 'yoast_seo_whitelist_vars'));
       if ($this->options['wp_posts_to_forum'])
@@ -296,20 +300,22 @@ if (!class_exists('mingleforum'))
       }
       $widget_option = get_option("wpf_widget");
 
-      echo '<p><label for="wpf_title">' . __('Title to display in the sidebar:', 'mingleforum') . '
-        <input style="width: 250px;" id="wpf_title" name="wpf_title" type="text" class="wpf-input" value="' . $widget_option['wpf_title'] . ' /></label></p>';
-      echo '<p><label for="wpf_num">' . __('How many items would you like to display?', 'mingleforum');
+      echo '<label for="wpf_title">' . __('Title to display in the sidebar:', 'mingleforum') . '</label>
+            <input style="width: 250px;" id="wpf_title" name="wpf_title" type="text" class="wpf-input" value="' . $widget_option['wpf_title'] . '" />';
+      echo '<label for="wpf_num">' . __('How many items would you like to display?', 'mingleforum') . '</label>';
       echo '<select name="wpf_num">';
 
       for ($i = 1; $i < 21; ++$i)
+      {
         if ($widget_option["wpf_num"] == $i)
-          $selected = 'selected="selected';
+          $selected = 'selected="selected"';
         else
           $selected = '';
       echo '<option value="' . $i . '" ' . $selected . '>' . $i . '</option>';
+      }
 
       echo '</select>';
-      echo '</label></p> <input type="hidden" id="wpf_submit" name="wpf_submit" value="1" />';
+      echo '<input type="hidden" id="wpf_submit" name="wpf_submit" value="1" />';
     }
 
     //Fix SEO by Yoast conflict
@@ -363,6 +369,19 @@ if (!class_exists('mingleforum'))
       $this->topic_feed_url = WPFURL . "feed.php?topic=";
       $this->global_feed_url = WPFURL . "feed.php?topic=all";
       $this->home_url = $perm;
+    }
+
+    public function run_wpf_insert()
+    {
+      global $wpdb, $user_ID;
+      $this->setup_links();
+
+      $error = false;
+
+      if(isset($_POST['add_topic_submit']) || isset($_POST['add_post_submit']) || isset($_POST['edit_post_submit']))
+        require('wpf-insert.php');
+
+      return;
     }
 
     public function get_addtopic_link()
@@ -421,7 +440,7 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      $wpdb->query("SELECT * FROM {$this->t_posts} WHERE parent_id = {$id}");
+      $wpdb->query($wpdb->prepare("SELECT * FROM {$this->t_posts} WHERE parent_id = %d", $id));
       $num = ceil($wpdb->num_rows / $this->options['forum_posts_per_page']) - 1;
 
       if ($num < 0)
@@ -993,7 +1012,7 @@ if (!class_exists('mingleforum'))
           if ((!$this->is_closed() || $this->is_moderator($user_ID, $this->current_forum)) &&
                   ($user_ID || $this->allow_unreg()))
           {
-            $out .= "<form action='" . WPFURL . "wpf-insert.php' name='addform' method='post'>
+            $out .= "<form action='' name='addform' method='post'>
             <table class='wpf-post-table' width='100%' id='wpf-quick-reply'>
               <tr>
                 <td>";
@@ -1653,6 +1672,24 @@ if (!class_exists('mingleforum'))
       $this->convert_moderators();
     }
 
+    //This runs once a month to cleanup any zombie posts or topics
+    public function maybe_run_db_cleanup()
+    {
+      global $wpdb;
+
+      $last_run = get_option($this->db_cleanup_name, 0);
+
+      if ((time() - $last_run) > 2419200)
+      {
+        //Cleanup Posts
+        $wpdb->query("DELETE FROM {$this->t_posts} WHERE parent_id NOT IN (SELECT id FROM {$this->t_threads})");
+        //Cleanup Threads
+        $wpdb->query("DELETE FROM {$this->t_threads} WHERE parent_id NOT IN (SELECT id FROM {$this->t_forums})");
+
+        update_option($this->db_cleanup_name, time());
+      }
+    }
+
     public function forum_menu($group, $pos = "top")
     {
       global $user_ID;
@@ -2252,17 +2289,15 @@ if (!class_exists('mingleforum'))
       global $user_ID, $wpdb;
 
       $id = (isset($_GET['id']) && is_numeric($_GET['id'])) ? $_GET['id'] : 0;
-      $thread = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id FROM {$this->t_posts} WHERE id = %d", $id));
+      $post = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id FROM {$this->t_posts} WHERE id = %d", $id));
 
-      if ($this->is_moderator($user_ID, $this->current_forum) || $user_ID == $thread->author_id)
+      if ($this->is_moderator($user_ID, $this->current_forum) || $user_ID == $post->author_id)
       {
         $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
-        $nbmsg = $wpdb->get_var("SELECT COUNT(*) FROM {$this->t_posts} WHERE parent_id = %d", $thread->parent_id);
+        $nbmsg = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$this->t_posts} WHERE parent_id = %d", $post->parent_id));
 
         if (!$nbmsg)
-        {
-          $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $thread->parent_id));
-        }
+          $wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $post->parent_id));
 
         $this->o .= "<div class='wpf-info'><div class='updated'><span aria-hidden='true' class='icon-warning'>" . __("Post deleted", "mingleforum") . "</div></div>";
       }
@@ -3020,8 +3055,16 @@ if (!class_exists('mingleforum'))
     }
 
     //Add a dynamic sitemap for the forum posts
-    public function do_sitemap()
+    public function maybe_do_sitemap()
     {
+      //If we don't want the sitemap, then don't execute this
+      if(!isset($_GET['mingleforumaction']) || $_GET['mingleforumaction'] != 'sitemap')
+        return;
+
+      $this->setup_links();
+      header('Content-type: application/xml; charset="utf-8"', true);
+
+      $out = "";
       $priority = "0.8";
       $freq = "daily";
       $threads = $this->get_threads(false);
@@ -3030,19 +3073,26 @@ if (!class_exists('mingleforum'))
 
       if (!empty($threads))
       {
-        $out = '<?xml version="1.0" encoding="UTF-8"?>' . $nl . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . $nl;
+        $out = '<?xml version="1.0" encoding="UTF-8"?>' . $nl;
+        $out .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . $nl;
 
         foreach ($threads as $t)
         {
           $time = explode(' ', $t->last_post, 2);
           $time = explode('-', $time[0], 3);
-          $out .= $ind . "<url>" . $nl . $ind . $ind . "<loc>" . $this->clean_link($this->get_threadlink($t->id)) . "</loc>" . $nl . $ind . $ind . "<lastmod>" . date('Y-m-d', mktime(0, 0, 0, $time[1], $time[2], $time[0])) . "</lastmod>" . $nl . $ind . $ind . "<changefreq>" . $freq . "</changefreq>" . $nl . $ind . $ind . "<priority>" . $priority . "</priority>" . $nl . $ind . "</url>" . $nl;
+          $out .= $ind . "<url>" . $nl;
+          $out .= $ind . $ind . "<loc>" . $this->clean_link($this->get_threadlink($t->id)) . "</loc>" . $nl;
+          $out .= $ind . $ind . "<lastmod>" . date('Y-m-d', mktime(0, 0, 0, $time[1], $time[2], $time[0])) . "</lastmod>" . $nl;
+          // $out .= $ind . $ind . "<changefreq>" . $freq . "</changefreq>" . $nl;
+          // $out .= $ind . $ind . "<priority>" . $priority . "</priority>" . $nl;
+          $out .= $ind . "</url>" . $nl;
         }
 
         $out .= "</urlset>";
       }
 
       echo $out;
+      die();
     }
 
     public function clean_link($l)

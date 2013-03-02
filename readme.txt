@@ -1,64 +1,58 @@
 === Mingle Forum ===
 Contributors: cartpauj
 Donate link: http://cartpauj.com/donate/
-Tags: forum, mingle, mingle forum, cartpauj, discussion, board, threads, messaging, message, messages, user forum, wordpress forum, forum plugin, forums, discussion forums, easy forum, discussion board, discussions, boards, bbpress, bulletin board, bulletin boards, bulletin, server, wp
+Tags: forum, mingle, mingle forum, cartpauj, discussion, board, threads, messaging, message, messages, user forum, wordpress forum, forum plugin, forums, discussion forums, easy forum, discussion board, discussions, boards, bbpress, bulletin board, bulletin boards, bulletin, server, wp, simple forum, best wordpress forum
 Requires at least: 3.5
 Tested up to: 3.5.1
 Stable tag: 1.1.0
 
-Mingle Forum allows you to easily and quickly put a Forum on your Wordpress site/blog.
+Mingle Forum allows you to easily and quickly put a Forum on your WordPress site/blog.
 
 == Description ==
-Have you been looking for a Forum Plugin for WordPress that *just works*? Then look no further! Mingle Forum has been modified to be lightweight, solid, secure, quick to setup, easy to use, and best of all it now integrates seamlessly with or without the Mingle social networking plugin (by Blair Williams). The mission of Mingle Forum is, to **KEEP IT SIMPLE** There are a handful of Forum Plugins for WordPress available but they are either super buggy, difficult to install, or so bloated with features and settings that its a nightmare setting them up. Dont do that to yourself!!! You can be up and running with Mingle Forum fully installed and configured in as little as 5 minutes -- pretty cool eh?
+**The best free WordPress forum plugin available at wordpress.org!** Mingle Forum is so easy to setup and manage, that you'll be up and running in no time! It integrates seamlessly with WordPress and its user management system, whicn means you don't have to make your users signup twice! Best of all, you don't have to try and manage two separate applications and databases. With our new line of default skins, you can quickly choose one that integrates best with your site design. Mingle Forum comes with many standard forum featues, and also leverages WordPress permalinks for pretty SEO friendly URL's and page titles. So what are you waiting for? Give it a try, you won't regret it!!!
 
 = Donate =
-[GET A FREE PLUGIN WHEN DONATING](http://cartpauj.com/projects/cartpauj-post-hits-plugin/)
+[Please consider a small Donation to show your thanks](http://cartpauj.com/donate/)
 
 = See Mingle Forum In Action =
 You can try Mingle Forum out on my site:
-[cartpauj.com](http://cartpauj.com "cartpauj.com Wordpress Plugins")
+[cartpauj.com](http://cartpauj.com "cartpauj.com WordPress Plugins")
 
 = Get More Forum Skins =
 [Get More Mingle Forum Skins](http://cartpauj.icomnow.com/forum/?mingleforumaction=viewforum&f=5.0 "cartpauj.com Mingle Forum Skins")
 
 = Features =
-* **NEW!** Multisite friendly
+* **NEW!** Now Multisite - Network Activate - friendly
 * **NEW!** Limit SPAM by setting a time interval users must wait between posts
-* Create a corresponding Forum post when you create a WordPress post
-* User Signatures (instead of Bio)
-* Lock entire forums
-* Image uploads on New Posts and Replies
-* SEO Friendly forum URLs
-* Forum Sitemap (../wp-content/plugins/mingle-forum/sitemap.php)
-* Integrated HTML areas for adsense or affiliate links
-* Media embedding into forum posts (like Youtube, Flickr, Photobucket...)
-* Private Messages - Mingle Forum now integrates seamlessly with Mingle or my [Cartpauj PM Plugin](http://cartpauj.com/projects/cartpauj-pm-plugin) (Requires Cartpauj PM vs 1.0.09 or greater)
+* Create a corresponding Forum Topic when you create a WordPress Post
+* User Signatures
+* Lock all Forums in a Category
+* Image uploads
+* SEO Friendly URLs
+* Forum Sitemap
+* Areas for Adsense or Affiliate Links
+* Automatic Media embedding into Forum Topics and Replies (like Youtube, Flickr, Photobucket...)
+* Automatic Private Messages Integration (Message Mania, Cartpauj PM, or Mingle)
 * RSS Feeds
 * Quick Reply
-* Wordpress 3.5+ ready!
-* Categories with sub-forums
 * User Groups
 * User Levels (EX: Newbie, Beginner, Advanced, Pro)
-* Moderators
+* Flexible Moderator options
 * Skins
 * Captcha
-* BB Code
-* Smilies
-* Custom Forum Search
-* Guest posts (See Mingle Forum Guest Info add-on by wpweaver)
-* Hot/Very Hot topics
+* Search Forums
+* Guests can create Topics/Replies if you allow it
+* Hot/Very Hot Topics
 * Sticky (Pinned) Topics
-* Move, Edit, Remove and Close topics
-* Email notifications on Replies to Topics
-* Email notifications on new Topics in Forums
-* Recent posts widget (or PHP shortcode for your theme)
-* Integrates nicely with most themes (Its tough to make it work for all themes so some skin modifications may be required for your site)
-* Allow/Dis-allow other users to view your profile from the Forum
-* Supports internationalization/localization
-* Integrates with the Mingle plugin (by Blair Williams) NOTE: The Mingle plugin is NOT required for the forum to work
+* Move, Edit, Remove and Close Topics
+* Email notifications on Replies to Topic(s)
+* Email notifications on new Topics in Forum(s)
+* Recent Replies Widget
+* Works out of the box with most themes (See FAQ)
+* Supports multiple languages
 
 = Notes =
-* Mingle Forum 1.1.0 is officially dropping support for versions of WP older than 3.5. That's not to say it doesn't work with older versions, it just means we are not officially supporting them.
+* As of Mingle Forum 1.1.0 - we are officially dropping support for versions of WP older than 3.5. That's not to say it doesn't work with older versions, it just means we are not officially supporting them. We are also dropping official support for the Mingle Social Networking Plugin (by Blair Williams).
 * If youre switching from WP Forum or Forum Server you will lose your skin and settings but you will NOT lose your categories, forums, groups, or topics which makes it very easy to make the transition :)
 
 = Translations =
@@ -98,7 +92,7 @@ You can try Mingle Forum out on my site:
 * Great [setup videos here](http://cartpauj.com/projects/mingle-forum-plugin/tutorials/) by cartpauj or use Roberts [text guide here](http://minglecommunities.com/mingle-forum-install-guide/)
 * Download Mingle Forum
 * Create a new page for your forum to display on
-* Head to the page you just created for the forum, paste [mingleforum] and save, (NOTE: Its best to paste that under the HTML/Text tab of your page editor)
+* Head to the page you just created for the forum, paste [mingleforum] and save, (NOTE: It's best to paste that under the HTML/Text tab of your page editor)
 * Head to Dashboard -> Plugins -> Add New -> Upload
 * Browse to the .zip file you downloaded and click open
 * Click Install
@@ -111,31 +105,33 @@ Need help?:
 [Cartpauj Support Forums](http://cartpauj.icomnow.com/forum "Cartpauj Support Forums")
 
 == Frequently Asked Questions ==
-* My users can't register? - Dashboard -> Settings -> General -> Anyone can register -> Save
-* Help! I can't create new topics - Step 1: Make sure you have watched the setup videos and have created both categories AND forums. Step 2: Check that the file permissions on the wpf-insert.php file are 644 or higher. Step 3: Delete the plugin, and re-install. Step 4: Contact your host to make sure the file ownership of the wpf-insert.php file is set to the correct user.
-* How can I hide the sidebar on the forum page? - When editing the forum page, if your theme supports it, you should be able to change your Template to a full-width one. If you don't see this option, either hire a developer to make one for you, or bug your theme author to add it.
-* I made customizations to the forum, but they get overwritten on every update - If you customize anything inside of the /mingle-forum/ folder it will be overwritten, there's no way around that. If all you're changing is CSS, then put it somewhere else, like at the bottom of your theme's styles.css file (which gets overwritten when you upgrade your theme FYI).
-* My skin looks bad/funny - Your theme is most likely causing a conflict with the forum's table styles. We do our best, but can't possibly make the forum work for every conceivable WordPress theme. Find a friend who knows a thing or two about CSS and see if they'll help you get some custom styles set to fix the issue.
-* Can I put different forums on different pages? - No. Not right now, and maybe not ever.
-* SEO friedly URL's are not working - Make sure you have permalinks enabled in WordPress. Any setting but "default" should work. We personally like Day & Name for blogs, or Postname for non-blogs.
-* Google isn't indexing my forum pages - Step 1: Turn on SEO Friendly URLs in the options. Step 2: Make sure you don't have Canonical URLs enabled on the forum page. In fact, if your SEO plugin/theme supports disabling its features on certain pages, just disable any SEO functionality on your Forum page. Mingle Forum implements some of its own SEO features making this unneccessary.
-* I can only see the front page of the forum. No matter what I click, it goes back to the front page - Step 1: Make sure the forum isn't the home page of your site. Mingle Forum does not currently work when set to the home page. Step 2: Try enabling or disabling SEO Friendly URL's in the Forum Options. Step 3: Are you using WP SEO by Yoast? If so, disable the option to rewrite ugly permalinks.
-* No images are showing up after I installed a new Skin - Either you got a bad skin, or you didn't upload the file structure correctly. The file structure after uploading the skin should be: /wp-content/mingle-forum-skins/THEMNAME/style.css...
+* **My users can't register?** - Dashboard -> Settings -> General -> Anyone can register -> Save
+* **Help! I can't create new topics** - Make sure you have watched the setup videos and have created both categories AND forums.
+* **How can I hide the sidebar on the forum page?** - When editing the forum page, if your theme supports it, you should be able to change your Template to a full-width one. If you don't see this option, either hire a developer to make one for you, or bug your theme author to add it.
+* **I made customizations to the forum, but they get overwritten on every update** - If you customize anything inside of the /mingle-forum/ folder it will be overwritten, there's no way around that. If all you're changing is CSS, then put it somewhere else, like at the bottom of your theme's styles.css file (which gets overwritten when you upgrade your theme FYI).
+* **My skin looks bad/funny** - Your theme is most likely causing a conflict with the forum's table styles. We do our best, but can't possibly make the forum work for every conceivable WordPress theme. Find a friend who knows a thing or two about CSS and see if they'll help you get some custom styles set to fix the issue.
+* **Can I put different forums on different pages?** - No. Not right now, and maybe not ever.
+* **SEO friedly URL's are not working** - Make sure you have permalinks enabled in WordPress. Any setting but "default" should work. We personally like Day & Name for blogs, or Postname for non-blogs.
+* **Google isn't indexing my forum pages** - Step 1: Set WordPress Permalink settings to anything but default, then enable SEO Friendly URLs in the forum's options. Step 2: Make sure you don't have Canonical URLs enabled on the forum page by another plugin like All In One SEO Pack. Mingle Forum implements some of its own SEO features making this unneccessary.
+* **I can only see the front page of the forum. No matter what I click, it goes back to the front page** - Step 1: Make sure the forum isn't the home page of your site. Mingle Forum does not currently work when set to the home page. Step 2: Try enabling or disabling SEO Friendly URL's in the Forum Options. Step 3: Are you using WP SEO by Yoast? If so, disable the option to rewrite ugly permalinks.
+* **No images are showing up after I installed a new Skin** - Either you got a bad skin, or you didn't upload the file structure correctly. The file structure after uploading the skin should be: /wp-content/mingle-forum-skins/THEMNAME/style.css...
 
 == Upgrade Notice ==
-* Mingle Forum 1.1.x and later contains some significant things. Your old skins will need to be replaced with one's that are compatible with 1.1.x or later.
+* Mingle Forum 1.1.x and later contains some significant changes. Your old skins will need to be replaced with one's that are compatible with 1.1.x or later.
 
 == Changelog ==
 = 1.1.0 =
-* We owe 99% of this one to ddart!!! Please send him a donation, http://ddart-bg.com/
+* We owe 99% of the new design to ddart!!! Please send him a donation, http://ddart-bg.com/
 * Also want to give a special thanks to Xefir for his awesome contributions as well
-* Added option to define Login, Logout, and Signup URL's
+* Added option to define Login, Logout, and Signup URL's (seamlessly works with Theme my Login)
 * Added more BBCode options & images (ddart)
 * Added more smilies (ddart)
 * Added prettier icons (ddart)
 * Added smilies to quick reply (ddart)
 * Added ability to shrink Categories to save space
 * Added localized dates for non-english users (xefir)
+* Added below menu ad area
+* Added invisible cron to cleanup zombie posts & topics monthly
 * Changed styling of default skin (HUGE Thanks to ddart)
 * Changed profile header at top of Forum to save space
 * Changed breadcrumbs location
@@ -144,6 +140,9 @@ Need help?:
 * Changed recent posts widget (ddart)
 * Changed length of username before auto wrap occurs (ddart)
 * Changed database to be more Multisite-friendly
+* Changed the way replies and topics are inserted, more efficient now
+* Changed sitemap access. You'll need to resubmit your sitemap to Google etc. (Example: http://yoursite.com/forumpage/?mingleforumaction=sitemap)
+* Fixed problem with wpf-insert.php not always working
 * Fixed known conflict with WordPress SEO by Yoast
 * Fixed SEO issue caused by Canonical URLs
 * Fixed some JS issues
@@ -153,6 +152,8 @@ Need help?:
 * Fixed common style problems with many themes (ddart)
 * Fixed some unclosed HTML elements
 * Fixed quote link issue
+* Removed capability to change Topic Subject when replying
+* Removed above breadcrumbs ad area
 * Code refactor & cleanup (xefir)
 * Updated Bulgarian Translation (Big thanks to DDArt)
 = 1.0.34 =
@@ -237,7 +238,7 @@ Need help?:
 * Added a few more CSS classes for skin developers
 * Updated Bulgarian Translation (Big thanks to DDArt)
 = 1.0.28 =
-* Dropped all legacy support for Wordpress versions older than 3.0
+* Dropped all legacy support for WordPress versions older than 3.0
 * Added Google Maps BBCode button
 * Added a few code optimization fixes
 * Added link to last page of thread to the date in the right column of forum view
@@ -389,7 +390,7 @@ Need help?:
 * Fixed bug preventing Moderators from being able to make topics sticky/closed
 * Fixed some CSS in the default theme
 * Fixed bugs preventing users with PHP 4 from using the forum
-* Updated forum time to work with the users Wordpress settings instead of using GMT, this change doens't effect existing posts but all new posts will have the corrected time.
+* Updated forum time to work with the users WordPress settings instead of using GMT, this change doens't effect existing posts but all new posts will have the corrected time.
 * Updated the way emails are sent out, now much more info is sent in HTML format instead of plain text
 * Added spacing around smilie inserts to prevent them from not showing up properly
 * Added Traditional Chinese translation (Big thanks to [Jackie Yeh](http://givelove.tellustek.com))
@@ -483,4 +484,4 @@ Need help?:
 * Added Translation: Finnish
 
 == Screenshots ==
-[Mingle Forum Screenshots](http://cartpauj.com/projects/mingle-forum-plugin "Mingle Forum Screenshots")
+n/a
