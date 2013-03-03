@@ -70,7 +70,7 @@ if ($user_ID || $this->allow_unreg())
       $out .= "<table class='wpf-table' width='100%'>
         <tr>
           <th colspan='2'>" . __("Edit Post:", "mingleforum") . " " . stripslashes($post->subject) . "
-            <input type='hidden' name='edit_post_subject' value='" . stripslashes($post->text) . "' />
+            <input type='hidden' name='edit_post_subject' value='" . stripslashes($post->subject) . "' />
           </th>
         </tr>";
 

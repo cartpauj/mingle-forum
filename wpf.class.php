@@ -1704,7 +1704,6 @@ if (!class_exists('mingleforum'))
 
         $menu = "<table cellpadding='0' cellspacing='0' style='margin-right:10px;' id='forummenu'>";
         $menu .= "<tr>
-                <td class='" . $class . "_first'>&nbsp;</td>
                 <td valign='top' class='" . $class . "_back' nowrap='nowrap'><a href='" . $this->get_addtopic_link() . "'><span  aria-hidden='true' class='icon-topic'>" . __("New Topic", "mingleforum") . "</span></a></td>";
 
         if ($user_ID)
@@ -1715,7 +1714,7 @@ if (!class_exists('mingleforum'))
             $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a onclick='return notify();' href='" . $this->forum_link . $this->current_forum . "&forumsubs'><span  aria-hidden='true' class='icon-subscribe'>" . __("Subscribe", "mingleforum") . "</a></td>";
         }
 
-        $menu .= "<td valign='top' class='" . $class . "_last'>&nbsp;&nbsp;</td>
+        $menu .= "
           </tr>
           </table>";
       }
@@ -1766,7 +1765,7 @@ if (!class_exists('mingleforum'))
         }
 
         $menu .= "<table cellpadding='0' cellspacing='0' style='margin-right:10px;' id='topicmenu'>";
-        $menu .= "<tr><td class='" . $class . "_first'>&nbsp;</td>";
+        $menu .= "<tr>";
 
         if (!in_array($this->current_group, $this->options['forum_disabled_cats']) ||
                 is_super_admin() || $this->is_moderator($user_ID, $this->current_forum) ||
@@ -1787,7 +1786,7 @@ if (!class_exists('mingleforum'))
         if ($this->options['forum_use_rss'])
           $menu .= "<td class='" . $class . "_back' nowrap='nowrap'><a href='{$this->topic_feed_url}" . "{$this->current_thread}'><span class='icon-rss-feed' aria-hidden='true'>" . __("RSS feed", "mingleforum") . "</span></a></td>";
 
-        $menu .= $stick . $closed . "<td valign='top' class='" . $class . "_last'>&nbsp;&nbsp;</td></tr></table>";
+        $menu .= $stick . $closed . "</tr></table>";
       }
 
       return $menu;
