@@ -2847,7 +2847,7 @@ if (!class_exists('mingleforum'))
               "BCC: " . implode(",", $to) . "\r\n";
 
       if (!empty($to))
-        wp_mail("", $subject, make_clickable(convert_smilies(wpautop($this->output_filter(stripslashes($message))))), $headers);
+        wp_mail("fake@fakestfakingfaker.co.uk", $subject, make_clickable(convert_smilies(wpautop($this->output_filter(stripslashes($message))))), $headers);
     }
 
     public function notify_forum_subscribers($thread_id, $subject, $content, $date, $forum_id)
@@ -2871,7 +2871,7 @@ if (!class_exists('mingleforum'))
               "BCC: " . implode(",", $to) . "\r\n";
 
       if (!empty($to))
-        wp_mail("", $subject, make_clickable(convert_smilies(wpautop($this->output_filter(stripslashes($message))))), $headers);
+        wp_mail("fake@fakestfakingfaker.co.uk", $subject, make_clickable(convert_smilies(wpautop($this->output_filter(stripslashes($message))))), $headers);
     }
 
     public function notify_admins($thread_id, $subject, $content, $date)
