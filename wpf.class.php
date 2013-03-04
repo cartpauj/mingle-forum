@@ -986,14 +986,14 @@ if (!class_exists('mingleforum'))
           if (!$c)
             $out .= apply_filters('mf_thread_start', '', $this->current_thread, $this->get_threadlink($post->parent_id));
 
-          $out .= apply_filters('mf_before_reply', '', $post->id) . make_clickable(convert_smilies(wpautop($this->autoembed($this->output_filter($post->text))))) . apply_filters('mf_after_reply', '', $post->id) .
+          $out .= apply_filters('mf_before_reply', '', $post->id) . make_clickable(wpautop($this->autoembed($this->output_filter($post->text)))) . apply_filters('mf_after_reply', '', $post->id) .
                   "</td>
                 </tr>";
 
           $userinfo = get_user_meta($post->author_id, "wpf_useroptions", true);
 
           if (isset($userinfo['signature']) && $userinfo['signature'] && $this->options['forum_show_bio'])
-            $out .= "<tr><td class='user_desc'><small>" . $this->output_filter(make_clickable(convert_smilies(wpautop($userinfo['signature'], true)))) . "</small></td></tr>";
+            $out .= "<tr><td class='user_desc'><small>" . $this->output_filter(make_clickable(wpautop($userinfo['signature'], true))) . "</small></td></tr>";
 
           $out .= "</table>
               </td>
@@ -2694,7 +2694,7 @@ if (!class_exists('mingleforum'))
                 </tr>
                 <tr class='alt' >
                   <td class='label' valign='top'><strong>" . __("Biographical Info:", "mingleforum") . "</strong></td>
-                  <td valign='top'>" . $this->output_filter(make_clickable(convert_smilies(wpautop($user->description)))) . "</td>
+                  <td valign='top'>" . $this->output_filter(make_clickable(wpautop($user->description))) . "</td>
                 </tr>
               </table>
             </td>
@@ -2846,7 +2846,7 @@ if (!class_exists('mingleforum'))
               "BCC: " . implode(",", $to) . "\r\n";
 
       if (!empty($to))
-        wp_mail("fake@fakestfakingfaker.co.uk", $subject, make_clickable(convert_smilies(wpautop($this->output_filter(stripslashes($message))))), $headers);
+        wp_mail("fake@fakestfakingfaker.co.uk", $subject, make_clickable(wpautop($this->output_filter(stripslashes($message)))), $headers);
     }
 
     public function notify_forum_subscribers($thread_id, $subject, $content, $date, $forum_id)
@@ -2870,7 +2870,7 @@ if (!class_exists('mingleforum'))
               "BCC: " . implode(",", $to) . "\r\n";
 
       if (!empty($to))
-        wp_mail("fake@fakestfakingfaker.co.uk", $subject, make_clickable(convert_smilies(wpautop($this->output_filter(stripslashes($message))))), $headers);
+        wp_mail("fake@fakestfakingfaker.co.uk", $subject, make_clickable(wpautop($this->output_filter(stripslashes($message)))), $headers);
     }
 
     public function notify_admins($thread_id, $subject, $content, $date)
@@ -2894,7 +2894,7 @@ if (!class_exists('mingleforum'))
 
       if ($this->options['notify_admin_on_new_posts'])
         if (!empty($to))
-          wp_mail($to, $subject, make_clickable(convert_smilies(wpautop($this->output_filter(stripslashes($message))))), $headers);
+          wp_mail($to, $subject, make_clickable($this->output_filter(stripslashes($message))), $headers);
     }
 
     public function autoembed($string)

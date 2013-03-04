@@ -69,22 +69,20 @@ if (!class_exists('cartpaujBBCodeParser'))
       preg_match_all('/\[code\](.+)\[\/code\]/Uis', $subject, $codes);
 
       foreach ($codes[0] as $num => $code)
-      {
-        $subject = str_replace($code, "[code$num]", $subject);
-      }
+        $subject = str_replace($code, "[code{$num}]", $subject);
 
       $subject = preg_replace($this->patterns, $this->replacements, $subject);
 
       $findQ = array("[quote]", "[/quote]", "[QUOTE]", "[/QUOTE]");
       $replaceQ = array("<blockquote>", "</blockquote>", "<blockquote>", "</blockquote>");
-      $subjectTwo = str_replace($findQ, $replaceQ, $subject);
+      $subject = str_replace($findQ, $replaceQ, $subject);
+
+      $subject = convert_smilies($subject);
 
       foreach ($codes[1] as $num => $code)
-      {
-        $subjectTwo = str_replace("[code$num]", '<pre class="code">' . $code . '</pre>', $subjectTwo);
-      }
+        $subject = str_replace("[code{$num}]", '<pre class="code">' . $code . '</pre>', $subject);
 
-      return $subjectTwo;
+      return $subject;
     }
 
   }
