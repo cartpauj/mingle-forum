@@ -949,11 +949,13 @@ if (!class_exists('mingleforum'))
 
           $out .= "<span class='post-data-format'>" . date_i18n($this->options['forum_date_format'], strtotime($post->date)) . "</spanl><div class='wpf-meta' valign='top'>" . $this->get_postmeta($post->id, $post->author_id) . "</div></th></tr><tr class='{$class}'><td class='autorpostbox' valign='top' width='125'>";
 
-          $out .= "<div class='wpf-small'>" . $this->get_send_message_link($post->author_id);
+          $out .= "<div class='wpf-small'>";
 
           if ($this->options["forum_use_gravatar"])
             $out .= $this->get_avatar($post->author_id);
-
+			
+          $out .= $this->get_send_message_link($post->author_id);
+		  
           $out .= "<div class='hr'></div>";
 
           $out .= $this->get_userrole($post->author_id) . "<br/>";
@@ -2654,47 +2656,44 @@ if (!class_exists('mingleforum'))
       $user = get_userdata($user_id);
       $this->header();
       //Need to move this to its own view
-      $o = "<div class='wpf'>
-        <table class='wpf-table' cellpadding='0' cellspacing='0' width='100%'>
+      $o = "<div class='wpf-profile'>
+        <table class='wpf-profile-fields' cellpadding='0' cellspacing='0' width='100%'>
           <tr>
-            <th class='wpf-bright'>" . __("Summary", "mingleforum") . " - " . $this->get_userdata($user_id, $this->options['forum_display_name']) . "</th>
+            <th class='wpf-profile-bright'>" . __("Summary", "mingleforum") . " - " . $this->get_userdata($user_id, $this->options['forum_display_name']) . "</th>
           </tr>
           <tr>
             <td>
-              <table class='wpf-table' cellpadding='0' cellspacing='0' width='100%'>
+              <table class='wpf-profile-fields' cellpadding='0' cellspacing='0' width='100%'>
                 <tr>
-                  <td width='20%'><strong>" . __("Name:", "mingleforum") . "</strong></td>
+                  <td class='label' width='20%'><strong>" . __("Name:", "mingleforum") . "</strong></td>
                   <td>{$user->first_name} {$user->last_name}</td>
-                  <td rowspan='9' valign='top' width='1%'>" . $this->get_avatar($user_id, 60) . "</td>
+                  <td class='autor-profile-box' rowspan='9' valign='top' width='1%'>" .  $this->get_userrole($user_id) . "<br/>" . $this->get_avatar($user_id, 95) . "<br/>" . $this->get_send_message_link($user_id) . "</td>
                 </tr>
-                <tr>
-                  <td><strong>" . __("Registered:", "mingleforum") . "</strong></td>
+                <tr class='alt'>
+                  <td class='label'><strong>" . __("Registered:", "mingleforum") . "</strong></td>
                   <td>" . $this->format_date($user->user_registered) . "</td>
                 </tr>
                 <tr>
-                  <td><strong>" . __("Posts:", "mingleforum") . "</strong></td>
+                  <td class='label'><strong>" . __("Posts:", "mingleforum") . "</strong></td>
                   <td>" . $this->num_post_user($user_id) . "</td>
-                </tr>
-                <tr>
-                  <td><strong>" . __("Position:", "mingleforum") . "</strong></td>
-                  <td>" . $this->get_userrole($user_id) . "</td></tr>
-                <tr>
-                  <td><strong>" . __("Website:", "mingleforum") . "</strong></td>
+                </tr>   
+                <tr class='alt'>
+                  <td class='label'><strong>" . __("Website:", "mingleforum") . "</strong></td>
                   <td><a href='{$user->user_url}'>{$user->user_url}</a></td>
                 </tr>
                 <tr>
-                  <td><strong>" . __("AIM:", "mingleforum") . "</strong></td>
+                  <td class='label'><strong>" . __("AIM:", "mingleforum") . "</strong></td>
                   <td>{$user->aim}</td>
                 </tr>
-                <tr>
-                  <td><strong>" . __("Yahoo:", "mingleforum") . "</strong></td>
+                <tr class='alt'>
+                  <td class='label'><strong>" . __("Yahoo:", "mingleforum") . "</strong></td>
                   <td>{$user->yim}</td></tr>
                 <tr>
-                  <td><strong>" . __("Jabber/google Talk:", "mingleforum") . "</strong></td>
+                  <td class='label'><strong>" . __("Jabber/google Talk:", "mingleforum") . "</strong></td>
                   <td>{$user->jabber}</td>
                 </tr>
-                <tr>
-                  <td valign='top'><strong>" . __("Biographical Info:", "mingleforum") . "</strong></td>
+                <tr class='alt' >
+                  <td class='label' valign='top'><strong>" . __("Biographical Info:", "mingleforum") . "</strong></td>
                   <td valign='top'>" . $this->output_filter(make_clickable(convert_smilies(wpautop($user->description)))) . "</td>
                 </tr>
               </table>
@@ -2961,7 +2960,7 @@ if (!class_exists('mingleforum'))
         {
           $cartpaujPMS->setPageURLs();
           $URL = $cartpaujPMS->actionURL . "newmessage&to=" . $id;
-          return "<a href='" . $URL . "'>" . __("Send Message", "mingleforum") . "</a><br/>";
+          return "</div><a aria-hidden='true' class='icon-message message-button' href='" . $URL . "'>" . __("Send Message", "mingleforum") . "</a><br/>";
         }
       }
 
@@ -2978,7 +2977,7 @@ if (!class_exists('mingleforum'))
             $permalink = get_permalink($mngl_options->inbox_page_id);
             $param_char = MnglAppController::get_param_delimiter_char($permalink);
 
-            return '<a href="' . $permalink . $param_char . 'u=' . $id . '">' . __("Send Message", "mingleforum") . '</a><br/>';
+            return '<a  aria-hidden="true" class="icon-message message-button" href="' . $permalink . $param_char . 'u=' . $id . '">' . __("Send Message", "mingleforum") . '</a><br/>';
           }
         }
       }

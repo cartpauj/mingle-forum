@@ -50,7 +50,7 @@ if ($user_ID == $user_id or $user_level > 8)
 					 		<input type='checkbox' name='allow_profile' value='true' $allow_profile_v /> " . __("Allow others to view my profile?", "mingleforum") . "<br />
 					 	</p>";
   if ($this->options['forum_show_bio'])
-    $out .= __('Edit Signature:', 'mingleforum') . "<br/>" . $this->form_buttons() . "<br/>
+    $out .= __('Edit Signature:', 'mingleforum') . "<br/>" . $this->form_buttons() . $this->form_smilies() . "<br/>
 						<textarea rows='4' id='sig-box' name='message'>" . $options['signature'] . "</textarea>";
   $out .= "</td>
 					 </tr>
