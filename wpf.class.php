@@ -18,7 +18,6 @@ if (!class_exists('mingleforum'))
       add_action("admin_menu", array($this, "add_admin_pages"));
       add_action("admin_init", array($this, "wp_forum_install")); //Easy Multisite-friendly way of setting up the DB
       add_action("admin_init", array($this, "maybe_run_db_cleanup"));
-      add_action("admin_enqueue_scripts", array($this, 'enqueue_admin_scripts'));
       add_action("wp_enqueue_scripts", array($this, 'enqueue_front_scripts'));
       add_action("wp_head", array($this, "setup_header"));
       add_action("plugins_loaded", array($this, "wpf_load_widget"));
@@ -44,12 +43,14 @@ if (!class_exists('mingleforum'))
       add_filter('mf_ad_above_quick_reply', array($this, 'mf_ad_above_quick_reply'));
       add_filter('mf_ad_below_menu', array($this, 'mf_ad_below_menu'));
       add_filter('mf_ad_below_first_post', array($this, 'mf_ad_below_first_post'));
-      add_filter("wp_title", array($this, "set_pagetitle"));
+      add_filter("wp_title", array($this, "get_pagetitle"), 10000, 2);
       add_filter('jetpack_enable_open_graph', '__return_false', 99); //Fix for duplication with JetPack
       //Shortcode hooks
       add_shortcode('mingleforum', array($this, "go"));
 
       $this->init();
+      
+      MFAdmin::load_hooks();
     }
 
     // !Member variables
@@ -80,6 +81,39 @@ if (!class_exists('mingleforum'))
     var $user_options = array();
     var $options = array();
     var $ads_options = array();
+
+    var $default_ops = array( 'wp_posts_to_forum' => false,
+                              'forum_posts_per_page' => 10,
+                              'forum_threads_per_page' => 20,
+                              'forum_require_registration' => true,
+                              'forum_show_login_form' => true,
+                              'forum_date_format' => 'F j, Y, H:i',
+                              'forum_use_gravatar' => true,
+                              'forum_show_bio' => true,
+                              'forum_skin' => "Default",
+                              'forum_use_rss' => true,
+                              'forum_use_seo_friendly_urls' => false,
+                              'forum_allow_image_uploads' => false,
+                              'notify_admin_on_new_posts' => false,
+                              'forum_captcha' => true,
+                              'hot_topic' => 15,
+                              'veryhot_topic' => 25,
+                              'forum_display_name' => 'user_login',
+                              'level_one' => 25,
+                              'level_two' => 50,
+                              'level_three' => 100,
+                              'level_newb_name' => "Newbie",
+                              'level_one_name' => "Beginner",
+                              'level_two_name' => "Advanced",
+                              'level_three_name' => "Pro",
+                              'forum_db_version' => 0,
+                              'forum_disabled_cats' => array(),
+                              'allow_user_replies_locked_cats' => false,
+                              'forum_posting_time_limit' => 300,
+                              'forum_hide_branding' => false,
+                              'forum_login_url' => '',
+                              'forum_signup_url' => '',
+                              'forum_logout_redirect_url' => '' );
 
     // Initialize varables
     public function init()
@@ -147,46 +181,10 @@ if (!class_exists('mingleforum'))
 
     public function load_forum_options()
     {
-      $default_ops = array('wp_posts_to_forum' => false,
-          'forum_posts_per_page' => 10,
-          'forum_threads_per_page' => 20,
-          'forum_require_registration' => true,
-          'forum_show_login_form' => true,
-          'forum_date_format' => get_option('date_format'),
-          'forum_use_gravatar' => true,
-          'forum_show_bio' => true,
-          'forum_skin' => "Default",
-          'forum_use_rss' => true,
-          'forum_use_seo_friendly_urls' => false,
-          'forum_allow_image_uploads' => false,
-          'notify_admin_on_new_posts' => false,
-          'set_sort' => "DESC",
-          'forum_use_spam' => false,
-          'forum_use_bbcode' => true,
-          'forum_captcha' => true,
-          'hot_topic' => 15,
-          'veryhot_topic' => 25,
-          'forum_display_name' => 'user_login',
-          'level_one' => 25,
-          'level_two' => 50,
-          'level_three' => 100,
-          'level_newb_name' => __("Newbie", "mingleforum"),
-          'level_one_name' => __("Beginner", "mingleforum"),
-          'level_two_name' => __("Advanced", "mingleforum"),
-          'level_three_name' => __("Pro", "mingleforum"),
-          'forum_db_version' => 0,
-          'forum_disabled_cats' => array(),
-          'allow_user_replies_locked_cats' => false,
-          'forum_posting_time_limit' => 300,
-          'forum_hide_branding' => false,
-          'forum_login_url' => '',
-          'forum_signup_url' => '',
-          'forum_logout_redirect_url' => '');
-
       $stored_ops = get_option('mingleforum_options', array());
 
       //Merge defaults with user's settings
-      $this->options = array_merge($default_ops, $stored_ops);
+      $this->options = array_merge($this->default_ops, $stored_ops);
     }
 
     // Add admin pages
@@ -194,9 +192,11 @@ if (!class_exists('mingleforum'))
     {
       include_once("fs-admin/fs-admin.php");
       $admin_class = new mingleforumadmin();
+      
+      //ONCE DONE WITH ADMIN REDUX - THIS FUNC NEEDS TO BE MOVED TO MFAdmin CLASS
 
-      add_menu_page(__("Mingle Forum - Options", "mingleforum"), "Mingle Forum", "administrator", "mingle-forum", array($admin_class, "options"), WPFURL . "images/logo.png");
-      add_submenu_page("mingle-forum", __("Mingle Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', array($admin_class, "options"));
+      add_menu_page(__("Mingle Forum - Options", "mingleforum"), "Mingle Forum", "administrator", "mingle-forum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
+      add_submenu_page("mingle-forum", __("Mingle Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', 'MFAdmin::options_page');
       add_submenu_page('mingle-forum', __('Ads', 'mingleforum'), __('Ads', 'mingleforum'), "administrator", 'mfads', array($admin_class, "ads"));
       add_submenu_page("mingle-forum", __("Skins", "mingleforum"), __("Skins", "mingleforum"), "administrator", 'mfskins', array($admin_class, "skins"));
       add_submenu_page("mingle-forum", __("Forum Structure - Categories & Forums", "mingleforum"), __("Forum Structure", "mingleforum"), "administrator", 'mfstructure', array($admin_class, "structure"));
@@ -235,18 +235,6 @@ if (!class_exists('mingleforum'))
         <link rel='stylesheet' type='text/css' href="<?php echo "{$this->skin_url}/style.css"; ?>"  />
         <?php
       endif;
-    }
-
-    public function enqueue_admin_scripts($hook)
-    {
-      $url = plugin_dir_url(__FILE__);
-
-      //Let's only load our shiz on mingle-forum admin pages
-      if (strstr($hook, 'mingle-forum') !== false)
-      {
-        wp_enqueue_style('mingle-forum-admin-css', $url . "wpf_admin.css");
-        wp_enqueue_script('mingle-forum-admin-js', $url . "js/script.js");
-      }
     }
 
     public function wpf_load_widget()
@@ -1422,11 +1410,11 @@ if (!class_exists('mingleforum'))
     }
 
     // Some SEO friendly stuff
-    public function get_pagetitle($bef_title)
+    public function get_pagetitle($bef_title, $sep)
     {
-      global $wpdb;
+      global $wpdb, $post;
 
-      $default_title = " &raquo; ";
+      $default_title = $post->post_title;
       $action = "";
       $title = "";
 
@@ -1435,6 +1423,7 @@ if (!class_exists('mingleforum'))
       elseif ($this->options['forum_use_seo_friendly_urls'])
       {
         $uri = $this->get_seo_friendly_query();
+
         if (!empty($uri) && $uri['action'] && $uri['id'])
         {
           switch ($uri['action'])
@@ -1454,41 +1443,42 @@ if (!class_exists('mingleforum'))
           }
         }
       }
+
       switch ($action)
       {
         case "vforum":
-          $title = $default_title . $this->get_groupname($this->check_parms($_GET['g']));
+          $title = $default_title . " &raquo; " . $this->get_groupname($this->check_parms($_GET['g']));
           break;
         case "viewforum":
-          $title = $default_title . $this->get_groupname($this->get_parent_id(FORUM, $this->check_parms($_GET['f']))) . " &raquo; " . $this->get_forumname($this->check_parms($_GET['f']));
+          $title = $default_title . " &raquo; " . $this->get_groupname($this->get_parent_id(FORUM, $this->check_parms($_GET['f']))) . " &raquo; " . $this->get_forumname($this->check_parms($_GET['f']));
           break;
         case "viewtopic":
           $group = $this->get_groupname($this->get_parent_id(FORUM, $this->get_parent_id(THREAD, $this->check_parms($_GET['t']))));
-          $title = $default_title . $group . " &raquo; " . $this->get_forumname($this->get_parent_id(THREAD, $this->check_parms($_GET['t']))) . " &raquo; " . $this->get_threadname($this->check_parms($_GET['t']));
+          $title = $default_title . " &raquo; " . $group . " &raquo; " . $this->get_forumname($this->get_parent_id(THREAD, $this->check_parms($_GET['t']))) . " &raquo; " . $this->get_threadname($this->check_parms($_GET['t']));
           break;
         case "search":
-          $terms = htmlentities($wpdb->escape($_POST['search_words']), ENT_QUOTES);
-          $title = $default_title . __("Search Results", "mingleforum") . " &raquo; {$terms} | ";
+          $terms = htmlentities($_POST['search_words'], ENT_QUOTES);
+          $title = $default_title . " &raquo; " . __("Search Results", "mingleforum") . " &raquo; {$terms} | ";
           break;
         case "profile":
-          $title = $default_title . __("Profile", "mingleforum") . "";
+          $title = $default_title . " &raquo; " . __("Profile", "mingleforum");
           break;
         case "editpost":
-          $title = $default_title . __("Edit Post", "mingleforum") . "";
+          $title = $default_title . " &raquo; " . __("Edit Post", "mingleforum");
           break;
         case "postreply":
-          $title = $default_title . __("Post Reply", "mingleforum") . "";
+          $title = $default_title . " &raquo; " . __("Post Reply", "mingleforum");
           break;
         case "addtopic":
-          $title = $default_title . __("New Topic", "mingleforum") . "";
+          $title = $default_title . " &raquo; " . __("New Topic", "mingleforum");
+          break;
+        default:
+          $title = $default_title;
           break;
       }
-      return $bef_title . $title;
-    }
 
-    public function set_pagetitle($title)
-    {
-      return $this->get_pagetitle($title);
+      //May want to look at this in the future if we get complains, but this seems great for now!
+      return $title . ' ';
     }
 
     public function get_usergroup_name($usergroup_id)

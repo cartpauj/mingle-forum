@@ -1,0 +1,12 @@
+.mf_admin_submit {
+  margin-top:25px !important;
+}
+
+#mf_options_form input {
+  vertical-align:middle;
+}
+
+.mf_tb_label {
+  display:inline-block;
+  width:350px;
+}

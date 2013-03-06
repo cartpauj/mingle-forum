@@ -35,6 +35,7 @@ require("wpf_define.php");
 
 //Load class files
 require('bbcode.php');
+require('mf-admin/mfadmin.php');
 require("wpf.class.php");
 
 //Set $mingleforum global
