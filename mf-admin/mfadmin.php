@@ -10,7 +10,7 @@ if(!class_exists("MFAdmin"))
       add_action('admin_enqueue_scripts', 'MFAdmin::enqueue_admin_scripts');
     }
 
-    public function enqueue_admin_scripts($hook)
+    public static function enqueue_admin_scripts($hook)
     {
       $plug_url = plugin_dir_url(__FILE__) . '../';
 
