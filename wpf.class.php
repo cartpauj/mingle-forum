@@ -798,10 +798,10 @@ if (!class_exists('mingleforum'))
       global $user_ID, $wpdb;
 
       if (isset($_GET['delete_topic']))
-        $this->remove_topic();
+        $this->remove_topic($forum_id);
 
       if (isset($_GET['move_topic']))
-        $this->move_topic();
+        $this->move_topic($forum_id);
 
       if (!empty($forum_id))
       {
@@ -2202,13 +2202,13 @@ if (!class_exists('mingleforum'))
       return "<span class='wpf-pages'>" . $out . "</span>";
     }
 
-    public function remove_topic()
+    public function remove_topic($forum_id)
     {
       global $user_ID, $wpdb;
 
       $topic = $_GET['topic'];
 
-      if ($this->is_moderator($user_ID, $this->current_forum))
+      if ($this->is_moderator($user_ID, $forum_id))
       {
         //DELETE MINGLE ENTRY AS WELL
         if (!function_exists('is_plugin_active'))
@@ -2256,7 +2256,7 @@ if (!class_exists('mingleforum'))
         wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
     }
 
-    public function move_topic()
+    public function move_topic($forum_id)
     {
       global $user_ID, $wpdb;
 
@@ -2264,7 +2264,7 @@ if (!class_exists('mingleforum'))
       $newForumID = !empty($_GET['newForumID']) ? (int) $_GET['newForumID'] : 0;
       $newForumID = !empty($_POST['newForumID']) ? (int) $_POST['newForumID'] : $newForumID;
 
-      if ($this->is_moderator($user_ID, $this->current_forum))
+      if ($this->is_moderator($user_ID, $forum_id))
       {
         $strSQL = $wpdb->prepare("UPDATE {$this->t_threads} SET `parent_id` = {$newForumID} WHERE id = %d", $topic);
         $wpdb->query($strSQL);
