@@ -1,3 +1,4 @@
+/* MAIN OPTIONS PAGE */
 .mf_admin_submit {
   margin-top:25px !important;
 }
@@ -9,4 +10,23 @@
 .mf_tb_label {
   display:inline-block;
   width:350px;
+}
+
+/* ADS OPTIONS PAGE */
+.parent_ad_box {
+  margin-top:25px;
+}
+
+.mf_ad_hidden_area {
+  margin-top:5px;
+  padding:15px;
+  border:1px solid #AAA;
+  border-radius:10px;
+  background:#EEE;
+}
+
+.ad_area_text {
+  width:75%;
+  height:200px;
+  border-radius:5px;
 }

@@ -197,7 +197,7 @@ if (!class_exists('mingleforum'))
 
       add_menu_page(__("Mingle Forum - Options", "mingleforum"), "Mingle Forum", "administrator", "mingle-forum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
       add_submenu_page("mingle-forum", __("Mingle Forum - Options", "mingleforum"), __("Options", "mingleforum"), "administrator", 'mingle-forum', 'MFAdmin::options_page');
-      add_submenu_page('mingle-forum', __('Ads', 'mingleforum'), __('Ads', 'mingleforum'), "administrator", 'mfads', array($admin_class, "ads"));
+      add_submenu_page('mingle-forum', __('Monetize', 'mingleforum'), __('Monetize', 'mingleforum'), "administrator", 'mingle-forum-ads', 'MFAdmin::ads_options_page');
       add_submenu_page("mingle-forum", __("Skins", "mingleforum"), __("Skins", "mingleforum"), "administrator", 'mfskins', array($admin_class, "skins"));
       add_submenu_page("mingle-forum", __("Forum Structure - Categories & Forums", "mingleforum"), __("Forum Structure", "mingleforum"), "administrator", 'mfstructure', array($admin_class, "structure"));
       add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mfmods', array($admin_class, "moderators"));

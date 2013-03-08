@@ -6,6 +6,7 @@ if(!class_exists("MFAdmin"))
     public static function load_hooks()
     {
       add_action('admin_init', 'MFAdmin::maybe_save_options');
+      add_action('admin_init', 'MFAdmin::maybe_save_ads_options');
       // add_action('admin_menu', 'MFAdmin::admin_menus');
       add_action('admin_enqueue_scripts', 'MFAdmin::enqueue_admin_scripts');
     }
@@ -34,6 +35,15 @@ if(!class_exists("MFAdmin"))
       $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
 
       require('views/options_page.php');
+    }
+
+    public static function ads_options_page()
+    {
+      global $mingleforum;
+
+      $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
+
+      require('views/ads_options_page.php');
     }
 
     public static function maybe_save_options()
@@ -77,6 +87,34 @@ if(!class_exists("MFAdmin"))
 
       update_option('mingleforum_options', $saved_ops);
       wp_redirect(admin_url('admin.php?page=mingle-forum&saved=true'));
+    }
+
+    public static function maybe_save_ads_options()
+    {
+      global $wpdb, $mingleforum;
+
+      if(!isset($_POST['mf_ads_options_save']) || empty($_POST['mf_ads_options_save']))
+        return;
+
+      $mingleforum->ads_options = array('mf_ad_above_forum_on' => isset($_POST['mf_ad_above_forum_on']),
+                                        'mf_ad_above_forum' => $wpdb->escape(stripslashes($_POST['mf_ad_above_forum_text'])),
+                                        'mf_ad_below_forum_on' => isset($_POST['mf_ad_below_forum_on']),
+                                        'mf_ad_below_forum' => $wpdb->escape(stripslashes($_POST['mf_ad_below_forum_text'])),
+                                        'mf_ad_above_branding_on' => isset($_POST['mf_ad_above_branding_on']),
+                                        'mf_ad_above_branding' => $wpdb->escape(stripslashes($_POST['mf_ad_above_branding_text'])),
+                                        'mf_ad_above_info_center_on' => isset($_POST['mf_ad_above_info_center_on']),
+                                        'mf_ad_above_info_center' => $wpdb->escape(stripslashes($_POST['mf_ad_above_info_center_text'])),
+                                        'mf_ad_above_quick_reply_on' => isset($_POST['mf_ad_above_quick_reply_on']),
+                                        'mf_ad_above_quick_reply' => $wpdb->escape(stripslashes($_POST['mf_ad_above_quick_reply_text'])),
+                                        'mf_ad_below_menu_on' => isset($_POST['mf_ad_below_menu_on']),
+                                        'mf_ad_below_menu' => $wpdb->escape(stripslashes($_POST['mf_ad_below_menu_text'])),
+                                        'mf_ad_below_first_post_on' => isset($_POST['mf_ad_below_first_post_on']),
+                                        'mf_ad_below_first_post' => $wpdb->escape(stripslashes($_POST['mf_ad_below_first_post_text'])),
+                                        'mf_ad_custom_css' => strip_tags($_POST['mf_ad_custom_css']));
+
+      update_option('mingleforum_ads_options', $mingleforum->ads_options);
+
+      wp_redirect(admin_url('admin.php?page=mingle-forum-ads&saved=true'));
     }
   } //End class
 } //End if
