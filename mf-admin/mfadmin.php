@@ -24,7 +24,7 @@ if(!class_exists("MFAdmin"))
 
         wp_enqueue_style('mingle-forum-ui-css', $url);
         wp_enqueue_style('mingle-forum-admin-css', $plug_url . "css/mf_admin.css");
-        wp_enqueue_script('mingle-forum-admin-js', $plug_url . "js/mf_admin.js", array('jquery-ui-accordion'));
+        wp_enqueue_script('mingle-forum-admin-js', $plug_url . "js/mf_admin.js", array('jquery-ui-accordion', 'jquery-ui-sortable'));
       }
     }
 
@@ -44,6 +44,24 @@ if(!class_exists("MFAdmin"))
       $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
 
       require('views/ads_options_page.php');
+    }
+
+    public static function structure_page()
+    {
+      global $mingleforum;
+
+      $action = (isset($_GET['action']) && !empty($_GET['action']))?$_GET['action']:false;
+
+      switch($action)
+      {
+        case 'forums':
+          require('views/structure_page_forums.php');
+          break;
+        default:
+          $categories = $mingleforum->get_groups();
+          require('views/structure_page_categories.php');
+          break;
+      }
     }
 
     public static function maybe_save_options()

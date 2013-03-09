@@ -30,3 +30,38 @@
   height:200px;
   border-radius:5px;
 }
+
+/* FORUM STRUCTURE PAGE */
+.mf_fset {
+  border:1px solid #999;
+  margin-top:25px;
+  border-radius:10px;
+  padding:15px;
+  background:#EFF8FF;
+}
+
+.mf_fset legend {
+  font-size:14px;
+  font-weight:bold;
+}
+
+.mf_ordered_list {
+  margin:0;
+  padding:0;
+}
+
+.mf_ordered_list li {
+  list-style-position:inside;
+  margin:10px;
+  padding:5px;
+  border:2px dotted #AAA;
+  cursor:move;
+}
+
+a#mf_add_new_category {
+  padding-left:8px;
+}
+
+a.mf_remove_category {
+  float:right;
+}
