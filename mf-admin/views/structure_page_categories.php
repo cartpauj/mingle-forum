@@ -11,10 +11,13 @@
   <form action="" method="post">
     <fieldset class="mf_fset">
       <legend><?php _e('Manage Categories', 'mingle-forum'); ?></legend>
+
+      <!-- STILL NEED TO PROCESS THE SAVE IN PHP, ADD NONCE, AND I18N THE JS -->
+
       <ol id="sortable-categories" class="mf_ordered_list">
         <?php if(!empty($categories)): ?>
           <?php foreach($categories as $cat): ?>
-            <li>
+            <li class="ui-state-default">
               <input type="hidden" name="mf_category_id[]" value="<?php echo $cat->id; ?>" />
               &nbsp;&nbsp;
               <label for="category-name-<?php echo $cat->id; ?>"><?php _e('Category Name:', 'mingle-forum'); ?></label>
@@ -29,19 +32,19 @@
             </li>
           <?php endforeach; ?>
         <?php else: ?>
-            <li>
-              <input type="hidden" name="mf_category_id[]" value="new" />
-              &nbsp;&nbsp;
-              <label for="category-name-9999999"><?php _e('Category Name:', 'mingle-forum'); ?></label>
-              <input type="text" name="category_name[]" id="category-name-9999999" value="" />
-              &nbsp;&nbsp;
-              <label for="category-description-9999999"><?php _e('Description:', 'mingle-forum'); ?></label>
-              <input type="text" name="category_description[]" id="category-description-9999999" value="" />
+          <li class="ui-state-default">
+            <input type="hidden" name="mf_category_id[]" value="new" />
+            &nbsp;&nbsp;
+            <label for="category-name-9999999"><?php _e('Category Name:', 'mingle-forum'); ?></label>
+            <input type="text" name="category_name[]" id="category-name-9999999" value="" />
+            &nbsp;&nbsp;
+            <label for="category-description-9999999"><?php _e('Description:', 'mingle-forum'); ?></label>
+            <input type="text" name="category_description[]" id="category-description-9999999" value="" size="50" />
 
-              <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'mingle-forum'); ?>">
-                <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
-              </a>
-            </li>
+            <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'mingle-forum'); ?>">
+              <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+            </a>
+          </li>
         <?php endif; ?>
       </ol>
 

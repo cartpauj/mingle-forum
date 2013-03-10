@@ -8,4 +8,60 @@
     <a href="<?php echo admin_url('admin.php?page=mingle-forum-structure&action=forums'); ?>" class="nav-tab main-nav nav-tab-active"><?php _e('Forums', 'mingle-forum'); ?></a>
   </h2>
 
+  <form action="" method="post">
+    <?php if(!empty($categories)): ?>
+      <?php foreach($categories as $cat): ?>
+        <?php $forums = $mingleforum->get_forums($cat->id); ?>
+        <fieldset class="mf_fset">
+          <legend><?php echo stripslashes($cat->name); ?></legend>
+
+          <!-- STILL NEED TO PROCESS THE SAVE IN PHP, ADD NONCE, AND I18N THE JS -->
+
+          <ol class="sortable_forums mf_ordered_list" id="sortable-forums-<?php echo $cat->id; ?>">
+            <?php if(!empty($forums)): ?>
+              <?php foreach($forums as $forum): ?>
+                <li class="ui-state-default">
+                  <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="<?php echo $forum->id; ?>" />
+                  &nbsp;&nbsp;
+                  <label for="forum-name-<?php echo $forum->id; ?>"><?php _e('Forum Name:', 'mingle-forum'); ?></label>
+                  <input type="text" name="forum_name[<?php echo $cat->id; ?>][]" id="forum-name-<?php echo $forum->id; ?>" value="<?php echo stripslashes($forum->name); ?>" />
+                  &nbsp;&nbsp;
+                  <label for="forum-description-<?php echo $forum->id; ?>"><?php _e('Description:', 'mingle-forum'); ?></label>
+                  <input type="text" name="forum_description[<?php echo $cat->id; ?>][]" id="forum-description-<?php echo $forum->id; ?>" value="<?php echo stripslashes($forum->description); ?>" size="50" />
+
+                  <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'mingle-forum'); ?>">
+                    <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+                  </a>
+                </li>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <li class="ui-state-default">
+                <?php $random_id = rand(1000001, 2000001); ?>
+                <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="new" />
+                &nbsp;&nbsp;
+                <label for="forum-name-<?php echo $random_id; ?>"><?php _e('Forum Name:', 'mingle-forum'); ?></label>
+                <input type="text" name="forum_name[<?php echo $cat->id; ?>][]" id="forum-name-<?php echo $random_id; ?>" value="" />
+                &nbsp;&nbsp;
+                <label for="forum-description-<?php echo $random_id; ?>"><?php _e('Description:', 'mingle-forum'); ?></label>
+                <input type="text" name="forum_description[<?php echo $cat->id; ?>][]" id="forum-description-<?php echo $random_id; ?>" value="" size="50" />
+
+                <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'mingle-forum'); ?>">
+                  <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
+                </a>
+              </li>
+            <?php endif; ?>
+          </ol>
+
+          <a href="#" class="mf_add_new_forum" title="<?php _e('Add new Forum', 'mingle-forum'); ?>" data-value="<?php echo $cat->id; ?>">
+            <img src="<?php echo WPFURL.'images/add.png'; ?>" width="32" />
+          </a>
+        </fieldset>
+      <?php endforeach; //End foreach($categories as $cat) ?>
+
+      <div style="margin-top:15px;">
+        <input type="submit" name="mf_forums_save" value="<?php _e('Save Changes', 'mingle-forum'); ?>" class="button" />
+      </div>
+    <?php endif; //End !empty($categories) if ?>
+  </form>
+
 </div>

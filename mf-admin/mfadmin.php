@@ -51,6 +51,7 @@ if(!class_exists("MFAdmin"))
       global $mingleforum;
 
       $action = (isset($_GET['action']) && !empty($_GET['action']))?$_GET['action']:false;
+      $categories = $mingleforum->get_groups();
 
       switch($action)
       {
@@ -58,7 +59,6 @@ if(!class_exists("MFAdmin"))
           require('views/structure_page_forums.php');
           break;
         default:
-          $categories = $mingleforum->get_groups();
           require('views/structure_page_categories.php');
           break;
       }

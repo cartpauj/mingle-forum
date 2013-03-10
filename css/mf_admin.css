@@ -18,11 +18,12 @@
 }
 
 .mf_ad_hidden_area {
+  color:white;
   margin-top:5px;
   padding:15px;
   border:1px solid #AAA;
   border-radius:10px;
-  background:#EEE;
+  background:#0078AE;
 }
 
 .ad_area_text {
@@ -33,7 +34,7 @@
 
 /* FORUM STRUCTURE PAGE */
 .mf_fset {
-  border:1px solid #999;
+  border:2px solid #999;
   margin-top:25px;
   border-radius:10px;
   padding:15px;
@@ -43,6 +44,14 @@
 .mf_fset legend {
   font-size:14px;
   font-weight:bold;
+  background:lightgray;
+  padding:5px;
+  border:1px solid #999;
+  border-radius:5px;
+}
+
+.mf_fset label {
+  cursor:move;
 }
 
 .mf_ordered_list {
@@ -50,18 +59,25 @@
   padding:0;
 }
 
-.mf_ordered_list li {
-  list-style-position:inside;
+li.ui-state-default {
+  list-style-type:none;
   margin:10px;
-  padding:5px;
-  border:2px dotted #AAA;
+  padding:10px;
   cursor:move;
 }
 
-a#mf_add_new_category {
+li.ui-state-highlight {
+  list-style-type:none;
+  margin:10px;
+  padding:22px;
+}
+
+a#mf_add_new_category,
+a.mf_add_new_forum {
   padding-left:8px;
 }
 
-a.mf_remove_category {
+a.mf_remove_category,
+a.mf_remove_forum {
   float:right;
 }
