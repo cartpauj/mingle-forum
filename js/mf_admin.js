@@ -30,7 +30,9 @@
     });
 
     $('a#mf_add_new_category').click(function() {
-      $('ol#sortable-categories').append(get_new_category_row());
+      var new_category_row = get_new_category_row();
+
+      $(new_category_row).hide().appendTo('ol#sortable-categories').fadeIn(500);
 
       return false;
     });
@@ -77,8 +79,9 @@
     //Add New Forum Button
     $('.mf_add_new_forum').click(function() {
       var category_id = $(this).attr('data-value');
+      var new_forum_row = get_new_forum_row(category_id);
 
-      $('ol#sortable-forums-' + category_id).append(get_new_forum_row(category_id));
+      $(new_forum_row).hide().appendTo('ol#sortable-forums-' + category_id).fadeIn(500);
 
       return false;
     });
