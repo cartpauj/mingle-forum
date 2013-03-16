@@ -38,8 +38,7 @@
     });
 
     $('body').on('click', '.mf_remove_category', function() {
-      //TODO NEED TO I18N THIS SHIZZ!!!
-      var answer = confirm('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Topics, and Replies associated with it!!! Are you sure you want to delete this Category???');
+      var answer = confirm(MFAdmin.remove_category_warning);
 
       if(answer) {
         $(this).parent().fadeOut(500, function() {
@@ -53,17 +52,16 @@
     function get_new_category_row() {
       var random_id = Math.floor(Math.random() * (1000000 - 100000)) + 100000;
 
-      //TODO NEED TO I18N THIS SHIZZ!!!
       return '<li class="ui-state-default">\
                 <input type="hidden" name="mf_category_id[]" value="new" />\
                 &nbsp;&nbsp;\
-                <label for="category-name-' + random_id + '">Category Name:</label>\
+                <label for="category-name-' + random_id + '">' + MFAdmin.category_name_label + '</label>\
                 <input type="text" name="category_name[]" id="category-name-' + random_id + '" value="" />\
                 &nbsp;&nbsp;\
-                <label for="category-description-' + random_id + '">Description:</label>\
+                <label for="category-description-' + random_id + '">' + MFAdmin.category_description_label + '</label>\
                 <input type="text" name="category_description[]" id="category-description-' + random_id + '" value="" size="50" />\
-                <a href="#" class="mf_remove_category" title="Remove this Category">\
-                  <img src="http://modforum.com/wp-content/plugins/mingle-forum/images/remove.png" width="24" />\
+                <a href="#" class="mf_remove_category" title="' + MFAdmin.remove_category_a_title + '">\
+                  <img src="' + MFAdmin.images_url + 'remove.png" width="24" />\
                 </a>\
               </li>';
     }
@@ -89,25 +87,23 @@
     function get_new_forum_row(category_id) {
       var random_id = Math.floor(Math.random() * (1000000 - 100000)) + 100000;
 
-      //TODO NEED TO I18N THIS SHIZZ!!!
-      return '<li class="ui-state-default">\
+      return '<li class="ui-state-active">\
                 <input type="hidden" name="mf_forum_id[' + category_id + '][]" value="new" />\
                 &nbsp;&nbsp;\
-                <label for="forum-name-' + random_id + '">Forum Name:</label>\
+                <label for="forum-name-' + random_id + '">' + MFAdmin.forum_name_label + '</label>\
                 <input type="text" name="forum_name[' + category_id + '][]" id="forum-name-' + random_id + '" value="" />\
                 &nbsp;&nbsp;\
-                <label for="forum-description-' + random_id + '">Description:</label>\
+                <label for="forum-description-' + random_id + '">' + MFAdmin.forum_description_label + '</label>\
                 <input type="text" name="forum_description[' + category_id + '][]" id="forum-description-' + random_id + '" value="" size="50" />\
-                <a href="#" class="mf_remove_forum" title="Remove this Forum">\
-                  <img src="http://modforum.com/wp-content/plugins/mingle-forum/images/remove.png" width="24" />\
+                <a href="#" class="mf_remove_forum" title="' + MFAdmin.remove_forum_a_title + '">\
+                  <img src="' + MFAdmin.images_url + 'remove.png" width="24" />\
                 </a>\
               </li>';
     }
 
     //Delete a Forum
     $('body').on('click', '.mf_remove_forum', function() {
-      //TODO NEED TO I18N THIS SHIZZ!!!
-      var answer = confirm('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???');
+      var answer = confirm(MFAdmin.remove_forum_warning);
 
       if(answer) {
         $(this).parent().fadeOut(500, function() {

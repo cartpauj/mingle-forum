@@ -7,6 +7,7 @@ if(!class_exists("MFAdmin"))
     {
       add_action('admin_init', 'MFAdmin::maybe_save_options');
       add_action('admin_init', 'MFAdmin::maybe_save_ads_options');
+      add_action('admin_init', 'MFAdmin::maybe_save_structure');
       // add_action('admin_menu', 'MFAdmin::admin_menus');
       add_action('admin_enqueue_scripts', 'MFAdmin::enqueue_admin_scripts');
     }
@@ -14,6 +15,15 @@ if(!class_exists("MFAdmin"))
     public static function enqueue_admin_scripts($hook)
     {
       $plug_url = plugin_dir_url(__FILE__) . '../';
+      $l10n_vars = array( 'remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Topics, and Replies associated with it!!! Are you sure you want to delete this Category???', 'mingle-forum'),
+                          'category_name_label' => __('Category Name:', 'mingle-forum'),
+                          'category_description_label' => __('Description:', 'mingle-forum'),
+                          'remove_category_a_title' => __('Remove this Category', 'mingle-forum'),
+                          'images_url' => WPFURL . 'images/',
+                          'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'mingle-forum'),
+                          'forum_name_label' => __('Forum Name:', 'mingle-forum'),
+                          'forum_description_label' => __('Description:', 'mingle-forum'),
+                          'remove_forum_a_title' => __('Remove this Forum', 'mingle-forum') );
 
       //Let's only load our shiz on mingle-forum admin pages
       if (strstr($hook, 'mingle-forum') !== false)
@@ -25,6 +35,7 @@ if(!class_exists("MFAdmin"))
         wp_enqueue_style('mingle-forum-ui-css', $url);
         wp_enqueue_style('mingle-forum-admin-css', $plug_url . "css/mf_admin.css");
         wp_enqueue_script('mingle-forum-admin-js', $plug_url . "js/mf_admin.js", array('jquery-ui-accordion', 'jquery-ui-sortable'));
+        wp_localize_script('mingle-forum-admin-js', 'MFAdmin', $l10n_vars);
       }
     }
 
@@ -105,6 +116,7 @@ if(!class_exists("MFAdmin"))
 
       update_option('mingleforum_options', $saved_ops);
       wp_redirect(admin_url('admin.php?page=mingle-forum&saved=true'));
+      exit();
     }
 
     public static function maybe_save_ads_options()
@@ -133,6 +145,38 @@ if(!class_exists("MFAdmin"))
       update_option('mingleforum_ads_options', $mingleforum->ads_options);
 
       wp_redirect(admin_url('admin.php?page=mingle-forum-ads&saved=true'));
+      exit();
+    }
+
+    public static function maybe_save_structure()
+    {
+      if(isset($_POST['mf_categories_save']) && !empty($_POST['mf_categories_save']))
+        self::process_save_categories();
+
+      if(isset($_POST['mf_forums_save']) && !empty($_POST['mf_forums_save']))
+        self::process_save_forums();
+    }
+
+    public static function process_save_categories()
+    {
+      global $wpdb, $mingleforum;
+
+      $order = 10000;
+      $listed_categories = array();
+
+      wp_redirect(admin_url('admin.php?page=mingle-forum-structure&saved=true'));
+      exit();
+    }
+
+    public static function process_save_forums()
+    {
+      global $wpdb, $mingleforum;
+
+      $order = 100000;
+      $listed_forums = array();
+
+      wp_redirect(admin_url('admin.php?page=mingle-forum-structure&action=forums&saved=true'));
+      exit();
     }
   } //End class
 } //End if

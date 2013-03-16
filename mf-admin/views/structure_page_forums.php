@@ -1,6 +1,12 @@
 <div class="wrap">
   <h2>Mingle Forum - <?php _e('Structure', 'mingle-forum'); ?></h2>
 
+  <?php if (isset($_GET['saved']) && $_GET['saved'] == 'true'): ?>
+    <div id="message" class="updated below-h2">
+      <p><?php _e('Your Forums have been saved.', 'mingle-forum'); ?></p>
+    </div>
+  <?php endif; ?>
+
   <p><i>* <?php _e('Categories can be thought of as empty boxes. Great for organizing stuff, but no good without something in them. Use categories to organize your various Forums. Say you want a discussion board dedicated to classic sports cars. Then you would create a Category called "Chevrolet" and put Forums inside of it called "Corvette Sting Ray", "Aston Martin DB5", "1969 Camaro", etc.', 'mingle-forum'); ?></i></p>
 
   <h2 class="nav-tab-wrapper">
@@ -14,13 +20,10 @@
         <?php $forums = $mingleforum->get_forums($cat->id); ?>
         <fieldset class="mf_fset">
           <legend><?php echo stripslashes($cat->name); ?></legend>
-
-          <!-- STILL NEED TO PROCESS THE SAVE IN PHP, ADD NONCE, AND I18N THE JS -->
-
           <ol class="sortable_forums mf_ordered_list" id="sortable-forums-<?php echo $cat->id; ?>">
             <?php if(!empty($forums)): ?>
               <?php foreach($forums as $forum): ?>
-                <li class="ui-state-default">
+                <li class="ui-state-active">
                   <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="<?php echo $forum->id; ?>" />
                   &nbsp;&nbsp;
                   <label for="forum-name-<?php echo $forum->id; ?>"><?php _e('Forum Name:', 'mingle-forum'); ?></label>
@@ -35,7 +38,7 @@
                 </li>
               <?php endforeach; ?>
             <?php else: ?>
-              <li class="ui-state-default">
+              <li class="ui-state-active">
                 <?php $random_id = rand(1000001, 2000001); ?>
                 <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="new" />
                 &nbsp;&nbsp;
@@ -61,7 +64,10 @@
       <div style="margin-top:15px;">
         <input type="submit" name="mf_forums_save" value="<?php _e('Save Changes', 'mingle-forum'); ?>" class="button" />
       </div>
-    <?php endif; //End !empty($categories) if ?>
+    
+    <?php else: //else !empty($categories) if ?>
+      <h3><?php _e('You must add some Categories first.', 'mingle-forum'); ?></h3>
+    <?php endif; //end !empty($categories) if ?>
   </form>
 
 </div>

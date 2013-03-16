@@ -1,6 +1,12 @@
 <div class="wrap">
   <h2>Mingle Forum - <?php _e('Structure', 'mingle-forum'); ?></h2>
 
+  <?php if (isset($_GET['saved']) && $_GET['saved'] == 'true'): ?>
+    <div id="message" class="updated below-h2">
+      <p><?php _e('Your Categories have been saved.', 'mingle-forum'); ?></p>
+    </div>
+  <?php endif; ?>
+
   <p><i>* <?php _e('Categories can be thought of as empty boxes. Great for organizing stuff, but no good without something in them. Use categories to organize your various Forums. Say you want a discussion board dedicated to classic sports cars. Then you would create a Category called "Chevrolet" and put Forums inside of it called "Corvette Sting Ray", "Aston Martin DB5", "1969 Camaro", etc.', 'mingle-forum'); ?></i></p>
 
   <h2 class="nav-tab-wrapper">
@@ -11,9 +17,6 @@
   <form action="" method="post">
     <fieldset class="mf_fset">
       <legend><?php _e('Manage Categories', 'mingle-forum'); ?></legend>
-
-      <!-- STILL NEED TO PROCESS THE SAVE IN PHP, ADD NONCE, AND I18N THE JS -->
-
       <ol id="sortable-categories" class="mf_ordered_list">
         <?php if(!empty($categories)): ?>
           <?php foreach($categories as $cat): ?>
