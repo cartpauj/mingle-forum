@@ -13,6 +13,7 @@ if (!class_exists('mingleforum'))
       //Init options
       $this->load_forum_options();
       $this->get_set_ads_options();
+      $this->init();
 
       //Action hooks
       add_action("admin_menu", array($this, "add_admin_pages"));
@@ -48,8 +49,6 @@ if (!class_exists('mingleforum'))
       //Shortcode hooks
       add_shortcode('mingleforum', array($this, "go"));
 
-      $this->init();
-      
       MFAdmin::load_hooks();
     }
 
@@ -200,7 +199,6 @@ if (!class_exists('mingleforum'))
       add_submenu_page('mingle-forum', __('Monetize', 'mingleforum'), __('Monetize', 'mingleforum'), "administrator", 'mingle-forum-ads', 'MFAdmin::ads_options_page');
       add_submenu_page("mingle-forum", __("Skins", "mingleforum"), __("Skins", "mingleforum"), "administrator", 'mfskins', array($admin_class, "skins"));
       add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
-      add_submenu_page("mingle-forum", __("Forum Structure - Categories & Forums", "mingleforum"), __("Forum Structure", "mingleforum"), "administrator", 'mfstructure', array($admin_class, "structure"));
       add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mfmods', array($admin_class, "moderators"));
       add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mfgroups', array($admin_class, "usergroups"));
       add_submenu_page("mingle-forum", __("About", "mingleforum"), __("About", "mingleforum"), "administrator", 'mfabout', array($admin_class, "about"));
@@ -3207,10 +3205,10 @@ if (!class_exists('mingleforum'))
         $fid = (int) $_POST['mf_post_to_forum_forum'];
         $_POST['mf_post_to_forum'] = 'false'; //Eternal loop if this isn't set to false
         $post = get_post($post_id);
-        $sql_thread = "INSERT INTO {$this->t_threads} (last_post, subject, parent_id, `date`, status, starter) VALUES('{$date}', '" . $this->strip_single_quote($post->post_title) . "', '{$fid}', '{$date}', 'open', '{$user_ID}')";
+        $sql_thread = "INSERT INTO {$this->t_threads} (last_post, subject, parent_id, `date`, status, starter) VALUES ('{$date}', '" . $this->strip_single_quote($post->post_title) . "', '{$fid}', '{$date}', 'open', '{$user_ID}')";
         $wpdb->query($sql_thread);
         $tid = $wpdb->insert_id;
-        $sql_post = "INSERT INTO {$this->t_posts} (text, parent_id, `date`, author_id, subject) VALUES('" . $this->input_filter($wpdb->escape($post->post_content)) . "', '{$tid}', '{$date}', '{$user_ID}', '" . $this->strip_single_quote($post->post_title) . "')";
+        $sql_post = "INSERT INTO {$this->t_posts} (text, parent_id, `date`, author_id, subject) VALUES ('" . $this->input_filter($wpdb->escape($post->post_content)) . "', '{$tid}', '{$date}', '{$user_ID}', '" . $this->strip_single_quote($post->post_title) . "')";
         $wpdb->query($sql_post);
         $new = $post->post_content . "\n" . '<p><a href="' . $this->get_threadlink($tid) . '">' . __("Join the Forum discussion on this post", "mingleforum") . '</a></p>';
         $post->post_content = $new;

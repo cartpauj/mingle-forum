@@ -24,10 +24,10 @@
               <input type="hidden" name="mf_category_id[]" value="<?php echo $cat->id; ?>" />
               &nbsp;&nbsp;
               <label for="category-name-<?php echo $cat->id; ?>"><?php _e('Category Name:', 'mingle-forum'); ?></label>
-              <input type="text" name="category_name[]" id="category-name-<?php echo $cat->id; ?>" value="<?php echo stripslashes($cat->name); ?>" />
+              <input type="text" name="category_name[]" id="category-name-<?php echo $cat->id; ?>" value="<?php echo htmlentities(stripslashes($cat->name), ENT_QUOTES); ?>" />
               &nbsp;&nbsp;
               <label for="category-description-<?php echo $cat->id; ?>"><?php _e('Description:', 'mingle-forum'); ?></label>
-              <input type="text" name="category_description[]" id="category-description-<?php echo $cat->id; ?>" value="<?php echo stripslashes($cat->description); ?>" size="50" />
+              <input type="text" name="category_description[]" id="category-description-<?php echo $cat->id; ?>" value="<?php echo htmlentities(stripslashes($cat->description), ENT_QUOTES); ?>" size="50" />
 
               <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'mingle-forum'); ?>">
                 <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />

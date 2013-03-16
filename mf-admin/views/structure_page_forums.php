@@ -27,10 +27,10 @@
                   <input type="hidden" name="mf_forum_id[<?php echo $cat->id; ?>][]" value="<?php echo $forum->id; ?>" />
                   &nbsp;&nbsp;
                   <label for="forum-name-<?php echo $forum->id; ?>"><?php _e('Forum Name:', 'mingle-forum'); ?></label>
-                  <input type="text" name="forum_name[<?php echo $cat->id; ?>][]" id="forum-name-<?php echo $forum->id; ?>" value="<?php echo stripslashes($forum->name); ?>" />
+                  <input type="text" name="forum_name[<?php echo $cat->id; ?>][]" id="forum-name-<?php echo $forum->id; ?>" value="<?php echo htmlentities(stripslashes($forum->name), ENT_QUOTES); ?>" />
                   &nbsp;&nbsp;
                   <label for="forum-description-<?php echo $forum->id; ?>"><?php _e('Description:', 'mingle-forum'); ?></label>
-                  <input type="text" name="forum_description[<?php echo $cat->id; ?>][]" id="forum-description-<?php echo $forum->id; ?>" value="<?php echo stripslashes($forum->description); ?>" size="50" />
+                  <input type="text" name="forum_description[<?php echo $cat->id; ?>][]" id="forum-description-<?php echo $forum->id; ?>" value="<?php echo htmlentities(stripslashes($forum->description), ENT_QUOTES); ?>" size="50" />
 
                   <a href="#" class="mf_remove_forum" title="<?php _e('Remove this Forum', 'mingle-forum'); ?>">
                     <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
