@@ -199,7 +199,7 @@ if (!class_exists('mingleforum'))
       add_submenu_page('mingle-forum', __('Monetize', 'mingleforum'), __('Monetize', 'mingleforum'), "administrator", 'mingle-forum-ads', 'MFAdmin::ads_options_page');
       add_submenu_page("mingle-forum", __("Skins", "mingleforum"), __("Skins", "mingleforum"), "administrator", 'mfskins', array($admin_class, "skins"));
       add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
-      add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mfmods', array($admin_class, "moderators"));
+      add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mingle-forum-moderators', 'MFAdmin::moderators_page');
       add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mfgroups', array($admin_class, "usergroups"));
       add_submenu_page("mingle-forum", __("About", "mingleforum"), __("About", "mingleforum"), "administrator", 'mfabout', array($admin_class, "about"));
     }
@@ -554,14 +554,14 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      return $wpdb->get_var($wpdb->prepare("SELECT description FROM $this->t_groups WHERE id = %d", $id));
+      return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_groups} WHERE id = %d", $id));
     }
 
     public function get_forum_description($id)
     {
       global $wpdb;
 
-      return $wpdb->get_var($wpdb->prepare("SELECT description FROM $this->t_forums WHERE id = %d", $id));
+      return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_forums} WHERE id = %d", $id));
     }
 
     public function check_parms($parm)
@@ -1494,24 +1494,6 @@ if (!class_exists('mingleforum'))
       return $wpdb->get_var($wpdb->prepare("SELECT description FROM {$this->t_usergroups} WHERE id = %d", $usergroup_id));
     }
 
-    public function is_moderator($user_id, $forum_id = '')
-    {
-      if (!$user_id || !$forum_id) //If guest or no forum ID
-        return false;
-
-      if (is_super_admin($user_id))
-        return true;
-
-      $user = get_userdata($user_id);
-
-      $forums = get_user_meta($user_id, 'wpf_moderator', true);
-
-      if ($forums == "mod_global")
-        return true;
-
-      return in_array($forum_id, (array) $forums);
-    }
-
     public function get_users()
     {
       global $wpdb;
@@ -1524,13 +1506,23 @@ if (!class_exists('mingleforum'))
       global $wpdb;
 
       return $wpdb->get_results("
-        SELECT {$wpdb->usermeta}.user_id, {$wpdb->users}.user_login
+        SELECT {$wpdb->usermeta}.user_id, {$wpdb->usermeta}.meta_value, {$wpdb->users}.user_login
           FROM
           {$wpdb->usermeta}
           INNER JOIN
           {$wpdb->users} on {$wpdb->usermeta}.user_id = {$wpdb->users}.ID
           WHERE
           {$wpdb->usermeta}.meta_key = 'wpf_moderator' ORDER BY {$wpdb->users}.user_login ASC");
+    }
+
+    public function get_moderator_forums($user_id)
+    {
+      $forums = get_user_meta($user_id, 'wpf_moderator', true);
+
+      if(empty($forums))
+        return array();
+      else
+        return $forums;
     }
 
     public function get_forum_moderators($forum_id)
@@ -1547,6 +1539,22 @@ if (!class_exists('mingleforum'))
       $out = substr($out, 0, strlen($out) - 2);
 
       return "<small><i>" . __("Moderators:", "mingleforum") . " {$out}</i></small>";
+    }
+
+    public function is_moderator($user_id, $forum_id = '')
+    {
+      if (!$user_id || !$forum_id) //If guest or no forum ID
+        return false;
+
+      if (is_super_admin($user_id))
+        return true;
+
+      $forums = get_user_meta($user_id, 'wpf_moderator', true);
+
+      if ($forums == "mod_global")
+        return true;
+
+      return in_array($forum_id, (array) $forums);
     }
 
     public function wp_forum_install()

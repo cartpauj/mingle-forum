@@ -114,5 +114,18 @@
       return false;
     });
 
+/******************************** MODERATORS STUFF ********************************/
+    $('a#mf_add_new_moderator').click(function() {
+      $('div#mf_hidden_moderator_instructions').slideToggle();
+    });
+
+    if($('#mf_global_moderator').is(':checked')) {
+      $('div#mf_moderator_not_global').hide();
+    }
+
+    $('#mf_global_moderator').click(function() {
+      $('div#mf_moderator_not_global').slideToggle();
+    });
+
   });
 })(jQuery);

@@ -10,6 +10,8 @@ if(!class_exists("MFAdmin"))
       add_action('admin_init', 'MFAdmin::maybe_save_structure');
       // add_action('admin_menu', 'MFAdmin::admin_menus');
       add_action('admin_enqueue_scripts', 'MFAdmin::enqueue_admin_scripts');
+      add_action('edit_user_profile', 'MFAdmin::show_moderator_form');
+      add_action('edit_user_profile_update', 'MFAdmin::save_moderator_form');
     }
 
     public static function enqueue_admin_scripts($hook)
@@ -26,7 +28,7 @@ if(!class_exists("MFAdmin"))
                           'remove_forum_a_title' => __('Remove this Forum', 'mingle-forum') );
 
       //Let's only load our shiz on mingle-forum admin pages
-      if (strstr($hook, 'mingle-forum') !== false)
+      if(strstr($hook, 'mingle-forum') !== false || $hook == 'user-edit.php')
       {
         $wp_scripts = new WP_Scripts();
         $ui = $wp_scripts->query('jquery-ui-core');
@@ -36,6 +38,35 @@ if(!class_exists("MFAdmin"))
         wp_enqueue_style('mingle-forum-admin-css', $plug_url . "css/mf_admin.css");
         wp_enqueue_script('mingle-forum-admin-js', $plug_url . "js/mf_admin.js", array('jquery-ui-accordion', 'jquery-ui-sortable'));
         wp_localize_script('mingle-forum-admin-js', 'MFAdmin', $l10n_vars);
+      }
+    }
+
+    public static function show_moderator_form($user)
+    {
+      global $mingleforum;
+      $mod = $mingleforum->get_moderator_forums($user->ID);
+
+      if(is_super_admin())
+      {
+        $categories = $mingleforum->get_groups();
+        require('views/moderators_profile_form.php');
+      }
+    }
+
+    public static function save_moderator_form($user_id)
+    {
+      $global = isset($_POST['mf_global_moderator']);
+
+      if($global)
+        update_user_meta($user_id, 'wpf_moderator', 'mod_global');
+      else
+      {
+        $forums = (isset($_POST['mf_moderator_forum_ids']))?$_POST['mf_moderator_forum_ids']:false;
+
+        if(is_array($forums) && !empty($forums))
+          update_user_meta($user_id, 'wpf_moderator', $forums);
+        else
+          delete_user_meta($user_id, 'wpf_moderator', $forums);
       }
     }
 
@@ -55,6 +86,15 @@ if(!class_exists("MFAdmin"))
       $saved = (isset($_GET['saved']) && $_GET['saved'] == 'true');
 
       require('views/ads_options_page.php');
+    }
+
+    public static function moderators_page()
+    {
+      global $mingleforum;
+
+      $moderators = $mingleforum->get_moderators();
+
+      require('views/moderators_page.php');
     }
 
     public static function structure_page()

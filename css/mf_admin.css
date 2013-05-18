@@ -32,7 +32,7 @@
   border-radius:5px;
 }
 
-/* FORUM STRUCTURE PAGE */
+/* SHARED */
 .mf_fset {
   border:2px solid #999;
   margin-top:25px;
@@ -73,6 +73,7 @@ li.ui-state-highlight {
   padding:22px;
 }
 
+/* STRUCTURE PAGE */
 a#mf_add_new_category,
 a.mf_add_new_forum {
   padding-left:8px;
@@ -81,4 +82,30 @@ a.mf_add_new_forum {
 a.mf_remove_category,
 a.mf_remove_forum {
   float:right;
+}
+
+/* MODERATORS PAGE */
+div#mf_hidden_moderator_instructions {
+  padding:15px;
+  display:none;
+  border:1px solid #CCC;
+  border-radius:10px;
+  background:#EFF8FF;
+}
+
+span.mf_moderators_forums {
+  margin-left:10px;
+}
+
+/* MODERATORS PROFILE FORM */
+div#mf_moderator_wrapper {
+  padding:0 0 0 10px;
+}
+
+div#mf_moderator_not_global {
+  padding-left:10px;
+}
+
+div.mf_moderator_forums input {
+  margin-left:10px;
 }

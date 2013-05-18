@@ -132,6 +132,7 @@ Need help?:
 * Added localized dates for non-english users (xefir)
 * Added below menu ad area
 * Added invisible cron to cleanup zombie posts & topics monthly
+* Changed the entire Dashboard Administration of Mingle Forum
 * Changed styling of default skin (HUGE Thanks to ddart)
 * Changed profile header at top of Forum to save space
 * Changed breadcrumbs location
