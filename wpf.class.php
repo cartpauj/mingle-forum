@@ -5,7 +5,7 @@ if (!class_exists('mingleforum'))
   class mingleforum
   {
 
-    var $db_version = 2; //MANAGES DB VERSION
+    var $db_version = 3; //MANAGES DB VERSION
     var $db_cleanup_name = 'mf_cleanup_db_last_run';
 
     public function __construct()
@@ -191,7 +191,7 @@ if (!class_exists('mingleforum'))
     {
       include_once("fs-admin/fs-admin.php");
       $admin_class = new mingleforumadmin();
-      
+
       //ONCE DONE WITH ADMIN REDUX - THIS FUNC NEEDS TO BE MOVED TO MFAdmin CLASS
 
       add_menu_page(__("Mingle Forum - Options", "mingleforum"), "Mingle Forum", "administrator", "mingle-forum", 'MFAdmin::options_page', WPFURL . "images/logo.png");
@@ -200,6 +200,7 @@ if (!class_exists('mingleforum'))
       add_submenu_page("mingle-forum", __("Skins", "mingleforum"), __("Skins", "mingleforum"), "administrator", 'mfskins', array($admin_class, "skins"));
       add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
       add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mingle-forum-moderators', 'MFAdmin::moderators_page');
+      add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mingle-forum-user-groups', 'MFAdmin::user_groups_page');
       add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mfgroups', array($admin_class, "usergroups"));
       add_submenu_page("mingle-forum", __("About", "mingleforum"), __("About", "mingleforum"), "administrator", 'mfabout', array($admin_class, "about"));
     }
@@ -1631,14 +1632,14 @@ if (!class_exists('mingleforum'))
           PRIMARY KEY  (`id`)
         ){$charset_collate};";
 
-        $sql6 =
-                "CREATE TABLE " . $this->t_usergroups . " (
-            `id` int(11) NOT NULL auto_increment,
-            `name` varchar(255) NOT NULL,
-            `description` varchar(255) default NULL,
-            `leaders` varchar(255) default NULL,
-            PRIMARY KEY  (`id`)
-          ){$charset_collate};";
+        $sql6 = "
+          CREATE TABLE " . $this->t_usergroups . " (
+          `id` int(11) NOT NULL auto_increment,
+          `name` varchar(255) NOT NULL,
+          `description` varchar(255) default NULL,
+          `leaders` varchar(255) default NULL,
+          PRIMARY KEY  (`id`)
+        ){$charset_collate};";
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
@@ -1663,6 +1664,9 @@ if (!class_exists('mingleforum'))
           $wpdb->query("ALTER TABLE {$this->t_posts} ENGINE = MyISAM"); //InnoDB doesn't support FULLTEXT
           $wpdb->query("ALTER TABLE {$this->t_posts} ADD FULLTEXT (`text`)");
         }
+
+        if ($this->options['forum_db_version'] < 3 || $force)
+          $wpdb->query("ALTER TABLE {$this->t_usergroups} ADD auto_add INT(1) NOT NULL DEFAULT '0'");
 
         $this->options['forum_db_version'] = $this->db_version;
         update_option('mingleforum_options', $this->options);

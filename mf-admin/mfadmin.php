@@ -25,7 +25,12 @@ if(!class_exists("MFAdmin"))
                           'remove_forum_warning' => __('WARNING: Deleting this Forum will also PERMANENTLY DELETE ALL Topics, and Replies associated with it!!! Are you sure you want to delete this Forum???', 'mingle-forum'),
                           'forum_name_label' => __('Forum Name:', 'mingle-forum'),
                           'forum_description_label' => __('Description:', 'mingle-forum'),
-                          'remove_forum_a_title' => __('Remove this Forum', 'mingle-forum') );
+                          'remove_forum_a_title' => __('Remove this Forum', 'mingle-forum'),
+                          'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'),
+                          'user_group_name_label' => __('Name:', 'mingle-forum'),
+                          'user_group_description_label' => __('Description:', 'mingle-forum'),
+                          'remove_user_group_a_title' => __('Remove this User Group', 'mingle-forum'),
+                          'user_group_auto_add_label' => __('Auto-add new Users', 'mingle-forum') );
 
       //Let's only load our shiz on mingle-forum admin pages
       if(strstr($hook, 'mingle-forum') !== false || $hook == 'user-edit.php')
@@ -95,6 +100,15 @@ if(!class_exists("MFAdmin"))
       $moderators = $mingleforum->get_moderators();
 
       require('views/moderators_page.php');
+    }
+
+    public static function user_groups_page()
+    {
+      global $mingleforum;
+
+      $user_groups = $mingleforum->get_usergroups();
+
+      require('views/user_groups_page.php');
     }
 
     public static function structure_page()

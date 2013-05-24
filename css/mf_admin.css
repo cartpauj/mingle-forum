@@ -84,6 +84,38 @@ a.mf_remove_forum {
   float:right;
 }
 
+/* USER GROUPS PAGE */
+div#mf_add_new_user_group_area {
+  padding:15px;
+  display:none;
+  border:1px solid #CCC;
+  border-radius:10px;
+  background:#EFF8FF;
+}
+
+.mf_user_group_li_item {
+  cursor:default !important;
+}
+
+.mf_user_group_li_item label {
+  cursor:pointer !important;
+}
+
+.mf_user_group_li_item .button {
+  color:#666 !important;
+}
+.mf_user_group_li_item .button:hover {
+  color:black !important;
+}
+
+a.mf_remove_user_group {
+  float:right;
+}
+
+a#mf_add_new_user_group {
+  padding-left:8px;
+}
+
 /* MODERATORS PAGE */
 div#mf_hidden_moderator_instructions {
   padding:15px;
