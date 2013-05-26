@@ -19,7 +19,7 @@
               <input type="checkbox" name="user_group_auto_add[]" id="user_group_auto_add-<?php echo $group->id; ?>" <?php checked($group->auto_add); ?> />
               <label for="user_group_auto_add-<?php echo $group->id; ?>"><?php _e('Auto-add new Users', 'mingle-forum'); ?></label>
               &nbsp;&nbsp;
-              <a href="" class="button"><?php _e('Configure', 'mingle-forum'); ?></a>
+              <a href="#" class="button"><?php _e('Manage Users', 'mingle-forum'); ?></a>
 
               <a href="#" class="mf_remove_user_group" title="<?php _e('Remove this User Group', 'mingle-forum'); ?>">
                 <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />

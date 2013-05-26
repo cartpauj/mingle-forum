@@ -201,7 +201,6 @@ if (!class_exists('mingleforum'))
       add_submenu_page("mingle-forum", __("Structure - Categories & Forums", "mingleforum"), __("Structure", "mingleforum"), "administrator", 'mingle-forum-structure', 'MFAdmin::structure_page');
       add_submenu_page("mingle-forum", __("Moderators", "mingleforum"), __("Moderators", "mingleforum"), "administrator", 'mingle-forum-moderators', 'MFAdmin::moderators_page');
       add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mingle-forum-user-groups', 'MFAdmin::user_groups_page');
-      add_submenu_page("mingle-forum", __("User Groups", "mingleforum"), __("User Groups", "mingleforum"), "administrator", 'mfgroups', array($admin_class, "usergroups"));
       add_submenu_page("mingle-forum", __("About", "mingleforum"), __("About", "mingleforum"), "administrator", 'mfabout', array($admin_class, "about"));
     }
 
@@ -1366,7 +1365,7 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb, $user_ID;
 
-      if (current_user_can("administrator") || is_super_admin($user_ID))
+      if (is_super_admin())
         return true;
 
       $user_groups = maybe_unserialize($wpdb->get_var("SELECT usergroups FROM {$this->t_groups} WHERE id = {$groupid}"));
@@ -1387,6 +1386,17 @@ if (!class_exists('mingleforum'))
       return $wpdb->get_results("SELECT * FROM {$this->t_usergroups}");
     }
 
+    public function get_usergroup($id)
+    {
+      global $wpdb;
+
+      $q = "SELECT *
+              FROM {$this->t_usergroups}
+              WHERE `id` = %d";
+
+      return $wpdb->get_row($wpdb->prepare($q, $id));
+    }
+
     public function get_members($usergroup)
     {
       global $wpdb;
@@ -1403,7 +1413,7 @@ if (!class_exists('mingleforum'))
 
       $id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM {$this->t_usergroup2user} WHERE user_id = %d AND `group` = %d", $user_id, $user_group_id));
 
-      if ($id != "")
+      if ($id)
         return true;
 
       return false;

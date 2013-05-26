@@ -51,7 +51,15 @@
 }
 
 .mf_fset label {
-  cursor:move;
+  cursor:pointer;
+}
+
+.mf_fset a.button {
+  color:#666 !important;
+}
+
+.mf_fset a.button:hover {
+  color:black !important;
 }
 
 .mf_ordered_list {
@@ -84,6 +92,11 @@ a.mf_remove_forum {
   float:right;
 }
 
+div.user-groups-area {
+  margin:10px 0 0 9px;
+  display:none;
+}
+
 /* USER GROUPS PAGE */
 div#mf_add_new_user_group_area {
   padding:15px;
@@ -99,13 +112,6 @@ div#mf_add_new_user_group_area {
 
 .mf_user_group_li_item label {
   cursor:pointer !important;
-}
-
-.mf_user_group_li_item .button {
-  color:#666 !important;
-}
-.mf_user_group_li_item .button:hover {
-  color:black !important;
 }
 
 a.mf_remove_user_group {

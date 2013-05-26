@@ -26,7 +26,16 @@
 /******************************** SORTABLE CATEGORIES ********************************/
     //Make Categories Sortable
     $('#sortable-categories').sortable({
-      placeholder: "ui-state-highlight"
+      placeholder: "ui-state-highlight",
+      start: function() {
+        $('div.user-groups-area').hide();
+      }
+    });
+
+    $('a.access_control').click(function() {
+      id = $(this).attr('data-value');
+      $('div#user-groups-' + id).slideToggle();
+      return false;
     });
 
     $('a#mf_add_new_category').click(function() {

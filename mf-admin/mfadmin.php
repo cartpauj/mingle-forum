@@ -107,8 +107,27 @@ if(!class_exists("MFAdmin"))
       global $mingleforum;
 
       $user_groups = $mingleforum->get_usergroups();
+      $action = (isset($_GET['action']))?$_GET['action']:false;
 
-      require('views/user_groups_page.php');
+      switch($action)
+      {
+        case 'users':
+          $id = isset($_GET['id'])?$_GET['id']:false;
+
+          if($id)
+          {
+            $usergroup = $mingleforum->get_usergroup($id);
+            $group_users = $mingleforum->get_members($id);
+            require('views/user_groups_users_page.php');
+          }
+          else
+            require('views/user_groups_page.php');
+          break;
+
+        default:
+          require('views/user_groups_page.php');
+          break;
+      }
     }
 
     public static function structure_page()
@@ -239,11 +258,12 @@ if(!class_exists("MFAdmin"))
           else
           {
             //Update existing category
+            $usergroups = (isset($_POST['category_usergroups_'.$id]))?serialize((array)$_POST['category_usergroups_'.$id]):'';
             $q = "UPDATE {$mingleforum->t_groups}
-                    SET `name` = %s, `description` = %s, `sort` = %d
+                    SET `name` = %s, `description` = %s, `sort` = %d, `usergroups` = %s
                     WHERE `id` = %d";
 
-            $wpdb->query($wpdb->prepare($q, $name, $description, $order, $id));
+            $wpdb->query($wpdb->prepare($q, $name, $description, $order, $usergroups, $id));
 
             $listed_categories[] = $id;
           }

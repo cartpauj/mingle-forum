@@ -1,4 +1,5 @@
 <h3><?php _e('Mingle Forum Moderator Settings', 'mingle-forum'); ?></h3>
+
 <div id="mf_moderator_wrapper">
   <?php if(!empty($categories)): ?>
     <input type="checkbox" name="mf_global_moderator" id="mf_global_moderator" <?php checked(!is_array($mod)); ?> />
