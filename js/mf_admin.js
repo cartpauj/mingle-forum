@@ -136,8 +136,6 @@
 
     $('#mf_global_moderator').click(function() {
       $('div#mf_moderator_not_global').slideToggle();
-
-      return false;
     });
 
 /******************************** USER GROUPS STUFF *******************************/
@@ -172,9 +170,6 @@
                 &nbsp;&nbsp;\
                 <label for="user-group-description-' + random_id + '">' + MFAdmin.user_group_description_label + '</label>\
                 <input type="text" name="user_group_description[]" id="user-group-description-' + random_id + '" value="" size="40" />\
-                &nbsp;&nbsp;\
-                <input type="checkbox" name="user_group_auto_add[]" id="user_group_auto_add-' + random_id + '" />\
-                <label for="user_group_auto_add-' + random_id + '">' + MFAdmin.user_group_auto_add_label + '</label>\
                 <a href="#" class="mf_remove_user_group" title="' + MFAdmin.remove_user_group_a_title + '">\
                   <img src="' + MFAdmin.images_url + 'remove.png" width="24" />\
                 </a>\

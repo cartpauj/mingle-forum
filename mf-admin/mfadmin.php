@@ -8,6 +8,7 @@ if(!class_exists("MFAdmin"))
       add_action('admin_init', 'MFAdmin::maybe_save_options');
       add_action('admin_init', 'MFAdmin::maybe_save_ads_options');
       add_action('admin_init', 'MFAdmin::maybe_save_structure');
+      add_action('admin_init', 'MFAdmin::maybe_save_user_groups');
       // add_action('admin_menu', 'MFAdmin::admin_menus');
       add_action('admin_enqueue_scripts', 'MFAdmin::enqueue_admin_scripts');
       add_action('edit_user_profile', 'MFAdmin::show_moderator_form');
@@ -29,8 +30,7 @@ if(!class_exists("MFAdmin"))
                           'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'),
                           'user_group_name_label' => __('Name:', 'mingle-forum'),
                           'user_group_description_label' => __('Description:', 'mingle-forum'),
-                          'remove_user_group_a_title' => __('Remove this User Group', 'mingle-forum'),
-                          'user_group_auto_add_label' => __('Auto-add new Users', 'mingle-forum') );
+                          'remove_user_group_a_title' => __('Remove this User Group', 'mingle-forum') );
 
       //Let's only load our shiz on mingle-forum admin pages
       if(strstr($hook, 'mingle-forum') !== false || $hook == 'user-edit.php')
@@ -146,6 +146,85 @@ if(!class_exists("MFAdmin"))
           require('views/structure_page_categories.php');
           break;
       }
+    }
+
+    public static function maybe_save_user_groups()
+    {
+      global $mingleforum, $wpdb;
+      $listed_user_groups = array();
+
+      if(!isset($_POST['mf_user_groups_save']) || empty($_POST['mf_user_groups_save']))
+        return;
+
+      if(!isset($_POST['user_group_name']) || empty($_POST['user_group_name']))
+        return;
+
+      foreach($_POST['user_group_name'] as $i => $v)
+      {
+        $id = $_POST['mf_user_group_id'][$i];
+        $name = stripslashes($v);
+        $description = (!empty($_POST['user_group_description'][$i]))?stripslashes($_POST['user_group_description'][$i]):'';
+
+        if(empty($name)) //If no name, don't save this User Group
+          continue;
+
+        if($id == 'new') //Create a new User Group
+        {
+          $wpdb->insert($mingleforum->t_usergroups,
+                        array('name' => $name, 'description' => $description),
+                        array('%s', '%s'));
+
+          $listed_user_groups[] = $wpdb->insert_id;
+        }
+        else //Update an existing User Group
+        {
+          $q = "UPDATE {$mingleforum->t_usergroups}
+                  SET `name` = %s, `description` = %s
+                  WHERE `id` = %d";
+
+          $wpdb->query($wpdb->prepare($q, $name, $description, $id));
+
+          $listed_user_groups[] = $id;
+        }
+      }
+
+      //Delete user groups that the user removed from the list
+      if(!empty($listed_user_groups))
+      {
+        $listed_user_groups = implode(',', $listed_user_groups);
+        $user_group_ids = $wpdb->get_col("SELECT `id` FROM {$mingleforum->t_usergroups} WHERE `id` NOT IN ({$listed_user_groups})");
+
+        if(!empty($user_group_ids))
+          foreach($user_group_ids as $ugid)
+            self::delete_usergroup($ugid);
+      }
+
+      wp_redirect(admin_url('admin.php?page=mingle-forum-user-groups&saved=true'));
+      exit();
+    }
+
+    public static function delete_usergroup($ugid)
+    {
+      global $mingleforum, $wpdb;
+
+      $wpdb->query("DELETE FROM {$mingleforum->t_usergroup2user} WHERE `group` = {$ugid}");
+      $wpdb->query("DELETE FROM {$mingleforum->t_usergroups} WHERE `id` = {$ugid}");
+
+      //Remove this group from categories too
+      $cats = $wpdb->get_results("SELECT * FROM {$mingleforum->t_groups}");
+
+      if(!empty($cats))
+        foreach($cats as $cat)
+        {
+          $usergroups = (array)unserialize($cat->usergroups);
+
+          if(in_array($ugid, $usergroups))
+          {
+            $usergroups = serialize(array_diff($usergroups, array($ugid)));
+
+            $wpdb->query("UPDATE {$mingleforum->t_groups} SET `usergroups` = '{$usergroups}' WHERE `id` = {$cat->id}");
+          }
+        }
     }
 
     public static function maybe_save_options()

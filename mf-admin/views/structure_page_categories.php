@@ -28,7 +28,7 @@
               &nbsp;&nbsp;
               <label for="category-description-<?php echo $cat->id; ?>"><?php _e('Description:', 'mingle-forum'); ?></label>
               <input type="text" name="category_description[]" id="category-description-<?php echo $cat->id; ?>" value="<?php echo htmlentities(stripslashes($cat->description), ENT_QUOTES); ?>" size="50" />
-              <a href="#" class="button access_control" data-value="<?php echo $cat->id; ?>"><?php _e('Limit Access', 'mingle-forum'); ?></a>
+              <a href="#" class="button access_control" data-value="<?php echo $cat->id; ?>" title="<?php echo __('Category ID', 'mingle-forum') . ' = ' . $cat->id; ?>"><?php _e('Limit Access', 'mingle-forum'); ?></a>
 
               <a href="#" class="mf_remove_category" title="<?php _e('Remove this Category', 'mingle-forum'); ?>">
                 <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />

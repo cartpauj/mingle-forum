@@ -1,6 +1,12 @@
 <div class="wrap">
   <h2>Mingle Forum - <?php _e('User Groups', 'mingle-forum'); ?></h2>
 
+  <?php if (isset($_GET['saved']) && $_GET['saved'] == 'true'): ?>
+    <div id="message" class="updated below-h2">
+      <p><?php _e('Your User Groups have been saved.', 'mingle-forum'); ?></p>
+    </div>
+  <?php endif; ?>
+
   <form action="" method="post">
     <fieldset class="mf_fset">
       <legend><?php _e('Manage User Groups', 'mingle-forum'); ?></legend>
@@ -15,9 +21,6 @@
               &nbsp;&nbsp;
               <label for="user-group-description-<?php echo $group->id; ?>"><?php _e('Description:', 'mingle-forum'); ?></label>
               <input type="text" name="user_group_description[]" id="user-group-description-<?php echo $group->id; ?>" value="<?php echo htmlentities(stripslashes($group->description), ENT_QUOTES); ?>" size="40" />
-              &nbsp;&nbsp;
-              <input type="checkbox" name="user_group_auto_add[]" id="user_group_auto_add-<?php echo $group->id; ?>" <?php checked($group->auto_add); ?> />
-              <label for="user_group_auto_add-<?php echo $group->id; ?>"><?php _e('Auto-add new Users', 'mingle-forum'); ?></label>
               &nbsp;&nbsp;
               <a href="#" class="button"><?php _e('Manage Users', 'mingle-forum'); ?></a>
 
@@ -35,9 +38,6 @@
             &nbsp;&nbsp;
             <label for="user-group-description-9999999"><?php _e('Description:', 'mingle-forum'); ?></label>
             <input type="text" name="user_group_description[]" id="user-group-description-9999999" value="" size="40" />
-            &nbsp;&nbsp;
-            <input type="checkbox" name="user_group_auto_add[]" id="user_group_auto_add-9999999" />
-            <label for="user_group_auto_add-9999999"><?php _e('Auto-add new Users', 'mingle-forum'); ?></label>
 
             <a href="#" class="mf_remove_user_group" title="<?php _e('Remove this User Group', 'mingle-forum'); ?>">
               <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />
@@ -55,5 +55,4 @@
       <input type="submit" name="mf_user_groups_save" value="<?php _e('Save Changes', 'mingle-forum'); ?>" class="button" />
     </div>
   </form>
-
 </div>
