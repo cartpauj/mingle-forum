@@ -122,6 +122,16 @@ a#mf_add_new_user_group {
   padding-left:8px;
 }
 
+div.usergroup_users_row {
+  padding:5px;
+  width:250px;
+  border:1px solid #DEDEDE;
+}
+
+div.usergroup_users_row_alt {
+  background:#ECECEC;
+}
+
 /* MODERATORS PAGE */
 div#mf_hidden_moderator_instructions {
   padding:15px;

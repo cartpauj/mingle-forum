@@ -50,19 +50,19 @@
           <label for="forum_login_url" class="mf_tb_label">
             <?php _e('Login URL', 'mingle-forum'); ?>
           </label>
-          <input type="text" name="forum_login_url" id="forum_login_url" value="<?php echo stripslashes($mingleforum->options['forum_login_url']); ?>" class="mf_tb" />
+          <input type="text" name="forum_login_url" id="forum_login_url" value="<?php echo stripslashes($mingleforum->options['forum_login_url']); ?>" class="mf_tb" size="50" />
         </p>
         <p>
           <label for="forum_signup_url" class="mf_tb_label">
             <?php _e('Signup URL', 'mingle-forum'); ?>
           </label>
-          <input type="text" name="forum_signup_url" id="forum_signup_url" value="<?php echo stripslashes($mingleforum->options['forum_signup_url']); ?>" class="mf_tb" />
+          <input type="text" name="forum_signup_url" id="forum_signup_url" value="<?php echo stripslashes($mingleforum->options['forum_signup_url']); ?>" class="mf_tb" size="50" />
         </p>
         <p>
           <label for="forum_logout_redirect_url" class="mf_tb_label">
             <?php _e('Logout Redirect URL', 'mingle-forum'); ?>
           </label>
-          <input type="text" name="forum_logout_redirect_url" id="forum_logout_redirect_url" value="<?php echo stripslashes($mingleforum->options['forum_logout_redirect_url']); ?>" class="mf_tb" />
+          <input type="text" name="forum_logout_redirect_url" id="forum_logout_redirect_url" value="<?php echo stripslashes($mingleforum->options['forum_logout_redirect_url']); ?>" class="mf_tb" size="50" />
         </p>
       </div>
 

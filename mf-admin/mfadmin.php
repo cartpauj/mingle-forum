@@ -17,6 +17,8 @@ if(!class_exists("MFAdmin"))
 
     public static function enqueue_admin_scripts($hook)
     {
+      global $mingleforum;
+
       $plug_url = plugin_dir_url(__FILE__) . '../';
       $l10n_vars = array( 'remove_category_warning' => __('WARNING: Deleting this Category will also PERMANENTLY DELETE ALL Forums, Topics, and Replies associated with it!!! Are you sure you want to delete this Category???', 'mingle-forum'),
                           'category_name_label' => __('Category Name:', 'mingle-forum'),
@@ -30,7 +32,8 @@ if(!class_exists("MFAdmin"))
                           'remove_user_group_warning' => __('Are you sure you want to remove this Group?', 'mingle-forum'),
                           'user_group_name_label' => __('Name:', 'mingle-forum'),
                           'user_group_description_label' => __('Description:', 'mingle-forum'),
-                          'remove_user_group_a_title' => __('Remove this User Group', 'mingle-forum') );
+                          'remove_user_group_a_title' => __('Remove this User Group', 'mingle-forum'),
+                          'users_list' => json_encode($mingleforum->get_all_users_list()) );
 
       //Let's only load our shiz on mingle-forum admin pages
       if(strstr($hook, 'mingle-forum') !== false || $hook == 'user-edit.php')
@@ -40,7 +43,9 @@ if(!class_exists("MFAdmin"))
         $url = "//ajax.googleapis.com/ajax/libs/jqueryui/{$ui->ver}/themes/start/jquery-ui.css";
 
         wp_enqueue_style('mingle-forum-ui-css', $url);
+        wp_enqueue_style('mingle-forum-inputosaurus-css', $plug_url . 'css/inputosaurus.css');
         wp_enqueue_style('mingle-forum-admin-css', $plug_url . "css/mf_admin.css");
+        wp_enqueue_script('mingle-forum-inputosaurus-js', $plug_url . 'js/inputosaurus.js', array('jquery', 'jquery-ui-widget', 'jquery-ui-autocomplete'));
         wp_enqueue_script('mingle-forum-admin-js', $plug_url . "js/mf_admin.js", array('jquery-ui-accordion', 'jquery-ui-sortable'));
         wp_localize_script('mingle-forum-admin-js', 'MFAdmin', $l10n_vars);
       }
@@ -117,7 +122,7 @@ if(!class_exists("MFAdmin"))
           if($id)
           {
             $usergroup = $mingleforum->get_usergroup($id);
-            $group_users = $mingleforum->get_members($id);
+            $usergroup_users = $mingleforum->get_members($id);
             require('views/user_groups_users_page.php');
           }
           else

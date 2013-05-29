@@ -7,6 +7,8 @@
     </div>
   <?php endif; ?>
 
+  <p><i>* <?php _e('By default all users have full access to create Topics and Replies in all Categories. User Groups can help you limit access to certain Categories to only those users who belong to the Group associated with that Category. If you want to hide your entire Forum Page from Guests, it is recommended that you use a plugin like "Member Access", or even MemberPress to hide entire Pages from Guests, rather than use a User Group to do so.', 'mingle-forum'); ?></i></p>
+
   <form action="" method="post">
     <fieldset class="mf_fset">
       <legend><?php _e('Manage User Groups', 'mingle-forum'); ?></legend>
@@ -22,7 +24,7 @@
               <label for="user-group-description-<?php echo $group->id; ?>"><?php _e('Description:', 'mingle-forum'); ?></label>
               <input type="text" name="user_group_description[]" id="user-group-description-<?php echo $group->id; ?>" value="<?php echo htmlentities(stripslashes($group->description), ENT_QUOTES); ?>" size="40" />
               &nbsp;&nbsp;
-              <a href="#" class="button"><?php _e('Manage Users', 'mingle-forum'); ?></a>
+              <a href="<?php echo admin_url('admin.php?page=mingle-forum-user-groups&action=users&id='.$group->id); ?>" class="button"><?php _e('Manage Users', 'mingle-forum'); ?></a>
 
               <a href="#" class="mf_remove_user_group" title="<?php _e('Remove this User Group', 'mingle-forum'); ?>">
                 <img src="<?php echo WPFURL.'images/remove.png'; ?>" width="24" />

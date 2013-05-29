@@ -1401,7 +1401,24 @@ if (!class_exists('mingleforum'))
     {
       global $wpdb;
 
-      return $wpdb->get_results($wpdb->prepare("SELECT user_id FROM {$this->t_usergroup2user} WHERE `group` = %d", $usergroup));
+      $q = "SELECT ug2u.user_id, u.user_login
+              FROM {$this->t_usergroup2user} AS ug2u JOIN {$wpdb->users} AS u
+                ON ug2u.user_id = u.ID
+              WHERE ug2u.group = %d
+            ORDER BY u.user_login";
+
+      return $wpdb->get_results($wpdb->prepare($q, $usergroup));
+    }
+
+    public function get_all_users_list()
+    {
+      global $wpdb;
+
+      $q = "SELECT user_login
+              FROM {$wpdb->users}
+            ORDER BY user_login";
+
+      return $wpdb->get_col($q);
     }
 
     public function is_user_ingroup($user_id = "0", $user_group_id)
