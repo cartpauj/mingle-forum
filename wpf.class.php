@@ -1872,6 +1872,7 @@ if (!class_exists('mingleforum'))
       {
         $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'shownew') ? 'menu_current' : '';
         $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['new_topics']}</td>";
+		$menu .= $this->get_inbox_link();
         $class = (isset($_GET['mingleforumaction']) && $_GET['mingleforumaction'] == 'profile') ? 'menu_current' : '';
         $menu .= "<td valign='top' class='menu_sub {$class}'>{$menuitems['view_profile']}</td>";
         $menu .= "<td valign='top' class='menu_sub'>{$menuitems['edit_profile']}</td>";
@@ -2956,7 +2957,7 @@ if (!class_exists('mingleforum'))
         {
           $URL = get_permalink($cartpaujPMS->getPageID());
           $numNew = $cartpaujPMS->getNewMsgs();
-          return "<a href='" . $URL . "'>" . __("Inbox", "mingleforum") . "</a> (<font color='red'>" . $numNew . "</font>)<br/>";
+          return "<td class='menu_sub' valign='top' ><a class='icon-message' href='" . $URL . "'>" . __("Inbox", "mingleforum") . " <span>" . $numNew . "</span> </a></td>";
         }
       }
 
@@ -2968,7 +2969,7 @@ if (!class_exists('mingleforum'))
 
           $numNew = $mngl_message->get_unread_count();
           if (MnglUtils::is_user_logged_in() and MnglUser::user_exists_and_visible($mngl_user->id))
-            return "<a href='" . get_permalink($mngl_options->inbox_page_id) . "'>" . __("Inbox", "mingleforum") . "</a> (<font color='red'>" . $numNew . "</font>)<br/>";
+            return "<td class='menu_sub' valign='top' ><a href='" . get_permalink($mngl_options->inbox_page_id) . "'>" . __("Inbox", "mingleforum") . "<span>" . $numNew . "</span> </a></td>";
         }
       }
 

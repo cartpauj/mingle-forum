@@ -121,6 +121,16 @@ Version: 1.34
 #wpf-wrapper #upshrinkHeader p {
   margin: 0 0 0.514rem !important;
 }
+
+#wp-mainmenu a span {
+  background: none repeat scroll 0 0 #D95B44;
+  border-radius: 2px 2px 2px 2px;
+  color: #FDFDFD;
+  font-size: 11px;
+  margin: 0 0 0 3px;
+  padding: 1px 4px;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}
 /*END Menu Header -----------------------------------*/
 
 /*Minlge Forum All buttons -----------------------------------*/
@@ -639,6 +649,7 @@ ul#wpf-menu li,.wpf-postmeta li {
   border-bottom: 1px solid #adadad !important;
   border-top: 1px solid #eaeaea !important;
   background: #f6f6f6;
+  
 }
 .wpf-table th,
 .wpf-post-table th,
@@ -673,6 +684,27 @@ ul#wpf-menu li,.wpf-postmeta li {
   border-right: 1px solid #CECECE !important;
   border-bottom: 1px solid #CECECE !important;
   border-top: 1px solid #d9d7d7 !important;
+}
+.wpf-table textarea {
+  width: 98%;
+}
+#wpf-wrapper table.edit-post th {
+  font-size: 16px;
+  border: 1px solid rgba(155, 155, 155, 0.4);
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3);  /* box shadow */
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3); 
+  box-shadow: 0 1px 2px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.3);  
+}
+#wpf-wrapper #wpf-quick-reply br,
+#wpf-wrapper table.edit-post br {
+   display: none!important;
+}
+#wpf-wrapper table.edit-post td{
+ border: none !important;
+  font-size: 16px;
+}
+#wpf-wrapper table.edit-post{
+ background: none !important;
 }
 .wpf-table textarea {
   width: 98%;
@@ -747,6 +779,17 @@ td.statistik {
   font-size: 12px !important;
   text-transform: none !important;
 }
+
+/* Fixing avatars pose a problem for some sites */
+
+td.autorpostbox img.avatar{height: 60px;width: 60px;}
+
+td.autorpostbox .message-button{margin-top:5px;}
+
+td.autor-profile-box img.avatar{height: 95px; width: 95px;}
+
+#wpf-wrapper .img-avatar-forumstats .avatar{ height: 15px;width: 15px;}
+
 td.autorpostbox {
   text-align: center;
   background-image: url("images/post/hr-a.png");
