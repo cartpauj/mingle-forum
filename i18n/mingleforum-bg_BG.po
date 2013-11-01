@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Mingle Forum 1.0.34\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-02-15 22:40+0200\n"
+"PO-Revision-Date: 2013-11-01 06:05+0200\n"
 "Last-Translator: Dobrin Draganov  <ddart.bg@gmail.com>\n"
 "Language-Team: DDART <ddart.bg@gmail.com>\n"
 "Language: bg_BG\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: .\\pms\n"
@@ -808,11 +808,11 @@ msgstr "Емайл:"
 
 #: wpf.class.php:2740 wpf.class.php:2750
 msgid "Inbox"
-msgstr "Пощенска кутия"
+msgstr "Съобщения"
 
 #: wpf.class.php:2767 wpf.class.php:2780
 msgid "Send Message"
-msgstr "Изпрати съобщение"
+msgstr "Изпрати ЛС"
 
 #: wpf.class.php:2956
 msgid "Mingle Forum Post Options"
