@@ -1,11 +1,4 @@
 mingle-forum
 =============
 
-Awesome, free Forum plugin for WordPress.
-
-Note to developers:
-Because the WordPress.org repository is SVN based, I will not be managing Tags at github.
-Also, if I add you as a contibutor to the project, it's because I trust you, so no need to create any Forks or Branches, just push/pull to/from master.
-
-Thanks,
-Cartpauj
+We are no longer maintaining this project
